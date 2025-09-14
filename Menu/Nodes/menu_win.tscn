@@ -1,0 +1,248 @@
+[gd_scene load_steps=10 format=3 uid="uid://dse1fhfje01i8"]
+
+[ext_resource type="Script" uid="uid://cq8c866l8i0d" path="res://Menu/Scripts/MenuWin.cs" id="2_jdqle"]
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
+[ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="3_jdqle"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr70"]
+bg_color = Color(0.384314, 0.113725, 0.537255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.756863, 0.286275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otwlu"]
+bg_color = Color(0.69124, 0.493593, 0.897696, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpant"]
+bg_color = Color(0.690196, 0.494118, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skq7x"]
+bg_color = Color(0.690196, 0.494118, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjukq"]
+bg_color = Color(0.38455, 0.112288, 0.5389, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.756863, 0.286275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlnal"]
+bg_color = Color(0.384314, 0.113725, 0.537255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.756863, 0.286275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Menu_Win" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jdqle")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 1157.0
+offset_bottom = 650.0
+color = Color(0.494118, 0.254902, 0.819608, 1)
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 1157.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 150
+text = "You Win!"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 174.0
+offset_top = 317.0
+offset_right = 374.0
+offset_bottom = 517.0
+texture = ExtResource("3_jdqle")
+
+[node name="PanelTime" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 192.0
+offset_right = 656.0
+offset_bottom = 264.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_llr70")
+
+[node name="LabelTimeScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 192.0
+offset_right = 656.0
+offset_bottom = 264.0
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+text = "00:00"
+horizontal_alignment = 1
+
+[node name="LabelTime2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 192.0
+offset_right = 512.0
+offset_bottom = 264.0
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+text = "Time:"
+horizontal_alignment = 1
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="ButtonPlayAgain" type="Button" parent="Buttons"]
+offset_left = 688.0
+offset_top = 320.0
+offset_right = 907.0
+offset_bottom = 396.0
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192814, 0.953087, 0.420198, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+text = "Play Again!"
+
+[node name="ButtonMenu" type="Button" parent="Buttons"]
+offset_left = 685.0
+offset_top = 416.0
+offset_right = 921.0
+offset_bottom = 492.0
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+text = "Main Menu"
+
+[node name="ButtonExit" type="Button" parent="Buttons"]
+offset_left = 733.0
+offset_top = 512.0
+offset_right = 886.0
+offset_bottom = 588.0
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+text = "Exit"
+
+[node name="NameDialog" type="AcceptDialog" parent="."]
+title = "Congratulations!"
+initial_position = 1
+size = Vector2i(200, 108)
+theme_override_styles/panel = SubResource("StyleBoxFlat_vlnal")
+ok_button_text = "Accept"
+dialog_close_on_escape = false
+
+[node name="LineEdit" type="LineEdit" parent="NameDialog"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 198.0
+offset_bottom = 65.0
+theme_override_colors/selection_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_placeholder_color = Color(0.192157, 0.952941, 0.419608, 0.392157)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Playername"
+alignment = 1
+max_length = 12
+flat = true
+
+[connection signal="pressed" from="Buttons/ButtonPlayAgain" to="." method="onButtonPlayAgainPressed"]
+[connection signal="pressed" from="Buttons/ButtonMenu" to="." method="onButtonMenuPressed"]
+[connection signal="pressed" from="Buttons/ButtonExit" to="." method="onButtonExitPressed"]
+[connection signal="confirmed" from="NameDialog" to="." method="onNameDialogConfirmed"]

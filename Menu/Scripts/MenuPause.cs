@@ -1,0 +1,68 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+public partial class MenuPause : Control
+{
+    Global global;
+
+    SoundManager soundManager;
+
+    bool isPaused = false;
+
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        //Get nodes
+        soundManager = GetNode<SoundManager>("/root/SoundManager");
+        global = GetNode<Global>("/root/Global");
+    }
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+        if (Input.IsActionJustPressed("ui_pause"))
+        {
+            CallDeferred(nameof(setPause));
+        }
+
+    }
+
+    public void setPause()
+    {
+        if (isPaused)
+        {
+            Hide();
+            GetTree().Paused = false;
+            Input.MouseMode = Input.MouseModeEnum.Captured;
+        }
+        else
+        {
+            Show();
+            GetTree().Paused = true;
+            Input.MouseMode = Input.MouseModeEnum.Visible;
+        }
+        isPaused = !isPaused;
+    }
+
+    public void onButtonResumePressed()
+    {
+        GetTree().Paused = false;
+        soundManager.playSoundClick();
+        CallDeferred(nameof(setPause));
+    }
+
+    public void onButtonMenuPressed()
+    {
+        GetTree().Paused = false;
+        soundManager.playSoundClick();
+        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
+    }
+
+    public async void onButtonExitPressed()
+    {
+        GetTree().Paused = false;
+        await soundManager.playSoundExit();
+        GetTree().Quit();
+    }
+}

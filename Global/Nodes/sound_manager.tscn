@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://cuywxliftukgc"]
+
+[ext_resource type="Script" uid="uid://l402lejro4oi" path="res://Global/Scripts/SoundManager.cs" id="1_ve38c"]
+[ext_resource type="AudioStream" uid="uid://drgk8lsoo8hbx" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/Lose/Lose.wav" id="2_8744b"]
+[ext_resource type="AudioStream" uid="uid://c4p0ebpxidj8t" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/confirmation_001.ogg" id="3_2mo65"]
+[ext_resource type="AudioStream" uid="uid://c8f0wpogq8t0o" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/1up/1up4.wav" id="3_8744b"]
+[ext_resource type="AudioStream" uid="uid://cpfk7mokl24s3" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/back_003.ogg" id="4_wob5h"]
+[ext_resource type="AudioStream" uid="uid://bnritx8ysif06" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/close_003.ogg" id="5_dauyj"]
+[ext_resource type="AudioStream" uid="uid://cn15g4t7dkxgt" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/click_001.ogg" id="6_8w7i2"]
+[ext_resource type="AudioStream" uid="uid://cfmbd41bxwuea" path="res://AudioTracks/Music/OpenGameArt/puppy playing in the garden sms PORT.ogg" id="8_wob5h"]
+[ext_resource type="AudioStream" uid="uid://irmy7r5dxqdj" path="res://AudioTracks/Music/OpenGameArt/Project 2 marioish.mp3" id="9_dauyj"]
+
+[node name="SoundManager" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ve38c")
+
+[node name="SoundLose" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_8744b")
+
+[node name="SoundWin" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_8744b")
+
+[node name="SoundPlay" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2mo65")
+
+[node name="SoundMainMenu" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_wob5h")
+
+[node name="SoundExit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_dauyj")
+
+[node name="SoundClick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_8w7i2")
+
+[node name="MusicProject2Marioish2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_dauyj")
+
+[node name="MusicPuppyPlayingInTheGarden2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_wob5h")
+volume_db = -8.0

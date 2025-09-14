@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://c031qh1bonppp"]
+
+[ext_resource type="Script" uid="uid://bbvvs4j7svuef" path="res://UI/Hud.cs" id="1_2o5uh"]
+[ext_resource type="Texture2D" uid="uid://c242cvnacega3" path="res://Images/Icons/Treat.png" id="1_ne75i"]
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_bytes"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtv4n"]
+bg_color = Color(0, 0, 0, 0.498039)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_2o5uh")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 29.0
+offset_top = 25.0
+offset_right = 248.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jtv4n")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 448.0
+offset_top = 25.0
+offset_right = 640.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jtv4n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 41.0
+offset_top = 28.0
+offset_right = 91.0
+offset_bottom = 78.0
+texture = ExtResource("1_ne75i")
+expand_mode = 1
+
+[node name="x" type="Label" parent="."]
+offset_left = 95.0
+offset_top = 26.0
+offset_right = 111.0
+offset_bottom = 77.0
+theme_override_fonts/font = ExtResource("2_bytes")
+theme_override_font_sizes/font_size = 35
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTreats" type="Label" parent="."]
+offset_left = 120.0
+offset_top = 8.0
+offset_right = 233.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("2_bytes")
+theme_override_font_sizes/font_size = 60
+text = "###"
+vertical_alignment = 1
+
+[node name="LabelTime" type="Label" parent="."]
+offset_left = 470.0
+offset_top = 8.0
+offset_right = 619.0
+offset_bottom = 94.0
+theme_override_fonts/font = ExtResource("2_bytes")
+theme_override_font_sizes/font_size = 60
+text = "00:00"
+vertical_alignment = 1

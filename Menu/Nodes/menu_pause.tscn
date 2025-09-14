@@ -1,0 +1,150 @@
+[gd_scene load_steps=8 format=3 uid="uid://bevo4djud04el"]
+
+[ext_resource type="Script" uid="uid://tqgvx7aqmho1" path="res://Menu/Scripts/MenuPause.cs" id="1_ft0x8"]
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_uepin"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uepin"]
+bg_color = Color(0.494118, 0.254902, 0.819608, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.196078, 0.0705882, 0.352941, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iglgv"]
+bg_color = Color(0.69124, 0.493593, 0.897696, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxfd1"]
+bg_color = Color(0.690196, 0.494118, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydb6o"]
+bg_color = Color(0.690196, 0.494118, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8bwd"]
+bg_color = Color(0.38455, 0.112288, 0.5389, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.756863, 0.286275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MenuPause" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ft0x8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 384.0
+offset_top = 128.0
+offset_right = 423.0
+offset_bottom = 610.0
+scale = Vector2(9.8094, 0.796568)
+color = Color(0.494118, 0.254902, 0.819608, 0.392157)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 128.0
+offset_right = 416.0
+offset_bottom = 168.0
+scale = Vector2(10.0714, 9.6)
+theme_override_styles/panel = SubResource("StyleBoxFlat_uepin")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 0
+offset_left = 456.0
+offset_top = 192.0
+offset_right = 692.0
+offset_bottom = 428.0
+
+[node name="ButtonResume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_uepin")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+text = "Resume"
+
+[node name="ButtonMainMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_uepin")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+text = "Main Menu"
+
+[node name="ButtonExit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_uepin")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+text = "Exit"
+
+[connection signal="button_down" from="VBoxContainer/ButtonResume" to="." method="onButtonResumePressed"]
+[connection signal="button_down" from="VBoxContainer/ButtonMainMenu" to="." method="onButtonMenuPressed"]
+[connection signal="button_down" from="VBoxContainer/ButtonExit" to="." method="onButtonExitPressed"]

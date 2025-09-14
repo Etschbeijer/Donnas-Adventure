@@ -1,0 +1,24 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.import/
+.export/
+*.import
+*.tmp
+*.bak
+*.swp
+*.godot*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+
+# Build folders (if you export builds into your repo)
+bin/
+obj/

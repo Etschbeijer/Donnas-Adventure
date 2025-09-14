@@ -1,0 +1,182 @@
+[gd_scene load_steps=7 format=3 uid="uid://be1ra3cvgnjsw"]
+
+[ext_resource type="Script" uid="uid://b5xoysbln1vkj" path="res://Menu/Scripts/MenuCredits.cs" id="1_1ftru"]
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_xos3g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
+bg_color = Color(0.26146, 0.562342, 0.212165, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weaej"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4cr3"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
+bg_color = Color(0.138366, 0.327553, 0.116957, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.494118, 0.254902, 0.819608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MenuCredits" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1ftru")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 1157.0
+offset_bottom = 650.0
+color = Color(0.335211, 0.754964, 0.287311, 1)
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 1157.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 80
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="LabelAudioCredits" type="Label" parent="."]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 128.0
+offset_right = 683.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 35
+text = "Audio Credits
+
+"
+horizontal_alignment = 1
+
+[node name="LabelAudioAutors" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 192.0
+offset_right = 512.0
+offset_bottom = 373.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Sound effects from OpenGameArt.org (Public Domain / CC0)
+- KobatoGames
+- Spring Spring
+- cynicmusic
+- SwissArcadeGameEntertainment"
+autowrap_mode = 3
+
+[node name="LabelArtAutors" type="Label" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 512.0
+offset_right = 512.0
+offset_bottom = 785.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Art from OpenGameArt.org (Public Domain / CC0)
+- bart
+Art from Wikimedia.org (Public Domain / CC0)"
+autowrap_mode = 3
+
+[node name="LabelAudioAutors2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 1000.0
+offset_bottom = 649.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Sound effects from kenney.nl  (Public Domain / CC0)
+- Interface Sounds
+- Impact Sounds"
+autowrap_mode = 3
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="ButtonMenu" type="Button" parent="Buttons"]
+offset_left = 848.0
+offset_top = 544.0
+offset_right = 1084.0
+offset_bottom = 620.0
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Main Menu"
+
+[connection signal="pressed" from="Buttons/ButtonMenu" to="." method="onButtonMenuPressed"]

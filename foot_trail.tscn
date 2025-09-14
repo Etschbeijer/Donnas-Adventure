@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://ke6srbtmi42d"]
+
+[ext_resource type="Shader" uid="uid://6qpi14u0ogw7" path="res://addons/GPUTrail-main/shaders/trail.gdshader" id="1_0vsvq"]
+[ext_resource type="Shader" uid="uid://3u4fvet0mv2d" path="res://addons/GPUTrail-main/shaders/trail_draw_pass.gdshader" id="2_5s6jy"]
+[ext_resource type="Script" uid="uid://ip5uneejdrjl" path="res://addons/GPUTrail-main/GPUTrail3D.gd" id="3_1ti8a"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail-main/defaults/texture.tres" id="3_5s6jy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n48k"]
+shader = ExtResource("1_0vsvq")
+
+[sub_resource type="Gradient" id="Gradient_evc5l"]
+colors = PackedColorArray(1, 0.235294, 0.996078, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2akir"]
+gradient = SubResource("Gradient_evc5l")
+
+[sub_resource type="Curve" id="Curve_vdd22"]
+bake_resolution = 16
+_data = [Vector2(0, 0.100114), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_soh8u"]
+curve = SubResource("Curve_vdd22")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkwq8"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_5s6jy")
+shader_parameter/tex = ExtResource("3_5s6jy")
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/color_ramp = SubResource("GradientTexture1D_2akir")
+shader_parameter/curve = SubResource("CurveTexture_soh8u")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+
+[sub_resource type="QuadMesh" id="QuadMesh_qw26s"]
+material = SubResource("ShaderMaterial_hkwq8")
+
+[node name="FootTrail" type="Node3D"]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="."]
+amount = 34
+lifetime = 34.0
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ShaderMaterial_5n48k")
+draw_pass_1 = SubResource("QuadMesh_qw26s")
+script = ExtResource("3_1ti8a")
+length = 34
+length_seconds = 0.566667
+color_ramp = SubResource("GradientTexture1D_2akir")
+curve = SubResource("CurveTexture_soh8u")
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://ip5uneejdrjl"

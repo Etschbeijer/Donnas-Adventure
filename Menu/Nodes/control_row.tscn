@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://c638efe0ce7mv"]
+
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_pq02n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7sg6"]
+bg_color = Color(0.384314, 0.113725, 0.537255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.756863, 0.286275, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="ControlRow" type="Control"]
+custom_minimum_size = Vector2(432, 70)
+layout_mode = 3
+anchor_top = -0.025
+anchor_right = 0.319
+anchor_bottom = 0.123
+offset_top = 16.2
+offset_right = 64.512
+offset_bottom = -9.704
+
+[node name="PanelRank" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 432.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_j7sg6")
+
+[node name="LabelRank" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 224.0
+offset_bottom = 163.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "1st
+"
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 4.0
+offset_right = 264.0
+offset_bottom = 163.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "123456789012
+
+"
+
+[node name="LabelTime" type="Label" parent="."]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 4.0
+offset_right = 456.0
+offset_bottom = 163.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "05:00
+
+"
