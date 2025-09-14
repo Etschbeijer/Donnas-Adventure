@@ -349,6 +349,11 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
         if (hitbox.Name == "FallZone")
         {
+            if (soundManager != null)
+            {
+                soundManager.playSoundLose();
+            }
+
             await gameOver("res://Menu/Nodes/menu_defeat.tscn");
         }
         else
