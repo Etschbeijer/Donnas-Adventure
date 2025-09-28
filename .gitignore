@@ -1,13 +1,15 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
 .import/
 .export/
+export.cfg
+export_presets.cfg
+
+# Temporary files
 *.import
 *.tmp
 *.bak
 *.swp
-*.godot*
 
 # OS-specific
 .DS_Store
@@ -19,6 +21,6 @@ Thumbs.db
 *.user
 *.userosscache
 
-# Build folders (if you export builds into your repo)
+# Build folders
 bin/
 obj/
