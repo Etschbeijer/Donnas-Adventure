@@ -3,21 +3,22 @@ using System;
 
 public partial class Hud : CanvasLayer
 {
-	Global global;
-    Label labelTreats;
-    Label labelTime;
+    Global global;
+    public Label LabelTreats;
+    public Label LabelTime;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         //Get nodes
-		global = GetNode<Global>("/root/Global");
-        labelTreats = GetNode<Label>("LabelTreats");
-        labelTime = GetNode<Label>("LabelTime");
+        global = GetNode<Global>("/root/Global");
+
+        LabelTreats = GetNode<Label>("LabelTreats");
+        LabelTime = GetNode<Label>("LabelTime");
 
         //Set initial values
-        labelTreats.Text = global.collectedTreats.ToString();
-        labelTime.Text = $"{global.minutes:D2}:{global.seconds:D2}";
+        LabelTreats.Text = global.CollectedTreats.ToString();
+        LabelTime.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,13 +27,13 @@ public partial class Hud : CanvasLayer
         
     }
 
-    public void updateLabelTreats()
+    public void UpdateLabelTreats()
     {
-        labelTreats.Text = global.collectedTreats.ToString();
+        LabelTreats.Text = global.CollectedTreats.ToString();
     }
 
-    public void updateLabelTime()
+    public void UpdateLabelTime()
     {
-        labelTime.Text = $"{global.minutes:D2}:{global.seconds:D2}";
+        LabelTime.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
     }
 }

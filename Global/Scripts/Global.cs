@@ -3,72 +3,72 @@ using System;
 
 public partial class Global : Node
 {
-    public int collectedTreats = 0;
-    public int numberOfTreats = 0;
-    public int minutes = 0;
-    public int seconds = 0;
+    public int CollectedTreats = 0;
+    public int NumberOfTreats = 0;
+    public int Minutes = 0;
+    public int Seconds = 0;
 
-    public bool checkTime;
+    public bool CheckTime;
 
-    public ulong startTime;
+    public ulong StartTime;
 
-    public SaveData saveData;
+    public SaveData SaveData;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Call important methods
-        saveData = SaveData.LoadOrCreate();
+        SaveData = SaveData.LoadOrCreate();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        if (checkTime)
+        if (CheckTime)
         {
             ulong now = Time.GetTicksMsec();
-            ulong elapsed = (now - startTime) / 1000;
+            ulong elapsed = (now - StartTime) / 1000;
 
-            minutes = (int)(elapsed / 60);
-            seconds = (int)(elapsed % 60);
+            Minutes = (int)(elapsed / 60);
+            Seconds = (int)(elapsed % 60);
         }
     }
 
-    public void increaseTreats()
+    public void IncreaseTreats()
     {
-        collectedTreats += 1;
+        CollectedTreats += 1;
     }
 
-    public void decreaseTreats()
+    public void DecreaseTreats()
     {
-        collectedTreats -= 1;
+        CollectedTreats -= 1;
     }
 
-    public void setCurrentTreats(int numberOfTreats)
+    public void SetCurrentTreats(int numberOfTreats)
     {
-        collectedTreats = numberOfTreats;
+        CollectedTreats = numberOfTreats;
     }
 
-    public void setNumberOfTreats(int countedTreats)
+    public void SetNumberOfTreats(int countedTreats)
     {
-        numberOfTreats = countedTreats;
+        NumberOfTreats = countedTreats;
     }
 
-    public void startTimer()
+    public void StartTimer()
     {
-        checkTime = true;
-        startTime = Time.GetTicksMsec();
+        CheckTime = true;
+        StartTime = Time.GetTicksMsec();
     }
 
-    public void stopTimer() 
+    public void StopTimer() 
     { 
-        checkTime = false; 
+        CheckTime = false; 
     }
 
-    public void resetTimer()
+    public void ResetTimer()
     {
-        stopTimer();
-        minutes = 0;
-        seconds = 0;
+        StopTimer();
+        Minutes = 0;
+        Seconds = 0;
     }
 }

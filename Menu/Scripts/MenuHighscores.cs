@@ -21,8 +21,8 @@ public partial class MenuHighscores : Control
         container = GetNode<VBoxContainer>("VBoxContainer");
 
         //Call important methods
-        clearHighScores();
-        showHighScores();
+        ClearHighScores();
+        ShowHighScores();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +30,7 @@ public partial class MenuHighscores : Control
 	{
 	}
 
-    public void clearHighScores()
+    public void ClearHighScores()
     {
         foreach (Node child in container.GetChildren())
         {
@@ -38,32 +38,32 @@ public partial class MenuHighscores : Control
         }
     }
 
-    public void showHighScores()
+    private string formatTime(double time)
     {
-        var highScores = global.saveData.highscores;
+        int minutes = (int)time / 60;
+        int seconds = (int)time % 60;
+
+        return $"{minutes:D2}:{seconds:D2}";
+    }
+
+    public void ShowHighScores()
+    {
+        var highScores = global.SaveData.highscores;
         
         for (int i = 0; i < highScores.Length; i++)
         {
             var row = PanelRowScene.Instantiate() as Control;
             row.GetNode<Label>("LabelRank").Text = $"{i + 1}";
-            row.GetNode<Label>("LabelName").Text = global.saveData.topPlayers[i];
+            row.GetNode<Label>("LabelName").Text = global.SaveData.topPlayers[i];
             row.GetNode<Label>("LabelTime").Text = $"{formatTime(highScores[i])}";
 
             container.AddChild(row);
         }
     }
 
-    private string formatTime(double time)
+    public void OnButtonMenuPressed()
     {
-        int minutes = (int) time / 60;
-        int seconds = (int) time % 60;
-
-        return $"{minutes:D2}:{seconds:D2}";
-    }
-
-    public void onButtonMenuPressed()
-    {
-        soundManager.playSoundClick();
+        soundManager.PlaySoundMainMenu();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 }

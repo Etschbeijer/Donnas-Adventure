@@ -22,7 +22,7 @@ public partial class MenuCredits : Control
 
     public void onButtonMenuPressed()
     {
-        soundManager.playSoundMainMenu();
+        soundManager.PlaySoundMainMenu();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }

@@ -15,27 +15,27 @@ public partial class MenuDefeat : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.stopMusicPuppyPlayingInTheGarden3D();
-        soundManager.playMusicProject2Marioish2D();
+        soundManager.StopMusicPuppyPlayingInTheGarden3D();
+        soundManager.PlayMusicProject2Marioish2D();
     }
 
     public async void onButtonPlayAgainPressed()
     {
-        await soundManager.playSoundPlay();
+        await soundManager.PlaySoundPlay();
 
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void onButtonMenuPressed()
     {
-        soundManager.playSoundMainMenu();
+        soundManager.PlaySoundMainMenu();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void onButtonExitPressed()
     {
-        await soundManager.playSoundExit();
+        await soundManager.PlaySoundExit();
 
         GetTree().Quit();
     }

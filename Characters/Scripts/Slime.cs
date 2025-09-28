@@ -5,10 +5,10 @@ using static Godot.TextServer;
 
 public partial class Slime : CharacterBody3D
 {
-    public float movementSpeed = 2.0f;
+    public float MovementSpeed = 2.0f;
 
     [Export]
-    public double turnTime = 0.6;
+    public double TurnTime = 0.6;
 
     [Export]
 	Vector3 direction = new Vector3(0, 0, 1).Normalized();
@@ -56,8 +56,8 @@ public partial class Slime : CharacterBody3D
 			velocity += GetGravity() * (float)delta;
 		}
 
-        velocity.Z = movementSpeed * direction.Z;
-        velocity.X = movementSpeed * direction.X;
+        velocity.Z = MovementSpeed * direction.Z;
+        velocity.X = MovementSpeed * direction.X;
 
         Velocity = velocity;
 
@@ -65,25 +65,25 @@ public partial class Slime : CharacterBody3D
 
 		if ((IsOnWall() || !floorDetector.IsColliding()) && !isTurning && IsOnFloor())
 		{
-			await turnAround();
+			await TurnAround();
         }
 	}
 
-	public async Task turnAround()
+	public async Task TurnAround()
 	{
         isTurning = true;
 
         var dir = direction;
         direction = Vector3.Zero;
 
-        var timer = GetTree().CreateTimer(turnTime);
+        var timer = GetTree().CreateTimer(TurnTime);
 
         audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
         audioPlayer.Play();
 
         var turnTween = CreateTween();
 
-		turnTween.TweenProperty(this, "rotation_degrees", new Vector3(Rotation.X, 180, Rotation.Z), turnTime).AsRelative();
+		turnTween.TweenProperty(this, "rotation_degrees", new Vector3(Rotation.X, 180, Rotation.Z), TurnTime).AsRelative();
 
         await ToSignal(timer, Timer.SignalName.Timeout);
 
@@ -94,43 +94,35 @@ public partial class Slime : CharacterBody3D
 
     public async void Hit(Area3D hurtBox)
     {
-        var body = hurtBox.GetOwner();
+        var player = hurtBox.GetOwner() as PlayerCharacter;
 
-        if (body is PlayerCharacterMovement player)
+        if (player != null)
         {
-            var hitFromAbove = !player.IsOnFloor() || player.timeSinceLeftFloor > player.coyoteTime;
+            var hitFromAbove = !player.IsOnFloor() || player.TimeSinceLeftFloor > player.CoyoteTime;
             if (hitFromAbove)
             {
-                await death(body as PlayerCharacterMovement);
+                await Death(player);
             }
         }
     }
 
-    public void onHitboxEntered(Area3D hurtbox)
-    {
-        //var body = hurtbox.GetOwner();
-        //if (body is PlayerCharacterMovement)
-        //{
-        //    GD.Print("Slime onHitboxEntered");
-        //    GD.Print($"Donnas hurtbox: {hurtbox.Name}");
-        //}
-    }
-
-    public async void onHurtboxEntered(Area3D hitbox)
+    public async void OnHurtboxEntered(Area3D hitbox)
     {
         var body = hitbox.GetOwner();
-        if (body is PlayerCharacterMovement)
+        var player = body as PlayerCharacter;
+
+        if (player != null)
         {
-            await death(body as PlayerCharacterMovement);
+            await Death(player);
         }
         else if(body is Slime slime && !isTurning)
         {
-            slime.turnAround();
-            turnAround();
+            slime.TurnAround();
+            TurnAround();
         }
     }
 
-    public async Task death(PlayerCharacterMovement body)
+    public async Task Death(PlayerCharacter player)
     {
         animationPlayer.Play("Squash", 0.1);
 
@@ -138,9 +130,9 @@ public partial class Slime : CharacterBody3D
         audioPlayer.Play();
 
         direction = Vector3.Zero;
-        movementSpeed = 0;
+        MovementSpeed = 0;
 
-        body.bounce();
+        player.ShallBounce = true;
 
         hurtbox.SetCollisionLayerValue(8, false);
         hurtbox.SetCollisionMaskValue(7, false);
@@ -150,15 +142,15 @@ public partial class Slime : CharacterBody3D
 
         await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 
-        CallDeferred(nameof(unload));
+        CallDeferred(nameof(Unload));
     }
 
-    public void unload()
+    public void Unload()
     {
         QueueFree();
     }
 
-    public void loadDefeatScene()
+    public void LoadDefeatScene()
 	{
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_defeat.tscn");
     }

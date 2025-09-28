@@ -15,9 +15,12 @@ public partial class Platform3x2 : AnimatableBody3D
     [Export]
     public float pauseTime = 0.7f;
 
+    SceneTree tree;
+
     // Called when the node enters the scene tree for the first time.
     public override async void _Ready()
 	{
+        tree = GetTree();
         await movement();
     }
 
@@ -28,13 +31,16 @@ public partial class Platform3x2 : AnimatableBody3D
 
     public async Task movement()
     {
-        var travelTimer = GetTree().CreateTimer(2 * (travelTime + pauseTime));
+        if (tree != null)
+        {
+            var travelTimer = GetTree().CreateTimer(2 * (travelTime + pauseTime));
 
-        var moveTween = CreateTween();
+            var moveTween = CreateTween();
 
-        moveTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
-        moveTween.TweenProperty(this, "position", startPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
-        await ToSignal(travelTimer, Timer.SignalName.Timeout);
-        await movement();
+            moveTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
+            moveTween.TweenProperty(this, "position", startPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
+            await ToSignal(travelTimer, Timer.SignalName.Timeout);
+            await movement();
+        }
     }
 }

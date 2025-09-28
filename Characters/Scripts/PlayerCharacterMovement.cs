@@ -127,10 +127,10 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 		gravity = GetGravity();
 
         // Get the input direction and handle the movement/deceleration.
-        inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        inputDir = Input.GetVector("Left", "Right", "Forward", "Backward");
 
         //Play animations
-        playAnimation();
+        PlayAnimation();
 
         if (groundDetector.IsColliding())
         {
@@ -159,7 +159,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         }
 
         // Handle Jump.
-        if (Input.IsActionJustPressed("ui_accept") && (IsOnFloor() || timeSinceLeftFloor < coyoteTime))
+        if (Input.IsActionJustPressed("Jump") && (IsOnFloor() || timeSinceLeftFloor < coyoteTime))
         {
             controllFeetCollision(false, true);
 
@@ -168,7 +168,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
             velocity.Y = JumpVelocity;
         }
-        else if (Input.IsActionJustPressed("ui_accept") && !IsOnFloor() && hasDoubleJump)
+        else if (Input.IsActionJustPressed("Jump") && !IsOnFloor() && hasDoubleJump)
         {
             soundDoubleJump.PitchScale = 1.5f * rng.RandfRange(0.9f, 1.1f);
             soundDoubleJump.Play();
@@ -274,15 +274,15 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         }
     }
 
-    public void playAnimation()
+    public void PlayAnimation()
     {
         //Play animations
-        if (Input.IsActionJustPressed("ui_accept") && IsOnFloor() && !isHurt && !hasWon)
+        if (Input.IsActionJustPressed("Jump") && IsOnFloor() && !isHurt && !hasWon)
         {
             animationPlayer.Play("Jump_Rise", 0.1);
             controlTrusters(false);
         }
-        else if (Input.IsActionJustPressed("ui_accept") && !IsOnFloor() && hasDoubleJump && !isHurt && !hasWon)
+        else if (Input.IsActionJustPressed("Jump") && !IsOnFloor() && hasDoubleJump && !isHurt && !hasWon)
         {
             animationPlayer.Play("Jump_Double", 0.1);
             controlTrusters(true);
@@ -320,11 +320,11 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
     public void accelerate(double delta)
     {
-        if (IsOnFloor() && Input.IsActionPressed("ui_accelerate"))
+        if (IsOnFloor() && Input.IsActionPressed("Accelerate"))
         {
             MovementSpeed = Mathf.MoveToward(MovementSpeed, TopSpeed, topAcellerationRate * (float)delta);
         }
-        else if (!IsOnFloor() && Input.IsActionPressed("ui_accelerate"))
+        else if (!IsOnFloor() && Input.IsActionPressed("Accelerate"))
         {
         }
         else if (MovementSpeed >= RunSpeed)
@@ -337,7 +337,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         }
     }
 
-    public async void onHurtboxEntered(Area3D hitbox)
+    public async void OnHurtboxEntered(Area3D hitbox)
     {
         if (isHurt)
         {
@@ -351,7 +351,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         {
             if (soundManager != null)
             {
-                soundManager.playSoundLose();
+                soundManager.PlaySoundLose();
             }
 
             await gameOver("res://Menu/Nodes/menu_defeat.tscn");
@@ -360,28 +360,28 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         {
             soundJump.PitchScale = rng.RandfRange(0.9f, 1.1f);
             soundGetHit.Play();
-            await playDefeatedAnimation();
+            await PlayDefeatedAnimation();
             await gameOver("res://Menu/Nodes/menu_defeat.tscn");
         }
     }
 
-    public async Task playDefeatedAnimation()
+    public async Task PlayDefeatedAnimation()
     {
         animationPlayer.Play("Defeat", 0.1);
         if (soundManager != null)
         {
-            soundManager.playSoundLose();
+            soundManager.PlaySoundLose();
         }
         controlTrusters(false);
         await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
     }
 
-    public async Task playWinAnimation()
+    public async Task PlayWinAnimation()
     {
         animationPlayer.Play("Win", 0.1);
         if (soundManager != null)
         {
-            soundManager.playSoundWin();
+            soundManager.PlaySoundWin();
         }
         controlTrusters(true);
         await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);

@@ -21,7 +21,7 @@ public partial class MenuPause : Control
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        if (Input.IsActionJustPressed("ui_pause"))
+        if (Input.IsActionJustPressed("Pause"))
         {
             CallDeferred(nameof(setPause));
         }
@@ -48,21 +48,21 @@ public partial class MenuPause : Control
     public void onButtonResumePressed()
     {
         GetTree().Paused = false;
-        soundManager.playSoundClick();
+        soundManager.PlaySoundClick();
         CallDeferred(nameof(setPause));
     }
 
     public void onButtonMenuPressed()
     {
         GetTree().Paused = false;
-        soundManager.playSoundClick();
+        soundManager.PlaySoundClick();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void onButtonExitPressed()
     {
         GetTree().Paused = false;
-        await soundManager.playSoundExit();
+        await soundManager.PlaySoundExit();
         GetTree().Quit();
     }
 }

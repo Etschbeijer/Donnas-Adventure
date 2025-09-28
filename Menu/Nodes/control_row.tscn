@@ -25,13 +25,13 @@ offset_right = 64.512
 offset_bottom = -9.704
 
 [node name="PanelRank" type="Panel" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_right = 432.0
 offset_bottom = 64.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7sg6")
 
 [node name="LabelRank" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_left = 8.0
 offset_top = 4.0
 offset_right = 224.0
@@ -48,7 +48,7 @@ text = "1st
 "
 
 [node name="LabelName" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_left = 96.0
 offset_top = 4.0
 offset_right = 264.0
@@ -66,7 +66,7 @@ text = "123456789012
 "
 
 [node name="LabelTime" type="Label" parent="."]
-layout_mode = 0
+layout_mode = 1
 offset_left = 328.0
 offset_top = 4.0
 offset_right = 456.0

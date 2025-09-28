@@ -6,34 +6,34 @@ public partial class SoundManager : Control
 {
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
-    public AudioStreamPlayer2D soundClick;
-    public AudioStreamPlayer2D soundExit;
-    public AudioStreamPlayer2D soundMainMenu;
-    public AudioStreamPlayer2D sounPlay;
+    public AudioStreamPlayer2D SoundClick;
+    public AudioStreamPlayer2D SoundExit;
+    public AudioStreamPlayer2D SoundMainMenu;
+    public AudioStreamPlayer2D SoundStartGame;
 
-    public AudioStreamPlayer2D musicProject2Marioish2D;
-    public AudioStreamPlayer2D musicPuppyPlayingInTheGarden2D;
+    public AudioStreamPlayer2D MusicProject2Marioish2D;
+    public AudioStreamPlayer2D MusicPuppyPlayingInTheGarden2D;
 
-    public AudioStreamPlayer3D soundLose;
-    public AudioStreamPlayer3D soundWin;
+    public AudioStreamPlayer3D SoundLose;
+    public AudioStreamPlayer3D SoundWin;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         //Get nodes
-        soundClick = GetNode<AudioStreamPlayer2D>("SoundClick");
-        soundExit = GetNode<AudioStreamPlayer2D>("SoundExit");
-        soundMainMenu = GetNode<AudioStreamPlayer2D>("SoundMainMenu");
-        sounPlay = GetNode<AudioStreamPlayer2D>("SoundPlay");
+        SoundClick = GetNode<AudioStreamPlayer2D>("SoundClick");
+        SoundExit = GetNode<AudioStreamPlayer2D>("SoundExit");
+        SoundMainMenu = GetNode<AudioStreamPlayer2D>("SoundMainMenu");
+        SoundStartGame = GetNode<AudioStreamPlayer2D>("SoundPlay");
 
-        musicProject2Marioish2D = GetNode<AudioStreamPlayer2D>("MusicProject2Marioish2D");
-        musicPuppyPlayingInTheGarden2D = GetNode<AudioStreamPlayer2D>("MusicPuppyPlayingInTheGarden2D");
+        MusicProject2Marioish2D = GetNode<AudioStreamPlayer2D>("MusicProject2Marioish2D");
+        MusicPuppyPlayingInTheGarden2D = GetNode<AudioStreamPlayer2D>("MusicPuppyPlayingInTheGarden2D");
 
-        soundLose = GetNode<AudioStreamPlayer3D>("SoundLose");
-        soundWin = GetNode<AudioStreamPlayer3D>("SoundWin");
+        SoundLose = GetNode<AudioStreamPlayer3D>("SoundLose");
+        SoundWin = GetNode<AudioStreamPlayer3D>("SoundWin");
 
         //Call important methods
-        playMusicProject2Marioish2D();
+        PlayMusicProject2Marioish2D();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -41,68 +41,68 @@ public partial class SoundManager : Control
 	{
 	}
 
-    public void playSoundClick()
+    public void PlaySoundClick()
     {
-        soundClick.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        soundClick.Play();
+        SoundClick.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        SoundClick.Play();
     }
 
-    public async Task playSoundExit()
+    public async Task PlaySoundExit()
     {
-        soundExit.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        soundExit.Play();
+        SoundExit.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        SoundExit.Play();
 
-        await ToSignal(soundExit, AudioStreamPlayer2D.SignalName.Finished);
+        await ToSignal(SoundExit, AudioStreamPlayer2D.SignalName.Finished);
     }
 
-    public void playSoundMainMenu()
+    public void PlaySoundMainMenu()
     {
-        soundMainMenu.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        soundMainMenu.Play();
+        SoundMainMenu.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        SoundMainMenu.Play();
     }
 
-    public void playMusicProject2Marioish2D()
+    public void PlayMusicProject2Marioish2D()
     {
-        musicProject2Marioish2D.Play();
+        MusicProject2Marioish2D.Play();
     }
 
-    public void stopMusicProject2Marioish2D()
+    public void StopMusicProject2Marioish2D()
     {
-        musicProject2Marioish2D.Stop();
+        MusicProject2Marioish2D.Stop();
     }
 
-    public void playMusicPuppyPlayingInTheGarden3D()
+    public void PlayMusicPuppyPlayingInTheGarden3D()
     {
-        musicPuppyPlayingInTheGarden2D.Play();
+        MusicPuppyPlayingInTheGarden2D.Play();
     }
 
-    public void stopMusicPuppyPlayingInTheGarden3D()
+    public void StopMusicPuppyPlayingInTheGarden3D()
     {
-        musicPuppyPlayingInTheGarden2D.Stop();
+        MusicPuppyPlayingInTheGarden2D.Stop();
     }
 
-    public async Task playSoundPlay()
+    public async Task PlaySoundPlay()
     {
-        sounPlay.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        sounPlay.Play();
+        SoundStartGame.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        SoundStartGame.Play();
 
-        await ToSignal(sounPlay, AudioStreamPlayer2D.SignalName.Finished);
+        await ToSignal(SoundStartGame, AudioStreamPlayer2D.SignalName.Finished);
     }
 
-    public void playSoundLose()
+    public void PlaySoundLose()
     {
-        soundLose.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        soundLose.Play();
+        SoundLose.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        SoundLose.Play();
 
-        stopMusicPuppyPlayingInTheGarden3D();
+        StopMusicPuppyPlayingInTheGarden3D();
     }
 
-    public void playSoundWin()
+    public void PlaySoundWin()
     {
-        soundWin.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        var defaultDB = soundWin.VolumeDb;
-        soundWin.VolumeDb = soundWin.VolumeDb * 20f;
-        soundWin.Play();
-        soundWin.VolumeDb = defaultDB;
+        SoundWin.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        var defaultDB = SoundWin.VolumeDb;
+        SoundWin.VolumeDb = SoundWin.VolumeDb * 20f;
+        SoundWin.Play();
+        SoundWin.VolumeDb = defaultDB;
     }
 }

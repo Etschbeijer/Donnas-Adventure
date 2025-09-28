@@ -30,7 +30,7 @@ public partial class StartZone : Area3D
             audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
             audioPlayer.Play();
 
-            global.startTimer();
+            global.StartTimer();
             SetCollisionMaskValue(1, false);
         }
     }

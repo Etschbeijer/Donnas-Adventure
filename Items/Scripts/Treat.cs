@@ -37,34 +37,26 @@ public partial class Treat : Area3D
         RotateY(Mathf.DegToRad(RotSpeed * (float)delta));
     }
 
-    public async void onBodyEntered(CharacterBody3D body)
+    public async void OnBodyEntered(CharacterBody3D body)
     {
-        global.increaseTreats();
+        global.IncreaseTreats();
         SetCollisionLayerValue(3, false);
         SetCollisionMaskValue(1, false);
 
         animationPlayer.Play("bounce");
 
-        hud.updateLabelTreats();
+        hud.UpdateLabelTreats();
 
         audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
         audioPlayer.Play();
 
         await ToSignal(audioPlayer, AudioStreamPlayer2D.SignalName.Finished);
 
-        if (global.collectedTreats == global.numberOfTreats && body is PlayerCharacterMovement)
+        var player = body as PlayerCharacter;
+
+        if (global.CollectedTreats == global.NumberOfTreats && player != null)
         {
-            var player = body as PlayerCharacterMovement;
-
-            player.CallDeferred(nameof(player.controllHurtBoxes), false);
-            player.hasWon = true;
-
-            global.stopTimer();
-
-            await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-
-            await player.playWinAnimation();
-            await player.gameOver("res://Menu/Nodes/menu_win.tscn");
+            player.HasWon = true;
         }
         else
         {
@@ -72,20 +64,20 @@ public partial class Treat : Area3D
         }
     }
 
-    public void onAnimationPlayerAnimationFinished(string animation)
+    public void OnAnimationPlayerAnimationFinished(string animation)
     {
         if (animation == "bounce")
         {
-            CallDeferred(nameof(unload));
+            CallDeferred(nameof(Unload));
         }
     }
 
-    public void unload()
+    public void Unload()
     {
         QueueFree();
     }
 
-    public void loadWinScene()
+    public void LoadWinScene()
     {
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_win.tscn");
     }

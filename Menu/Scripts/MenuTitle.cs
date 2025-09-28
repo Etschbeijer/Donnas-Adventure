@@ -16,34 +16,34 @@ public partial class MenuTitle : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.stopMusicPuppyPlayingInTheGarden3D();
-        soundManager.playMusicProject2Marioish2D();
+        soundManager.StopMusicPuppyPlayingInTheGarden3D();
+        soundManager.PlayMusicProject2Marioish2D();
     }
 
     public async void onButtonPlayPressed()
 	{
-        await soundManager.playSoundPlay();
+        await soundManager.PlaySoundPlay();
 
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void onButtonScoresPressed()
     {
-        soundManager.playSoundClick();
+        soundManager.PlaySoundClick();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_highscores.tscn");
     }
 
     public void onButtonCreditsPressed()
     {
-        soundManager.playSoundClick();
+        soundManager.PlaySoundClick();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_credits.tscn");
     }
 
     public async void onButtonExitPressed()
     {
-        await soundManager.playSoundExit();
+        await soundManager.PlaySoundExit();
 
         GetTree().Quit();
     }

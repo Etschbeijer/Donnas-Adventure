@@ -29,43 +29,43 @@ public partial class MenuWin : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.stopMusicPuppyPlayingInTheGarden3D();
-        soundManager.playMusicProject2Marioish2D();
+        soundManager.StopMusicPuppyPlayingInTheGarden3D();
+        soundManager.PlayMusicProject2Marioish2D();
         nameDialog.Hide();
         SetHighscore();
     }
 
     public async void onButtonPlayAgainPressed()
     {
-        await soundManager.playSoundPlay();
+        await soundManager.PlaySoundPlay();
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void onButtonMenuPressed()
     {
-        soundManager.playSoundClick();
+        soundManager.PlaySoundClick();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void onButtonExitPressed()
     {
-        await soundManager.playSoundExit();
+        await soundManager.PlaySoundExit();
         GetTree().Quit();
     }
 
     public void SetHighscore()
     {
-        timescore.Text = $"{global.minutes:D2}:{global.seconds:D2}";
+        timescore.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
 
-        var highscores = global.saveData.highscores?.ToList() ?? new List<double>();
+        var highscores = global.SaveData.highscores?.ToList() ?? new List<double>();
 
-        currentScore = (new TimeSpan(0, global.minutes, global.seconds)).TotalSeconds;
+        currentScore = (new TimeSpan(0, global.Minutes, global.Seconds)).TotalSeconds;
 
         bool addNewTime = highscores.Any(highscore => highscore > currentScore) || highscores.Count < 10;
 
         if (addNewTime)
         {
-            var temp = global.saveData.topPlayers?.ToList() ?? new List<string>();
+            var temp = global.SaveData.topPlayers?.ToList() ?? new List<string>();
 
             for(int i = 0; i < temp.Count; i++)
             {
@@ -92,9 +92,9 @@ public partial class MenuWin : Control
             notIndexedTopPlayers.Add(highscoresAndPlayers[i].Item2);
         }
 
-        global.saveData.highscores = topHighscores.ToArray();
-        global.saveData.topPlayers = notIndexedTopPlayers.ToArray();
+        global.SaveData.highscores = topHighscores.ToArray();
+        global.SaveData.topPlayers = notIndexedTopPlayers.ToArray();
 
-        global.saveData.Save();
+        global.SaveData.Save();
     }
 }

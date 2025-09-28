@@ -54,25 +54,29 @@ corner_radius_bottom_left = 8
 
 [node name="MenuTitle" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_8mqsw")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 1157.0
-offset_bottom = 650.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.335211, 0.754964, 0.287311, 1)
 
 [node name="LabelTitle" type="Label" parent="."]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 1157.0
-offset_bottom = 273.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -85,20 +89,32 @@ text = "Donnas Adventure!"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 228.0
-offset_top = 200.0
-offset_right = 428.0
-offset_bottom = 400.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_vertical = 2
 texture = ExtResource("2_8mqsw")
 
-[node name="Buttons" type="Node2D" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -158.0
+offset_right = 473.0
+offset_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ButtonPlay" type="Button" parent="Buttons"]
-offset_left = 743.0
-offset_top = 168.0
-offset_right = 896.0
-offset_bottom = 244.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
 theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
@@ -114,10 +130,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Play"
 
 [node name="ButtonScores" type="Button" parent="Buttons"]
-offset_left = 743.0
-offset_top = 288.0
-offset_right = 896.0
-offset_bottom = 368.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
 theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
@@ -133,10 +146,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Scores"
 
 [node name="ButtonCredits" type="Button" parent="Buttons"]
-offset_left = 743.0
-offset_top = 408.0
-offset_right = 896.0
-offset_bottom = 484.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
 theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
@@ -153,10 +163,7 @@ text = "Credits
 "
 
 [node name="ButtonExit" type="Button" parent="Buttons"]
-offset_left = 743.0
-offset_top = 520.0
-offset_right = 896.0
-offset_bottom = 596.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
 theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)

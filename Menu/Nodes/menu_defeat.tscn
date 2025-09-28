@@ -62,19 +62,21 @@ grow_vertical = 2
 script = ExtResource("1_elvsx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 1157.0
-offset_bottom = 650.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.602972, 0.0150375, 1.92523e-07, 1)
 
 [node name="LabelTitle" type="Label" parent="."]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -3.0
-offset_right = 1157.0
-offset_bottom = 273.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.738556, 0, 0.194751, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -87,20 +89,33 @@ text = "Game Over!"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 174.0
-offset_top = 317.0
-offset_right = 374.0
-offset_bottom = 517.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_vertical = 2
 texture = ExtResource("2_elvsx")
 
-[node name="Buttons" type="Node2D" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = -118.0
+offset_right = 556.0
+offset_bottom = 118.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
 [node name="ButtonPlayAgain" type="Button" parent="Buttons"]
-offset_left = 688.0
-offset_top = 320.0
-offset_right = 907.0
-offset_bottom = 396.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192814, 0.953087, 0.420198, 1)
 theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
@@ -116,10 +131,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
 text = "Play Again!"
 
 [node name="ButtonMenu" type="Button" parent="Buttons"]
-offset_left = 685.0
-offset_top = 416.0
-offset_right = 921.0
-offset_bottom = 492.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
 theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
@@ -135,10 +147,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
 text = "Main Menu"
 
 [node name="ButtonExit" type="Button" parent="Buttons"]
-offset_left = 733.0
-offset_top = 512.0
-offset_right = 886.0
-offset_bottom = 588.0
+layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
 theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)

@@ -18,24 +18,24 @@ public partial class Level1 : Node3D
         global = GetNode<Global>("/root/Global");
         numberOfTreats = GetNode<Node3D>("Treats");
         hud = GetNode<Hud>("HUD");
-        var labelTreats = hud.GetNode<Label>("LabelTreats");
+        var labelTreats = hud.LabelTreats;
         soundManager = GetNode<SoundManager>("/root/SoundManager");
 
         //Set initial values
         int treatCount = numberOfTreats.GetChildCount();
-        global.setCurrentTreats(0);
-        global.setNumberOfTreats(treatCount);
-        labelTreats.Text = global.collectedTreats.ToString();
+        global.SetCurrentTreats(0);
+        global.SetNumberOfTreats(treatCount);
+        labelTreats.Text = global.CollectedTreats.ToString();
 
         //Call important methods
-        soundManager.stopMusicProject2Marioish2D();
-        soundManager.playMusicPuppyPlayingInTheGarden3D();
-        global.resetTimer();
+        soundManager.StopMusicProject2Marioish2D();
+        soundManager.PlayMusicPuppyPlayingInTheGarden3D();
+        global.ResetTimer();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-        hud.updateLabelTime();
+        hud.UpdateLabelTime();
     }
 }
