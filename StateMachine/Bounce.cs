@@ -22,7 +22,7 @@ public partial class Bounce : PlayerState
         startJumping = true;
     }
 
-    public override async void PhysicsUpdate(double delta)
+    public override void PhysicsUpdate(double delta)
     {
         if (Input.IsActionJustPressed("Jump") && !Player.IsOnFloor() && Player.HasDoubleJump)
         {
