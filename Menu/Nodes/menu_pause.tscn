@@ -159,6 +159,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
 text = "Exit"
 
-[connection signal="button_down" from="VBoxContainer/ButtonResume" to="." method="onButtonResumePressed"]
-[connection signal="button_down" from="VBoxContainer/ButtonMainMenu" to="." method="onButtonMenuPressed"]
-[connection signal="button_down" from="VBoxContainer/ButtonExit" to="." method="onButtonExitPressed"]
+[connection signal="button_down" from="VBoxContainer/ButtonResume" to="." method="OnButtonResumePressed"]
+[connection signal="button_down" from="VBoxContainer/ButtonMainMenu" to="." method="OnButtonMenuPressed"]
+[connection signal="button_down" from="VBoxContainer/ButtonExit" to="." method="OnButtonExitPressed"]

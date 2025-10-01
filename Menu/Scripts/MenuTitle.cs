@@ -20,28 +20,28 @@ public partial class MenuTitle : Control
         soundManager.PlayMusicProject2Marioish2D();
     }
 
-    public async void onButtonPlayPressed()
+    public async void OnButtonPlayPressed()
 	{
         await soundManager.PlaySoundPlay();
 
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void onButtonScoresPressed()
+    public void OnButtonScoresPressed()
     {
         soundManager.PlaySoundClick();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_highscores.tscn");
     }
 
-    public void onButtonCreditsPressed()
+    public void OnButtonCreditsPressed()
     {
         soundManager.PlaySoundClick();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_credits.tscn");
     }
 
-    public async void onButtonExitPressed()
+    public async void OnButtonExitPressed()
     {
         await soundManager.PlaySoundExit();
 

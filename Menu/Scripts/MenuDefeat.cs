@@ -19,21 +19,21 @@ public partial class MenuDefeat : Control
         soundManager.PlayMusicProject2Marioish2D();
     }
 
-    public async void onButtonPlayAgainPressed()
+    public async void OnButtonPlayAgainPressed()
     {
         await soundManager.PlaySoundPlay();
 
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void onButtonMenuPressed()
+    public void OnButtonMenuPressed()
     {
         soundManager.PlaySoundMainMenu();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
-    public async void onButtonExitPressed()
+    public async void OnButtonExitPressed()
     {
         await soundManager.PlaySoundExit();
 

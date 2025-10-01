@@ -192,4 +192,4 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Main Menu"
 
-[connection signal="pressed" from="Buttons/ButtonMenu" to="." method="onButtonMenuPressed"]
+[connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]

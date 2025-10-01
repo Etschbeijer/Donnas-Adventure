@@ -178,7 +178,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Exit"
 
-[connection signal="pressed" from="Buttons/ButtonPlay" to="." method="onButtonPlayPressed"]
-[connection signal="pressed" from="Buttons/ButtonScores" to="." method="onButtonScoresPressed"]
-[connection signal="pressed" from="Buttons/ButtonCredits" to="." method="onButtonCreditsPressed"]
-[connection signal="pressed" from="Buttons/ButtonExit" to="." method="onButtonExitPressed"]
+[connection signal="pressed" from="Buttons/ButtonPlay" to="." method="OnButtonPlayPressed"]
+[connection signal="pressed" from="Buttons/ButtonScores" to="." method="OnButtonScoresPressed"]
+[connection signal="pressed" from="Buttons/ButtonCredits" to="." method="OnButtonCreditsPressed"]
+[connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]

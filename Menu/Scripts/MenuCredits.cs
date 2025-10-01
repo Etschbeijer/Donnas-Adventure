@@ -20,7 +20,7 @@ public partial class MenuCredits : Control
 	{
 	}
 
-    public void onButtonMenuPressed()
+    public void OnButtonMenuPressed()
     {
         soundManager.PlaySoundMainMenu();
 

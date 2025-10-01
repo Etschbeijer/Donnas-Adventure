@@ -35,19 +35,19 @@ public partial class MenuWin : Control
         SetHighscore();
     }
 
-    public async void onButtonPlayAgainPressed()
+    public async void OnButtonPlayAgainPressed()
     {
         await soundManager.PlaySoundPlay();
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void onButtonMenuPressed()
+    public void OnButtonMenuPressed()
     {
         soundManager.PlaySoundClick();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
-    public async void onButtonExitPressed()
+    public async void OnButtonExitPressed()
     {
         await soundManager.PlaySoundExit();
         GetTree().Quit();
@@ -75,7 +75,7 @@ public partial class MenuWin : Control
         }
     }
 
-    public void onNameDialogConfirmed()
+    public void OnNameDialogConfirmed()
     {
         string playerName = nameDialog.GetNode<LineEdit>("LineEdit").Text.Trim();
         highscoresAndPlayers.Add((currentScore, playerName));

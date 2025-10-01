@@ -22,6 +22,8 @@ public partial class Slime : CharacterBody3D
     AnimationPlayer animationPlayer;
     Global global;
 
+    GpuParticles3D slimeBurst;
+
     Area3D hurtbox;
     Area3D hitbox;
 
@@ -41,6 +43,7 @@ public partial class Slime : CharacterBody3D
         floorDetector = GetNode<RayCast3D>("RayCast3D");
         audioPlayer = GetNode<AudioStreamPlayer3D>("SoundSlime");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
+        slimeBurst = GetNode<Node3D>("SlimeBurst").GetNode<GpuParticles3D>("GPUParticles3D");
 
         //Set initial values
         rotation = Rotation;
@@ -128,9 +131,9 @@ public partial class Slime : CharacterBody3D
 
         audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
         audioPlayer.Play();
-
-        direction = Vector3.Zero;
         MovementSpeed = 0;
+        slimeBurst.Emitting = true;
+        direction = Vector3.Zero;
 
         player.ShallBounce = true;
 

@@ -23,12 +23,12 @@ public partial class MenuPause : Control
 	{
         if (Input.IsActionJustPressed("Pause"))
         {
-            CallDeferred(nameof(setPause));
+            CallDeferred(nameof(SetPause));
         }
 
     }
 
-    public void setPause()
+    public void SetPause()
     {
         if (isPaused)
         {
@@ -45,21 +45,21 @@ public partial class MenuPause : Control
         isPaused = !isPaused;
     }
 
-    public void onButtonResumePressed()
+    public void OnButtonResumePressed()
     {
         GetTree().Paused = false;
         soundManager.PlaySoundClick();
-        CallDeferred(nameof(setPause));
+        CallDeferred(nameof(SetPause));
     }
 
-    public void onButtonMenuPressed()
+    public void OnButtonMenuPressed()
     {
         GetTree().Paused = false;
         soundManager.PlaySoundClick();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
-    public async void onButtonExitPressed()
+    public async void OnButtonExitPressed()
     {
         GetTree().Paused = false;
         await soundManager.PlaySoundExit();
