@@ -44,10 +44,10 @@ public partial class AirRiseMovement : PlayerState
 
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
 
-        Player.Velocity = Player.PlayerVelocity;
-
         if (Player.IsHurt)
         {
+            Player.PlayerVelocity.Y = 0f;
+            Player.Velocity = Player.PlayerVelocity;
             Player.ControllFeetCollision(true, false);
             StateMachine.TransitionTo(nameof(GetHit));
         }
@@ -74,12 +74,16 @@ public partial class AirRiseMovement : PlayerState
             Player.HasDoubleJump = true;
             if (Player.InputDir == Vector2.Zero)
             {
+                Player.PlayerVelocity.Y = 0f;
+                Player.Velocity = Player.PlayerVelocity;
                 Player.ControllFeetCollision(true, false);
                 Player.ControllSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(Idle));
             }
             else
             {
+                Player.PlayerVelocity.Y = 0f;
+                Player.Velocity = Player.PlayerVelocity;
                 Player.ControllFeetCollision(true, false);
                 Player.ControllSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(GroundMovement));
@@ -96,11 +100,15 @@ public partial class AirRiseMovement : PlayerState
     {
         if (Player.CurrentHealth <= 0)
         {
+            Player.PlayerVelocity.Y = 0f;
+            Player.Velocity = Player.PlayerVelocity;
             StateMachine.TransitionTo(nameof(Lose));
         }
 
         if (Player.HasWon)
         {
+            Player.PlayerVelocity.Y = 0f;
+            Player.Velocity = Player.PlayerVelocity;
             StateMachine.TransitionTo(nameof(Win));
         }
     }
@@ -135,6 +143,8 @@ public partial class AirRiseMovement : PlayerState
 
     public void OnHit()
     {
+        Player.PlayerVelocity.Y = 0f;
+        Player.Velocity = Player.PlayerVelocity;
         StateMachine.TransitionTo(nameof(GetHit));
     }
 }

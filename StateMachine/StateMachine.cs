@@ -54,6 +54,7 @@ public partial class StateMachine : Node
 
     public override void _Process(double delta)
     {
+        GD.Print($"{currentState.Name}");
         currentState.Update(delta);
     }
 

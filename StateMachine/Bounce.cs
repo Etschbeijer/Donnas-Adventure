@@ -33,8 +33,6 @@ public partial class Bounce : PlayerState
 
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
 
-        Player.Velocity = Player.PlayerVelocity;
-
         if (Player.IsHurt)
         {
             Player.ControllFeetCollision(true, false);

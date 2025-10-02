@@ -163,9 +163,11 @@ public partial class PlayerCharacter : CharacterBody3D
             ControllLightTrail(true);
         }
 
+        alignWithFloor(groundDetector.GetCollisionNormal());
+
         InputDir = GetInputDirection();
 
-        AlignWithFloor(groundDetector.GetCollisionNormal());
+        Velocity = PlayerVelocity;
 
         AlignCamera(cameraPosition, characterPosition, delta);
 
@@ -236,7 +238,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
 
     //Align character to floor
-    public void AlignWithFloor(Vector3 floorNormal)
+    private void alignWithFloor(Vector3 floorNormal)
     {
         if (IsOnFloor())
         {

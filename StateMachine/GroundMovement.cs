@@ -15,18 +15,16 @@ public partial class GroundMovement : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
+        Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
+
+        PlayAnimation();
+
         if (!Player.IsOnFloor())
         {
             StateMachine.TransitionTo(nameof(AirDropMovement));
 
             return;
         }
-
-        Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
-
-        PlayAnimation();
-
-        Player.Velocity = Player.PlayerVelocity;
 
         if (Player.IsHurt)
         {

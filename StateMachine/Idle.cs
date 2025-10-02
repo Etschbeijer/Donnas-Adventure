@@ -23,8 +23,6 @@ public partial class Idle : PlayerState
 	{
         CalculateVelocity(Player.InputDir, delta);
 
-        Player.Velocity = Player.PlayerVelocity;
-
         if (!AnimationPlayer.IsPlaying())
         {
             AnimationPlayer.Play("Idle", 0.1);

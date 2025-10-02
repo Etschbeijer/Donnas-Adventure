@@ -374,6 +374,7 @@ data = {
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("2_a34cx")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -10, 7, 2)
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -10, 8.46746, 2)
+floor_constant_speed = false
 
 [node name="MenuPause" parent="PlayerCharacter" instance=ExtResource("10_25t36")]
