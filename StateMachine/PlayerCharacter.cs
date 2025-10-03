@@ -28,12 +28,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     [Export]
     public int ComboCounter { get; set; } = 1;
-    [Export]
-    public int Friction { get; set; } = 20;
-    [Export]
-    public int AttackFriction { get; set; } = 4;
-    [Export]
-    public int AirFriction { get; set; } = 10;
+
 
     public Vector3 PlayerVelocity;
     public Vector3 Gravity;

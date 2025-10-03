@@ -29,9 +29,21 @@ public partial class AirDropMovement : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
-        if (Input.IsActionJustPressed("Jump") && !Player.IsOnFloor() && Player.HasDoubleJump)
+        Player.TimeSinceLeftFloor += (float)delta;
+
+
+        if (Input.IsActionJustPressed("Jump") && Player.TimeSinceLeftFloor < Player.CoyoteTime)
+        {
+            Dictionary msg = new Dictionary();
+            msg["doJump"] = true;
+
+            Player.PlayerVelocity.Y = 0;
+            StateMachine.TransitionTo(nameof(AirRiseMovement), msg);
+        }
+        else if (Input.IsActionJustPressed("Jump") && !Player.IsOnFloor() && Player.HasDoubleJump)
         {
             Player.HasDoubleJump = false;
+            Player.PlayerVelocity.Y = 0;
             StateMachine.TransitionTo(nameof(AirRiseMovement));
         }
 

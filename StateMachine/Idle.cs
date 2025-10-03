@@ -9,6 +9,8 @@ public partial class Idle : PlayerState
 
 	public override void Enter(Dictionary msg = null)
 	{
+        Player.TimeSinceLeftFloor = 0;
+
         if (StateMachine.PreviousState != null && (StateMachine.PreviousState.Name == nameof(AirRiseMovement) || StateMachine.PreviousState.Name == nameof(AirDropMovement)))
         {
             AnimationPlayer.Play("Jump_Land", 0.1);

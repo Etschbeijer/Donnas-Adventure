@@ -23,9 +23,11 @@ public partial class StartZone : Area3D
 	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public void onStartZoneEntered(CharacterBody3D body)
+    public void OnStartZoneEntered(CharacterBody3D body)
     {
-        if (body is PlayerCharacterMovement player)
+        var player = body as PlayerCharacter;
+
+        if (player != null)
         {
             audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
             audioPlayer.Play();
@@ -35,5 +37,6 @@ public partial class StartZone : Area3D
         }
     }
 
-    
+
+
 }

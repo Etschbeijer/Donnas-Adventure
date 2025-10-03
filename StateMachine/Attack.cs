@@ -30,7 +30,7 @@ public partial class Attack : PlayerState
 
         if (Player.IsOnFloor())
         {
-            Player.Velocity = Player.Velocity.Lerp(new Vector3(), (float)(Player.AttackFriction * delta));
+            //Player.Velocity = Player.Velocity.Lerp(new Vector3(), (float)(Player.AttackFriction * delta));
         }
 
         Player.Velocity = new Vector3(Player.Velocity.X, Player.Velocity.Y, Player.Velocity.Z);

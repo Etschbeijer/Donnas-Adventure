@@ -15,6 +15,8 @@ public partial class Bounce : PlayerState
         Player.HasDoubleJump = true;
         Player.ShallBounce = false;
 
+        Player.TimeSinceLeftFloor = 0;
+
         AnimationPlayer.Play("Jump_Start", 0.1, 2);
 
         Player.PlayerVelocity.Y = Player.JumpVelocity * 0.7f;

@@ -173,6 +173,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
             soundDoubleJump.PitchScale = 1.5f * rng.RandfRange(0.9f, 1.1f);
             soundDoubleJump.Play();
 
+            velocity.Y = 0;
             velocity.Y = JumpVelocity;
             hasDoubleJump = false;
         }

@@ -18,4 +18,4 @@ shape = SubResource("CylinderShape3D_krv0v")
 [node name="SoundStart" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_krv0v")
 
-[connection signal="body_entered" from="." to="." method="onStartZoneEntered"]
+[connection signal="body_entered" from="." to="." method="OnStartZoneEntered"]

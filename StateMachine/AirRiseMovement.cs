@@ -14,7 +14,7 @@ public partial class AirRiseMovement : PlayerState
     {
         Player.ControllFeetCollision(false, true);
 
-        if (msg is not null && msg.Keys.Contains("doJump") && Player.IsOnFloor())
+        if (msg is not null && msg.Keys.Contains("doJump") && Player.HasDoubleJump)
         {
             AnimationPlayer.Play("Jump_Start", 0.1, 2);
 
