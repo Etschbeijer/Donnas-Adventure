@@ -10,7 +10,7 @@ public partial class GroundMovement : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
-        Player.TimeonWall = 0f;
+        Player.TimeOnWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
         PlayMovementAnimation();

@@ -15,7 +15,7 @@ public partial class Bounce : PlayerState
         Player.HasDoubleJump = true;
         Player.ShallBounce = false;
 
-        Player.TimeonWall = 0f;
+        Player.TimeOnWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
         AnimationPlayer.Play("Jump_Start", 0.1, 2);
@@ -47,11 +47,6 @@ public partial class Bounce : PlayerState
             AnimationPlayer.Play("Jump_Rise", 0.1);
             startJumping = false;
         }
-
-        //if (Input.IsActionJustPressed("Attack"))
-        //{
-        //    StateMachine.TransitionTo("Attack1");
-        //}
 
         if(!Player.IsOnFloor() && IsAtTop((float) delta))
         {

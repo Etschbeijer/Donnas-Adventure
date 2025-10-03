@@ -56,7 +56,7 @@ public partial class PlayerCharacter : CharacterBody3D
     public float MovementSpeed;
     public float TimeSinceLeftFloor = 0f;
     public float WallTime = 0.5f;
-    public float TimeonWall = 0f;
+    public float TimeOnWall = 0f;
 
     //Min and max vertical rotation
     const float minPitch = -45f;

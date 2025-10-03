@@ -46,6 +46,12 @@ public partial class AirDropMovement : PlayerState
             StateMachine.TransitionTo(nameof(AirRiseMovement));
         }
 
+        if (Input.IsActionJustPressed("Stomp") || (Input.IsActionPressed("Stomp")))
+        {
+            Player.PlayerVelocity.Y = 0;
+            StateMachine.TransitionTo(nameof(Stomp));
+        }
+
         if (isGravityActive)
         {
             CalculateGravityVelocity((float)delta); 
@@ -63,12 +69,7 @@ public partial class AirDropMovement : PlayerState
             AnimationPlayer.Play("Jump_Drop", 0.1);
         }
 
-        //if (Input.IsActionJustPressed("Attack"))
-        //{
-        //    StateMachine.TransitionTo("Attack1");
-        //}
-
-        if (Player.TimeonWall < Player.WallTime && Player.IsOnWallOnly())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly())
         {
             StateMachine.TransitionTo(nameof(WallHanging));
         }

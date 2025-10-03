@@ -12,12 +12,13 @@ public partial class WallHanging : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
-        Player.TimeonWall = 0f;
+        Player.TimeOnWall = 0f;
 
         Player.ShallBounce = false;
         Player.HasDoubleJump = true;
 
         Player.PlayerVelocity = Vector3.Zero;
+        Player.Velocity = Player.PlayerVelocity;
 
         FaceToWall();
 
@@ -26,20 +27,14 @@ public partial class WallHanging : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
-        if(Player.TimeonWall < Player.WallTime && Player.IsOnWallOnly())
+        if (Player.TimeOnWall <= Player.WallTime && Player.IsOnWallOnly())
         {
-            Player.PlayerVelocity.Y = 0f;
-            Player.Velocity = Player.PlayerVelocity;
-            Player.TimeonWall += (float)delta;
+            Player.TimeOnWall += (float)delta;
+            AnimationPlayer.Play("Wall_Idle", 0.1);
         }
         else
         {
             StateMachine.TransitionTo(nameof(AirDropMovement));
-        }
-
-        if (!AnimationPlayer.IsPlaying() && !Player.IsOnWallOnly())
-        {
-            AnimationPlayer.Play("Wall_Idle", 0.1);
         }
 
         if (Player.IsHurt)
@@ -54,7 +49,7 @@ public partial class WallHanging : PlayerState
             msg["doJump"] = true;
 
             Vector3 jumpDirection = (Vector3.Up + wallNormal).Normalized();
-            Player.PlayerVelocity = jumpDirection * Player.JumpVelocity;
+            Player.PlayerVelocity = jumpDirection * Player.JumpVelocity * 1.5f;
             StateMachine.TransitionTo(nameof(WallJump), msg);
         }
     }
@@ -76,8 +71,7 @@ public partial class WallHanging : PlayerState
     {
         KinematicCollision3D wallCollission = Player.GetLastSlideCollision();
         wallNormal = wallCollission.GetNormal().Normalized();
-
         Vector3 lookTarget = Player.GlobalTransform.Origin + wallNormal;
-        Player.LookAt(lookTarget);
+        Player.LookAt(lookTarget, Vector3.Up);
     }
 }

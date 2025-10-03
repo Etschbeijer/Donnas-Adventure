@@ -12,7 +12,7 @@ public partial class AirRiseMovement : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
-        Player.TimeonWall = 0f;
+        Player.TimeOnWall = 0f;
         Player.ControlFeetCollision(false, true);
 
         if (msg is not null && msg.Keys.Contains("doJump") && Player.HasDoubleJump)
@@ -34,7 +34,7 @@ public partial class AirRiseMovement : PlayerState
         }
     }
 
-    public override async void PhysicsUpdate(double delta)
+    public override void PhysicsUpdate(double delta)
     {
         if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
         {
@@ -44,6 +44,12 @@ public partial class AirRiseMovement : PlayerState
         CalculateGravityVelocity((float) delta);
 
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
+
+        if (Input.IsActionJustPressed("Stomp") || (Input.IsActionPressed("Stomp")))
+        {
+            Player.PlayerVelocity.Y = 0;
+            StateMachine.TransitionTo(nameof(Stomp));
+        }
 
         if (Player.IsHurt)
         {
@@ -59,18 +65,13 @@ public partial class AirRiseMovement : PlayerState
             startJumping = false;
         }
 
-        //if (Input.IsActionJustPressed("Attack"))
-        //{
-        //    StateMachine.TransitionTo("Attack1");
-        //}
-
         if(!Player.IsOnFloor() && IsAtTop((float) delta))
         {
             Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
-        if (Player.TimeonWall < Player.WallTime && Player.IsOnWallOnly())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly())
         {
             StateMachine.TransitionTo(nameof(WallHanging));
         }
