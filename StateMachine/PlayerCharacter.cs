@@ -40,6 +40,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     Node3D cameraTarget;
     Node3D sounds;
+    Node3D rigDonna;
 
     Transform3D xTransform;
 
@@ -54,6 +55,8 @@ public partial class PlayerCharacter : CharacterBody3D
     public float CoyoteTime = 0.1f;
     public float MovementSpeed;
     public float TimeSinceLeftFloor = 0f;
+    public float WallTime = 0.5f;
+    public float TimeonWall = 0f;
 
     //Min and max vertical rotation
     const float minPitch = -45f;
@@ -62,6 +65,11 @@ public partial class PlayerCharacter : CharacterBody3D
     //Min and max Yaw rotation
     const float minYaw = -75f;
     const float maxYaw = 75f;
+
+    public float StopRate;
+    public float RunAcellerationRate;
+    public float TopAcellerationRate;
+    public float ToRunDecelerationRate;
 
     public int MaxHealth { get; set; } = 1;
     public int CurrentHealth { get; set; } = 1;
@@ -93,11 +101,6 @@ public partial class PlayerCharacter : CharacterBody3D
     [Signal]
     public delegate void PlayerHitEventHandler();
 
-    public float RunAcellerationRate;
-    public float StopRate;
-    public float TopAcellerationRate;
-    public float ToRunDecelerationRate;
-
     public Global Global;
 
     public override void _Ready()
@@ -109,6 +112,7 @@ public partial class PlayerCharacter : CharacterBody3D
         cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
         groundDetector = GetNode<RayCast3D>("RayCast3D");
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        rigDonna = GetNode<Node3D>("rig_Donna");
         Global = GetNode<Global>("/root/Global");
 
         sounds = GetNode<Node3D>("Sounds");
@@ -132,9 +136,9 @@ public partial class PlayerCharacter : CharacterBody3D
 
         //Call important methods
         ControlTrusters(false);
-        ControllHurtBoxes(true);
-        ControllHitBoxes(false);
-        ControllSaltoCollision(false);
+        ControlHurtBoxes(true);
+        ControlHitBoxes(false);
+        ControlSaltoCollision(false);
 
         RunAcellerationRate = RunSpeed / RunAccelarationTime;
         TopAcellerationRate = (TopSpeed - RunSpeed) / TopAccelarationTime;
@@ -143,7 +147,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        //Controll camera position manually
+        //Control camera position manually
         Vector3 characterPosition = Position;
 
         //Get camera controller position
@@ -151,11 +155,11 @@ public partial class PlayerCharacter : CharacterBody3D
 
         if (MovementSpeed > RunSpeed)
         {
-            ControllLightTrail(false);
+            ControlLightTrail(false);
         }
         else
         {
-            ControllLightTrail(true);
+            ControlLightTrail(true);
         }
 
         alignWithFloor(groundDetector.GetCollisionNormal());
@@ -317,7 +321,7 @@ public partial class PlayerCharacter : CharacterBody3D
         }
     }
 
-    public void ControllLightTrail(bool isHidden)
+    public void ControlLightTrail(bool isHidden)
     {
         foreach (Node3D trail in footLightTrails)
         {
@@ -344,7 +348,7 @@ public partial class PlayerCharacter : CharacterBody3D
         }
     }
 
-    public void ControllHurtbox(Area3D hurtbox, bool onOff)
+    public void ControlHurtbox(Area3D hurtbox, bool onOff)
     {
         var collisionBox = hurtbox.GetChild<CollisionShape3D>(0);
 
@@ -356,15 +360,15 @@ public partial class PlayerCharacter : CharacterBody3D
         hurtbox.SetCollisionMaskValue(9, onOff);
     }
 
-    public void ControllHurtBoxes(bool onOff)
+    public void ControlHurtBoxes(bool onOff)
     {
         foreach (Area3D hurtbox in hurtboxes)
         {
-            ControllHurtbox(hurtbox, onOff);
+            ControlHurtbox(hurtbox, onOff);
         }
     }
 
-    public void ControllHitbox(Area3D hitbox, bool onOff)
+    public void ControlHitbox(Area3D hitbox, bool onOff)
     {
         var collisionBox = hitbox.GetChild<CollisionShape3D>(0);
 
@@ -375,37 +379,37 @@ public partial class PlayerCharacter : CharacterBody3D
         hitbox.SetCollisionMaskValue(8, onOff);
     }
 
-    public void ControllHitBoxes(bool onOff)
+    public void ControlHitBoxes(bool onOff)
     {
         foreach (Area3D hitbox in hitboxes)
         {
-            ControllHitbox(hitbox, onOff);
+            ControlHitbox(hitbox, onOff);
         }
     }
 
-    public void ControllFeetCollision(bool onOffHurt, bool onOffHit)
+    public void ControlFeetCollision(bool onOffHurt, bool onOffHit)
     {
         var feetHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().ToLower().Contains("foot"));
         var feetHurtboxes = hurtboxes.Where(hurtBox => hurtBox.Name.ToString().ToLower().Contains("foot"));
 
         foreach (Area3D footHurtbox in feetHurtboxes)
         {
-            ControllHurtbox(footHurtbox, onOffHurt);
+            ControlHurtbox(footHurtbox, onOffHurt);
         }
 
         foreach (Area3D footHitbox in feetHitboxes)
         {
-            ControllHitbox(footHitbox, onOffHit);
+            ControlHitbox(footHitbox, onOffHit);
         }
     }
 
-    public void ControllSaltoCollision(bool onOffSalto)
+    public void ControlSaltoCollision(bool onOffSalto)
     {
         var saltoHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().ToLower().Contains("salto"));
 
         foreach (Area3D saltoHitbox in saltoHitboxes)
         {
-            ControllHitbox(saltoHitbox, onOffSalto);
+            ControlHitbox(saltoHitbox, onOffSalto);
         }
     }
 
@@ -459,31 +463,6 @@ public partial class PlayerCharacter : CharacterBody3D
         {
             IsHurt = true;
         }
-
-        //if (isHurt)
-        //{
-        //    return;
-        //}
-
-        //isHurt = true;
-        //CallDeferred(nameof(ControllHurtBoxes), false);
-
-        //if (hitbox.Name == "FallZone")
-        //{
-        //    if (soundManager != null)
-        //    {
-        //        soundManager.PlaySoundLose();
-        //    }
-
-        //    await GameOver("res://Menu/Nodes/menu_defeat.tscn");
-        //}
-        //else
-        //{
-        //    soundJump.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        //    soundGetHit.Play();
-        //    await PlayDefeatedAnimation();
-        //    await GameOver("res://Menu/Nodes/menu_defeat.tscn");
-        //}
     }
 
     public void PlaySoundDoubleJump()

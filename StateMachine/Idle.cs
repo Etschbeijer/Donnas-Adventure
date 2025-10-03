@@ -9,6 +9,7 @@ public partial class Idle : PlayerState
 
 	public override void Enter(Dictionary msg = null)
 	{
+        Player.TimeonWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
         if (StateMachine.PreviousState != null && (StateMachine.PreviousState.Name == nameof(AirRiseMovement) || StateMachine.PreviousState.Name == nameof(AirDropMovement)))
@@ -89,10 +90,5 @@ public partial class Idle : PlayerState
             Player.PlayerVelocity.X = Mathf.MoveToward(Player.Velocity.X, 0, stopRate * (float)delta);
             Player.PlayerVelocity.Z = Mathf.MoveToward(Player.Velocity.Z, 0, stopRate * (float)delta);
         }
-    }
-
-    public void OnHit()
-    {
-        StateMachine.TransitionTo(nameof(GetHit));
     }
 }

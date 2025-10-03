@@ -12,7 +12,7 @@ public partial class AirDropMovement : PlayerState
 
     public override async void Enter(Dictionary msg = null)
     {
-        Player.ControllFeetCollision(false, true);
+        Player.ControlFeetCollision(false, true);
 
         if (StateMachine.PreviousState.Name == nameof(AirRiseMovement))
         {
@@ -30,7 +30,6 @@ public partial class AirDropMovement : PlayerState
     public override void PhysicsUpdate(double delta)
     {
         Player.TimeSinceLeftFloor += (float)delta;
-
 
         if (Input.IsActionJustPressed("Jump") && Player.TimeSinceLeftFloor < Player.CoyoteTime)
         {
@@ -69,6 +68,11 @@ public partial class AirDropMovement : PlayerState
         //    StateMachine.TransitionTo("Attack1");
         //}
 
+        if (Player.TimeonWall < Player.WallTime && Player.IsOnWallOnly())
+        {
+            StateMachine.TransitionTo(nameof(WallHanging));
+        }
+
         if (Player.IsOnFloor())
         {
             Player.HasDoubleJump = true;
@@ -76,16 +80,16 @@ public partial class AirDropMovement : PlayerState
             {
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(Idle));
             }
             else
             {
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(GroundMovement));
             }
         }
@@ -131,13 +135,6 @@ public partial class AirDropMovement : PlayerState
     public bool IsAtTop(float delta)
     {
         return (Player.PlayerVelocity <= (Player.Gravity * delta));
-    }
-
-    public void OnHit()
-    {
-        Player.PlayerVelocity.Y = 0f;
-        Player.Velocity = Player.PlayerVelocity;
-        StateMachine.TransitionTo(nameof(GetHit));
     }
 
     public async Task StopInAir(double time)

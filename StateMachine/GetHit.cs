@@ -12,7 +12,7 @@ public partial class GetHit : PlayerState
         AnimationPlayer.Play("Hit_Front", 0.1);
         Player.CanInput = false;
 
-        Player.ControllHurtBoxes(false);
+        Player.ControlHurtBoxes(false);
 
         Player.CurrentHealth -= 1;
 
@@ -30,14 +30,14 @@ public partial class GetHit : PlayerState
             {
                 if (Math.Abs(Player.GetInputDirection().Length()) == 0)
                 {
-                    CallDeferred(nameof(Player.ControllHurtBoxes), true);
+                    CallDeferred(nameof(Player.ControlHurtBoxes), true);
                     Player.IsHurt = false;
                     Player.CanInput = true;
                     StateMachine.TransitionTo(nameof(Idle));
                 }
                 else
                 {
-                    CallDeferred(nameof(Player.ControllHurtBoxes), true);
+                    CallDeferred(nameof(Player.ControlHurtBoxes), true);
                     Player.IsHurt = false;
                     Player.CanInput = true;
                     StateMachine.TransitionTo(nameof(GroundMovement));
@@ -45,7 +45,7 @@ public partial class GetHit : PlayerState
             }
             else
             {
-                CallDeferred(nameof(Player.ControllHurtBoxes), true);
+                CallDeferred(nameof(Player.ControlHurtBoxes), true);
                 Player.IsHurt = false;
                 Player.CanInput = true;
                 StateMachine.TransitionTo(nameof(AirDropMovement));

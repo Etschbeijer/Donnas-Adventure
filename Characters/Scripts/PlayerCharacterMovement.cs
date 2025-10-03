@@ -110,13 +110,13 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
         //Call important methods
         controlTrusters(false);
-        controllHurtBoxes(true);
-        controllHitBoxes(false);
+        controlHurtBoxes(true);
+        controlHitBoxes(false);
     }
 
     public override void _PhysicsProcess(double delta)
 	{
-		//Controll camera position manually
+		//Control camera position manually
 		Vector3 characterPosition = Position;
 
 		//Get camera controller position
@@ -134,7 +134,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
         if (groundDetector.IsColliding())
         {
-            controllFeetCollision(true, false);
+            controlFeetCollision(true, false);
         }
 
         // Add the gravity.
@@ -151,17 +151,17 @@ public partial class PlayerCharacterMovement : CharacterBody3D
 
         if (MovementSpeed > RunSpeed)
         {
-            controllLightTrail(false);
+            controlLightTrail(false);
         }
         else
         {
-            controllLightTrail(true);
+            controlLightTrail(true);
         }
 
         // Handle Jump.
         if (Input.IsActionJustPressed("Jump") && (IsOnFloor() || timeSinceLeftFloor < coyoteTime))
         {
-            controllFeetCollision(false, true);
+            controlFeetCollision(false, true);
 
             soundJump.PitchScale = rng.RandfRange(0.9f, 1.1f);
             soundJump.Play();
@@ -346,7 +346,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         }
 
         isHurt = true;
-        CallDeferred(nameof(controllHurtBoxes), false);
+        CallDeferred(nameof(controlHurtBoxes), false);
 
         if (hitbox.Name == "FallZone")
         {
@@ -448,7 +448,7 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         }
     }
 
-    public void controllHurtbox(Area3D hurtbox, bool onOff)
+    public void controlHurtbox(Area3D hurtbox, bool onOff)
     {
         var collisionBox = hurtbox.GetChild<CollisionShape3D>(0);
 
@@ -460,15 +460,15 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         hurtbox.SetCollisionMaskValue(9, onOff);
     }
 
-    public void controllHurtBoxes(bool onOff)
+    public void controlHurtBoxes(bool onOff)
     {
         foreach (Area3D hurtbox in hurtboxes)
         {
-            controllHurtbox(hurtbox, onOff);
+            controlHurtbox(hurtbox, onOff);
         }
     }
 
-    public void controllHitbox(Area3D hitbox, bool onOff)
+    public void controlHitbox(Area3D hitbox, bool onOff)
     {
         var collisionBox = hitbox.GetChild<CollisionShape3D>(0);
 
@@ -479,31 +479,31 @@ public partial class PlayerCharacterMovement : CharacterBody3D
         hitbox.SetCollisionMaskValue(8, onOff);
     }
 
-    public void controllHitBoxes(bool onOff)
+    public void controlHitBoxes(bool onOff)
     {
         foreach (Area3D hitbox in hitboxes)
         {
-            controllHitbox(hitbox, onOff);
+            controlHitbox(hitbox, onOff);
         }
     }
 
-    public void controllFeetCollision(bool onOffHurt, bool onOffHit)
+    public void controlFeetCollision(bool onOffHurt, bool onOffHit)
     {
         var feetHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().ToLower().Contains("foot"));
         var feetHurtboxes = hurtboxes.Where(hurtBox => hurtBox.Name.ToString().ToLower().Contains("foot"));
 
         foreach (Area3D footHurtbox in feetHurtboxes)
         {
-            controllHurtbox(footHurtbox, onOffHurt);
+            controlHurtbox(footHurtbox, onOffHurt);
         }
 
         foreach (Area3D footHitbox in feetHitboxes)
         {
-            controllHitbox(footHitbox, onOffHit);
+            controlHitbox(footHitbox, onOffHit);
         }
     }
 
-    public void controllLightTrail(bool isHidden)
+    public void controlLightTrail(bool isHidden)
     {
         foreach(Node3D trail in footLightTrails)
         {

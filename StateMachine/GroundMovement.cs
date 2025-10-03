@@ -10,16 +10,17 @@ public partial class GroundMovement : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
+        Player.TimeonWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
-        PlayAnimation();
+        PlayMovementAnimation();
     }
 
     public override void PhysicsUpdate(double delta)
     {
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
 
-        PlayAnimation();
+        PlayMovementAnimation();
 
         if (!Player.IsOnFloor())
         {
@@ -63,12 +64,7 @@ public partial class GroundMovement : PlayerState
         }
     }
 
-    public void OnHit()
-    {
-        StateMachine.TransitionTo(nameof(GetHit));
-    }
-
-    public void PlayAnimation()
+    public void PlayMovementAnimation()
     {
         //Play animation
         if (Player.MovementSpeed < 3)

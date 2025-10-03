@@ -14,7 +14,7 @@ public partial class Win : PlayerState
 
         Player.Global.StopTimer();
 
-        Player.ControllHurtBoxes(false);
+        Player.ControlHurtBoxes(false);
 
         await Won();
         await LoadWinScene("res://Menu/Nodes/menu_win.tscn");

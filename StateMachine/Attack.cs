@@ -81,7 +81,7 @@ public partial class Attack : PlayerState
             StateMachine.TransitionTo(nameof(Win));
         }
     }
-    public void controllHitbox(Area3D hitbox, bool onOff)
+    public void controlHitbox(Area3D hitbox, bool onOff)
     {
         var collisionBox = hitbox.GetChild<CollisionShape3D>(0);
 

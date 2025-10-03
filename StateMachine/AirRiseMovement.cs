@@ -12,7 +12,8 @@ public partial class AirRiseMovement : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
-        Player.ControllFeetCollision(false, true);
+        Player.TimeonWall = 0f;
+        Player.ControlFeetCollision(false, true);
 
         if (msg is not null && msg.Keys.Contains("doJump") && Player.HasDoubleJump)
         {
@@ -35,7 +36,7 @@ public partial class AirRiseMovement : PlayerState
 
     public override async void PhysicsUpdate(double delta)
     {
-        if (Input.IsActionJustPressed("Jump") && !Player.IsOnFloor() && Player.HasDoubleJump)
+        if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
         {
             DoubleJump();
         }
@@ -48,7 +49,7 @@ public partial class AirRiseMovement : PlayerState
         {
             Player.PlayerVelocity.Y = 0f;
             Player.Velocity = Player.PlayerVelocity;
-            Player.ControllFeetCollision(true, false);
+            Player.ControlFeetCollision(true, false);
             StateMachine.TransitionTo(nameof(GetHit));
         }
 
@@ -65,8 +66,13 @@ public partial class AirRiseMovement : PlayerState
 
         if(!Player.IsOnFloor() && IsAtTop((float) delta))
         {
-            Player.ControllSaltoCollision(true);
+            Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
+        }
+
+        if (Player.TimeonWall < Player.WallTime && Player.IsOnWallOnly())
+        {
+            StateMachine.TransitionTo(nameof(WallHanging));
         }
 
         if (Player.IsOnFloor() && !startJumping)
@@ -76,16 +82,16 @@ public partial class AirRiseMovement : PlayerState
             {
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(Idle));
             }
             else
             {
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(GroundMovement));
             }
         }
@@ -139,12 +145,5 @@ public partial class AirRiseMovement : PlayerState
     public bool IsAtTop(float delta)
     {
         return (Player.PlayerVelocity.Y <= (Player.Gravity * delta).Y);
-    }
-
-    public void OnHit()
-    {
-        Player.PlayerVelocity.Y = 0f;
-        Player.Velocity = Player.PlayerVelocity;
-        StateMachine.TransitionTo(nameof(GetHit));
     }
 }

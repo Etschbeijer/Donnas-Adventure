@@ -15,6 +15,7 @@ public partial class Bounce : PlayerState
         Player.HasDoubleJump = true;
         Player.ShallBounce = false;
 
+        Player.TimeonWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
         AnimationPlayer.Play("Jump_Start", 0.1, 2);
@@ -37,7 +38,7 @@ public partial class Bounce : PlayerState
 
         if (Player.IsHurt)
         {
-            Player.ControllFeetCollision(true, false);
+            Player.ControlFeetCollision(true, false);
             StateMachine.TransitionTo(nameof(GetHit));
         }
 
@@ -54,7 +55,7 @@ public partial class Bounce : PlayerState
 
         if(!Player.IsOnFloor() && IsAtTop((float) delta))
         {
-            Player.ControllSaltoCollision(true);
+            Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
@@ -63,14 +64,14 @@ public partial class Bounce : PlayerState
             Player.HasDoubleJump = true;
             if (Player.InputDir == Vector2.Zero)
             {
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(Idle));
             }
             else
             {
-                Player.ControllFeetCollision(true, false);
-                Player.ControllSaltoCollision(false);
+                Player.ControlFeetCollision(true, false);
+                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(GroundMovement));
             }
         }
@@ -115,10 +116,5 @@ public partial class Bounce : PlayerState
     public bool IsAtTop(float delta)
     {
         return (Player.PlayerVelocity.Y <= (Player.Gravity * delta).Y);
-    }
-
-    public void OnHit()
-    {
-        StateMachine.TransitionTo(nameof(GetHit));
     }
 }
