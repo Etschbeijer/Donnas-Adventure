@@ -12,14 +12,18 @@ public partial class Idle : PlayerState
         Player.TimeOnWall = 0f;
         Player.TimeSinceLeftFloor = 0;
 
-        if (StateMachine.PreviousState != null && (StateMachine.PreviousState.Name == nameof(AirRiseMovement) || StateMachine.PreviousState.Name == nameof(AirDropMovement)))
+        if (StateMachine.PreviousState != null && (StateMachine.PreviousState.Name == nameof(AirRiseMovement) || StateMachine.PreviousState.Name == nameof(AirDropMovement) || StateMachine.PreviousState.Name == nameof(WallJump)))
         {
             AnimationPlayer.Play("Jump_Land", 0.1);
+        }
+        else if (StateMachine.PreviousState != null && (StateMachine.PreviousState.Name == nameof(GroundMovement)) && Player.MovementSpeed >= 6f)
+        {
+            AnimationPlayer.Play("Run_Stop", 0.1);
         }
         else
         {
             AnimationPlayer.Play("Idle", 0.1);
-        } 
+        }
     }
 
     public override void PhysicsUpdate(double delta)
