@@ -41,3 +41,6 @@ jobs:
         generateReleaseNotes: true
         tag: "nightly"
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
+        allowUpdates: true
+        removeArtifacts: true
+        replaceArtifacts: true
