@@ -38,6 +38,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public Node3D CameraController;
 
+    Vector3 platformVelocity;
+
     Node3D cameraTarget;
     Node3D sounds;
     Node3D rigDonna;
@@ -166,6 +168,18 @@ public partial class PlayerCharacter : CharacterBody3D
 
         InputDir = GetInputDirection();
 
+        if (IsOnFloor())
+        {
+            CalculatePlatformVelocity();
+        }
+
+        if (!IsOnFloor())
+        {
+            var adaptedVelocity = new Vector3(platformVelocity.X, platformVelocity.Y * 0.5f, platformVelocity.Z);
+            PlayerVelocity += adaptedVelocity;
+            platformVelocity = Vector3.Zero;
+        }
+
         Velocity = PlayerVelocity;
 
         AlignCamera(cameraPosition, characterPosition, delta);
@@ -272,6 +286,15 @@ public partial class PlayerCharacter : CharacterBody3D
         else
         {
             MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, RunAcellerationRate * (float)delta);
+        }
+    }
+
+    public void CalculatePlatformVelocity()
+    {
+        var collider = GetLastSlideCollision()?.GetCollider() as Platform3x2;
+        if (collider != null)
+        {
+            platformVelocity = collider.Velocity;
         }
     }
 
