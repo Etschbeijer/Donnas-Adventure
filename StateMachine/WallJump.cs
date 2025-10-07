@@ -13,16 +13,22 @@ public partial class WallJump : PlayerState
         Player.ControlFeetCollision(false, true);
 
         AnimationPlayer.Play("Wall_Jump", 0.1);
+
+        Player.CanInput = false;
     }
 
     public override async void PhysicsUpdate(double delta)
     {
         CalculateGravityVelocity((float)delta);
 
-        Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
+        if (Player.CanInput)
+        {
+            Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
+        }
 
         if (Player.IsHurt)
         {
+            Player.CanInput = true;
             Player.PlayerVelocity.Y = 0f;
             Player.Velocity = Player.PlayerVelocity;
             Player.ControlFeetCollision(true, false);
@@ -31,23 +37,27 @@ public partial class WallJump : PlayerState
 
         if (!AnimationPlayer.IsPlaying() && !Player.IsOnFloor())
         {
+            Player.CanInput = true;
             Player.TimeOnWall = 0f;
             AnimationPlayer.Play("Jump_Rise", 0.1);
         }
 
         if (!AnimationPlayer.IsPlaying() && !Player.IsOnFloor() && IsAtTop((float)delta))
         {
+            Player.CanInput = true;
             Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
         if (Player.TimeOnWall == 0f && Player.IsOnWallOnly())
         {
+            Player.CanInput = true;
             StateMachine.TransitionTo(nameof(WallHanging));
         }
 
         if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
         {
+            Player.CanInput = true;
             Player.HasDoubleJump = false;
             StateMachine.TransitionTo(nameof(AirRiseMovement));
         }
@@ -56,6 +66,7 @@ public partial class WallJump : PlayerState
         {
             if (Player.InputDir == Vector2.Zero)
             {
+                Player.CanInput = true;
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
                 Player.ControlFeetCollision(true, false);
@@ -64,6 +75,7 @@ public partial class WallJump : PlayerState
             }
             else
             {
+                Player.CanInput = true;
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
                 Player.ControlFeetCollision(true, false);
@@ -74,6 +86,7 @@ public partial class WallJump : PlayerState
 
         if (Player.ShallBounce)
         {
+            Player.CanInput = true;
             StateMachine.TransitionTo(nameof(Bounce));
         }
     }

@@ -38,7 +38,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public Node3D CameraController;
 
-    Vector3 platformVelocity;
+    public Vector3 PlatformVelocity;
 
     Node3D cameraTarget;
     Node3D sounds;
@@ -168,17 +168,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
         InputDir = GetInputDirection();
 
-        if (IsOnFloor())
-        {
-            CalculatePlatformVelocity();
-        }
-
-        if (!IsOnFloor())
-        {
-            var adaptedVelocity = new Vector3(platformVelocity.X, platformVelocity.Y * 0.5f, platformVelocity.Z);
-            PlayerVelocity += adaptedVelocity;
-            platformVelocity = Vector3.Zero;
-        }
+        CalculatePlatformVelocity();
 
         Velocity = PlayerVelocity;
 
@@ -294,7 +284,7 @@ public partial class PlayerCharacter : CharacterBody3D
         var collider = GetLastSlideCollision()?.GetCollider() as Platform3x2;
         if (collider != null)
         {
-            platformVelocity = collider.Velocity;
+            PlatformVelocity = collider.Velocity;
         }
     }
 

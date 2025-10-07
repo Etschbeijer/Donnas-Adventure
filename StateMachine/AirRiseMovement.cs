@@ -45,6 +45,13 @@ public partial class AirRiseMovement : PlayerState
 
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
 
+        if (Player.PlatformVelocity != Vector3.Zero)
+        {
+            var adaptedVelocity = new Vector3(Player.PlatformVelocity.X, Player.PlatformVelocity.Y, Player.PlatformVelocity.Z);
+            Player.PlayerVelocity += (adaptedVelocity * 0.5f);
+            Player.PlatformVelocity = Vector3.Zero;
+        }
+
         if (Input.IsActionJustPressed("Stomp") || (Input.IsActionPressed("Stomp")))
         {
             Player.PlayerVelocity.Y = 0;
