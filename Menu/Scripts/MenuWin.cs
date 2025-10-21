@@ -29,7 +29,7 @@ public partial class MenuWin : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.StopMusicPuppyPlayingInTheGarden3D();
+        soundManager.StopMusicPuppyPlayingInTheGarden2D();
         soundManager.PlayMusicProject2Marioish2D();
         nameDialog.Hide();
         SetHighscore();

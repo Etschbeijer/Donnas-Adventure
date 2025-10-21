@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://crveqwfiaffy" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_2cn0a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2cn0a"]
-radius = 0.563525
+radius = 0.611301
 
 [sub_resource type="Animation" id="Animation_2cn0a"]
 length = 0.001
@@ -63,6 +63,7 @@ libraries = {
 
 [node name="SoundTreat" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_2cn0a")
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]

@@ -10,16 +10,20 @@ public partial class AirRiseMovement : PlayerState
 
     private bool startJumping { get; set; } = false;
 
+    private float jumpHoldTimer = 0f;
+
     public override void Enter(Dictionary msg = null)
     {
         Player.TimeOnWall = 0f;
         Player.ControlFeetCollision(false, true);
 
+        jumpHoldTimer = 0f;
+
         if (msg is not null && msg.Keys.Contains("doJump") && Player.HasDoubleJump)
         {
             AnimationPlayer.Play("Jump_Start", 0.1, 2);
 
-            Player.PlayerVelocity.Y = Player.JumpVelocity;
+            Player.PlayerVelocity.Y = Player.JumpVelocity * 0.5f;
 
             startJumping = true;
         }
@@ -28,7 +32,7 @@ public partial class AirRiseMovement : PlayerState
             AnimationPlayer.Play("Jump_Double", 0.1);
             Player.ControlTrusters(true);
 
-            Player.PlayerVelocity.Y = Player.JumpVelocity;
+            Player.PlayerVelocity.Y = Player.JumpVelocity * 0.5f;
 
             startJumping = false;
         }
@@ -36,8 +40,16 @@ public partial class AirRiseMovement : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
+        if (Input.IsActionPressed("Jump") && jumpHoldTimer < Player.JumpTime)
+        {
+            jumpHoldTimer += (float)delta;
+            var weight = (float)delta / Player.JumpTime;
+            CalculateMaximumJumpHeigh(weight);
+        }
+
         if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
         {
+            jumpHoldTimer = 0f;
             DoubleJump();
         }
 
@@ -142,10 +154,16 @@ public partial class AirRiseMovement : PlayerState
         }
     }
 
+    public void CalculateMaximumJumpHeigh(float weight)
+    {
+        var newJumpHeight = Mathf.Lerp(Player.PlayerVelocity.Y, Player.JumpVelocity, weight);
+        Player.PlayerVelocity = new Vector3(Player.PlayerVelocity.X, (float) newJumpHeight, Player.PlayerVelocity.Z);
+    }
+
     public void DoubleJump()
     {
         Player.HasDoubleJump = false;
-        Player.PlayerVelocity.Y = Player.JumpVelocity;
+        Player.PlayerVelocity.Y = Player.JumpVelocity * 0.5f;
         AnimationPlayer.Play("Jump_Double", 0.1);
         Player.ControlTrusters(true);
     }

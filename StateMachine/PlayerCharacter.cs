@@ -14,7 +14,9 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export]
     public float TopSpeed = 8f;
     [Export]
-    public float JumpVelocity = 5f;
+    public float JumpTime { get; set; } = 0.35f;
+    [Export]
+    public float JumpVelocity = 6f;
     [Export]
     public float RunAccelarationTime = 0.3f;
     [Export]
@@ -59,6 +61,7 @@ public partial class PlayerCharacter : CharacterBody3D
     public float TimeSinceLeftFloor = 0f;
     public float WallTime = 0.5f;
     public float TimeOnWall = 0f;
+    public float JumpWeight;
 
     //Min and max vertical rotation
     const float minPitch = -45f;
@@ -97,6 +100,8 @@ public partial class PlayerCharacter : CharacterBody3D
     Node3D[] thrusters;
     Node3D[] footLightTrails;
 
+    GpuParticles3D smokeExplosion;
+
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
 
@@ -125,6 +130,7 @@ public partial class PlayerCharacter : CharacterBody3D
         soundWalkOnGrass = sounds.GetNode<AudioStreamPlayer3D>("WalkOnGrass");
         soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
 
+        smokeExplosion = GetNode<Node3D>("SmokeExplosion").GetNode<GpuParticles3D>("Explosion");
         thrusters = GetTree().GetNodesInGroup("Thrusters").Cast<Node3D>().ToArray();
         hitboxes = GetTree().GetNodesInGroup("HitBoxesPlayer").Cast<Area3D>().ToArray();
         hurtboxes = GetTree().GetNodesInGroup("HurtBoxesPlayer").Cast<Area3D>().ToArray();
@@ -347,6 +353,11 @@ public partial class PlayerCharacter : CharacterBody3D
                 trail.Show();
             }
         }
+    }
+
+    public void FireSmoke()
+    {
+        smokeExplosion.Emitting = true;
     }
 
     public void ControlTrusters(bool onOff)

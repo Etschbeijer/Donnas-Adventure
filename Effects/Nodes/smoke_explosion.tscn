@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://21hr3inhjaa6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62q1l"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0.737255, 0.494118, 0.188235, 0.784314)
+
+[sub_resource type="Curve" id="Curve_eqer1"]
+_data = [Vector2(0, 0.199008), 0.0, 0.0, 0, 0, Vector2(0.750865, 0.852691), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_4oela"]
+curve = SubResource("Curve_eqer1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eqer1"]
+emission_shape_scale = Vector3(2, 2, 0)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.8
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 2.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 5, 0)
+radial_accel_min = 8.0
+radial_accel_max = 10.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_4oela")
+
+[sub_resource type="SphereMesh" id="SphereMesh_62q1l"]
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l5pkn"]
+albedo_color = Color(0.737255, 0.494118, 0.188235, 0.784314)
+
+[sub_resource type="SphereMesh" id="SphereMesh_l5pkn"]
+radial_segments = 8
+rings = 4
+
+[node name="SmokeExplosion" type="Node3D"]
+metadata/_edit_group_ = true
+
+[node name="Explosion" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_62q1l")
+emitting = false
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_eqer1")
+draw_pass_1 = SubResource("SphereMesh_62q1l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_l5pkn")
+mesh = SubResource("SphereMesh_l5pkn")

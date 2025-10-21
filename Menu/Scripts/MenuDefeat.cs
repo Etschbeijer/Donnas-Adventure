@@ -15,8 +15,15 @@ public partial class MenuDefeat : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.StopMusicPuppyPlayingInTheGarden3D();
-        soundManager.PlayMusicProject2Marioish2D();
+        if (soundManager.IsMusicPuppyPlayingInTheGarden2DPlaying())
+        {
+            soundManager.StopMusicPuppyPlayingInTheGarden2D();
+        }
+
+        if (!soundManager.IsMusicProject2Marioish2DPlaying())
+        {
+            soundManager.PlayMusicProject2Marioish2D();
+        }
     }
 
     public async void OnButtonPlayAgainPressed()

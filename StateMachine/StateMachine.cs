@@ -73,6 +73,8 @@ public partial class StateMachine : Node
         if (!HasNode(targetStateName))
             return;
 
+        GD.Print($"targetStateName: {targetStateName}");
+
         currentState.Exit();
         PreviousState = currentState;
         currentState = GetNode<State>(targetStateName);

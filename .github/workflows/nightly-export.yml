@@ -1,46 +1,60 @@
-# Whenever a tag push matching pattern "v*" then run the job
-on: 
+# Run nightly exports on pushes to master
+on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
-  # job id, can be anything
   export_game:
-    # Always use ubuntu-latest for this action
     runs-on: ubuntu-latest
-    # Add permission for release creation. Can be made narrower according to your needs
     permissions:
       contents: write
-    # Job name, can be anything
     name: Export Game
-    steps:
-      # Always include the checkout step so that 
-      # your project is available for Godot to export
-    - name: checkout
-      uses: actions/checkout@v5
-  
-    - name: export game
-      id: export
-      # Use latest version (see releases for all versions)
-      uses: firebelley/godot-export@v7.0.0
-      with:
-        # Defining all the required inputs
-        godot_executable_download_url: https://downloads.godotengine.org/?version=4.4&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64
-        godot_export_templates_download_url: https://downloads.godotengine.org/?version=4.4&flavor=stable&slug=mono_export_templates.tpz&platform=templates
-        relative_project_path: ./
-        archive_output: true
-        cache: true
 
-      # This release action has worked well for me. However, you can most likely use any release action of your choosing.
-      # https://github.com/ncipollo/release-action
-    - name: create release
-      uses: ncipollo/release-action@v1.18.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        generateReleaseNotes: true
-        tag: "nightly"
-        artifacts: ${{ steps.export.outputs.archive_directory }}/*
-        allowUpdates: true
-        removeArtifacts: true
-        replaceArtifacts: true
+    # Matrix allows running multiple OS exports in parallel
+    strategy:
+      matrix:
+        platform: [windows, linux, macos]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Export Godot Project
+        id: export
+        uses: firebelley/godot-export@v7.0.0
+        with:
+          godot_executable_download_url: https://downloads.godotengine.org/?version=4.4&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64
+          godot_export_templates_download_url: https://downloads.godotengine.org/?version=4.4&flavor=stable&slug=mono_export_templates.tpz&platform=templates
+          relative_project_path: ./
+          archive_output: true
+          cache: true
+          export_preset: ${{ matrix.platform == 'windows' && 'Windows' || matrix.platform == 'linux' && 'Linux/X11' || 'Mac OSX' }}
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-build
+          path: ${{ steps.export.outputs.archive_directory }}/*
+
+  create_release:
+    runs-on: ubuntu-latest
+    needs: export_game
+    permissions:
+      contents: write
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
+
+      - name: Create GitHub Release
+        uses: ncipollo/release-action@v1.18.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: nightly
+          generateReleaseNotes: true
+          artifacts: ./artifacts/*
+          allowUpdates: true
+          removeArtifacts: true
+          replaceArtifacts: true

@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 public partial class SoundManager : Control
 {
+    private string settingsPath = "user://settings.cfg";
+
+    private ConfigFile configFile = new ConfigFile();
+
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
     public AudioStreamPlayer2D SoundClick;
@@ -33,13 +37,54 @@ public partial class SoundManager : Control
         SoundWin = GetNode<AudioStreamPlayer3D>("SoundWin");
 
         //Call important methods
+        LoadVolume();
         PlayMusicProject2Marioish2D();
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public float GetLinearValue(string busName)
+    {
+        if (configFile.HasSectionKey("sound", busName))
+        {
+            return (float)configFile.GetValue("sound", busName);
+        }
+        else
+        {
+            throw new Exception($"The section \"sound\" could not be found.");
+        }
+    }
+
+    public void SetVolume(string busName, float linearValue)
+    {
+        float dbValue = Mathf.LinearToDb(linearValue);
+        AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex(busName), dbValue);
+        configFile.SetValue("sound", busName, linearValue);
+        configFile.Save(settingsPath);
+    }
+
+    public void LoadVolume()
+    {
+        if (configFile.Load(settingsPath) != Error.Ok)
+        {
+            var configFile = new ConfigFile();
+            configFile.Save(settingsPath);
+        }
+
+        foreach (string busName in new string[] { "Master", "Music", "SFX" })
+        {
+            if (configFile.HasSectionKey("sound", busName))
+            {
+                float linearValue = (float)configFile.GetValue("sound", busName);
+                float dbValue = Mathf.LinearToDb(linearValue);
+                AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex(busName), dbValue);
+            }
+            else
+            {
+                configFile.SetValue("sound", busName, 1f);
+                AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex(busName), 1f);
+                configFile.Save(settingsPath);
+            }
+        }
+    }
 
     public void PlaySoundClick()
     {
@@ -66,17 +111,27 @@ public partial class SoundManager : Control
         MusicProject2Marioish2D.Play();
     }
 
+    public bool IsMusicProject2Marioish2DPlaying()
+    {
+        return MusicProject2Marioish2D.Playing;
+    }
+
     public void StopMusicProject2Marioish2D()
     {
         MusicProject2Marioish2D.Stop();
     }
 
-    public void PlayMusicPuppyPlayingInTheGarden3D()
+    public void PlayMusicPuppyPlayingInTheGarden2D()
     {
         MusicPuppyPlayingInTheGarden2D.Play();
     }
 
-    public void StopMusicPuppyPlayingInTheGarden3D()
+    public bool IsMusicPuppyPlayingInTheGarden2DPlaying()
+    {
+        return MusicPuppyPlayingInTheGarden2D.Playing;
+    }
+
+    public void StopMusicPuppyPlayingInTheGarden2D()
     {
         MusicPuppyPlayingInTheGarden2D.Stop();
     }
@@ -94,7 +149,7 @@ public partial class SoundManager : Control
         SoundLose.PitchScale = rng.RandfRange(0.9f, 1.1f);
         SoundLose.Play();
 
-        StopMusicPuppyPlayingInTheGarden3D();
+        StopMusicPuppyPlayingInTheGarden2D();
     }
 
     public void PlaySoundWin()

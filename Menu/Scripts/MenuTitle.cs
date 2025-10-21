@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 public partial class MenuTitle : Control
 {
-    SoundManager soundManager;
+    private SoundManager soundManager;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -16,8 +16,16 @@ public partial class MenuTitle : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        soundManager.StopMusicPuppyPlayingInTheGarden3D();
-        soundManager.PlayMusicProject2Marioish2D();
+
+        if (soundManager.IsMusicPuppyPlayingInTheGarden2DPlaying())
+        {
+            soundManager.StopMusicPuppyPlayingInTheGarden2D();
+        }
+
+        if (!soundManager.IsMusicProject2Marioish2DPlaying())
+        {
+            soundManager.PlayMusicProject2Marioish2D();
+        }
     }
 
     public async void OnButtonPlayPressed()
@@ -32,6 +40,13 @@ public partial class MenuTitle : Control
         soundManager.PlaySoundClick();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_highscores.tscn");
+    }
+
+    public void OnButtonSettingsPressed()
+    {
+        soundManager.PlaySoundClick();
+
+        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_settings_sound.tscn");
     }
 
     public void OnButtonCreditsPressed()

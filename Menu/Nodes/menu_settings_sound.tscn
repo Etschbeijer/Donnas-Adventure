@@ -1,0 +1,326 @@
+[gd_scene load_steps=12 format=3 uid="uid://y3ba0to0tv4c"]
+
+[ext_resource type="Script" uid="uid://coo5u5m3mwehp" path="res://Menu/Scripts/MenuSettingsSound.cs" id="1_jrtae"]
+[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_2v02v"]
+[ext_resource type="Script" uid="uid://d1y8hiwsiyko" path="res://Menu/Nodes/VolumeSliders.cs" id="3_783fd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrtae"]
+bg_color = Color(0.26146, 0.562342, 0.212165, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_783fd"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2v02v"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iovgq"]
+bg_color = Color(0.138366, 0.327553, 0.116957, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.494118, 0.254902, 0.819608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
+bg_color = Color(0.26146, 0.562342, 0.212165, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weaej"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4cr3"]
+bg_color = Color(0.262745, 0.560784, 0.211765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
+bg_color = Color(0.138366, 0.327553, 0.116957, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.494118, 0.254902, 0.819608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MenuTitle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jrtae")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.335211, 0.754964, 0.287311, 1)
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 80
+text = "Soundmanager"
+horizontal_alignment = 1
+
+[node name="VolumeSliders" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 192.0
+offset_right = 792.0
+offset_bottom = 238.0
+script = ExtResource("3_783fd")
+
+[node name="LabelMaster" type="Label" parent="VolumeSliders"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "Master"
+metadata/_edit_group_ = true
+
+[node name="SliderMaster" type="HSlider" parent="VolumeSliders/LabelMaster"]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 16.0
+offset_right = 416.0
+offset_bottom = 32.0
+tooltip_text = "Controlls the volume of all sounds."
+max_value = 2.0
+step = 0.01
+tick_count = 20
+ticks_on_borders = true
+
+[node name="LabelMasterVolume" type="Label" parent="VolumeSliders/LabelMaster/SliderMaster"]
+layout_mode = 2
+offset_left = 320.0
+offset_top = -16.0
+offset_right = 768.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+metadata/_edit_group_ = true
+
+[node name="LabelMusic" type="Label" parent="VolumeSliders"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "Music"
+metadata/_edit_group_ = true
+
+[node name="SliderMusic" type="HSlider" parent="VolumeSliders/LabelMusic"]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 16.0
+offset_right = 416.0
+offset_bottom = 32.0
+tooltip_text = "Controlls the volume of all sounds."
+max_value = 2.0
+step = 0.01
+tick_count = 20
+ticks_on_borders = true
+
+[node name="LabelMusicVolume" type="Label" parent="VolumeSliders/LabelMusic/SliderMusic"]
+layout_mode = 2
+offset_left = 320.0
+offset_top = -16.0
+offset_right = 768.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+metadata/_edit_group_ = true
+
+[node name="LabelSFX" type="Label" parent="VolumeSliders"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "Effects"
+metadata/_edit_group_ = true
+
+[node name="SliderSFX" type="HSlider" parent="VolumeSliders/LabelSFX"]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 16.0
+offset_right = 416.0
+offset_bottom = 32.0
+tooltip_text = "Controlls the volume of all sounds."
+max_value = 2.0
+step = 0.01
+tick_count = 20
+ticks_on_borders = true
+
+[node name="LabelSFXVolume" type="Label" parent="VolumeSliders/LabelSFX/SliderSFX"]
+layout_mode = 2
+offset_left = 320.0
+offset_top = -16.0
+offset_right = 768.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+metadata/_edit_group_ = true
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = 92.0
+offset_right = 148.0
+offset_bottom = 408.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ButtonMenu" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_jrtae")
+theme_override_styles/hover = SubResource("StyleBoxFlat_783fd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2v02v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iovgq")
+text = "Main Menu"
+
+[node name="ButtonExit" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Exit"
+
+[connection signal="value_changed" from="VolumeSliders/LabelMaster/SliderMaster" to="." method="OnMasterValueChanged"]
+[connection signal="value_changed" from="VolumeSliders/LabelMaster/SliderMaster" to="VolumeSliders" method="OnMasterValueChanged"]
+[connection signal="value_changed" from="VolumeSliders/LabelMusic/SliderMusic" to="." method="OnMusicValueChanged"]
+[connection signal="value_changed" from="VolumeSliders/LabelMusic/SliderMusic" to="VolumeSliders" method="OnMusicValueChanged"]
+[connection signal="value_changed" from="VolumeSliders/LabelSFX/SliderSFX" to="." method="OnSFXValueChanged"]
+[connection signal="value_changed" from="VolumeSliders/LabelSFX/SliderSFX" to="VolumeSliders" method="OnSFXValueChanged"]
+[connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]
+[connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]

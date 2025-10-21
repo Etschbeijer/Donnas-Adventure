@@ -29,7 +29,7 @@ public partial class Level1 : Node3D
 
         //Call important methods
         soundManager.StopMusicProject2Marioish2D();
-        soundManager.PlayMusicPuppyPlayingInTheGarden3D();
+        soundManager.PlayMusicPuppyPlayingInTheGarden2D();
         global.ResetTimer();
     }
 

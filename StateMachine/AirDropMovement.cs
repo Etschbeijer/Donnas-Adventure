@@ -31,6 +31,8 @@ public partial class AirDropMovement : PlayerState
     {
         Player.TimeSinceLeftFloor += (float)delta;
 
+        var collider = Player.GetLastSlideCollision()?.GetCollider() as Platform3x2;
+
         if (Input.IsActionJustPressed("Jump") && Player.TimeSinceLeftFloor < Player.CoyoteTime)
         {
             Dictionary msg = new Dictionary();
@@ -69,14 +71,22 @@ public partial class AirDropMovement : PlayerState
             AnimationPlayer.Play("Jump_Drop", 0.1);
         }
 
-        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null)
         {
             StateMachine.TransitionTo(nameof(WallHanging));
+        }
+
+        if (Player.PlatformVelocity != Vector3.Zero)
+        {
+            var adaptedVelocity = new Vector3(Player.PlatformVelocity.X, Player.PlatformVelocity.Y, Player.PlatformVelocity.Z);
+            Player.PlayerVelocity += (adaptedVelocity * 4f);
+            Player.PlatformVelocity = Vector3.Zero;
         }
 
         if (Player.IsOnFloor())
         {
             Player.HasDoubleJump = true;
+            Player.FireSmoke();
             if (Player.InputDir == Vector2.Zero)
             {
                 Player.PlayerVelocity.Y = 0f;
@@ -87,6 +97,7 @@ public partial class AirDropMovement : PlayerState
             }
             else
             {
+                Player.PlaySoundLandOnGrass();
                 Player.PlayerVelocity.Y = 0f;
                 Player.Velocity = Player.PlayerVelocity;
                 Player.ControlFeetCollision(true, false);
