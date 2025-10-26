@@ -42,10 +42,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public Vector3 PlatformVelocity;
 
-    Node3D cameraTarget;
-    Node3D sounds;
-    Node3D rigDonna;
-
     Transform3D xTransform;
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
@@ -97,10 +93,21 @@ public partial class PlayerCharacter : CharacterBody3D
     AudioStreamPlayer3D soundWalkOnGrass;
     AudioStreamPlayer3D soundSkate;
 
+    Node explosions;
+    Node trails;
+
+    Node3D cameraTarget;
+    Node3D rigDonna;
+    Node3D sounds;
+
     Node3D[] thrusters;
     Node3D[] footLightTrails;
 
-    GpuParticles3D smokeExplosion;
+    GpuParticles3D grassTrailL;
+    GpuParticles3D grassTrailR;
+
+    GpuParticles3D dustExplosion;
+    GpuParticles3D [] grassExplosion;
 
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
@@ -130,7 +137,14 @@ public partial class PlayerCharacter : CharacterBody3D
         soundWalkOnGrass = sounds.GetNode<AudioStreamPlayer3D>("WalkOnGrass");
         soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
 
-        smokeExplosion = GetNode<Node3D>("SmokeExplosion").GetNode<GpuParticles3D>("Explosion");
+        explosions = GetNode<Node3D>("Explosions");
+        dustExplosion = explosions.GetNode<Node3D>("DustExplosion").GetNode<GpuParticles3D>("Explosion");
+        grassExplosion = explosions.GetNode<Node3D>("GrassExplosion").GetChildren().OfType<GpuParticles3D>().Where(explosion => explosion.Name.ToString().Contains("Explosion")).ToArray();
+
+        trails = GetNode<Node3D>("Trails");
+        grassTrailL = trails.GetNode<Node3D>("GrassTrailL").GetNode<GpuParticles3D>("GrassExplosion");
+        grassTrailR = trails.GetNode<Node3D>("GrassTrailR").GetNode<GpuParticles3D>("GrassExplosion");
+
         thrusters = GetTree().GetNodesInGroup("Thrusters").Cast<Node3D>().ToArray();
         hitboxes = GetTree().GetNodesInGroup("HitBoxesPlayer").Cast<Area3D>().ToArray();
         hurtboxes = GetTree().GetNodesInGroup("HurtBoxesPlayer").Cast<Area3D>().ToArray();
@@ -342,6 +356,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void ControlLightTrail(bool isHidden)
     {
+
         foreach (Node3D trail in footLightTrails)
         {
             if (isHidden)
@@ -357,7 +372,29 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void FireSmoke()
     {
-        smokeExplosion.Emitting = true;
+        dustExplosion.Emitting = true;
+    }
+
+    public void FireGrassExplosion()
+    {
+        foreach (GpuParticles3D explision in grassExplosion)
+        {
+            explision.Emitting = true;
+        }
+    }
+
+    public void FireGrassTrail(string side)
+    {
+        if (side == "l")
+        {
+            grassTrailL.Amount = (int) MovementSpeed * 2;
+            grassTrailL.Emitting = true;
+        }
+        else if (side == "r")
+        {
+            grassTrailR.Amount = (int)MovementSpeed * 2;
+            grassTrailR.Emitting = true;
+        }
     }
 
     public void ControlTrusters(bool onOff)

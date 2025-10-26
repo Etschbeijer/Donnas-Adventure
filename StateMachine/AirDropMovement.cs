@@ -86,7 +86,7 @@ public partial class AirDropMovement : PlayerState
         if (Player.IsOnFloor())
         {
             Player.HasDoubleJump = true;
-            Player.FireSmoke();
+            Player.FireGrassExplosion();
             if (Player.InputDir == Vector2.Zero)
             {
                 Player.PlayerVelocity.Y = 0f;
