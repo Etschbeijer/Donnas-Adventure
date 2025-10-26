@@ -30,7 +30,7 @@ public partial class MenuDefeat : Control
     {
         await soundManager.PlaySoundPlay();
 
-        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
+        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_test.tscn");
     }
 
     public void OnButtonMenuPressed()
