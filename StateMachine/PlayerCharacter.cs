@@ -396,16 +396,11 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void FireGrassTrail(string side)
     {
-        if (side == "l")
-        {
-            grassTrailL.Amount = (int) MovementSpeed * 2;
-            grassTrailL.Emitting = true;
-        }
-        else if (side == "r")
-        {
-            grassTrailR.Amount = (int)MovementSpeed * 2;
-            grassTrailR.Emitting = true;
-        }
+        GpuParticles3D trail = side == "l" ? grassTrailL : grassTrailR;
+
+        trail.Emitting = false;
+        trail.Amount = (int)MovementSpeed * 2;
+        trail.Emitting = true;
     }
 
     public void ControlTrusters(bool onOff)

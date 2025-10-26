@@ -183,7 +183,7 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_2v02v")
 theme_override_font_sizes/font_size = 32
-text = "100%"
+text = "0%"
 metadata/_edit_group_ = true
 
 [node name="LabelMusic" type="Label" parent="VolumeSliders"]
@@ -225,7 +225,7 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_2v02v")
 theme_override_font_sizes/font_size = 32
-text = "100%"
+text = "0%"
 metadata/_edit_group_ = true
 
 [node name="LabelSFX" type="Label" parent="VolumeSliders"]
@@ -267,7 +267,7 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_2v02v")
 theme_override_font_sizes/font_size = 32
-text = "100%"
+text = "0%"
 metadata/_edit_group_ = true
 
 [node name="Buttons" type="VBoxContainer" parent="."]
@@ -278,11 +278,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -88.0
-offset_top = 92.0
+offset_top = 60.0
 offset_right = 148.0
-offset_bottom = 408.0
+offset_bottom = 376.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ButtonMenuReset" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_2v02v")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_jrtae")
+theme_override_styles/hover = SubResource("StyleBoxFlat_783fd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2v02v")
+theme_override_styles/normal = SubResource("StyleBoxFlat_iovgq")
+text = "Reset"
 
 [node name="ButtonMenu" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -322,5 +338,6 @@ text = "Exit"
 [connection signal="value_changed" from="VolumeSliders/LabelMusic/SliderMusic" to="VolumeSliders" method="OnMusicValueChanged"]
 [connection signal="value_changed" from="VolumeSliders/LabelSFX/SliderSFX" to="." method="OnSFXValueChanged"]
 [connection signal="value_changed" from="VolumeSliders/LabelSFX/SliderSFX" to="VolumeSliders" method="OnSFXValueChanged"]
+[connection signal="pressed" from="Buttons/ButtonMenuReset" to="." method="OnButtonResetPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]
 [connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://6exg1xcll47q"]
 
-[ext_resource type="Script" uid="uid://iehouv86x367" path="res://Levels/Scripts/Level1.cs" id="1_r5xp3"]
+[ext_resource type="Script" uid="uid://byvwficb4xf6c" path="res://Levels/Scripts/LevelTest.cs" id="1_r5xp3"]
 [ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/hud.tscn" id="2_yr5j8"]
 [ext_resource type="Environment" uid="uid://62hpcna74r70" path="res://Environment/Ressources/level_1_environment.tres" id="3_05uub"]
 [ext_resource type="PackedScene" uid="uid://kdhgdir770ai" path="res://Items/Nodes/treat.tscn" id="4_3mr6q"]

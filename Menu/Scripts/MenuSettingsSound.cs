@@ -28,6 +28,16 @@ public partial class MenuSettingsSound : Control
         sliderSFX.Value = sfxLinearValue;
     }
 
+    public void OnButtonResetPressed()
+    {
+        sliderSFX.EmitSignal("value_changed", 1f);
+        sliderSFX.Value = 1f;
+        sliderMusic.EmitSignal("value_changed", 1f);
+        sliderMusic.Value = 1f;
+        sliderMaster.EmitSignal("value_changed", 1f);
+        sliderMaster.Value = 1f;
+    }
+
     public void OnMasterValueChanged(float value)
     {
         soundManager.SetVolume("Master", value);

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Level1 : Node3D
+public partial class LevelTest : Node3D
 {
     Global global;
 
