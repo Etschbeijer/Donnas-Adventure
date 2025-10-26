@@ -49,7 +49,7 @@ public partial class WallHanging : PlayerState
             msg["doJump"] = true;
 
             Vector3 jumpDirection = (Vector3.Up + wallNormal).Normalized();
-            Player.PlayerVelocity = jumpDirection * Player.JumpVelocity * 1.5f;
+            Player.PlayerVelocity = jumpDirection * Player.JumpVelocity * 0.5f;
             StateMachine.TransitionTo(nameof(WallJump), msg);
         }
     }

@@ -8,6 +8,8 @@ public partial class WallJump : PlayerState
     [Export]
     public AnimationPlayer AnimationPlayer { get; set; }
 
+    private float jumpHoldTimer = 0f;
+
     public override void Enter(Dictionary msg = null)
     {
         Player.ControlFeetCollision(false, true);
@@ -15,10 +17,26 @@ public partial class WallJump : PlayerState
         AnimationPlayer.Play("Wall_Jump", 0.1);
 
         Player.CanInput = false;
+
+        jumpHoldTimer = 0f;
     }
 
-    public override async void PhysicsUpdate(double delta)
+    public override void PhysicsUpdate(double delta)
     {
+        if (Input.IsActionPressed("Jump") && jumpHoldTimer < Player.JumpTime)
+        {
+            jumpHoldTimer += (float)delta;
+            var weight = (float)delta / Player.JumpTime;
+            Player.CalculateMaximumJumpHeigh(weight, Player.JumpVelocity * 1.5f);
+        }
+
+        if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
+        {
+            Player.CanInput = true;
+            Player.HasDoubleJump = false;
+            StateMachine.TransitionTo(nameof(AirRiseMovement));
+        }
+
         CalculateGravityVelocity((float)delta);
 
         if (Player.CanInput)
@@ -55,13 +73,6 @@ public partial class WallJump : PlayerState
             StateMachine.TransitionTo(nameof(WallHanging));
         }
 
-        if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
-        {
-            Player.CanInput = true;
-            Player.HasDoubleJump = false;
-            StateMachine.TransitionTo(nameof(AirRiseMovement));
-        }
-
         if (Player.IsOnFloor())
         {
             if (Player.InputDir == Vector2.Zero)
@@ -91,7 +102,7 @@ public partial class WallJump : PlayerState
         }
     }
 
-    public override async void Update(double delta)
+    public override void Update(double delta)
     {
         if (Player.CurrentHealth <= 0)
         {

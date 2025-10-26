@@ -44,7 +44,7 @@ public partial class AirRiseMovement : PlayerState
         {
             jumpHoldTimer += (float)delta;
             var weight = (float)delta / Player.JumpTime;
-            CalculateMaximumJumpHeigh(weight);
+            Player.CalculateMaximumJumpHeigh(weight);
         }
 
         if (Input.IsActionJustPressed("Jump") && Player.HasDoubleJump)
@@ -152,12 +152,6 @@ public partial class AirRiseMovement : PlayerState
             Player.PlayerVelocity += Player.Gravity * delta;
             Player.TimeSinceLeftFloor += delta;
         }
-    }
-
-    public void CalculateMaximumJumpHeigh(float weight)
-    {
-        var newJumpHeight = Mathf.Lerp(Player.PlayerVelocity.Y, Player.JumpVelocity, weight);
-        Player.PlayerVelocity = new Vector3(Player.PlayerVelocity.X, (float) newJumpHeight, Player.PlayerVelocity.Z);
     }
 
     public void DoubleJump()

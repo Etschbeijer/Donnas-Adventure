@@ -283,6 +283,17 @@ public partial class PlayerCharacter : CharacterBody3D
         xTransform.Basis = xTransform.Basis.Orthonormalized();
     }
 
+    public void CalculateMaximumJumpHeigh(float weight)
+    {
+        CalculateMaximumJumpHeigh(weight, JumpVelocity);
+    }
+
+    public void CalculateMaximumJumpHeigh(float weight, float jumpheight)
+    {
+        var newJumpHeight = Mathf.Lerp(PlayerVelocity.Y, jumpheight, weight);
+        PlayerVelocity = new Vector3(PlayerVelocity.X, (float)newJumpHeight, PlayerVelocity.Z);
+    }
+
     public void CalculateMovementSpeed(double delta)
     {
         if (IsOnFloor() && Input.IsActionPressed("Accelerate"))
