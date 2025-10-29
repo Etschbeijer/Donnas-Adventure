@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://big15srtmkr7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a34cx"]
+size = Vector3(150, 10, 150)
+
+[node name="FallZone" type="Area3D"]
+collision_layer = 16
+metadata/_edit_group_ = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_a34cx")

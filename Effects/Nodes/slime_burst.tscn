@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://c51l5r4hdips2"]
 
-[ext_resource type="Material" uid="uid://b1yb07mj1esrj" path="res://Characters/Nodes/slime.tres" id="1_yag7l"]
+[ext_resource type="Material" uid="uid://b1yb07mj1esrj" path="res://Materials/slime.tres" id="1_yag7l"]
 
 [sub_resource type="Curve" id="Curve_icyoh"]
 _limits = [-360.0, 360.0, 0.0, 1.0]

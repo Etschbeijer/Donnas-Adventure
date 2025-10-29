@@ -58,19 +58,21 @@ public partial class Slime : CharacterBody3D
 		{
 			velocity += GetGravity() * (float)delta;
 		}
-
-        velocity.Z = MovementSpeed * direction.Z;
-        velocity.X = MovementSpeed * direction.X;
+        else
+        {
+            velocity.Z = MovementSpeed * direction.Z;
+            velocity.X = MovementSpeed * direction.X;
+        }
 
         Velocity = velocity;
 
-		MoveAndSlide();
+        MoveAndSlide();
 
-		if ((IsOnWall() || !floorDetector.IsColliding()) && !isTurning && IsOnFloor())
-		{
-			await TurnAround();
+        if ((IsOnWall() || !floorDetector.IsColliding()) && !isTurning && IsOnFloor())
+        {
+            await TurnAround();
         }
-	}
+    }
 
 	public async Task TurnAround()
 	{
@@ -151,10 +153,5 @@ public partial class Slime : CharacterBody3D
     public void Unload()
     {
         QueueFree();
-    }
-
-    public void LoadDefeatScene()
-	{
-        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_defeat.tscn");
     }
 }

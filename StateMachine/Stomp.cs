@@ -42,11 +42,6 @@ public partial class Stomp : PlayerState
             StateMachine.TransitionTo(nameof(GetHit));
         }
 
-        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly())
-        {
-            StateMachine.TransitionTo(nameof(WallHanging));
-        }
-
         if (Player.IsOnFloor())
         {
             Player.HasDoubleJump = true;

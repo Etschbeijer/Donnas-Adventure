@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Threading.Tasks;
 
-public partial class Platform3x2 : AnimatableBody3D
+public partial class MovingPlatform : AnimatableBody3D
 {
 
     [Export]
@@ -23,7 +23,10 @@ public partial class Platform3x2 : AnimatableBody3D
     // Called when the node enters the scene tree for the first time.
     public override async void _Ready()
 	{
+        //Get nodes
         tree = GetTree();
+
+        //Call important methods
         await Movement();
     }
 

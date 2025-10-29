@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://cgeo4c1wtdvri"]
+[gd_scene load_steps=8 format=4 uid="uid://cgeo4c1wtdvri"]
 
-[ext_resource type="Script" uid="uid://wyu8o67nors4" path="res://Environment/Scripts/Platform3x2.cs" id="1_ntipb"]
+[ext_resource type="Script" uid="uid://wyu8o67nors4" path="res://Environment/Scripts/MovingPlatform.cs" id="1_ntipb"]
 [ext_resource type="Texture2D" uid="uid://blet42785t5jv" path="res://Environment/Models/Blocks_ColourMap.png" id="1_wbt3h"]
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="3_vhgyu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx2mv"]
 resource_name = "AnimeMaterial"
+next_pass = ExtResource("3_vhgyu")
 cull_mode = 2
 diffuse_mode = 3
 specular_mode = 1
@@ -48,7 +50,7 @@ shadow_mesh = SubResource("ArrayMesh_4lrli")
 [sub_resource type="BoxShape3D" id="BoxShape3D_hrpga"]
 size = Vector3(4, 2, 6)
 
-[node name="Platform3x2" type="AnimatableBody3D"]
+[node name="GrassPlatform3x2" type="AnimatableBody3D"]
 collision_layer = 2
 collision_mask = 13
 script = ExtResource("1_ntipb")

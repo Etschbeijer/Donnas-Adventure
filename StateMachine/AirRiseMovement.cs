@@ -40,6 +40,8 @@ public partial class AirRiseMovement : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
+        var collider = Player.GetLastSlideCollision()?.GetCollider() as MovingPlatform;
+
         if (Input.IsActionPressed("Jump") && jumpHoldTimer < Player.JumpTime)
         {
             jumpHoldTimer += (float)delta;
@@ -84,13 +86,13 @@ public partial class AirRiseMovement : PlayerState
             startJumping = false;
         }
 
-        if(!Player.IsOnFloor() && IsAtTop((float) delta))
+        if(!Player.IsOnFloor() && Player.IsAtTop((float) delta))
         {
             Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
-        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null && Player.WallDetector.IsColliding() && !Player.HasMovementInput())
         {
             StateMachine.TransitionTo(nameof(WallHanging));
         }
@@ -160,10 +162,5 @@ public partial class AirRiseMovement : PlayerState
         Player.PlayerVelocity.Y = Player.JumpVelocity * 0.5f;
         AnimationPlayer.Play("Jump_Double", 0.1);
         Player.ControlTrusters(true);
-    }
-
-    public bool IsAtTop(float delta)
-    {
-        return (Player.PlayerVelocity.Y <= (Player.Gravity * delta).Y);
     }
 }

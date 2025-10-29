@@ -16,7 +16,7 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export]
     public float JumpTime { get; set; } = 0.35f;
     [Export]
-    public float JumpVelocity = 6f;
+    public float JumpVelocity = 8f;
     [Export]
     public float RunAccelarationTime = 0.3f;
     [Export]
@@ -84,6 +84,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public SoundManager SoundManager;
 
+    public RayCast3D WallDetector;
+
     RayCast3D groundDetector;
 
     AudioStreamPlayer3D soundJump;
@@ -124,7 +126,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
         CameraController = GetNode<Node3D>("Camera_Controller");
         cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
-        groundDetector = GetNode<RayCast3D>("RayCast3D");
+        WallDetector = GetNode<RayCast3D>("WallDetector");
+        groundDetector = GetNode<RayCast3D>("GroundDetector");
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         rigDonna = GetNode<Node3D>("rig_Donna");
         Global = GetNode<Global>("/root/Global");
@@ -312,7 +315,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void CalculatePlatformVelocity()
     {
-        var collider = GetLastSlideCollision()?.GetCollider() as Platform3x2;
+        var collider = GetLastSlideCollision()?.GetCollider() as MovingPlatform;
         if (collider != null)
         {
             PlatformVelocity = collider.Velocity;
@@ -518,6 +521,16 @@ public partial class PlayerCharacter : CharacterBody3D
         {
             sceneTree.CallDeferred("change_scene_to_file", sceneName);
         }
+    }
+
+    public bool HasMovementInput()
+    {
+        return InputDir.X != 0 || InputDir.Y != 0;
+    }
+
+    public bool IsAtTop(float delta)
+    {
+        return (PlayerVelocity.Y <= (Gravity * delta).Y);
     }
 
     public void OnHurtboxEntered(Area3D hitbox)

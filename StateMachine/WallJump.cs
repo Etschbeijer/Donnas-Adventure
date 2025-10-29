@@ -23,6 +23,8 @@ public partial class WallJump : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
+        var collider = Player.GetLastSlideCollision()?.GetCollider() as MovingPlatform;
+
         if (Input.IsActionPressed("Jump") && jumpHoldTimer < Player.JumpTime)
         {
             jumpHoldTimer += (float)delta;
@@ -60,14 +62,14 @@ public partial class WallJump : PlayerState
             AnimationPlayer.Play("Jump_Rise", 0.1);
         }
 
-        if (!AnimationPlayer.IsPlaying() && !Player.IsOnFloor() && IsAtTop((float)delta))
+        if (!Player.IsOnFloor() && Player.IsAtTop((float)delta))
         {
             Player.CanInput = true;
             Player.ControlSaltoCollision(true);
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
-        if (Player.TimeOnWall == 0f && Player.IsOnWallOnly())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null && Player.WallDetector.IsColliding())
         {
             Player.CanInput = true;
             StateMachine.TransitionTo(nameof(WallHanging));
@@ -137,10 +139,5 @@ public partial class WallJump : PlayerState
     public void FaceAwayFromWall()
     {
         Player.Rotation = new Vector3(Player.Rotation.X, -Player.Rotation.Y, Player.Rotation.Z);
-    }
-
-    public bool IsAtTop(float delta)
-    {
-        return (Player.PlayerVelocity.Y <= (Player.Gravity * delta).Y);
     }
 }

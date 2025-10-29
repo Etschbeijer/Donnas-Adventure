@@ -14,7 +14,7 @@ public partial class AirDropMovement : PlayerState
     {
         Player.ControlFeetCollision(false, true);
 
-        if (StateMachine.PreviousState.Name == nameof(AirRiseMovement))
+        if (StateMachine.PreviousState.Name == nameof(AirRiseMovement) || StateMachine.PreviousState.Name == nameof(WallJump))
         {
             AnimationPlayer.Play("Jump_Salto", 0.1, 2);
             Player.ControlTrusters(false);
@@ -31,7 +31,7 @@ public partial class AirDropMovement : PlayerState
     {
         Player.TimeSinceLeftFloor += (float)delta;
 
-        var collider = Player.GetLastSlideCollision()?.GetCollider() as Platform3x2;
+        var collider = Player.GetLastSlideCollision()?.GetCollider() as MovingPlatform;
 
         if (Input.IsActionJustPressed("Jump") && Player.TimeSinceLeftFloor < Player.CoyoteTime)
         {
@@ -71,7 +71,7 @@ public partial class AirDropMovement : PlayerState
             AnimationPlayer.Play("Jump_Drop", 0.1);
         }
 
-        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null)
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null && Player.WallDetector.IsColliding())
         {
             StateMachine.TransitionTo(nameof(WallHanging));
         }

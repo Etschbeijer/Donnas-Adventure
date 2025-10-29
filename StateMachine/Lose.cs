@@ -18,14 +18,14 @@ public partial class Lose : PlayerState
 
     public async Task Defeated()
     {
-        if (StateMachine.PreviousState != null && StateMachine.PreviousState.Name == nameof(GetHit))
-        {
-            AnimationPlayer.Play("Defeat", 0.1);
-        }
         Player.SoundManager.PlaySoundLose();
         Player.ControlTrusters(false);
 
-        await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        if (StateMachine.PreviousState != null && StateMachine.PreviousState.Name == nameof(GetHit))
+        {
+            AnimationPlayer.Play("Defeat", 0.1);
+            await ToSignal(AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+        }
     }
 
     public async Task LoadDefeatScene(string nextScene)
