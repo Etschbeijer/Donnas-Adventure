@@ -8,9 +8,18 @@ public partial class Lose : PlayerState
     [Export]
     public AnimationPlayer AnimationPlayer { get; set; }
 
+    //SoundManager soundManager;
+
+    //public override void _Ready()
+    //{
+    //    //Get nodes
+    //    soundManager = GetNode<SoundManager>("/root/SoundManager");
+    //}
+
     public async override void Enter(Dictionary msg = null)
     {
         Player.CanInput = false;
+        Player.PlayerVelocity = Vector3.Zero;
 
         await Defeated();
         await LoadDefeatScene("res://Menu/Nodes/menu_defeat.tscn");

@@ -365,7 +365,8 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("9_b5cc4")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud") instance=ExtResource("9_b5cc4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 8.46746, 2)
+Hud = NodePath("../HUD")
 
 [node name="MenuPause" parent="PlayerCharacter" instance=ExtResource("10_1ms43")]

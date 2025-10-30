@@ -92,7 +92,7 @@ public partial class AirRiseMovement : PlayerState
             StateMachine.TransitionTo(nameof(AirDropMovement));
         }
 
-        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null && Player.WallDetector.IsColliding() && !Player.HasMovementInput())
+        if (Player.TimeOnWall == 0 && Player.IsOnWallOnly() && collider == null && Player.WallDetector.IsColliding() && Player.HasMovementInput())
         {
             StateMachine.TransitionTo(nameof(WallHanging));
         }
@@ -126,10 +126,12 @@ public partial class AirRiseMovement : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.CurrentHealth <= 0)
+        if (Player.ShallRespawn())
         {
-            Player.PlayerVelocity.Y = 0f;
-            Player.Velocity = Player.PlayerVelocity;
+            Player.Respawn();
+        }
+        else if (Player.HasLost())
+        {
             StateMachine.TransitionTo(nameof(Lose));
         }
 

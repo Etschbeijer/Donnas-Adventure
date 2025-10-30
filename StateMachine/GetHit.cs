@@ -10,15 +10,16 @@ public partial class GetHit : PlayerState
     public override void Enter(Dictionary msg = null)
     {
         AnimationPlayer.Play("Hit_Front", 0.1);
-        Player.CanInput = false;
 
         Player.ControlHurtBoxes(false);
+        Player.ReduceHealth();
 
-        Player.CurrentHealth -= 1;
+        Player.PlaySoundOnHit();
 
         if (Player.CurrentHealth <= 0)
         {
-            StateMachine.TransitionTo(nameof(Lose));
+            Player.ReduceLife();
+            Player.Hud.UpdateLifes(Player.Lifes);
         }
     }
 
@@ -30,24 +31,21 @@ public partial class GetHit : PlayerState
             {
                 if (Math.Abs(Player.GetInputDirection().Length()) == 0)
                 {
-                    CallDeferred(nameof(Player.ControlHurtBoxes), true);
+                    Player.ControlHurtBoxes(true);
                     Player.IsHurt = false;
-                    Player.CanInput = true;
                     StateMachine.TransitionTo(nameof(Idle));
                 }
                 else
                 {
-                    CallDeferred(nameof(Player.ControlHurtBoxes), true);
+                    Player.ControlHurtBoxes(true);
                     Player.IsHurt = false;
-                    Player.CanInput = true;
                     StateMachine.TransitionTo(nameof(GroundMovement));
                 }
             }
             else
             {
-                CallDeferred(nameof(Player.ControlHurtBoxes), true);
+                Player.ControlHurtBoxes(true);
                 Player.IsHurt = false;
-                Player.CanInput = true;
                 StateMachine.TransitionTo(nameof(AirDropMovement));
             }
         }
@@ -55,12 +53,16 @@ public partial class GetHit : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.CurrentHealth <= 0)
+        if (Player.ShallRespawn() && !AnimationPlayer.IsPlaying())
+        {
+            Player.Respawn();
+        }
+        else if (Player.HasLost())
         {
             StateMachine.TransitionTo(nameof(Lose));
         }
 
-        if (Player.HasWon)
+        if (Player.HasWon && !AnimationPlayer.IsPlaying())
         {
             StateMachine.TransitionTo(nameof(Win));
         }

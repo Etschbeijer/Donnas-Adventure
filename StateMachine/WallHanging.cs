@@ -56,7 +56,11 @@ public partial class WallHanging : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.CurrentHealth <= 0)
+        if (Player.ShallRespawn())
+        {
+            Player.Respawn();
+        }
+        else if (Player.HasLost())
         {
             StateMachine.TransitionTo(nameof(Lose));
         }

@@ -20,11 +20,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ve38c")
 
-[node name="SoundLose" type="AudioStreamPlayer3D" parent="."]
+[node name="SoundLose" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_8744b")
 bus = &"SFX"
 
-[node name="SoundWin" type="AudioStreamPlayer3D" parent="."]
+[node name="SoundWin" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_8744b")
 bus = &"SFX"
 

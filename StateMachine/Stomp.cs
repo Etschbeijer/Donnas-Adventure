@@ -71,10 +71,12 @@ public partial class Stomp : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.CurrentHealth <= 0)
+        if (Player.ShallRespawn())
         {
-            Player.PlayerVelocity.Y = 0f;
-            Player.Velocity = Player.PlayerVelocity;
+            Player.Respawn();
+        }
+        else if (Player.HasLost())
+        {
             StateMachine.TransitionTo(nameof(Lose));
         }
 
@@ -90,7 +92,7 @@ public partial class Stomp : PlayerState
     {
         // Add the stomp to the gravity.
         Player.Gravity = Player.GetGravity();
-        Player.PlayerVelocity += Player.Gravity * delta * 4;
+        Player.PlayerVelocity += Player.Gravity * delta * 8;
         Player.PlayerVelocity = new Vector3(0, Player.PlayerVelocity.Y, 0);
         Player.TimeSinceLeftFloor += delta;
     }

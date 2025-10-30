@@ -1,0 +1,137 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqg6hglokk4av"]
+
+[ext_resource type="Script" uid="uid://dov1r381x573l" path="res://Global/Scripts/Checkpoint.cs" id="1_f1kax"]
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="2_f2met"]
+[ext_resource type="AudioStream" uid="uid://b5khdoc2vm2ep" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/1up/1up2.wav" id="3_yt7ll"]
+
+[sub_resource type="Animation" id="Animation_6ca7x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yt7ll"]
+resource_name = "SlowRotation"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -6.28319)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ca7x"]
+_data = {
+&"RESET": SubResource("Animation_6ca7x"),
+&"SlowRotation": SubResource("Animation_yt7ll")
+}
+
+[sub_resource type="TorusMesh" id="TorusMesh_x4wyw"]
+inner_radius = 0.45
+outer_radius = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x4wyw"]
+next_pass = ExtResource("2_f2met")
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.196078, 0.423529, 0.788235, 0.392157)
+emission_enabled = true
+emission = Color(0.0980392, 0.576471, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_njsvn"]
+height = 0.001
+
+[sub_resource type="TorusMesh" id="TorusMesh_yt7ll"]
+inner_radius = 0.075
+outer_radius = 0.125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ca7x"]
+cull_mode = 1
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.003
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yt7ll"]
+next_pass = SubResource("StandardMaterial3D_6ca7x")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.162066, 0.162066, 0.162066, 1)
+metallic = 0.3
+roughness = 0.6
+
+[node name="Checkpoint" type="AnimatableBody3D"]
+collision_layer = 0
+script = ExtResource("1_f1kax")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6ca7x")
+}
+autoplay = "SlowRotation"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_x4wyw")
+surface_material_override/0 = SubResource("StandardMaterial3D_x4wyw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.18563e-11, 0.000499994)
+shape = SubResource("CylinderShape3D_njsvn")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_yt7ll")
+
+[node name="RingHolders" type="Node3D" parent="."]
+
+[node name="RingHolderTop" type="MeshInstance3D" parent="RingHolders"]
+transform = Transform3D(-4.37114e-08, 4.83091, -4.37114e-08, 0, -2.11166e-07, -1, -1, -2.11166e-07, 1.91069e-15, 0, 0.475, 0)
+mesh = SubResource("TorusMesh_yt7ll")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yt7ll")
+
+[node name="RingHolderBottom" type="MeshInstance3D" parent="RingHolders"]
+transform = Transform3D(-4.37114e-08, 4.83091, -4.37114e-08, 0, -2.11166e-07, -1, -1, -2.11166e-07, 1.91069e-15, 0, -0.475, 0)
+mesh = SubResource("TorusMesh_yt7ll")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yt7ll")
+
+[node name="RingHolderLeft" type="MeshInstance3D" parent="RingHolders"]
+transform = Transform3D(4.37114e-08, -1.84607e-14, -1, -8.74228e-08, -4.83091, 0, -1, 4.22331e-07, -4.37114e-08, 0.475, 0, 0)
+mesh = SubResource("TorusMesh_yt7ll")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yt7ll")
+
+[node name="RingHolderRight" type="MeshInstance3D" parent="RingHolders"]
+transform = Transform3D(4.37114e-08, -1.84607e-14, -1, -8.74228e-08, -4.83091, 0, -1, 4.22331e-07, -4.37114e-08, -0.475, 0, 0)
+mesh = SubResource("TorusMesh_yt7ll")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yt7ll")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.18563e-11, 0.000499994)
+shape = SubResource("CylinderShape3D_njsvn")
+
+[connection signal="body_entered" from="Area3D" to="." method="OnCheckpointEntered"]

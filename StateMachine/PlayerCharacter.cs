@@ -27,11 +27,23 @@ public partial class PlayerCharacter : CharacterBody3D
     public float RotationSpeed { get; set; } = 12;
     [Export]
     public float MouseSensitivity { get; set; } = 0.003f;
+    [Export]
+    public float CoyoteTime = 0.1f;
+
+    [Export]
+    public double InvulnerabilityTimer = 1;
 
     [Export]
     public int ComboCounter { get; set; } = 1;
+    [Export]
+    public int MaxHealth { get; set; } = 3;
+    [Export]
+    public int Lifes { get; set; } = 3;
 
+    [Export]
+    public Hud Hud;
 
+    public Vector3 SpawnPoint;
     public Vector3 PlayerVelocity;
     public Vector3 Gravity;
     public Vector3 Direction;
@@ -49,10 +61,10 @@ public partial class PlayerCharacter : CharacterBody3D
     public bool CanInput = true;
     public bool HasDoubleJump = true;
     public bool IsHurt = false;
+    public bool IsInvulnerable = false;
     public bool HasWon = false;
     public bool ShallBounce = false;
 
-    public float CoyoteTime = 0.1f;
     public float MovementSpeed;
     public float TimeSinceLeftFloor = 0f;
     public float WallTime = 0.5f;
@@ -72,8 +84,7 @@ public partial class PlayerCharacter : CharacterBody3D
     public float TopAcellerationRate;
     public float ToRunDecelerationRate;
 
-    public int MaxHealth { get; set; } = 1;
-    public int CurrentHealth { get; set; } = 1;
+    public int CurrentHealth { get; set; } = 3;
     public int HitStagger { get; set; } = 8;
 
     public AnimationTree AnimationTree { get; set; }
@@ -86,10 +97,27 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public RayCast3D WallDetector;
 
+    [Signal]
+    public delegate void PlayerHitEventHandler();
+
+    public Global Global;
+
+    double currentInvulnerabilityTime;
+
+    float blinkInterval;
+
+    bool isBlinking = false;
+
     RayCast3D groundDetector;
+
+    MeshInstance3D meshInstance;
+
+    Color originColour;
+    Color damageColour;
 
     AudioStreamPlayer3D soundJump;
     AudioStreamPlayer3D soundDoubleJump;
+    AudioStreamPlayer3D soundDrop;
     AudioStreamPlayer3D soundGetHit;
     AudioStreamPlayer3D soundLandOnGrass;
     AudioStreamPlayer3D soundWalkOnGrass;
@@ -114,27 +142,25 @@ public partial class PlayerCharacter : CharacterBody3D
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
 
-    [Signal]
-    public delegate void PlayerHitEventHandler();
-
-    public Global Global;
-
     public override void _Ready()
     {
         //Get nodes
+        Global = GetNode<Global>("/root/Global");
         SoundManager = GetNode<SoundManager>("/root/SoundManager");
 
-        CameraController = GetNode<Node3D>("Camera_Controller");
-        cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
-        WallDetector = GetNode<RayCast3D>("WallDetector");
-        groundDetector = GetNode<RayCast3D>("GroundDetector");
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        CameraController = GetNode<Node3D>("Camera_Controller");
+        WallDetector = GetNode<RayCast3D>("WallDetector");
+
+        cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
+        groundDetector = GetNode<RayCast3D>("GroundDetector");
         rigDonna = GetNode<Node3D>("rig_Donna");
-        Global = GetNode<Global>("/root/Global");
+        meshInstance = rigDonna.GetNode<Skeleton3D>("Skeleton3D").GetNode<MeshInstance3D>("Donna_Head");
 
         sounds = GetNode<Node3D>("Sounds");
         soundJump = sounds.GetNode<AudioStreamPlayer3D>("Jump");
         soundDoubleJump = sounds.GetNode<AudioStreamPlayer3D>("DoubleJump");
+        soundDrop = sounds.GetNode<AudioStreamPlayer3D>("Drop");
         soundGetHit = sounds.GetNode<AudioStreamPlayer3D>("GetHit");
         soundLandOnGrass = sounds.GetNode<AudioStreamPlayer3D>("LandOnGrass");
         soundWalkOnGrass = sounds.GetNode<AudioStreamPlayer3D>("WalkOnGrass");
@@ -157,11 +183,20 @@ public partial class PlayerCharacter : CharacterBody3D
         //AnimationNodeState = (AnimationNodeStateMachinePlayback) AnimationTree.Get("parameters/playback");
 
         //Set initial values
+        blinkInterval = 0.15f;
+        originColour = (Color)meshInstance.GetActiveMaterial(0).NextPass.Get("albedo_color");
+        damageColour = new Color(1f, 0f, 0f);
+
+        Lifes = 3;
+        CurrentHealth = 3;
+        Hud.UpdateHealthbar(CurrentHealth);
+        Hud.UpdateLifes(Lifes);
+        SpawnPoint = Position;
         Input.MouseMode = Input.MouseModeEnum.Captured;
 
         //Call important methods
-        ControlTrusters(false);
         ControlHurtBoxes(true);
+        ControlTrusters(false);
         ControlHitBoxes(false);
         ControlSaltoCollision(false);
 
@@ -177,6 +212,21 @@ public partial class PlayerCharacter : CharacterBody3D
 
         //Get camera controller position
         Vector3 cameraPosition = CameraController.Position;
+
+        if(IsInvulnerable)
+        {
+            currentInvulnerabilityTime += delta;
+
+            if (!isBlinking)
+            {
+                blinking(originColour, damageColour, blinkInterval);
+            }
+
+            if (currentInvulnerabilityTime >= InvulnerabilityTimer)
+            {
+                ResetInvulnerability();
+            }
+        }
 
         if (MovementSpeed > RunSpeed)
         {
@@ -221,6 +271,23 @@ public partial class PlayerCharacter : CharacterBody3D
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
             cameraTarget.RotationDegrees = new Vector3(pitch, cameraTarget.RotationDegrees.Y, cameraTarget.RotationDegrees.Z);
         }
+    }
+
+    private async void blinking(Color originColour, Color blinkColor, float blinkInterval)
+    {
+        isBlinking = true;
+
+        while (IsInvulnerable)
+        {
+            meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", blinkColor);
+            await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
+
+            meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
+            await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
+        }
+
+        isBlinking = false;
+        meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
     }
 
     public void AlignCamera(Vector3 cameraPosition, Vector3 characterPosition, double delta)
@@ -507,6 +574,11 @@ public partial class PlayerCharacter : CharacterBody3D
         return input;
     }
 
+    public bool HasMovementInput()
+    {
+        return InputDir.X != 0 || InputDir.Y != 0;
+    }
+
     public void LoadScene(SceneTree sceneTree, string sceneName)
     {
         foreach (Node3D trail in footLightTrails)
@@ -523,25 +595,49 @@ public partial class PlayerCharacter : CharacterBody3D
         }
     }
 
-    public bool HasMovementInput()
-    {
-        return InputDir.X != 0 || InputDir.Y != 0;
-    }
-
     public bool IsAtTop(float delta)
     {
         return (PlayerVelocity.Y <= (Gravity * delta).Y);
     }
 
+    public bool ShallRespawn()
+    {
+        return CurrentHealth <= 0 && Lifes > 0;
+    }
+
+    public bool HasLost()
+    {
+        return Lifes <= 0;
+    }
+
     public void OnHurtboxEntered(Area3D hitbox)
     {
+        if(IsHurt)
+        {
+            return;
+        }
+        
         if (hitbox.Name == "FallZone")
         {
-            CurrentHealth = 0;
+            IsHurt = true;
+            CallDeferred(nameof(handleFallZone));
         }
-        else
+        else if(!IsInvulnerable)
         {
             IsHurt = true;
+            IsInvulnerable = true;
+        }
+    }
+
+    private void handleFallZone()
+    {
+        soundDrop.Play();
+        CurrentHealth = 0;
+        ReduceLife();
+        Hud.UpdateLifes(Lifes);
+        if (Lifes > 0)
+        {
+            Respawn();
         }
     }
 
@@ -549,6 +645,12 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         soundDoubleJump.PitchScale = 1.5f * rng.RandfRange(0.9f, 1.1f);
         soundDoubleJump.Play();
+    }
+
+    public void PlaySoundDrop()
+    {
+        soundDrop.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        soundDrop.Play();
     }
 
     public void PlaySoundJump()
@@ -589,8 +691,51 @@ public partial class PlayerCharacter : CharacterBody3D
         soundWalkOnGrass.Play();
     }
 
+    public void AddHealth()
+    {
+        CurrentHealth += 1;
+        Hud.UpdateHealthbar(CurrentHealth);
+    }
+
+    public void ReduceHealth()
+    {
+        CurrentHealth -= 1;
+        Hud.UpdateHealthbar(CurrentHealth);
+    }
+
+    public void AddLife()
+    {
+        Lifes += 1;
+    }
+
+    public void ReduceLife()
+    {
+        Lifes -= 1;
+    }
+
     public void ReadyForInput()
     {
         CanInput = true;
+    }
+
+    public void Respawn()
+    {
+        PlayerVelocity = Vector3.Zero;
+        CurrentHealth = MaxHealth;
+        Position = SpawnPoint;
+        ResetInvulnerability();
+        Hud.UpdateHealthbar(MaxHealth);
+    }
+
+    public void ResetInvulnerability()
+    {
+        IsHurt = false;
+        IsInvulnerable = false;
+        currentInvulnerabilityTime = 0f;
+    }
+
+    public void SetSpawnPoint(Vector3 spawnPoint)
+    {
+        SpawnPoint = spawnPoint;
     }
 }

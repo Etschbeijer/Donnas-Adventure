@@ -106,10 +106,12 @@ public partial class WallJump : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.CurrentHealth <= 0)
+        if (Player.ShallRespawn())
         {
-            Player.PlayerVelocity.Y = 0f;
-            Player.Velocity = Player.PlayerVelocity;
+            Player.Respawn();
+        }
+        else if (Player.HasLost())
+        {
             StateMachine.TransitionTo(nameof(Lose));
         }
 

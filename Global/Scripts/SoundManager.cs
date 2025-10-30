@@ -10,6 +10,8 @@ public partial class SoundManager : Control
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
+    public AudioStreamPlayer2D SoundLose;
+    public AudioStreamPlayer2D SoundWin;
     public AudioStreamPlayer2D SoundClick;
     public AudioStreamPlayer2D SoundExit;
     public AudioStreamPlayer2D SoundMainMenu;
@@ -17,14 +19,13 @@ public partial class SoundManager : Control
 
     public AudioStreamPlayer2D MusicProject2Marioish2D;
     public AudioStreamPlayer2D MusicPuppyPlayingInTheGarden2D;
-
-    public AudioStreamPlayer3D SoundLose;
-    public AudioStreamPlayer3D SoundWin;
     
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         //Get nodes
+        SoundLose = GetNode<AudioStreamPlayer2D>("SoundLose");
+        SoundWin = GetNode<AudioStreamPlayer2D>("SoundWin");
         SoundClick = GetNode<AudioStreamPlayer2D>("SoundClick");
         SoundExit = GetNode<AudioStreamPlayer2D>("SoundExit");
         SoundMainMenu = GetNode<AudioStreamPlayer2D>("SoundMainMenu");
@@ -32,9 +33,6 @@ public partial class SoundManager : Control
 
         MusicProject2Marioish2D = GetNode<AudioStreamPlayer2D>("MusicProject2Marioish2D");
         MusicPuppyPlayingInTheGarden2D = GetNode<AudioStreamPlayer2D>("MusicPuppyPlayingInTheGarden2D");
-
-        SoundLose = GetNode<AudioStreamPlayer3D>("SoundLose");
-        SoundWin = GetNode<AudioStreamPlayer3D>("SoundWin");
 
         //Call important methods
         LoadVolume();
