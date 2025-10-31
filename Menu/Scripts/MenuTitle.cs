@@ -32,7 +32,7 @@ public partial class MenuTitle : Control
 	{
         await soundManager.PlaySoundPlay();
 
-        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_test.tscn");
+        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void OnButtonScoresPressed()

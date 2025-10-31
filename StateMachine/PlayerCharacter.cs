@@ -44,15 +44,15 @@ public partial class PlayerCharacter : CharacterBody3D
     public Hud Hud;
 
     public Vector3 SpawnPoint;
+    public Vector3 SpawnRoration;
     public Vector3 PlayerVelocity;
     public Vector3 Gravity;
     public Vector3 Direction;
+    public Vector3 PlatformVelocity;
 
     public Vector2 InputDir;
 
     public Node3D CameraController;
-
-    public Vector3 PlatformVelocity;
 
     Transform3D xTransform;
 
@@ -192,9 +192,12 @@ public partial class PlayerCharacter : CharacterBody3D
         Hud.UpdateHealthbar(CurrentHealth);
         Hud.UpdateLifes(Lifes);
         SpawnPoint = Position;
+        SpawnRoration = Rotation;
         Input.MouseMode = Input.MouseModeEnum.Captured;
 
         //Call important methods
+        ResetCamera();
+
         ControlHurtBoxes(true);
         ControlTrusters(false);
         ControlHitBoxes(false);
@@ -217,7 +220,7 @@ public partial class PlayerCharacter : CharacterBody3D
         {
             currentInvulnerabilityTime += delta;
 
-            if (!isBlinking)
+            if (!isBlinking && IsHurt)
             {
                 blinking(originColour, damageColour, blinkInterval);
             }
@@ -721,10 +724,18 @@ public partial class PlayerCharacter : CharacterBody3D
     public void Respawn()
     {
         PlayerVelocity = Vector3.Zero;
+        InputDir = Vector2.Zero;
         CurrentHealth = MaxHealth;
+        Rotation = SpawnRoration;
         Position = SpawnPoint;
+        ResetCamera();
         ResetInvulnerability();
         Hud.UpdateHealthbar(MaxHealth);
+    }
+
+    public void ResetCamera()
+    {
+        CameraController.Rotation = Rotation;
     }
 
     public void ResetInvulnerability()
@@ -734,8 +745,9 @@ public partial class PlayerCharacter : CharacterBody3D
         currentInvulnerabilityTime = 0f;
     }
 
-    public void SetSpawnPoint(Vector3 spawnPoint)
+    public void SetSpawnParameters(Vector3 spawnPoint, Vector3 spawnRotation)
     {
         SpawnPoint = spawnPoint;
+        SpawnRoration = spawnRotation;
     }
 }

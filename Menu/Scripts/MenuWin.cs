@@ -38,7 +38,7 @@ public partial class MenuWin : Control
     public async void OnButtonPlayAgainPressed()
     {
         await soundManager.PlaySoundPlay();
-        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_test.tscn");
+        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void OnButtonMenuPressed()

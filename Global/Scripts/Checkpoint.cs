@@ -4,14 +4,17 @@ using System.Reflection.Emit;
 
 public partial class Checkpoint : AnimatableBody3D
 {
+    [Export]
+    public Vector3 PlayerSpawnPosition;
+    [Export]
+    public Vector3 PlayerSpawnRotation;
+
     public AnimationPlayer AnimationPlayer { get; set; }
 
     bool isActive = false;
 
     private float currentTime = 0f;
     private float totalTime = 0f;
-
-    Vector3 playerSpawn;
 
     MeshInstance3D meshInstance3D;
 
@@ -26,9 +29,6 @@ public partial class Checkpoint : AnimatableBody3D
         meshInstance3D = GetNode<MeshInstance3D>("MeshInstance3D");
         playSoundCheckPointEntered = GetNode<AudioStreamPlayer3D>("AudioStreamPlayer3D");
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-
-        //Set initial values
-        playerSpawn = new Vector3(Position.X, Position.Y, Position.Z + 1);
     }
 
     public void ChangeMaterial(int layer, Material material)
@@ -54,7 +54,7 @@ public partial class Checkpoint : AnimatableBody3D
 
             ChangeMaterial(0, prupleMaterial);
 
-            player.SetSpawnPoint(playerSpawn);
+            player.SetSpawnParameters(PlayerSpawnPosition, new Vector3(normalizeDegrees(PlayerSpawnRotation.X), normalizeDegrees(PlayerSpawnRotation.Y), normalizeDegrees(PlayerSpawnRotation.Z)));
         }
 
         AnimationPlayer.SpeedScale = 4f;
@@ -62,6 +62,12 @@ public partial class Checkpoint : AnimatableBody3D
         var timer = sceneTree.CreateTimer(1f);
         await ToSignal(timer, Timer.SignalName.Timeout);
         AnimationPlayer.SpeedScale = 1f;
+    }
+
+    private float normalizeDegrees(float degree)
+    {
+        var angleRad = Mathf.DegToRad(degree);
+        return Mathf.Wrap(angleRad, -Mathf.Pi, Mathf.Pi);
     }
 
     public void PlaySoundCheckPointEntered()

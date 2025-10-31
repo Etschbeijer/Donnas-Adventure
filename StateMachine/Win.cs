@@ -16,6 +16,8 @@ public partial class Win : PlayerState
 
         Player.ControlHurtBoxes(false);
 
+        Player.PlayerVelocity = Vector3.Zero;
+
         await Won();
         await LoadWinScene("res://Menu/Nodes/menu_win.tscn");
     }
