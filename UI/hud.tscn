@@ -183,3 +183,33 @@ theme_override_fonts/font = ExtResource("2_bytes")
 theme_override_font_sizes/font_size = 60
 text = "3"
 horizontal_alignment = 1
+
+[node name="PanelTutorial" type="Panel" parent="."]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -200.0
+offset_right = 256.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jtv4n")
+
+[node name="x" type="Label" parent="PanelTutorial"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 440.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_bytes")
+theme_override_font_sizes/font_size = 35
+text = "Test text "
+autowrap_mode = 3
+clip_text = true

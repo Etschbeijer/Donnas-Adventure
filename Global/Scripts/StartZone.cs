@@ -25,7 +25,6 @@ public partial class StartZone : Area3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public void OnStartZoneExited(CharacterBody3D body)
     {
-        GD.Print("OnStartZoneExited");
         var player = body as PlayerCharacter;
 
         if (player != null)
