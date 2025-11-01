@@ -54,10 +54,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public Node3D CameraController;
 
-    Transform3D xTransform;
-
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-
     public bool CanInput = true;
     public bool HasDoubleJump = true;
     public bool IsHurt = false;
@@ -107,6 +103,7 @@ public partial class PlayerCharacter : CharacterBody3D
     float blinkInterval;
 
     bool isBlinking = false;
+    bool isDead = false;
 
     RayCast3D groundDetector;
 
@@ -114,6 +111,10 @@ public partial class PlayerCharacter : CharacterBody3D
 
     Color originColour;
     Color damageColour;
+
+    Transform3D xTransform;
+
+    RandomNumberGenerator rng = new RandomNumberGenerator();
 
     AudioStreamPlayer3D soundJump;
     AudioStreamPlayer3D soundDoubleJump;
@@ -615,14 +616,14 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void OnHurtboxEntered(Area3D hitbox)
     {
-        if(IsHurt)
+        if(isDead)
         {
             return;
         }
         
         if (hitbox.Name == "FallZone")
         {
-            IsHurt = true;
+            isDead = true;
             CallDeferred(nameof(handleFallZone));
         }
         else if(!IsInvulnerable)
@@ -635,7 +636,7 @@ public partial class PlayerCharacter : CharacterBody3D
     private void handleFallZone()
     {
         Global.StopTimer();
-
+        isDead = false;
         soundDrop.Play();
         ReduceLife();
         Hud.UpdateLifes(Lifes);

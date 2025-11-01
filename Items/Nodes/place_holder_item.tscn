@@ -2,11 +2,26 @@
 
 [ext_resource type="Script" uid="uid://b3d7xoo02fef8" path="res://Items/Scripts/PlaceHolderItem.cs" id="1_teqtv"]
 [ext_resource type="Material" uid="uid://5c7v78hxwamj" path="res://Materials/donna_flame.tres" id="1_vp8bu"]
-[ext_resource type="AudioStream" uid="uid://crveqwfiaffy" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_30vvh"]
+[ext_resource type="AudioStream" uid="uid://c28202yckrxo4" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_30vvh"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_teqtv"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_30vvh"]
+
+[sub_resource type="Animation" id="Animation_xea1s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_30vvh"]
 resource_name = "bounce"
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 1.2, 0), Vector3(0, 0.85, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xea1s"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MeshInstance3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xea1s"]
