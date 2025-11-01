@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpi6mjbvdnooy"]
+
+[ext_resource type="Script" uid="uid://bki8tcusy7vo" path="res://Global/Scripts/TutorialTrigger.cs" id="1_pcjbg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sr4dq"]
+height = 0.3
+radius = 5.0
+
+[node name="TutorialTrigger" type="Area3D"]
+collision_layer = 512
+script = ExtResource("1_pcjbg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_sr4dq")
+
+[connection signal="body_entered" from="." to="." method="OnTutorialEntered"]

@@ -7,14 +7,16 @@ public partial class Hud : CanvasLayer
     public Label LabelTime;
     public Label LabelHealth;
     public Label LabelLifes;
-    
+    public Label LabelTutorial;
+
     public TextureProgressBar TextureProgressBar;
 
-    private Panel panelTreats;
-    private Panel panelTime;
-    private Panel panelLife;
-
     Global global;
+
+    Panel panelLife;
+    Panel panelTime;
+    Panel panelTreats;
+    Panel panelTutorial;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -22,14 +24,16 @@ public partial class Hud : CanvasLayer
         //Get nodes
         global = GetNode<Global>("/root/Global");
 
-        panelTreats = GetNode<Panel>("PanelScore");
-        panelTime = GetNode<Panel>("PanelTime");
         panelLife = GetNode<Panel>("PanelLife");
+        panelTime = GetNode<Panel>("PanelTime");
+        panelTreats = GetNode<Panel>("PanelScore");
+        panelTutorial = GetNode<Panel>("PanelTutorial");
 
-        LabelTreats = panelTreats.GetNode<Label>("LabelTreats");
         LabelTime = panelTime.GetNode<Label>("LabelTime");
-        LabelHealth = panelLife.GetNode<Label>("LabelHealth");
         LabelLifes = panelLife.GetNode<Label>("LabelLifes");
+        LabelHealth = panelLife.GetNode<Label>("LabelHealth");
+        LabelTreats = panelTreats.GetNode<Label>("LabelTreats");
+        LabelTutorial = panelTutorial.GetNode<Label>("LabelTutorial");
 
         TextureProgressBar = panelLife.GetNode<TextureProgressBar>("TextureProgressBar");
 
@@ -63,5 +67,17 @@ public partial class Hud : CanvasLayer
     public void UpdateLifes(int lifes)
     {
         LabelLifes.Text = lifes.ToString();
+    }
+
+    public async void UpdateTutorial(string text, float time = 3f)
+    {
+        panelTutorial.Show();
+        LabelTutorial.Text = text;
+
+        var timer = GetTree().CreateTimer(time);
+        await ToSignal(timer, Timer.SignalName.Timeout);
+
+        panelTutorial.Hide();
+        LabelTutorial.Text = "";
     }
 }

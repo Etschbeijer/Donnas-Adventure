@@ -35,11 +35,7 @@ public partial class StartZone : Area3D
                 audioPlayer.Play();
 
                 global.StartTimer();
-                //SetCollisionMaskValue(1, false);
             }
         }
     }
-
-
-
 }
