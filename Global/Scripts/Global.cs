@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class Global : Node
 {
@@ -16,11 +17,23 @@ public partial class Global : Node
 
     public SaveData SaveData;
 
+    Node explosions;
+
+    Node3D grassExplosion;
+
+    GpuParticles3D dustExplosion;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        //Get nodes
+        //explosions = GetNode<Node3D>("Explosions");
+        //dustExplosion = GD.Load<Node3D>("res://Effects/Nodes/earth_explosion.tscn").GetNode<GpuParticles3D>("Explosion");
+        grassExplosion = (Node3D) (GD.Load<PackedScene>("res://Effects/Nodes/grass_explosion.tscn").Instantiate());
+
         //Call important methods
         SaveData = SaveData.LoadOrCreate();
+        GetTree().CurrentScene.AddChild(grassExplosion);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -84,5 +97,27 @@ public partial class Global : Node
         PausedTime = 0;
         Minutes = 0;
         Seconds = 0;
+    }
+
+    public void DustExplosion()
+    {
+        dustExplosion.Emitting = true;
+    }
+
+    public void FireExplosions(GpuParticles3D[] explosions)
+    {
+        foreach (GpuParticles3D explosion in explosions)
+        {
+            explosion.Restart();
+            explosion.Emitting = true;
+        }
+    }
+
+    public void CreateGrassExplosion(Vector3 position, float scaling)
+    {
+        grassExplosion.Scale = new Vector3(scaling, scaling, scaling);
+        grassExplosion.GlobalPosition = new Vector3(position.X, position.Y - 0.25f, position.Z); ;
+        var explosions = grassExplosion.GetChildren().OfType<GpuParticles3D>().Where(explosion => explosion.Name.ToString().Contains("Explosion")).ToArray();
+        FireExplosions(explosions);
     }
 }

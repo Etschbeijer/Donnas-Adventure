@@ -45,6 +45,7 @@ public partial class Stomp : PlayerState
         if (Player.IsOnFloor())
         {
             Player.HasDoubleJump = true;
+            Player.FireExplosion(0.3f);
             if (Player.InputDir == Vector2.Zero)
             {
                 Player.PlayerVelocity.Y = 0f;

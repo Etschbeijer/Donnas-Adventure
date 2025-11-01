@@ -93,10 +93,10 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public RayCast3D WallDetector;
 
+    public Global Global;
+
     [Signal]
     public delegate void PlayerHitEventHandler();
-
-    public Global Global;
 
     double currentInvulnerabilityTime;
 
@@ -124,7 +124,7 @@ public partial class PlayerCharacter : CharacterBody3D
     AudioStreamPlayer3D soundWalkOnGrass;
     AudioStreamPlayer3D soundSkate;
 
-    Node explosions;
+    
     Node trails;
 
     Node3D cameraTarget;
@@ -136,9 +136,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     GpuParticles3D grassTrailL;
     GpuParticles3D grassTrailR;
-
-    GpuParticles3D dustExplosion;
-    GpuParticles3D [] grassExplosion;
 
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
@@ -166,10 +163,6 @@ public partial class PlayerCharacter : CharacterBody3D
         soundLandOnGrass = sounds.GetNode<AudioStreamPlayer3D>("LandOnGrass");
         soundWalkOnGrass = sounds.GetNode<AudioStreamPlayer3D>("WalkOnGrass");
         soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
-
-        explosions = GetNode<Node3D>("Explosions");
-        dustExplosion = explosions.GetNode<Node3D>("DustExplosion").GetNode<GpuParticles3D>("Explosion");
-        grassExplosion = explosions.GetNode<Node3D>("GrassExplosion").GetChildren().OfType<GpuParticles3D>().Where(explosion => explosion.Name.ToString().Contains("Explosion")).ToArray();
 
         trails = GetNode<Node3D>("Trails");
         grassTrailL = trails.GetNode<Node3D>("GrassTrailL").GetNode<GpuParticles3D>("GrassExplosion");
@@ -455,19 +448,6 @@ public partial class PlayerCharacter : CharacterBody3D
         }
     }
 
-    public void FireSmoke()
-    {
-        dustExplosion.Emitting = true;
-    }
-
-    public void FireGrassExplosion()
-    {
-        foreach (GpuParticles3D explision in grassExplosion)
-        {
-            explision.Emitting = true;
-        }
-    }
-
     public void FireGrassTrail(string side)
     {
         GpuParticles3D trail = side == "l" ? grassTrailL : grassTrailR;
@@ -551,6 +531,21 @@ public partial class PlayerCharacter : CharacterBody3D
         foreach (Area3D saltoHitbox in saltoHitboxes)
         {
             ControlHitbox(saltoHitbox, onOffSalto);
+        }
+    }
+
+    public void FireExplosion(float scaling = 0.2f)
+    {
+        if(InputDir == Vector2.Zero)
+        {
+            Global.CreateGrassExplosion(Position, scaling);
+        }
+        else
+        {
+            var forward = GlobalTransform.Basis.Z;
+            var cloudPosition = Position + forward * 0.5f;
+
+            Global.CreateGrassExplosion(cloudPosition, scaling);
         }
     }
 
@@ -640,6 +635,7 @@ public partial class PlayerCharacter : CharacterBody3D
         soundDrop.Play();
         ReduceLife();
         Hud.UpdateLifes(Lifes);
+
         if (Lifes > 0)
         {
             Respawn();
