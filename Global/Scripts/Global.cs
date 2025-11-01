@@ -8,9 +8,11 @@ public partial class Global : Node
     public int Minutes = 0;
     public int Seconds = 0;
 
-    public bool CheckTime;
+    public bool CheckTime = false;
+    public bool PauseTime = false;
 
-    public ulong StartTime;
+    public ulong StartTime = 0;
+    public ulong PausedTime = 0;
 
     public SaveData SaveData;
 
@@ -34,9 +36,9 @@ public partial class Global : Node
         }
     }
 
-    public void IncreaseTreats()
+    public void IncreaseTreats(int value)
     {
-        CollectedTreats += 1;
+        CollectedTreats += value;
     }
 
     public void DecreaseTreats()
@@ -57,17 +59,29 @@ public partial class Global : Node
     public void StartTimer()
     {
         CheckTime = true;
-        StartTime = Time.GetTicksMsec();
+        PauseTime = false;
+        if (StartTime == 0)
+        {
+            StartTime = Time.GetTicksMsec();
+        }
+        else
+        {
+            StartTime = Time.GetTicksMsec() - PausedTime;
+        }
     }
 
     public void StopTimer() 
     { 
-        CheckTime = false; 
+        CheckTime = false;
+        PauseTime = true;
+        PausedTime = Time.GetTicksMsec() - StartTime;
     }
 
     public void ResetTimer()
     {
         StopTimer();
+        StartTime = 0;
+        PausedTime = 0;
         Minutes = 0;
         Seconds = 0;
     }

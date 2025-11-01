@@ -12,6 +12,7 @@ public partial class GetHit : PlayerState
         AnimationPlayer.Play("Hit_Front", 0.1);
 
         Player.ControlHurtBoxes(false);
+
         Player.ReduceHealth();
 
         Player.PlaySoundOnHit();

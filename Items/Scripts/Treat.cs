@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 public partial class Treat : Area3D
 {
     [Export]
-    public Hud hud;
+    public int Value = 1;
+
+    public Hud Hud;
 
     public bool isCollected = false;
 
@@ -23,8 +25,10 @@ public partial class Treat : Area3D
     public override void _Ready()
 	{
         //Get nodes
-        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        Hud = GetNode<Hud>("../../HUD");
         global = GetNode<Global>("/root/Global");
+
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         audioPlayer = GetNode<AudioStreamPlayer3D>("SoundTreat");
     }
 
@@ -40,13 +44,13 @@ public partial class Treat : Area3D
 
         if ( player != null)
         {
-            global.IncreaseTreats();
+            global.IncreaseTreats(Value);
             SetCollisionLayerValue(3, false);
             SetCollisionMaskValue(1, false);
 
             animationPlayer.Play("bounce");
 
-            hud.UpdateLabelTreats();
+            Hud.UpdateLabelTreats();
 
             audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
             audioPlayer.Play();

@@ -634,8 +634,9 @@ public partial class PlayerCharacter : CharacterBody3D
 
     private void handleFallZone()
     {
+        Global.StopTimer();
+
         soundDrop.Play();
-        CurrentHealth = 0;
         ReduceLife();
         Hud.UpdateLifes(Lifes);
         if (Lifes > 0)

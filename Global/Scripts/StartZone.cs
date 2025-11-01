@@ -3,11 +3,11 @@ using System;
 
 public partial class StartZone : Area3D
 {
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-
     public AudioStreamPlayer3D audioPlayer;
 
     Global global;
+
+    RandomNumberGenerator rng = new RandomNumberGenerator();
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -29,11 +29,14 @@ public partial class StartZone : Area3D
 
         if (player != null)
         {
-            audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
-            audioPlayer.Play();
+            if (!global.CheckTime)
+            {
+                audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
+                audioPlayer.Play();
 
-            global.StartTimer();
-            SetCollisionMaskValue(1, false);
+                global.StartTimer();
+                //SetCollisionMaskValue(1, false);
+            }
         }
     }
 

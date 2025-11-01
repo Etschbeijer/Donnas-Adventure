@@ -1,6 +1,9 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://5c7v78hxwamj"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://5c7v78hxwamj"]
+
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="1_p0ks8"]
 
 [resource]
+next_pass = ExtResource("1_p0ks8")
 cull_mode = 2
 diffuse_mode = 3
 specular_mode = 1

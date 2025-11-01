@@ -83,10 +83,10 @@ tracks/0/path = NodePath("MeshBoneTreats:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 1, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5, 0), Vector3(0, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2cn0a"]

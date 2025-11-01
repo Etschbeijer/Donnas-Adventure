@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://dqg6hglokk4av"]
 
-[ext_resource type="Script" uid="uid://dov1r381x573l" path="res://Global/Scripts/Checkpoint.cs" id="1_f1kax"]
+[ext_resource type="Script" uid="uid://dov1r381x573l" path="res://Items/Scripts/Checkpoint.cs" id="1_f1kax"]
 [ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="2_f2met"]
 [ext_resource type="AudioStream" uid="uid://b5khdoc2vm2ep" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/1up/1up2.wav" id="3_yt7ll"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bincglc530w64"]
+[gd_scene load_steps=17 format=3 uid="uid://bincglc530w64"]
 
 [ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/hud.tscn" id="1_308c0"]
 [ext_resource type="Script" uid="uid://byvwficb4xf6c" path="res://Levels/Scripts/LevelTest.cs" id="1_k8tq5"]
@@ -13,8 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dqn2hbq250vm" path="res://Environment/Nodes/earth_platform_1x_1.tscn" id="9_y8g71"]
 [ext_resource type="PackedScene" uid="uid://cgeo4c1wtdvri" path="res://Environment/Nodes/grass_platform_3x_2.tscn" id="10_25t36"]
 [ext_resource type="PackedScene" uid="uid://kdhgdir770ai" path="res://Items/Nodes/treat.tscn" id="13_4ccun"]
-[ext_resource type="PackedScene" uid="uid://dqg6hglokk4av" path="res://Global/Nodes/checkpoint.tscn" id="14_ef54h"]
+[ext_resource type="PackedScene" uid="uid://dqg6hglokk4av" path="res://Items/Nodes/checkpoint.tscn" id="14_ef54h"]
 [ext_resource type="PackedScene" uid="uid://fxchiasmiyoh" path="res://Items/Nodes/bone_treat.tscn" id="15_fep27"]
+[ext_resource type="PackedScene" uid="uid://bb106eqd6ylpm" path="res://Items/Nodes/place_holder_item.tscn" id="16_2tebo"]
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_k8tq5")
@@ -38,11 +39,25 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="StartZone" parent="." instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 18)
-
 [node name="BoneTreat" parent="." instance=ExtResource("15_fep27")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 3, -891)
+
+[node name="StartZones" type="Node3D" parent="."]
+
+[node name="StartZone1" parent="StartZones" instance=ExtResource("4_lpr52")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 18)
+
+[node name="StartZone2" parent="StartZones" instance=ExtResource("4_lpr52")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -182)
+
+[node name="StartZone3" parent="StartZones" instance=ExtResource("4_lpr52")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -188)
+
+[node name="StartZone4" parent="StartZones" instance=ExtResource("4_lpr52")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -381)
+
+[node name="StartZone5" parent="StartZones" instance=ExtResource("4_lpr52")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -387)
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud") instance=ExtResource("6_lpr52")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 22)
@@ -796,1762 +811,1333 @@ direction = Vector3(1, 0, 0)
 
 [node name="Treats" type="Node3D" parent="."]
 
-[node name="Treat" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 16)
-hud = NodePath("../../HUD")
 
-[node name="Treat3" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat3" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 12)
-hud = NodePath("../../HUD")
 
-[node name="Treat4" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat4" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, 8)
-hud = NodePath("../../HUD")
 
-[node name="Treat7" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat7" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 4)
-hud = NodePath("../../HUD")
 
-[node name="Treat9" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat9" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-hud = NodePath("../../HUD")
 
-[node name="Treat11" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat11" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -4)
-hud = NodePath("../../HUD")
 
-[node name="Treat13" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat13" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -8)
-hud = NodePath("../../HUD")
 
-[node name="Treat15" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat15" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 3, -12)
-hud = NodePath("../../HUD")
 
-[node name="Treat17" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat17" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -16)
-hud = NodePath("../../HUD")
 
-[node name="Treat19" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat19" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -20)
-hud = NodePath("../../HUD")
 
-[node name="Treat21" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat21" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -28)
-hud = NodePath("../../HUD")
 
-[node name="Treat22" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat22" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -24)
-hud = NodePath("../../HUD")
 
-[node name="Treat23" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat23" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -32)
-hud = NodePath("../../HUD")
 
-[node name="Treat24" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat24" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -35)
-hud = NodePath("../../HUD")
 
-[node name="Treat25" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat25" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -40)
-hud = NodePath("../../HUD")
 
-[node name="Treat26" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat26" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -51)
-hud = NodePath("../../HUD")
 
-[node name="Treat27" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat27" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -46)
-hud = NodePath("../../HUD")
 
-[node name="Treat28" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat28" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -46)
-hud = NodePath("../../HUD")
 
-[node name="Treat29" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat29" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -34)
-hud = NodePath("../../HUD")
 
-[node name="Treat43" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat43" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -40)
-hud = NodePath("../../HUD")
 
-[node name="Treat44" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat44" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -40)
-hud = NodePath("../../HUD")
 
-[node name="Treat30" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat30" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -34)
-hud = NodePath("../../HUD")
 
-[node name="Treat31" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat31" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -44)
-hud = NodePath("../../HUD")
 
-[node name="Treat32" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat32" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -47)
-hud = NodePath("../../HUD")
 
-[node name="Treat33" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat33" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -53)
-hud = NodePath("../../HUD")
 
-[node name="Treat34" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat34" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4, -56)
-hud = NodePath("../../HUD")
 
-[node name="Treat35" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat35" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -58)
-hud = NodePath("../../HUD")
 
-[node name="Treat36" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat36" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -60)
-hud = NodePath("../../HUD")
 
-[node name="Treat37" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat37" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -63)
-hud = NodePath("../../HUD")
 
-[node name="Treat38" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat38" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -65)
-hud = NodePath("../../HUD")
 
-[node name="Treat39" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat39" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -68)
-hud = NodePath("../../HUD")
 
-[node name="Treat40" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat40" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -70)
-hud = NodePath("../../HUD")
 
-[node name="Treat41" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat41" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -75)
-hud = NodePath("../../HUD")
 
-[node name="Treat42" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat42" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -79)
-hud = NodePath("../../HUD")
 
-[node name="Treat45" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat45" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 6, -82)
-hud = NodePath("../../HUD")
 
-[node name="Treat46" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat46" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -84)
-hud = NodePath("../../HUD")
 
-[node name="Treat308" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat308" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 4, -86)
-hud = NodePath("../../HUD")
 
-[node name="Treat47" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat47" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -88)
-hud = NodePath("../../HUD")
 
-[node name="Treat48" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat48" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -94)
-hud = NodePath("../../HUD")
 
-[node name="Treat49" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat49" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -98)
-hud = NodePath("../../HUD")
 
-[node name="Treat54" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat54" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -106)
-hud = NodePath("../../HUD")
 
-[node name="Treat55" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat55" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -106)
-hud = NodePath("../../HUD")
 
-[node name="Treat56" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat56" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -114)
-hud = NodePath("../../HUD")
 
-[node name="Treat57" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat57" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -114)
-hud = NodePath("../../HUD")
 
-[node name="Treat50" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat50" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -108)
-hud = NodePath("../../HUD")
 
-[node name="Treat51" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat51" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -112)
-hud = NodePath("../../HUD")
 
-[node name="Treat52" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat52" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -117)
-hud = NodePath("../../HUD")
 
-[node name="Treat53" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat53" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -122)
-hud = NodePath("../../HUD")
 
-[node name="Treat58" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat58" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -126)
-hud = NodePath("../../HUD")
 
-[node name="Treat59" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat59" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -130)
-hud = NodePath("../../HUD")
 
-[node name="Treat60" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat60" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -133)
-hud = NodePath("../../HUD")
 
-[node name="Treat61" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat61" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -138)
-hud = NodePath("../../HUD")
 
-[node name="Treat62" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat62" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -142)
-hud = NodePath("../../HUD")
 
-[node name="Treat63" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat63" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -146)
-hud = NodePath("../../HUD")
 
-[node name="Treat64" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat64" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -149)
-hud = NodePath("../../HUD")
 
-[node name="Treat65" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat65" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -151)
-hud = NodePath("../../HUD")
 
-[node name="Treat66" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat66" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -153)
-hud = NodePath("../../HUD")
 
-[node name="Treat67" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat67" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -156)
-hud = NodePath("../../HUD")
 
-[node name="Treat68" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat68" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -160)
-hud = NodePath("../../HUD")
 
-[node name="Treat69" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat69" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -164)
-hud = NodePath("../../HUD")
 
-[node name="Treat70" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat70" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -168)
-hud = NodePath("../../HUD")
 
-[node name="Treat71" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat71" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -172)
-hud = NodePath("../../HUD")
 
-[node name="Treat72" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat72" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -164)
-hud = NodePath("../../HUD")
 
-[node name="Treat73" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat73" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -164)
-hud = NodePath("../../HUD")
 
-[node name="Treat74" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat74" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -177)
-hud = NodePath("../../HUD")
 
-[node name="Treat75" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat75" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -175)
-hud = NodePath("../../HUD")
 
-[node name="Treat76" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat76" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -179)
-hud = NodePath("../../HUD")
 
-[node name="Treat77" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat77" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -182)
-hud = NodePath("../../HUD")
 
-[node name="Treat78" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat78" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -188)
-hud = NodePath("../../HUD")
 
-[node name="Treat79" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat79" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -103)
-hud = NodePath("../../HUD")
 
-[node name="Treat80" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat80" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -192)
-hud = NodePath("../../HUD")
 
-[node name="Treat81" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat81" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -196)
-hud = NodePath("../../HUD")
 
-[node name="Treat309" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat309" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -196)
-hud = NodePath("../../HUD")
 
-[node name="Treat310" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat310" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -200)
-hud = NodePath("../../HUD")
 
-[node name="Treat311" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat311" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -204)
-hud = NodePath("../../HUD")
 
-[node name="Treat335" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat335" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -9, -204)
-hud = NodePath("../../HUD")
 
-[node name="Treat358" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat358" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9, -208)
-hud = NodePath("../../HUD")
 
-[node name="Treat359" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat359" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -8, -214)
-hud = NodePath("../../HUD")
 
-[node name="Treat360" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat360" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -220)
-hud = NodePath("../../HUD")
 
-[node name="Treat312" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat312" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -208)
-hud = NodePath("../../HUD")
 
-[node name="Treat313" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat313" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -214)
-hud = NodePath("../../HUD")
 
-[node name="Treat314" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat314" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, -218)
-hud = NodePath("../../HUD")
 
-[node name="Treat315" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat315" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -222)
-hud = NodePath("../../HUD")
 
-[node name="Treat316" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat316" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -8, -226)
-hud = NodePath("../../HUD")
 
-[node name="Treat317" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat317" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9, -232)
-hud = NodePath("../../HUD")
 
-[node name="Treat318" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat318" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -7, -236)
-hud = NodePath("../../HUD")
 
-[node name="Treat319" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat319" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -240)
-hud = NodePath("../../HUD")
 
-[node name="Treat320" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat320" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -7, -244)
-hud = NodePath("../../HUD")
 
-[node name="Treat321" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat321" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, -252)
-hud = NodePath("../../HUD")
 
-[node name="Treat323" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat323" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -258)
-hud = NodePath("../../HUD")
 
-[node name="Treat324" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat324" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -264)
-hud = NodePath("../../HUD")
 
-[node name="Treat325" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat325" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -8, -268)
-hud = NodePath("../../HUD")
 
-[node name="Treat327" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat327" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -9, -272)
-hud = NodePath("../../HUD")
 
-[node name="Treat328" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat328" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -9, -278)
-hud = NodePath("../../HUD")
 
-[node name="Treat329" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat329" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -284)
-hud = NodePath("../../HUD")
 
-[node name="Treat326" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat326" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -8, -268)
-hud = NodePath("../../HUD")
 
-[node name="Treat330" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat330" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -272)
-hud = NodePath("../../HUD")
 
-[node name="Treat331" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat331" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9, -278)
-hud = NodePath("../../HUD")
 
-[node name="Treat332" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat332" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -9, -282)
-hud = NodePath("../../HUD")
 
-[node name="Treat333" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat333" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -8, -288)
-hud = NodePath("../../HUD")
 
-[node name="Treat334" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat334" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -292)
-hud = NodePath("../../HUD")
 
-[node name="Treat355" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat355" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -8, -298)
-hud = NodePath("../../HUD")
 
-[node name="Treat356" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat356" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -302)
-hud = NodePath("../../HUD")
 
-[node name="Treat357" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat357" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -302)
-hud = NodePath("../../HUD")
 
-[node name="Treat336" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat336" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -306)
-hud = NodePath("../../HUD")
 
-[node name="Treat337" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat337" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -8, -306)
-hud = NodePath("../../HUD")
 
-[node name="Treat338" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat338" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -9, -312)
-hud = NodePath("../../HUD")
 
-[node name="Treat339" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat339" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -9, -320)
-hud = NodePath("../../HUD")
 
-[node name="Treat340" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat340" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9, -326)
-hud = NodePath("../../HUD")
 
-[node name="Treat341" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat341" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -330)
-hud = NodePath("../../HUD")
 
-[node name="Treat353" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat353" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -8, -334)
-hud = NodePath("../../HUD")
 
-[node name="Treat354" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat354" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -338)
-hud = NodePath("../../HUD")
 
-[node name="Treat342" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat342" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -326)
-hud = NodePath("../../HUD")
 
-[node name="Treat343" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat343" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -324)
-hud = NodePath("../../HUD")
 
-[node name="Treat347" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat347" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -326)
-hud = NodePath("../../HUD")
 
-[node name="Treat348" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat348" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -9, -330)
-hud = NodePath("../../HUD")
 
-[node name="Treat349" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat349" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -336)
-hud = NodePath("../../HUD")
 
-[node name="Treat350" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat350" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -340)
-hud = NodePath("../../HUD")
 
-[node name="Treat351" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat351" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -344)
-hud = NodePath("../../HUD")
 
-[node name="Treat361" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat361" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -348)
-hud = NodePath("../../HUD")
 
-[node name="Treat362" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat362" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -352)
-hud = NodePath("../../HUD")
 
-[node name="Treat363" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat363" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat364" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat364" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat366" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat366" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -1, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat367" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat367" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -1, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat368" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat368" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -361)
-hud = NodePath("../../HUD")
 
-[node name="Treat369" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat369" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -361)
-hud = NodePath("../../HUD")
 
-[node name="Treat365" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat365" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -3, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat352" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat352" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -9, -342)
-hud = NodePath("../../HUD")
 
-[node name="Treat344" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat344" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -320)
-hud = NodePath("../../HUD")
 
-[node name="Treat345" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat345" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, -316)
-hud = NodePath("../../HUD")
 
-[node name="Treat346" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat346" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -312)
-hud = NodePath("../../HUD")
 
-[node name="Treat322" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat322" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -248)
-hud = NodePath("../../HUD")
 
-[node name="Treat82" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat82" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -200)
-hud = NodePath("../../HUD")
 
-[node name="Treat83" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat83" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -204)
-hud = NodePath("../../HUD")
 
-[node name="Treat84" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat84" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -208)
-hud = NodePath("../../HUD")
 
-[node name="Treat85" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat85" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -211)
-hud = NodePath("../../HUD")
 
-[node name="Treat86" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat86" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -213)
-hud = NodePath("../../HUD")
 
-[node name="Treat87" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat87" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -215)
-hud = NodePath("../../HUD")
 
-[node name="Treat88" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat88" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -217)
-hud = NodePath("../../HUD")
 
-[node name="Treat89" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat89" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -220)
-hud = NodePath("../../HUD")
 
-[node name="Treat128" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat128" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 7, -223)
-hud = NodePath("../../HUD")
 
-[node name="Treat370" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat370" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 12, -223)
-hud = NodePath("../../HUD")
 
-[node name="Treat371" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat371" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 12, -228)
-hud = NodePath("../../HUD")
 
-[node name="Treat372" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat372" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 12, -232)
-hud = NodePath("../../HUD")
 
-[node name="Treat373" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat373" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 12, -236)
-hud = NodePath("../../HUD")
 
-[node name="Treat407" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat407" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 13, -240)
-hud = NodePath("../../HUD")
 
-[node name="Treat374" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat374" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 12, -244)
-hud = NodePath("../../HUD")
 
-[node name="Treat375" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat375" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 12, -248)
-hud = NodePath("../../HUD")
 
-[node name="Treat376" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat376" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 12, -252)
-hud = NodePath("../../HUD")
 
-[node name="Treat377" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat377" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 12, -256)
-hud = NodePath("../../HUD")
 
-[node name="Treat378" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat378" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 13, -264)
-hud = NodePath("../../HUD")
 
-[node name="Treat382" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat382" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 14, -260)
-hud = NodePath("../../HUD")
 
-[node name="Treat379" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat379" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 13, -268)
-hud = NodePath("../../HUD")
 
-[node name="Treat380" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat380" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 13, -272)
-hud = NodePath("../../HUD")
 
-[node name="Treat381" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat381" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 13, -276)
-hud = NodePath("../../HUD")
 
-[node name="Treat383" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat383" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 14, -280)
-hud = NodePath("../../HUD")
 
-[node name="Treat384" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat384" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 12, -284)
-hud = NodePath("../../HUD")
 
-[node name="Treat385" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat385" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 12, -288)
-hud = NodePath("../../HUD")
 
-[node name="Treat386" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat386" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 12, -292)
-hud = NodePath("../../HUD")
 
-[node name="Treat387" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat387" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, -296)
-hud = NodePath("../../HUD")
 
-[node name="Treat388" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat388" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 13, -300)
-hud = NodePath("../../HUD")
 
-[node name="Treat389" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat389" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 15, -302.5)
-hud = NodePath("../../HUD")
 
-[node name="Treat390" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat390" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 14, -306)
-hud = NodePath("../../HUD")
 
-[node name="Treat391" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat391" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 14, -310)
-hud = NodePath("../../HUD")
 
-[node name="Treat392" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat392" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 14, -314)
-hud = NodePath("../../HUD")
 
-[node name="Treat393" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat393" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 14, -318)
-hud = NodePath("../../HUD")
 
-[node name="Treat394" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat394" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 14, -322)
-hud = NodePath("../../HUD")
 
-[node name="Treat395" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat395" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 15, -324)
-hud = NodePath("../../HUD")
 
-[node name="Treat396" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat396" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 12, -328)
-hud = NodePath("../../HUD")
 
-[node name="Treat397" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat397" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 12, -332)
-hud = NodePath("../../HUD")
 
-[node name="Treat398" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat398" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 14, -336)
-hud = NodePath("../../HUD")
 
-[node name="Treat399" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat399" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 14, -340)
-hud = NodePath("../../HUD")
 
-[node name="Treat400" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat400" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 14, -343)
-hud = NodePath("../../HUD")
 
-[node name="Treat401" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat401" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 16, -346)
-hud = NodePath("../../HUD")
 
-[node name="Treat402" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat402" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 16, -350)
-hud = NodePath("../../HUD")
 
-[node name="Treat403" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat403" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 16, -353)
-hud = NodePath("../../HUD")
 
-[node name="Treat404" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat404" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 18, -357)
-hud = NodePath("../../HUD")
 
-[node name="Treat405" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat405" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, -359)
-hud = NodePath("../../HUD")
 
-[node name="Treat406" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat406" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16, -362)
-hud = NodePath("../../HUD")
 
-[node name="Treat90" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat90" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, -220)
-hud = NodePath("../../HUD")
 
-[node name="Treat91" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat91" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 6, -224)
-hud = NodePath("../../HUD")
 
-[node name="Treat92" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat92" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 4, -228)
-hud = NodePath("../../HUD")
 
-[node name="Treat93" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat93" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -232)
-hud = NodePath("../../HUD")
 
-[node name="Treat94" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat94" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, -235)
-hud = NodePath("../../HUD")
 
-[node name="Treat95" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat95" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -239)
-hud = NodePath("../../HUD")
 
-[node name="Treat96" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat96" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4, -244)
-hud = NodePath("../../HUD")
 
-[node name="Treat97" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat97" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5, -249)
-hud = NodePath("../../HUD")
 
-[node name="Treat98" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat98" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -253)
-hud = NodePath("../../HUD")
 
-[node name="Treat99" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat99" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 7, -257)
-hud = NodePath("../../HUD")
 
-[node name="Treat100" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat100" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 7, -260)
-hud = NodePath("../../HUD")
 
-[node name="Treat101" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat101" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 5, -264)
-hud = NodePath("../../HUD")
 
-[node name="Treat102" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat102" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3, -268)
-hud = NodePath("../../HUD")
 
-[node name="Treat103" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat103" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -272)
-hud = NodePath("../../HUD")
 
-[node name="Treat104" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat104" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 4, -277)
-hud = NodePath("../../HUD")
 
-[node name="Treat105" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat105" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -282)
-hud = NodePath("../../HUD")
 
-[node name="Treat106" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat106" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3, -286)
-hud = NodePath("../../HUD")
 
-[node name="Treat107" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat107" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -290)
-hud = NodePath("../../HUD")
 
-[node name="Treat108" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat108" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -297)
-hud = NodePath("../../HUD")
 
-[node name="Treat109" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat109" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -304)
-hud = NodePath("../../HUD")
 
-[node name="Treat110" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat110" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -309)
-hud = NodePath("../../HUD")
 
-[node name="Treat111" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat111" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -314)
-hud = NodePath("../../HUD")
 
-[node name="Treat112" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat112" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, -318)
-hud = NodePath("../../HUD")
 
-[node name="Treat113" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat113" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 3, -322)
-hud = NodePath("../../HUD")
 
-[node name="Treat114" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat114" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, -327)
-hud = NodePath("../../HUD")
 
-[node name="Treat115" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat115" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -331)
-hud = NodePath("../../HUD")
 
-[node name="Treat116" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat116" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, -336)
-hud = NodePath("../../HUD")
 
-[node name="Treat117" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat117" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, -342)
-hud = NodePath("../../HUD")
 
-[node name="Treat118" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat118" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 3, -346)
-hud = NodePath("../../HUD")
 
-[node name="Treat119" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat119" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -351)
-hud = NodePath("../../HUD")
 
-[node name="Treat120" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat120" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -356)
-hud = NodePath("../../HUD")
 
-[node name="Treat121" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat121" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -360)
-hud = NodePath("../../HUD")
 
-[node name="Treat122" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat122" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -364)
-hud = NodePath("../../HUD")
 
-[node name="Treat123" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat123" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -368)
-hud = NodePath("../../HUD")
 
-[node name="Treat124" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat124" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -372)
-hud = NodePath("../../HUD")
 
-[node name="Treat125" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat125" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -376)
-hud = NodePath("../../HUD")
 
-[node name="Treat126" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat126" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -380)
-hud = NodePath("../../HUD")
 
-[node name="Treat127" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat127" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -388)
-hud = NodePath("../../HUD")
 
-[node name="Treat408" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat408" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -404)
-hud = NodePath("../../HUD")
 
-[node name="Treat409" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat409" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, -408)
-hud = NodePath("../../HUD")
 
-[node name="Treat410" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat410" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -412)
-hud = NodePath("../../HUD")
 
-[node name="Treat411" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat411" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -8, -416)
-hud = NodePath("../../HUD")
 
-[node name="Treat413" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat413" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -8, -424)
-hud = NodePath("../../HUD")
 
-[node name="Treat412" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat412" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -9, -420)
-hud = NodePath("../../HUD")
 
-[node name="Treat414" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat414" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -428)
-hud = NodePath("../../HUD")
 
-[node name="Treat415" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat415" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -8, -432)
-hud = NodePath("../../HUD")
 
-[node name="Treat416" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat416" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -436)
-hud = NodePath("../../HUD")
 
-[node name="Treat417" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat417" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -8, -440)
-hud = NodePath("../../HUD")
 
-[node name="Treat418" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat418" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -444)
-hud = NodePath("../../HUD")
 
-[node name="Treat419" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat419" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -9, -450)
-hud = NodePath("../../HUD")
 
-[node name="Treat420" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat420" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -8, -456)
-hud = NodePath("../../HUD")
 
-[node name="Treat421" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat421" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9, -462)
-hud = NodePath("../../HUD")
 
-[node name="Treat422" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat422" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -8, -466)
-hud = NodePath("../../HUD")
 
-[node name="Treat423" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat423" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -9, -470)
-hud = NodePath("../../HUD")
 
-[node name="Treat424" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat424" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -474)
-hud = NodePath("../../HUD")
 
-[node name="Treat425" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat425" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -9, -480)
-hud = NodePath("../../HUD")
 
-[node name="Treat440" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat440" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -486)
-hud = NodePath("../../HUD")
 
-[node name="Treat441" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat441" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -9, -489)
-hud = NodePath("../../HUD")
 
-[node name="Treat442" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat442" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -9, -493)
-hud = NodePath("../../HUD")
 
-[node name="Treat443" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat443" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -9, -498)
-hud = NodePath("../../HUD")
 
-[node name="Treat449" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat449" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -8, -500)
-hud = NodePath("../../HUD")
 
-[node name="Treat444" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat444" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -8, -500)
-hud = NodePath("../../HUD")
 
-[node name="Treat445" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat445" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -9, -504)
-hud = NodePath("../../HUD")
 
-[node name="Treat446" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat446" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -9, -508)
-hud = NodePath("../../HUD")
 
-[node name="Treat447" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat447" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -9, -512)
-hud = NodePath("../../HUD")
 
-[node name="Treat448" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat448" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -9, -513)
-hud = NodePath("../../HUD")
 
-[node name="Treat426" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat426" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -8, -486)
-hud = NodePath("../../HUD")
 
-[node name="Treat427" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat427" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, -9, -492)
-hud = NodePath("../../HUD")
 
-[node name="Treat428" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat428" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, -8, -497)
-hud = NodePath("../../HUD")
 
-[node name="Treat429" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat429" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, -9, -502)
-hud = NodePath("../../HUD")
 
-[node name="Treat430" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat430" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -9, -504)
-hud = NodePath("../../HUD")
 
-[node name="Treat431" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat431" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9, -508)
-hud = NodePath("../../HUD")
 
-[node name="Treat432" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat432" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -9, -514)
-hud = NodePath("../../HUD")
 
-[node name="Treat433" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat433" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -6, -519)
-hud = NodePath("../../HUD")
 
-[node name="Treat434" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat434" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -3, -521)
-hud = NodePath("../../HUD")
 
-[node name="Treat435" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat435" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -1, -523)
-hud = NodePath("../../HUD")
 
-[node name="Treat436" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat436" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -523)
-hud = NodePath("../../HUD")
 
-[node name="Treat437" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat437" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -5, -523)
-hud = NodePath("../../HUD")
 
-[node name="Treat438" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat438" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, -1, -523)
-hud = NodePath("../../HUD")
 
-[node name="Treat439" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat439" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -523)
-hud = NodePath("../../HUD")
 
-[node name="Treat129" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat129" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -400)
-hud = NodePath("../../HUD")
 
-[node name="Treat130" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat130" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -414)
-hud = NodePath("../../HUD")
 
-[node name="Treat227" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat227" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, -407)
-hud = NodePath("../../HUD")
 
-[node name="Treat131" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat131" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -422)
-hud = NodePath("../../HUD")
 
-[node name="Treat132" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat132" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -442)
-hud = NodePath("../../HUD")
 
-[node name="Treat133" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat133" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -434)
-hud = NodePath("../../HUD")
 
-[node name="Treat226" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat226" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 3, -428)
-hud = NodePath("../../HUD")
 
-[node name="Treat134" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat134" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -456)
-hud = NodePath("../../HUD")
 
-[node name="Treat225" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat225" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 3, -449)
-hud = NodePath("../../HUD")
 
-[node name="Treat137" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat137" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 3, -484)
-hud = NodePath("../../HUD")
 
-[node name="Treat224" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat224" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -490)
-hud = NodePath("../../HUD")
 
-[node name="Treat135" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat135" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -464)
-hud = NodePath("../../HUD")
 
-[node name="Treat223" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat223" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 3, -471)
-hud = NodePath("../../HUD")
 
-[node name="Treat136" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat136" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -478)
-hud = NodePath("../../HUD")
 
-[node name="Treat138" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat138" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -493)
-hud = NodePath("../../HUD")
 
-[node name="Treat139" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat139" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -498)
-hud = NodePath("../../HUD")
 
-[node name="Treat140" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat140" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -502)
-hud = NodePath("../../HUD")
 
-[node name="Treat141" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat141" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -506)
-hud = NodePath("../../HUD")
 
-[node name="Treat142" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat142" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -510)
-hud = NodePath("../../HUD")
 
-[node name="Treat143" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat143" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -514)
-hud = NodePath("../../HUD")
 
-[node name="Treat144" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat144" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -518)
-hud = NodePath("../../HUD")
 
-[node name="Treat145" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat145" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -522)
-hud = NodePath("../../HUD")
 
-[node name="Treat146" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat146" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -527)
-hud = NodePath("../../HUD")
 
-[node name="Treat147" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat147" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -530)
-hud = NodePath("../../HUD")
 
-[node name="Treat148" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat148" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat232" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat232" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 5, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat233" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat233" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 3, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat234" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat234" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 3, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat235" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat235" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 3, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat236" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat236" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 3, -535)
-hud = NodePath("../../HUD")
 
-[node name="Treat237" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat237" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 5, -541)
-hud = NodePath("../../HUD")
 
-[node name="Treat238" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat238" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 3, -546)
-hud = NodePath("../../HUD")
 
-[node name="Treat239" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat239" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 2, -549)
-hud = NodePath("../../HUD")
 
-[node name="Treat240" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat240" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 3, -553)
-hud = NodePath("../../HUD")
 
-[node name="Treat241" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat241" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 6, -558)
-hud = NodePath("../../HUD")
 
-[node name="Treat242" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat242" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 5, -562)
-hud = NodePath("../../HUD")
 
-[node name="Treat243" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat243" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 6, -565)
-hud = NodePath("../../HUD")
 
-[node name="Treat244" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat244" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 5, -570)
-hud = NodePath("../../HUD")
 
-[node name="Treat245" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat245" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 7, -573)
-hud = NodePath("../../HUD")
 
-[node name="Treat246" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat246" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, -577)
-hud = NodePath("../../HUD")
 
-[node name="Treat247" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat247" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 7, -581)
-hud = NodePath("../../HUD")
 
-[node name="Treat248" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat248" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 5, -585)
-hud = NodePath("../../HUD")
 
-[node name="Treat249" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat249" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 5, -594)
-hud = NodePath("../../HUD")
 
-[node name="Treat250" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat250" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 4, -600)
-hud = NodePath("../../HUD")
 
-[node name="Treat251" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat251" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 6, -604)
-hud = NodePath("../../HUD")
 
-[node name="Treat252" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat252" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 4, -610)
-hud = NodePath("../../HUD")
 
-[node name="Treat253" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat253" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 6, -615)
-hud = NodePath("../../HUD")
 
-[node name="Treat254" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat254" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 4, -620)
-hud = NodePath("../../HUD")
 
-[node name="Treat255" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat255" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 3, -623)
-hud = NodePath("../../HUD")
 
-[node name="Treat256" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat256" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 5, -629)
-hud = NodePath("../../HUD")
 
-[node name="Treat257" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat257" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 1, -636)
-hud = NodePath("../../HUD")
 
-[node name="Treat258" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat258" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 3, -642)
-hud = NodePath("../../HUD")
 
-[node name="Treat259" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat259" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -647)
-hud = NodePath("../../HUD")
 
-[node name="Treat260" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat260" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -2, -651)
-hud = NodePath("../../HUD")
 
-[node name="Treat261" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat261" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -3, -655)
-hud = NodePath("../../HUD")
 
-[node name="Treat262" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat262" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, -2, -659)
-hud = NodePath("../../HUD")
 
-[node name="Treat263" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat263" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -663)
-hud = NodePath("../../HUD")
 
-[node name="Treat264" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat264" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 3, -668)
-hud = NodePath("../../HUD")
 
-[node name="Treat265" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat265" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -674)
-hud = NodePath("../../HUD")
 
-[node name="Treat266" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat266" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 2, -677)
-hud = NodePath("../../HUD")
 
-[node name="Treat267" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat267" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -682)
-hud = NodePath("../../HUD")
 
-[node name="Treat268" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat268" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 2, -687)
-hud = NodePath("../../HUD")
 
-[node name="Treat269" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat269" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42, 0, -691)
-hud = NodePath("../../HUD")
 
-[node name="Treat270" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat270" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 2, -695)
-hud = NodePath("../../HUD")
 
-[node name="Treat271" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat271" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0, -698)
-hud = NodePath("../../HUD")
 
-[node name="Treat272" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat272" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 2, -701)
-hud = NodePath("../../HUD")
 
-[node name="Treat273" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat273" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -704)
-hud = NodePath("../../HUD")
 
-[node name="Treat274" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat274" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 2, -712)
-hud = NodePath("../../HUD")
 
-[node name="Treat275" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat275" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -718)
-hud = NodePath("../../HUD")
 
-[node name="Treat276" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat276" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 4, -724)
-hud = NodePath("../../HUD")
 
-[node name="Treat277" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat277" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 2, -730)
-hud = NodePath("../../HUD")
 
-[node name="Treat278" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat278" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 3, -735)
-hud = NodePath("../../HUD")
 
-[node name="Treat279" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat279" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 0, -740)
-hud = NodePath("../../HUD")
 
-[node name="Treat280" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat280" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, -2, -744)
-hud = NodePath("../../HUD")
 
-[node name="Treat281" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat281" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, -2, -750)
-hud = NodePath("../../HUD")
 
-[node name="Treat283" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat283" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, -754)
-hud = NodePath("../../HUD")
 
-[node name="Treat450" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat450" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 2, -758)
-hud = NodePath("../../HUD")
 
-[node name="Treat284" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat284" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 4, -761)
-hud = NodePath("../../HUD")
 
-[node name="Treat285" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat285" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 2, -768)
-hud = NodePath("../../HUD")
 
-[node name="Treat286" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat286" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 2, -774)
-hud = NodePath("../../HUD")
 
-[node name="Treat287" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat287" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 5, -774)
-hud = NodePath("../../HUD")
 
-[node name="Treat288" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat288" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 3, -774)
-hud = NodePath("../../HUD")
 
-[node name="Treat451" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat451" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 3, -774)
-hud = NodePath("../../HUD")
 
-[node name="Treat289" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat289" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 5, -778)
-hud = NodePath("../../HUD")
 
-[node name="Treat290" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat290" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -54, 2, -784)
-hud = NodePath("../../HUD")
 
-[node name="Treat291" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat291" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47, 5, -792)
-hud = NodePath("../../HUD")
 
-[node name="Treat292" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat292" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41, 6, -795)
-hud = NodePath("../../HUD")
 
-[node name="Treat293" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat293" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 5, -796)
-hud = NodePath("../../HUD")
 
-[node name="Treat294" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat294" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 5, -798)
-hud = NodePath("../../HUD")
 
-[node name="Treat295" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat295" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33, 8, -804)
-hud = NodePath("../../HUD")
 
-[node name="Treat296" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat296" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 5, -810)
-hud = NodePath("../../HUD")
 
-[node name="Treat297" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat297" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 7, -813)
-hud = NodePath("../../HUD")
 
-[node name="Treat298" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat298" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 5, -817)
-hud = NodePath("../../HUD")
 
-[node name="Treat299" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat299" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 7, -821)
-hud = NodePath("../../HUD")
 
-[node name="Treat300" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat300" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 5, -824)
-hud = NodePath("../../HUD")
 
-[node name="Treat301" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat301" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 8, -830)
-hud = NodePath("../../HUD")
 
-[node name="Treat302" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat302" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 5, -835)
-hud = NodePath("../../HUD")
 
-[node name="Treat303" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat303" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 3, -839)
-hud = NodePath("../../HUD")
 
-[node name="Treat304" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat304" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 2, -843)
-hud = NodePath("../../HUD")
 
-[node name="Treat305" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat305" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 4, -849)
-hud = NodePath("../../HUD")
 
-[node name="Treat306" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat306" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 7, -855)
-hud = NodePath("../../HUD")
 
-[node name="Treat307" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat307" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 10, -860)
-hud = NodePath("../../HUD")
 
-[node name="Treat149" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat149" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -540)
-hud = NodePath("../../HUD")
 
-[node name="Treat150" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat150" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -544)
-hud = NodePath("../../HUD")
 
-[node name="Treat151" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat151" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -548)
-hud = NodePath("../../HUD")
 
-[node name="Treat152" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat152" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -552)
-hud = NodePath("../../HUD")
 
-[node name="Treat153" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat153" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -556)
-hud = NodePath("../../HUD")
 
-[node name="Treat154" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat154" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -560)
-hud = NodePath("../../HUD")
 
-[node name="Treat155" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat155" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -564)
-hud = NodePath("../../HUD")
 
-[node name="Treat156" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat156" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -568)
-hud = NodePath("../../HUD")
 
-[node name="Treat157" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat157" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -573)
-hud = NodePath("../../HUD")
 
-[node name="Treat158" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat158" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -578)
-hud = NodePath("../../HUD")
 
-[node name="Treat159" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat159" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -582)
-hud = NodePath("../../HUD")
 
-[node name="Treat160" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat160" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -590)
-hud = NodePath("../../HUD")
 
-[node name="Treat161" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat161" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -586)
-hud = NodePath("../../HUD")
 
-[node name="Treat162" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat162" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -595)
-hud = NodePath("../../HUD")
 
-[node name="Treat163" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat163" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10, -602)
-hud = NodePath("../../HUD")
 
-[node name="Treat164" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat164" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -610)
-hud = NodePath("../../HUD")
 
-[node name="Treat165" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat165" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -618)
-hud = NodePath("../../HUD")
 
-[node name="Treat166" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat166" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10, -626)
-hud = NodePath("../../HUD")
 
-[node name="Treat167" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat167" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 10, -634)
-hud = NodePath("../../HUD")
 
-[node name="Treat168" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat168" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, -642)
-hud = NodePath("../../HUD")
 
-[node name="Treat169" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat169" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 10, -650)
-hud = NodePath("../../HUD")
 
-[node name="Treat170" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat170" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 10, -658)
-hud = NodePath("../../HUD")
 
-[node name="Treat171" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat171" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 10, -666)
-hud = NodePath("../../HUD")
 
-[node name="Treat172" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat172" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 11, -606)
-hud = NodePath("../../HUD")
 
-[node name="Treat173" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat173" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 11, -622)
-hud = NodePath("../../HUD")
 
-[node name="Treat174" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat174" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -638)
-hud = NodePath("../../HUD")
 
-[node name="Treat175" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat175" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 11, -654)
-hud = NodePath("../../HUD")
 
-[node name="Treat176" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat176" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 11, -670)
-hud = NodePath("../../HUD")
 
-[node name="Treat177" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat177" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -674)
-hud = NodePath("../../HUD")
 
-[node name="Treat178" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat178" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 10, -682)
-hud = NodePath("../../HUD")
 
-[node name="Treat179" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat179" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 11, -686)
-hud = NodePath("../../HUD")
 
-[node name="Treat180" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat180" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -692)
-hud = NodePath("../../HUD")
 
-[node name="Treat181" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat181" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 11, -698)
-hud = NodePath("../../HUD")
 
-[node name="Treat182" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat182" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 10, -702)
-hud = NodePath("../../HUD")
 
-[node name="Treat183" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat183" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 10, -710)
-hud = NodePath("../../HUD")
 
-[node name="Treat184" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat184" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 11, -714)
-hud = NodePath("../../HUD")
 
-[node name="Treat185" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat185" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -720)
-hud = NodePath("../../HUD")
 
-[node name="Treat186" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat186" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -727)
-hud = NodePath("../../HUD")
 
-[node name="Treat187" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat187" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11, -732)
-hud = NodePath("../../HUD")
 
-[node name="Treat188" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat188" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, -736)
-hud = NodePath("../../HUD")
 
-[node name="Treat189" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat189" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, -740)
-hud = NodePath("../../HUD")
 
-[node name="Treat190" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat190" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -744)
-hud = NodePath("../../HUD")
 
-[node name="Treat191" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat191" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -750)
-hud = NodePath("../../HUD")
 
-[node name="Treat192" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat192" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 17, -756)
-hud = NodePath("../../HUD")
 
-[node name="Treat193" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat193" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 17, -766)
-hud = NodePath("../../HUD")
 
-[node name="Treat220" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat220" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 18, -761)
-hud = NodePath("../../HUD")
 
-[node name="Treat221" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat221" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 18, -772)
-hud = NodePath("../../HUD")
 
-[node name="Treat222" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat222" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 18, -784)
-hud = NodePath("../../HUD")
 
-[node name="Treat194" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat194" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 17, -778)
-hud = NodePath("../../HUD")
 
-[node name="Treat195" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat195" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 17, -791)
-hud = NodePath("../../HUD")
 
-[node name="Treat196" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat196" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 16, -800)
-hud = NodePath("../../HUD")
 
-[node name="Treat197" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat197" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 18, -814)
-hud = NodePath("../../HUD")
 
-[node name="Treat198" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat198" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 21, -814)
-hud = NodePath("../../HUD")
 
-[node name="Treat199" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat199" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 19, -812)
-hud = NodePath("../../HUD")
 
-[node name="Treat200" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat200" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 21, -807)
-hud = NodePath("../../HUD")
 
-[node name="Treat201" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat201" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 19, -801)
-hud = NodePath("../../HUD")
 
-[node name="Treat202" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat202" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 21, -798)
-hud = NodePath("../../HUD")
 
-[node name="Treat203" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat203" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 23, -798)
-hud = NodePath("../../HUD")
 
-[node name="Treat204" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat204" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 22, -798)
-hud = NodePath("../../HUD")
 
-[node name="Treat205" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat205" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 20, -798)
-hud = NodePath("../../HUD")
 
-[node name="Treat206" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat206" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 20, -804)
-hud = NodePath("../../HUD")
 
-[node name="Treat207" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat207" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 20, -812)
-hud = NodePath("../../HUD")
 
-[node name="Treat208" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat208" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 20, -824)
-hud = NodePath("../../HUD")
 
-[node name="Treat228" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat228" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 21, -818)
-hud = NodePath("../../HUD")
 
-[node name="Treat209" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat209" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 22, -830)
-hud = NodePath("../../HUD")
 
-[node name="Treat210" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat210" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 25, -841)
-hud = NodePath("../../HUD")
 
-[node name="Treat231" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat231" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 22, -835)
-hud = NodePath("../../HUD")
 
-[node name="Treat230" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat230" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 24, -847)
-hud = NodePath("../../HUD")
 
-[node name="Treat211" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat211" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 30, -855)
-hud = NodePath("../../HUD")
 
-[node name="Treat213" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat213" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 31, -858)
-hud = NodePath("../../HUD")
 
-[node name="Treat214" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat214" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 29, -861)
-hud = NodePath("../../HUD")
 
-[node name="Treat215" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat215" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 25, -863)
-hud = NodePath("../../HUD")
 
-[node name="Treat229" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat229" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 20, -864)
-hud = NodePath("../../HUD")
 
-[node name="Treat216" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat216" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 12, -863)
-hud = NodePath("../../HUD")
 
-[node name="Treat217" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat217" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 8, -868)
-hud = NodePath("../../HUD")
 
-[node name="Treat218" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat218" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 5, -873)
-hud = NodePath("../../HUD")
 
-[node name="Treat219" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat219" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 3, -878)
-hud = NodePath("../../HUD")
 
-[node name="Treat212" parent="Treats" node_paths=PackedStringArray("hud") instance=ExtResource("13_4ccun")]
+[node name="Treat212" parent="Treats" instance=ExtResource("13_4ccun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 28, -852)
-hud = NodePath("../../HUD")
+
+[node name="SpecialTreats" type="Node3D" parent="."]
+
+[node name="PlaceHolderItem1" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -369)
+
+[node name="PlaceHolderItem2" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, -496)
+
+[node name="PlaceHolderItem3" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, -750)
