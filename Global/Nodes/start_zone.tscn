@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://8yjijtucm5t1" path="res://Global/Scripts/StartZone.cs" id="1_d3ovh"]
 [ext_resource type="AudioStream" uid="uid://met3r8c70njc" path="res://AudioTracks/Soundeffect/kenney_impact-sounds/Audio/impactBell_heavy_000.ogg" id="2_krv0v"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_krv0v"]
-height = 0.5
-radius = 15.0
+[sub_resource type="SphereShape3D" id="SphereShape3D_krv0v"]
+radius = 2.0
 
 [node name="StartZone" type="Area3D"]
 collision_layer = 512
@@ -13,9 +12,9 @@ script = ExtResource("1_d3ovh")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_krv0v")
+shape = SubResource("SphereShape3D_krv0v")
 
 [node name="SoundStart" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_krv0v")
 
-[connection signal="body_entered" from="." to="." method="OnStartZoneEntered"]
+[connection signal="body_exited" from="." to="." method="OnStartZoneExited"]

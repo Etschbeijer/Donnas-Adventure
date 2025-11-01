@@ -45,19 +45,16 @@ transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 3, -891)
 [node name="StartZones" type="Node3D" parent="."]
 
 [node name="StartZone1" parent="StartZones" instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 18)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4, 22)
 
 [node name="StartZone2" parent="StartZones" instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -182)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4, -184)
 
 [node name="StartZone3" parent="StartZones" instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -188)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4, -383)
 
 [node name="StartZone4" parent="StartZones" instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -381)
-
-[node name="StartZone5" parent="StartZones" instance=ExtResource("4_lpr52")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, -387)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4, -531)
 
 [node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud") instance=ExtResource("6_lpr52")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 22)
@@ -69,12 +66,12 @@ Hud = NodePath("../HUD")
 
 [node name="Checkpoint1" parent="CheckpointManager" instance=ExtResource("14_ef54h")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3.8, -185)
-PlayerSpawnPosition = Vector3(0, 3.8, -184)
+PlayerSpawnPosition = Vector3(0, 4, -184)
 PlayerSpawnRotation = Vector3(0, -180, 0)
 
 [node name="Checkpoint2" parent="CheckpointManager" instance=ExtResource("14_ef54h")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3.8, -384)
-PlayerSpawnPosition = Vector3(0, 3.8, -383)
+PlayerSpawnPosition = Vector3(0, 4, -383)
 PlayerSpawnRotation = Vector3(0, -180, 0)
 
 [node name="Checkpoint3" parent="CheckpointManager" instance=ExtResource("14_ef54h")]

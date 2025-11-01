@@ -16,8 +16,8 @@ public partial class Treat : Area3D
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
-    AnimationPlayer animationPlayer;
     Global global;
+    AnimationPlayer animationPlayer;
 
     AudioStreamPlayer3D audioPlayer;
 

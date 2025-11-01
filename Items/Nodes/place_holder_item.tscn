@@ -65,3 +65,4 @@ stream = ExtResource("3_30vvh")
 bus = &"SFX"
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationPlayerAnimationFinished"]
