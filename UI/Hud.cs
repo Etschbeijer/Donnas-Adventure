@@ -1,5 +1,9 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 public partial class Hud : CanvasLayer
 {
@@ -10,6 +14,10 @@ public partial class Hud : CanvasLayer
     public Label LabelTutorial;
 
     public TextureProgressBar TextureProgressBar;
+
+    bool isDisplayingTutorial = false;
+
+    Queue<(string text, float time)> tutorialQueue = new Queue<(string, float)>();
 
     Global global;
 
@@ -69,15 +77,34 @@ public partial class Hud : CanvasLayer
         LabelLifes.Text = lifes.ToString();
     }
 
-    public async void UpdateTutorial(string text, float time = 3f)
+    public void UpdateTutorial(string text, float time = 3f)
     {
-        panelTutorial.Show();
-        LabelTutorial.Text = text;
+        tutorialQueue.Enqueue((text, time));
 
-        var timer = GetTree().CreateTimer(time);
-        await ToSignal(timer, Timer.SignalName.Timeout);
+        if (!isDisplayingTutorial)
+        {
+            displayTutorialAsync();
+        }
+    }
 
-        panelTutorial.Hide();
-        LabelTutorial.Text = "";
+    private async Task displayTutorialAsync()
+    {
+        isDisplayingTutorial = true;
+
+        while (tutorialQueue.Count > 0)
+        {
+            var (text, time) = tutorialQueue.Dequeue();
+
+            panelTutorial.Show();
+            LabelTutorial.Text = text;
+
+            var timer = GetTree().CreateTimer(time);
+            await ToSignal(timer, Timer.SignalName.Timeout);
+
+            panelTutorial.Hide();
+            LabelTutorial.Text = "";
+        }
+
+        isDisplayingTutorial = false;
     }
 }
