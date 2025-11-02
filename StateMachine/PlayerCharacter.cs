@@ -542,8 +542,8 @@ public partial class PlayerCharacter : CharacterBody3D
         }
         else
         {
-            var forward = GlobalTransform.Basis.Z;
-            var cloudPosition = Position + forward * 0.5f;
+            var moveDir = (-GlobalTransform.Basis.X * InputDir.X + -GlobalTransform.Basis.Z * InputDir.Y).Normalized();
+            var cloudPosition = Position + moveDir * 0.5f;
 
             Global.CreateGrassExplosion(cloudPosition, scaling);
         }

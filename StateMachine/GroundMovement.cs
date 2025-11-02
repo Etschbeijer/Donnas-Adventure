@@ -71,20 +71,76 @@ public partial class GroundMovement : PlayerState
     public void PlayMovementAnimation()
     {
         //Play animation
-        if (Player.MovementSpeed < 3)
+        if (Player.MovementSpeed > 6)
         {
-            Player.AnimationPlayer.Play("Walk_Forward", 0.1);
-            Player.ControlTrusters(false);
+            PlaySkateAnimation();
         }
-        else if (Player.MovementSpeed <= 6)
+        else
         {
-            Player.AnimationPlayer.Play("Run", 0.1);
-            Player.ControlTrusters(false);
+            PlayWalkAnimation();
+        }
+    }
+
+    public void PlaySkateAnimation()
+    {
+        Player.ControlTrusters(true);
+
+        if (Player.InputDir.X < 0)
+        {
+            Player.AnimationPlayer.Play("Skate_LeftHand", 0.1);
+        }
+        else if (Player.InputDir.X > 0)
+        {
+            Player.AnimationPlayer.Play("Skate_RightHand", 0.1);
         }
         else
         {
             Player.AnimationPlayer.Play("Skate", 0.1);
-            Player.ControlTrusters(true);
+        }
+    }
+
+    public void PlayWalkAnimation()
+    {
+        Player.ControlTrusters(false);
+        if (Player.MovementSpeed <= 3)
+        {
+            DetermineWalkAnimation();
+        }
+        else
+        {
+            DetermineRunAnimation();
+        }
+    }
+
+    public void DetermineWalkAnimation()
+    {
+        if(Player.InputDir.X < 0)
+        {
+            Player.AnimationPlayer.Play("Strafe_Left", 0.1);
+        }
+        else if (Player.InputDir.X > 0)
+        {
+            Player.AnimationPlayer.Play("Strafe_Right", 0.1);
+        }
+        else
+        {
+            Player.AnimationPlayer.Play("Walk_Forward", 0.1);
+        }
+    }
+
+    public void DetermineRunAnimation()
+    {
+        if (Player.InputDir.X < 0)
+        {
+            Player.AnimationPlayer.Play("Strafe_Left", 0.1, 1.2f);
+        }
+        else if (Player.InputDir.X > 0)
+        {
+            Player.AnimationPlayer.Play("Strafe_Right", 0.1, 1.2f);
+        }
+        else
+        {
+            Player.AnimationPlayer.Play("Run", 0.1);
         }
     }
 
