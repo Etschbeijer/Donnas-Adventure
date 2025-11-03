@@ -828,7 +828,7 @@ public partial class PlayerCharacter : CharacterBody3D
             TopSpeedTimer = 5.5f;
         }
 
-        if(IsHurt || IsOnWall() || InputDir.Y >= 0)
+        if(IsHurt || (IsOnWall() && WallDetector.IsColliding()) || InputDir.Y >= 0)
         {
             hasTopSpeed = false;
             TopSpeedTimer = 0;
