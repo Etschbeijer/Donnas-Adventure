@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://coo5u5m3mwehp" path="res://Menu/Scripts/MenuSettingsSound.cs" id="1_jrtae"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_2v02v"]
-[ext_resource type="Script" uid="uid://d1y8hiwsiyko" path="res://Menu/Nodes/VolumeSliders.cs" id="3_783fd"]
+[ext_resource type="Script" uid="uid://d1y8hiwsiyko" path="res://Menu/Scripts/VolumeSliders.cs" id="3_783fd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrtae"]
 bg_color = Color(0.26146, 0.562342, 0.212165, 1)
@@ -120,11 +120,14 @@ color = Color(0.335211, 0.754964, 0.287311, 1)
 
 [node name="LabelTitle" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 64.0
+offset_right = 256.0
+offset_bottom = 192.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -137,11 +140,18 @@ text = "Soundmanager"
 horizontal_alignment = 1
 
 [node name="VolumeSliders" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 192.0
-offset_right = 792.0
-offset_bottom = 238.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -220.0
+offset_right = 224.0
+offset_bottom = -74.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("3_783fd")
 
 [node name="LabelMaster" type="Label" parent="VolumeSliders"]
@@ -272,17 +282,17 @@ metadata/_edit_group_ = true
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -88.0
-offset_top = 60.0
-offset_right = 148.0
-offset_bottom = 376.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -424.0
+offset_right = 116.0
+offset_bottom = -184.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="ButtonMenuReset" type="Button" parent="Buttons"]
 layout_mode = 2

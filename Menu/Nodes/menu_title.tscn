@@ -72,11 +72,14 @@ color = Color(0.335211, 0.754964, 0.287311, 1)
 
 [node name="LabelTitle" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 192.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -102,16 +105,16 @@ texture = ExtResource("2_8mqsw")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 6
+anchor_left = 1.0
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 336.0
-offset_top = -140.0
-offset_right = 515.0
-offset_bottom = 256.0
-grow_horizontal = 2
+offset_left = -376.0
+offset_top = -108.0
+offset_right = -192.0
+offset_bottom = 292.0
+grow_horizontal = 0
 grow_vertical = 2
 
 [node name="ButtonPlay" type="Button" parent="Buttons"]
