@@ -85,7 +85,11 @@ public partial class GroundMovement : PlayerState
     {
         Player.ControlTrusters(true);
 
-        if (Player.InputDir.X < 0)
+        if (Player.MovementSpeed > 8)
+        {
+            Player.AnimationPlayer.Play("Skate_HandsBack", 0.1, 1.2f);
+        }
+        else if (Player.InputDir.X < 0)
         {
             Player.AnimationPlayer.Play("Skate_LeftHand", 0.1);
         }
@@ -141,18 +145,6 @@ public partial class GroundMovement : PlayerState
         else
         {
             Player.AnimationPlayer.Play("Run", 0.1);
-        }
-    }
-
-    private void DetermineLocomotionAnimation(Vector3 mousePosition)
-    {
-        if (mousePosition.Z > Player.GlobalPosition.Z)
-        {
-            Player.AnimationTree.Set("parameters/IWR/blend_position", new Vector2(-Player.Velocity.X, Player.Velocity.Z) / Player.MovementSpeed);
-        }
-        else
-        {
-            Player.AnimationTree.Set("parameters/IWR/blend_position", new Vector2(Player.Velocity.X, -Player.Velocity.Z) / Player.MovementSpeed);
         }
     }
 }

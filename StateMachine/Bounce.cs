@@ -22,6 +22,9 @@ public partial class Bounce : PlayerState
 
         Player.PlayerVelocity.Y = Player.JumpVelocity * 0.7f;
 
+        Player.TopSpeedTimer += 1f;
+        Player.UpdateSpeedGauge();
+
         startJumping = true;
     }
 

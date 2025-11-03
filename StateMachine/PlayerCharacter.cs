@@ -12,7 +12,13 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export]
     public float RunSpeed = 5f;
     [Export]
-    public float TopSpeed = 8f;
+    public float HighSpeed = 8f;
+    [Export]
+    public float TopSpeed = 10f;
+    [Export]
+    public float TopSpeedTimer = 0f;
+    [Export]
+    public float TopSpeedThresholdTime = 5f;
     [Export]
     public float JumpTime { get; set; } = 0.35f;
     [Export]
@@ -102,8 +108,9 @@ public partial class PlayerCharacter : CharacterBody3D
 
     float blinkInterval;
 
-    bool isBlinking = false;
     bool isDead = false;
+    bool isBlinking = false;
+    bool hasTopSpeed = false;
 
     RayCast3D groundDetector;
 
@@ -114,31 +121,31 @@ public partial class PlayerCharacter : CharacterBody3D
 
     Transform3D xTransform;
 
-    RandomNumberGenerator rng = new RandomNumberGenerator();
-
-    AudioStreamPlayer3D soundJump;
-    AudioStreamPlayer3D soundDoubleJump;
-    AudioStreamPlayer3D soundDrop;
-    AudioStreamPlayer3D soundGetHit;
-    AudioStreamPlayer3D soundLandOnGrass;
-    AudioStreamPlayer3D soundWalkOnGrass;
-    AudioStreamPlayer3D soundSkate;
-
-    
     Node trails;
 
-    Node3D cameraTarget;
-    Node3D rigDonna;
     Node3D sounds;
+    Node3D rigDonna;
+    Node3D cameraTarget;
 
     Node3D[] thrusters;
     Node3D[] footLightTrails;
 
+    Area3D[] hitboxes;
+    Area3D[] hurtboxes;
+
     GpuParticles3D grassTrailL;
     GpuParticles3D grassTrailR;
 
-    Area3D[] hitboxes;
-    Area3D[] hurtboxes;
+    RandomNumberGenerator rng = new RandomNumberGenerator();
+
+    AudioStreamPlayer3D soundJump;
+    AudioStreamPlayer3D soundDrop;
+    AudioStreamPlayer3D soundSkate;
+    AudioStreamPlayer3D soundGetHit;
+    AudioStreamPlayer3D soundTopSpeed;
+    AudioStreamPlayer3D soundDoubleJump;
+    AudioStreamPlayer3D soundLandOnGrass;
+    AudioStreamPlayer3D soundWalkOnGrass;
 
     public override void _Ready()
     {
@@ -156,13 +163,14 @@ public partial class PlayerCharacter : CharacterBody3D
         meshInstance = rigDonna.GetNode<Skeleton3D>("Skeleton3D").GetNode<MeshInstance3D>("Donna_Head");
 
         sounds = GetNode<Node3D>("Sounds");
-        soundJump = sounds.GetNode<AudioStreamPlayer3D>("Jump");
-        soundDoubleJump = sounds.GetNode<AudioStreamPlayer3D>("DoubleJump");
         soundDrop = sounds.GetNode<AudioStreamPlayer3D>("Drop");
+        soundJump = sounds.GetNode<AudioStreamPlayer3D>("Jump");
+        soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
         soundGetHit = sounds.GetNode<AudioStreamPlayer3D>("GetHit");
+        soundTopSpeed = sounds.GetNode<AudioStreamPlayer3D>("TopSpeed");
+        soundDoubleJump = sounds.GetNode<AudioStreamPlayer3D>("DoubleJump");
         soundLandOnGrass = sounds.GetNode<AudioStreamPlayer3D>("LandOnGrass");
         soundWalkOnGrass = sounds.GetNode<AudioStreamPlayer3D>("WalkOnGrass");
-        soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
 
         trails = GetNode<Node3D>("Trails");
         grassTrailL = trails.GetNode<Node3D>("GrassTrailL").GetNode<GpuParticles3D>("GrassExplosion");
@@ -198,8 +206,8 @@ public partial class PlayerCharacter : CharacterBody3D
         ControlSaltoCollision(false);
 
         RunAcellerationRate = RunSpeed / RunAccelarationTime;
-        TopAcellerationRate = (TopSpeed - RunSpeed) / TopAccelarationTime;
-        ToRunDecelerationRate = (TopSpeed - RunSpeed) / ToRunDecelartionTime;
+        TopAcellerationRate = (HighSpeed - RunSpeed) / TopAccelarationTime;
+        ToRunDecelerationRate = (HighSpeed - RunSpeed) / ToRunDecelartionTime;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -224,6 +232,11 @@ public partial class PlayerCharacter : CharacterBody3D
                 ResetInvulnerability();
             }
         }
+
+        var factor = CalculateSpeedBoost();
+        DetermineTopSpeedConditions(factor, (float) delta);
+
+        HitWall();
 
         if (MovementSpeed > RunSpeed)
         {
@@ -363,9 +376,16 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void CalculateMovementSpeed(double delta)
     {
-        if (IsOnFloor() && Input.IsActionPressed("Accelerate"))
+        if (IsOnFloor() && Input.IsActionPressed("Accelerate") && !WallDetector.IsColliding())
         {
-            MovementSpeed = Mathf.MoveToward(MovementSpeed, TopSpeed, TopAcellerationRate * (float)delta);
+            if (TopSpeedTimer > TopSpeedThresholdTime)
+            {
+                MovementSpeed = Mathf.MoveToward(MovementSpeed, TopSpeed, TopAcellerationRate * (float)delta);
+            }
+            else
+            {
+                MovementSpeed = Mathf.MoveToward(MovementSpeed, HighSpeed, TopAcellerationRate * (float)delta);
+            }
         }
         else if (MovementSpeed >= RunSpeed)
         {
@@ -422,8 +442,8 @@ public partial class PlayerCharacter : CharacterBody3D
             //Reduce movement speed when not pressing a button
             var stopRate =
                 (MovementSpeed > 6f)
-                ? TopSpeed / TopAccelarationTime
-                : TopSpeed / RunAccelarationTime;
+                ? HighSpeed / TopAccelarationTime
+                : HighSpeed / RunAccelarationTime;
 
             MovementSpeed = Mathf.MoveToward(MovementSpeed, 0f, stopRate * (float)delta);
 
@@ -692,6 +712,12 @@ public partial class PlayerCharacter : CharacterBody3D
         soundWalkOnGrass.Play();
     }
 
+    public void PlaySoundTopSpeed()
+    {
+        soundTopSpeed.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        soundTopSpeed.Play();
+    }
+
     public void AddHealth()
     {
         CurrentHealth += 1;
@@ -747,5 +773,88 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         SpawnPoint = spawnPoint;
         SpawnRoration = spawnRotation;
+    }
+
+    public void HitWall()
+    {
+        if (MovementSpeed > 6f && WallDetector.IsColliding())
+        {
+            PlaySoundOnHit();
+            MovementSpeed = 0f;
+            Velocity = new Vector3(0f, Velocity.Y, 0f);
+        }
+    }
+
+    public float CalculateSpeedBoost()
+    {
+        if (groundDetector.IsColliding() && MovementSpeed > 6f)
+        {
+            var normal = groundDetector.GetCollisionNormal();
+            Vector3 forward = GlobalTransform.Basis.Z.Normalized();
+
+            Vector3 slopeDir = normal.Cross(normal.Cross(Vector3.Up)).Normalized();
+
+            float slopeAngle = Mathf.RadToDeg(Mathf.Acos(normal.Dot(Vector3.Up)));
+            float downHillDot = slopeDir.Dot(forward);
+
+            if (downHillDot > 0.5f && slopeAngle > 25f)
+            {
+                return 2f;
+            }
+            else if (downHillDot > 0.5f && slopeAngle > 25f)
+            {
+                return 0.5f;
+            }
+            else
+            {
+                return 1f;
+            }
+        }
+        else
+        {
+            return 1f;
+        }
+    }
+
+    public void DetermineTopSpeedConditions(float factor, float delta)
+    {
+        if (TopSpeedTimer < 0)
+        {
+            TopSpeedTimer = 0;
+        }
+        
+        if (TopSpeedTimer > 5.5f)
+        {
+            TopSpeedTimer = 5.5f;
+        }
+
+        if(IsHurt || IsOnWall() || InputDir.Y >= 0)
+        {
+            hasTopSpeed = false;
+            TopSpeedTimer = 0;
+            UpdateSpeedGauge();
+        }
+        
+        if(MovementSpeed >= 6f && TopSpeedTimer < 5.5f)
+        {
+            TopSpeedTimer += delta * factor;
+            UpdateSpeedGauge();
+
+            if (!hasTopSpeed && TopSpeedTimer >= TopSpeedThresholdTime)
+            {
+                hasTopSpeed = true;
+                PlaySoundTopSpeed();
+            }
+        }
+        else if (TopSpeedTimer > 0 && (IsOnFloor() || TimeSinceLeftFloor > 1.5f))
+        {
+            TopSpeedTimer -= delta;
+            UpdateSpeedGauge();
+        }
+    }
+
+    public void UpdateSpeedGauge()
+    {
+        Hud.UpdateSpeedGauge(TopSpeedTimer);
     }
 }

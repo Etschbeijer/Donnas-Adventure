@@ -9,9 +9,10 @@ public partial class Checkpoint : AnimatableBody3D
     [Export]
     public Vector3 PlayerSpawnRotation;
 
-    public AnimationPlayer AnimationPlayer { get; set; }
+    [Export]
+    public bool IsActive = false;
 
-    bool isActive = false;
+    public AnimationPlayer AnimationPlayer { get; set; }
 
     private float currentTime = 0f;
     private float totalTime = 0f;
@@ -41,27 +42,31 @@ public partial class Checkpoint : AnimatableBody3D
         var sceneTree = GetTree();
         var player = body as PlayerCharacter;
 
-        if (player != null && !isActive)
+        if (player != null)
         {
             PlaySoundCheckPointEntered();
+            player.TopSpeedTimer += 2f;
+            player.UpdateSpeedGauge();
 
-            isActive = true;
+            if (!IsActive)
+            {
+                IsActive = true;
 
-            var prupleMaterial = GD.Load<Material>("res://Materials/donna_flame.tres");
-            var blackOutlineMaterial = GD.Load<Material>("res://Materials/material_black_outline.tres");
+                var prupleMaterial = GD.Load<Material>("res://Materials/donna_flame.tres");
+                var blackOutlineMaterial = GD.Load<Material>("res://Materials/material_black_outline.tres");
 
-            prupleMaterial.NextPass = blackOutlineMaterial;
+                prupleMaterial.NextPass = blackOutlineMaterial;
 
-            ChangeMaterial(0, prupleMaterial);
+                ChangeMaterial(0, prupleMaterial);
 
-            player.SetSpawnParameters(PlayerSpawnPosition, new Vector3(normalizeDegrees(PlayerSpawnRotation.X), normalizeDegrees(PlayerSpawnRotation.Y), normalizeDegrees(PlayerSpawnRotation.Z)));
+                player.SetSpawnParameters(PlayerSpawnPosition, new Vector3(normalizeDegrees(PlayerSpawnRotation.X), normalizeDegrees(PlayerSpawnRotation.Y), normalizeDegrees(PlayerSpawnRotation.Z)));
+            }
+
+            AnimationPlayer.SpeedScale = 4f;
+            var timer = sceneTree.CreateTimer(1f);
+            await ToSignal(timer, Timer.SignalName.Timeout);
+            AnimationPlayer.SpeedScale = 1f;
         }
-
-        AnimationPlayer.SpeedScale = 4f;
-
-        var timer = sceneTree.CreateTimer(1f);
-        await ToSignal(timer, Timer.SignalName.Timeout);
-        AnimationPlayer.SpeedScale = 1f;
     }
 
     private float normalizeDegrees(float degree)

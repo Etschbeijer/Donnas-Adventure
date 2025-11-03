@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://xul2mr6me2xd" path="res://Items/Scripts/Treat.cs" id="1_gof5t"]
 [ext_resource type="ArrayMesh" uid="uid://cbeao1myxlxdd" path="res://Items/Models/TreatMesh.res" id="2_2cn0a"]
-[ext_resource type="AudioStream" uid="uid://crveqwfiaffy" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_2cn0a"]
+[ext_resource type="AudioStream" uid="uid://crveqwfiaffy" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_2cn0a"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2cn0a"]
 radius = 0.611301

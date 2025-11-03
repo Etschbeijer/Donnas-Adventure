@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://cuywxliftukgc"]
 
 [ext_resource type="Script" uid="uid://l402lejro4oi" path="res://Global/Scripts/SoundManager.cs" id="1_ve38c"]
-[ext_resource type="AudioStream" uid="uid://drgk8lsoo8hbx" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/Lose/Lose.wav" id="2_8744b"]
+[ext_resource type="AudioStream" uid="uid://drgk8lsoo8hbx" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Lose/Lose.wav" id="2_8744b"]
 [ext_resource type="AudioStream" uid="uid://c4p0ebpxidj8t" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/confirmation_001.ogg" id="3_2mo65"]
-[ext_resource type="AudioStream" uid="uid://c8f0wpogq8t0o" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Sound effects Mini Pack1.5/1up/1up4.wav" id="3_8744b"]
+[ext_resource type="AudioStream" uid="uid://c8f0wpogq8t0o" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up4.wav" id="3_8744b"]
 [ext_resource type="AudioStream" uid="uid://cpfk7mokl24s3" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/back_003.ogg" id="4_wob5h"]
 [ext_resource type="AudioStream" uid="uid://bnritx8ysif06" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/close_003.ogg" id="5_dauyj"]
 [ext_resource type="AudioStream" uid="uid://cn15g4t7dkxgt" path="res://AudioTracks/Soundeffect/kenney_interface-sounds/Audio/click_001.ogg" id="6_8w7i2"]

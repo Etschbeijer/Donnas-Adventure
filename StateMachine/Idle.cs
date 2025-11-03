@@ -90,8 +90,8 @@ public partial class Idle : PlayerState
             //Reduce movement speed when not pressing a button
             var stopRate =
                 (Player.MovementSpeed > 6f)
-                ? Player.TopSpeed / Player.TopAccelarationTime
-                : Player.TopSpeed / Player.RunAccelarationTime;
+                ? Player.HighSpeed / Player.TopAccelarationTime
+                : Player.HighSpeed / Player.RunAccelarationTime;
 
             Player.MovementSpeed = Mathf.MoveToward(Player.MovementSpeed, 0f, stopRate * (float)delta);
 
