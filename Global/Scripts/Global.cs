@@ -17,6 +17,8 @@ public partial class Global : Node
 
     public SaveData SaveData;
 
+    public Deathypes Deathypes;
+
     Node explosions;
 
     PackedScene grassExplosion;
@@ -124,5 +126,10 @@ public partial class Global : Node
             var explosions = instance.GetChildren().OfType<GpuParticles3D>().Where(explosion => explosion.Name.ToString().Contains("Explosion")).ToArray();
             FireExplosions(explosions);
         }
+    }
+
+    public void SetDeathType(Deathypes deathype)
+    {
+        Deathypes = deathype;
     }
 }

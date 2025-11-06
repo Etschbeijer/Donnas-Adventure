@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch3k83xv32swx"]
+[gd_scene load_steps=9 format=3 uid="uid://ch3k83xv32swx"]
 
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_7pqhn"]
 [ext_resource type="Script" uid="uid://briie8tlbg1lm" path="res://Menu/Scripts/MenuDefeat.cs" id="1_elvsx"]
-[ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="2_elvsx"]
+[ext_resource type="Texture2D" uid="uid://b3cuu8btn8opm" path="res://Images/Donnas/Donna_Death_Slimes.png" id="3_elvsx"]
+[ext_resource type="Texture2D" uid="uid://6t04y23qx75" path="res://Images/Donnas/Donna_Death_Dropping.png" id="4_otwlu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otwlu"]
 bg_color = Color(0.772549, 0.2, 0.380392, 1)
@@ -91,16 +92,31 @@ theme_override_font_sizes/font_size = 150
 text = "Game Over!"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="DeathBySlimes" type="TextureRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -64.0
-offset_right = 128.0
-offset_bottom = 64.0
+offset_top = -284.0
+offset_right = 1920.0
+offset_bottom = 796.0
 grow_vertical = 2
-texture = ExtResource("2_elvsx")
+texture = ExtResource("3_elvsx")
+
+[node name="DeathByDrop" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 48.0
+offset_top = -300.0
+offset_right = 1968.0
+offset_bottom = 780.0
+grow_vertical = 2
+rotation = -0.133147
+texture = ExtResource("4_otwlu")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1

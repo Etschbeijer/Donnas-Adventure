@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cienfqxbojf6o" path="res://Menu/Scripts/MenuTitle.cs" id="1_8mqsw"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_ef4cy"]
-[ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="2_8mqsw"]
+[ext_resource type="Texture2D" uid="uid://xda737f0wx7e" path="res://Images/Donnas/Donna_Run.png" id="3_8mqsw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
 bg_color = Color(0.26146, 0.562342, 0.212165, 1)
@@ -96,12 +96,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 64.0
-offset_top = -64.0
-offset_right = 192.0
-offset_bottom = 64.0
+offset_left = -512.0
+offset_top = -476.0
+offset_right = 1408.0
+offset_bottom = 612.0
 grow_vertical = 2
-texture = ExtResource("2_8mqsw")
+texture = ExtResource("3_8mqsw")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1

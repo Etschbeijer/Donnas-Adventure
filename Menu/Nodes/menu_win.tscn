@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq8c866l8i0d" path="res://Menu/Scripts/MenuWin.cs" id="2_jdqle"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
-[ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="3_jdqle"]
+[ext_resource type="Texture2D" uid="uid://cpdf4k3umk8lm" path="res://Images/Donnas/Donna_Win.png" id="3_vlnal"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr70"]
 bg_color = Color(0.384314, 0.113725, 0.537255, 1)
@@ -117,11 +117,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -100.0
-offset_right = 200.0
-offset_bottom = 100.0
+offset_left = -256.0
+offset_top = -468.0
+offset_right = 1664.0
+offset_bottom = 612.0
 grow_vertical = 2
-texture = ExtResource("3_jdqle")
+texture = ExtResource("3_vlnal")
 
 [node name="PanelTime" type="Panel" parent="."]
 layout_mode = 1
@@ -193,10 +194,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 320.0
-offset_top = -118.0
-offset_right = 556.0
-offset_bottom = 118.0
+offset_left = 512.0
+offset_top = 100.0
+offset_right = 768.0
+offset_bottom = 356.0
 grow_horizontal = 2
 grow_vertical = 2
 

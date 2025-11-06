@@ -3,13 +3,20 @@ using System;
 
 public partial class MenuDefeat : Control
 {
+    Global global;
     SoundManager soundManager;
+
+    TextureRect deathBySlimes;
+    TextureRect deathByDrop;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Get nodes
+        global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
+        deathByDrop = GetNode<TextureRect>("DeathByDrop");
+        deathBySlimes = GetNode<TextureRect>("DeathBySlimes");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -23,6 +30,15 @@ public partial class MenuDefeat : Control
         if (!soundManager.IsMusicProject2Marioish2DPlaying())
         {
             soundManager.PlayMusicProject2Marioish2D();
+        }
+
+        if (global.Deathypes == Deathypes.Slimes)
+        {
+            ShowDeathBySlimes();
+        }
+        else if (global.Deathypes == Deathypes.Drop)
+        {
+            ShowDeathByDrop();
         }
     }
 
@@ -45,5 +61,15 @@ public partial class MenuDefeat : Control
         await soundManager.PlaySoundExit();
 
         GetTree().Quit();
+    }
+
+    public void ShowDeathByDrop()
+    {
+        deathByDrop.Show();
+    }
+
+    public void ShowDeathBySlimes()
+    {
+        deathBySlimes.Show();
     }
 }

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bc8q08vpc0tk8" path="res://Images/Progressbars/ProgressBar.png" id="4_b1lf8"]
 [ext_resource type="Texture2D" uid="uid://c01vcvy1pbifw" path="res://Images/Progressbars/ProgressBarLayout.png" id="5_rnl6m"]
 [ext_resource type="Texture2D" uid="uid://dgwduonwek3gi" path="res://Images/Progressbars/ProgressBarFill.png" id="6_1ui3w"]
-[ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="7_0j753"]
+[ext_resource type="Texture2D" uid="uid://cp4p2nrmpggrf" path="res://Images/Icons/Donna_Face.png" id="7_0j753"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtv4n"]
 bg_color = Color(0, 0, 0, 0.498039)
@@ -197,10 +197,10 @@ horizontal_alignment = 1
 
 [node name="DonnasHeads" type="TextureRect" parent="PanelLife"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = 12.0
-offset_right = 72.0
-offset_bottom = 76.0
+offset_left = -16.0
+offset_top = 8.0
+offset_right = 120.0
+offset_bottom = 80.0
 texture = ExtResource("7_0j753")
 expand_mode = 1
 

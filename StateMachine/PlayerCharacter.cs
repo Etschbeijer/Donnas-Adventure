@@ -44,6 +44,8 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export]
     public int MaxHealth { get; set; } = 3;
     [Export]
+    public int CurrentHealth { get; set; } = 3;
+    [Export]
     public int Lifes { get; set; } = 3;
 
     [Export]
@@ -86,7 +88,6 @@ public partial class PlayerCharacter : CharacterBody3D
     public float TopAcellerationRate;
     public float ToRunDecelerationRate;
 
-    public int CurrentHealth { get; set; } = 3;
     public int HitStagger { get; set; } = 8;
 
     public AnimationTree AnimationTree { get; set; }
@@ -189,8 +190,6 @@ public partial class PlayerCharacter : CharacterBody3D
         originColour = (Color)meshInstance.GetActiveMaterial(0).NextPass.Get("albedo_color");
         damageColour = new Color(1f, 0f, 0f);
 
-        Lifes = 3;
-        CurrentHealth = 3;
         Hud.UpdateHealthbar(CurrentHealth);
         Hud.UpdateLifes(Lifes);
         SpawnPoint = Position;
@@ -643,6 +642,7 @@ public partial class PlayerCharacter : CharacterBody3D
         }
         else if(!IsInvulnerable)
         {
+            Global.SetDeathType(Deathypes.Slimes);
             IsHurt = true;
             IsInvulnerable = true;
         }
@@ -660,6 +660,8 @@ public partial class PlayerCharacter : CharacterBody3D
         {
             Respawn();
         }
+
+        Global.SetDeathType(Deathypes.Drop);
     }
 
     public void PlaySoundDoubleJump()
