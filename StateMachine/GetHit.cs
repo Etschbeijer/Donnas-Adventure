@@ -26,8 +26,8 @@ public partial class GetHit : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
-        if (!AnimationPlayer.IsPlaying())
-        {
+        //if (!AnimationPlayer.IsPlaying())
+        //{
             if (Player.IsOnFloor())
             {
                 if (Math.Abs(Player.GetInputDirection().Length()) == 0)
@@ -49,7 +49,7 @@ public partial class GetHit : PlayerState
                 Player.IsHurt = false;
                 StateMachine.TransitionTo(nameof(AirDropMovement));
             }
-        }
+        //}
     }
 
     public override void Update(double delta)
