@@ -35,6 +35,8 @@ public partial class PlayerCharacter : CharacterBody3D
     public float MouseSensitivity { get; set; } = 0.003f;
     [Export]
     public float CoyoteTime = 0.1f;
+    [Export]
+    public float JumpTimeThreshold = 1.5f;
 
     [Export]
     public double InvulnerabilityTimer = 1;
@@ -386,7 +388,7 @@ public partial class PlayerCharacter : CharacterBody3D
                 MovementSpeed = Mathf.MoveToward(MovementSpeed, HighSpeed, TopAcellerationRate * (float)delta);
             }
         }
-        else if (MovementSpeed >= RunSpeed)
+        else if (MovementSpeed >= HighSpeed)
         {
             MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, ToRunDecelerationRate * (float)delta);
         }
@@ -848,7 +850,7 @@ public partial class PlayerCharacter : CharacterBody3D
                 PlaySoundTopSpeed();
             }
         }
-        else if (TopSpeedTimer > 0 && (IsOnFloor() || TimeSinceLeftFloor > 1.5f))
+        else if (TopSpeedTimer > 0 && (IsOnFloor() || TimeSinceLeftFloor > JumpTimeThreshold))
         {
             TopSpeedTimer -= delta;
             UpdateSpeedGauge();

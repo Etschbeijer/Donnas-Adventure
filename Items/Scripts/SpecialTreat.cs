@@ -1,10 +1,13 @@
 using Godot;
 using System;
 
-public partial class PlaceHolderItem : Area3D
+public partial class SpecialTreat : Area3D
 {
     [Export]
-    public int Value = 10;
+    public int Value = 15;
+    [Export]
+    public TreatTypes TreatType;
+
 
     public Hud Hud;
 
@@ -28,7 +31,7 @@ public partial class PlaceHolderItem : Area3D
         global = GetNode<Global>("/root/Global");
 
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        audioPlayer = GetNode<AudioStreamPlayer3D>("SoundTreat");
+        audioPlayer = GetNode<AudioStreamPlayer3D>("SoundSpecialTreat");
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -54,15 +57,13 @@ public partial class PlaceHolderItem : Area3D
             audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
             audioPlayer.Play();
 
+            if (TreatType == TreatTypes.Cheese)
+            {
+                CollectedChees();
+            }
+
             await ToSignal(audioPlayer, AudioStreamPlayer3D.SignalName.Finished);
-            if (global.CollectedTreats == global.NumberOfTreats)
-            {
-                player.HasWon = true;
-            }
-            else
-            {
-                await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-            }
+            await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
         }
     }
 
@@ -77,5 +78,10 @@ public partial class PlaceHolderItem : Area3D
     public void Unload()
     {
         QueueFree();
+    }
+
+    public void CollectedChees()
+    {
+        Hud.ShowCheese();
     }
 }

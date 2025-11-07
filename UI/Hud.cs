@@ -7,10 +7,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 public partial class Hud : CanvasLayer
 {
-    public Label LabelTreats;
     public Label LabelTime;
-    public Label LabelHealth;
     public Label LabelLifes;
+    public Label LabelTreats;
+    public Label LabelHealth;
     public Label LabelTutorial;
 
     public TextureProgressBar Health;
@@ -27,6 +27,9 @@ public partial class Hud : CanvasLayer
     Panel panelSpeed;
     Panel panelTreats;
     Panel panelTutorial;
+    Panel panelSpecialTreats;
+
+    TextureRect textureCheese;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -39,6 +42,9 @@ public partial class Hud : CanvasLayer
         panelSpeed = GetNode<Panel>("PanelSpeed");
         panelTreats = GetNode<Panel>("PanelTreats");
         panelTutorial = GetNode<Panel>("PanelTutorial");
+        panelSpecialTreats = GetNode<Panel>("PanelSpecialTreats");
+
+        textureCheese = panelSpecialTreats.GetNode<TextureRect>("TextureCheese");
 
         LabelTime = panelTime.GetNode<Label>("LabelTime");
         LabelLifes = panelLife.GetNode<Label>("LabelLifes");
@@ -116,5 +122,10 @@ public partial class Hud : CanvasLayer
         }
 
         isDisplayingTutorial = false;
+    }
+
+    public void ShowCheese()
+    {
+        textureCheese.ShowBehindParent = false;
     }
 }

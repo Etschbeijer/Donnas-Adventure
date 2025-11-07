@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bincglc530w64"]
+[gd_scene load_steps=19 format=3 uid="uid://bincglc530w64"]
 
 [ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/hud.tscn" id="1_308c0"]
 [ext_resource type="Script" uid="uid://byvwficb4xf6c" path="res://Levels/Scripts/LevelTest.cs" id="1_k8tq5"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://fxchiasmiyoh" path="res://Items/Nodes/bone_treat.tscn" id="15_fep27"]
 [ext_resource type="PackedScene" uid="uid://bb106eqd6ylpm" path="res://Items/Nodes/place_holder_item.tscn" id="16_2tebo"]
 [ext_resource type="PackedScene" uid="uid://bpi6mjbvdnooy" path="res://Global/Nodes/tutorial_trigger.tscn" id="17_2maft"]
+[ext_resource type="PackedScene" uid="uid://bj784d8smoybv" path="res://Items/Nodes/cheese.tscn" id="17_gvuf6"]
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_k8tq5")
@@ -2131,17 +2132,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 29, -854)
 
 [node name="SpecialTreats" type="Node3D" parent="."]
 
-[node name="PlaceHolderItem1" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -369)
-Value = 15
-
 [node name="PlaceHolderItem2" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, -496)
-Value = 15
 
 [node name="PlaceHolderItem3" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, -750)
-Value = 15
+
+[node name="Cheese" parent="SpecialTreats" instance=ExtResource("17_gvuf6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, -368.5)
 
 [node name="Tutorials" type="Node3D" parent="."]
 

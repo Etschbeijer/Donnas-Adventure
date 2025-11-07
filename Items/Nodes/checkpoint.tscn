@@ -101,6 +101,13 @@ shape = SubResource("CylinderShape3D_njsvn")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_ikfxa")
 
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.18563e-11, 0.000499994)
+shape = SubResource("CylinderShape3D_njsvn")
+
 [node name="RingHolders" type="Node3D" parent="."]
 
 [node name="RingHolderTop" type="MeshInstance3D" parent="RingHolders"]
@@ -126,12 +133,5 @@ transform = Transform3D(4.37114e-08, -1.84607e-14, -1, -8.74228e-08, -4.83091, 0
 mesh = SubResource("TorusMesh_yt7ll")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_yt7ll")
-
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2.18563e-11, 0.000499994)
-shape = SubResource("CylinderShape3D_njsvn")
 
 [connection signal="body_entered" from="Area3D" to="." method="OnCheckpointEntered"]
