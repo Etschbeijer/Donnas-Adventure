@@ -30,6 +30,7 @@ public partial class Hud : CanvasLayer
     Panel panelSpecialTreats;
 
     TextureRect textureCheese;
+    TextureRect textureCookie;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -45,6 +46,7 @@ public partial class Hud : CanvasLayer
         panelSpecialTreats = GetNode<Panel>("PanelSpecialTreats");
 
         textureCheese = panelSpecialTreats.GetNode<TextureRect>("TextureCheese");
+        textureCookie = panelSpecialTreats.GetNode<TextureRect>("TextureCookie");
 
         LabelTime = panelTime.GetNode<Label>("LabelTime");
         LabelLifes = panelLife.GetNode<Label>("LabelLifes");
@@ -127,5 +129,10 @@ public partial class Hud : CanvasLayer
     public void ShowCheese()
     {
         textureCheese.ShowBehindParent = false;
+    }
+
+    public void ShowCookie()
+    {
+        textureCookie.ShowBehindParent = false;
     }
 }

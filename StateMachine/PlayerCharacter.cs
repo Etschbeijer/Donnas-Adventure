@@ -388,7 +388,7 @@ public partial class PlayerCharacter : CharacterBody3D
                 MovementSpeed = Mathf.MoveToward(MovementSpeed, HighSpeed, TopAcellerationRate * (float)delta);
             }
         }
-        else if (MovementSpeed >= HighSpeed)
+        else if (MovementSpeed >= HighSpeed && TimeSinceLeftFloor <= JumpTimeThreshold)
         {
             MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, ToRunDecelerationRate * (float)delta);
         }

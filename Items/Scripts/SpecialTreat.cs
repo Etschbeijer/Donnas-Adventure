@@ -62,6 +62,16 @@ public partial class SpecialTreat : Area3D
                 CollectedChees();
             }
 
+            if (TreatType == TreatTypes.Cookie)
+            {
+                CollectedCookie();
+            }
+
+            if (TreatType == TreatTypes.Meat)
+            {
+                CollectedMeat();
+            }
+
             await ToSignal(audioPlayer, AudioStreamPlayer3D.SignalName.Finished);
             await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
         }
@@ -83,5 +93,15 @@ public partial class SpecialTreat : Area3D
     public void CollectedChees()
     {
         Hud.ShowCheese();
+    }
+
+    public void CollectedCookie()
+    {
+        Hud.ShowCookie();
+    }
+
+    public void CollectedMeat()
+    {
+        //Hud.ShowCookie();
     }
 }
