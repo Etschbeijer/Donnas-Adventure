@@ -16,19 +16,20 @@ public partial class GetHit : PlayerState
         Player.ReduceHealth();
 
         Player.PlaySoundOnHit();
-
-        if (Player.CurrentHealth <= 0)
-        {
-            Player.ReduceLife();
-            Player.Hud.UpdateLifes(Player.Lifes);
-        }
     }
 
     public override void PhysicsUpdate(double delta)
     {
+        if (!AnimationPlayer.IsPlaying() && Player.CurrentHealth <= 0)
+        {
+            Player.ReduceLife();
+            Player.IsHurt = false;
+            Player.Hud.UpdateLifes(Player.Lifes);
+        }
+
         //if (!AnimationPlayer.IsPlaying())
         //{
-            if (Player.IsOnFloor())
+        if (Player.IsOnFloor())
             {
                 if (Math.Abs(Player.GetInputDirection().Length()) == 0)
                 {

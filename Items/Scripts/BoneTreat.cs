@@ -38,6 +38,8 @@ public partial class BoneTreat : Area3D
             player.PlayerVelocity = Vector3.Zero;
             player.IsInvulnerable = true;
 
+            global.StopTimer();
+
             SetCollisionLayerValue(3, false);
             SetCollisionMaskValue(1, false);
 
