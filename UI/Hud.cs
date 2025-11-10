@@ -29,6 +29,7 @@ public partial class Hud : CanvasLayer
     Panel panelTutorial;
     Panel panelSpecialTreats;
 
+    TextureRect textureMeat;
     TextureRect textureCheese;
     TextureRect textureCookie;
 
@@ -45,9 +46,10 @@ public partial class Hud : CanvasLayer
         panelTutorial = GetNode<Panel>("PanelTutorial");
         panelSpecialTreats = GetNode<Panel>("PanelSpecialTreats");
 
+        textureMeat = panelSpecialTreats.GetNode<TextureRect>("TextureMeat");
         textureCheese = panelSpecialTreats.GetNode<TextureRect>("TextureCheese");
         textureCookie = panelSpecialTreats.GetNode<TextureRect>("TextureCookie");
-
+        
         LabelTime = panelTime.GetNode<Label>("LabelTime");
         LabelLifes = panelLife.GetNode<Label>("LabelLifes");
         LabelHealth = panelLife.GetNode<Label>("LabelHealth");;
@@ -134,5 +136,10 @@ public partial class Hud : CanvasLayer
     public void ShowCookie()
     {
         textureCookie.ShowBehindParent = false;
+    }
+
+    public void ShowMeat()
+    {
+        textureMeat.ShowBehindParent = false;
     }
 }

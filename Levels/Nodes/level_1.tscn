@@ -15,10 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://kdhgdir770ai" path="res://Items/Nodes/treat.tscn" id="13_4ccun"]
 [ext_resource type="PackedScene" uid="uid://dqg6hglokk4av" path="res://Items/Nodes/checkpoint.tscn" id="14_ef54h"]
 [ext_resource type="PackedScene" uid="uid://fxchiasmiyoh" path="res://Items/Nodes/bone_treat.tscn" id="15_fep27"]
-[ext_resource type="PackedScene" uid="uid://bb106eqd6ylpm" path="res://Items/Nodes/place_holder_item.tscn" id="16_2tebo"]
 [ext_resource type="PackedScene" uid="uid://bpi6mjbvdnooy" path="res://Global/Nodes/tutorial_trigger.tscn" id="17_2maft"]
 [ext_resource type="PackedScene" uid="uid://bj784d8smoybv" path="res://Items/Nodes/cheese.tscn" id="17_gvuf6"]
 [ext_resource type="PackedScene" uid="uid://c8rg7nv6pte6p" path="res://Items/Nodes/cookie.tscn" id="18_y1ujj"]
+[ext_resource type="PackedScene" uid="uid://d1yjf68ini5d4" path="res://Items/Nodes/meat.tscn" id="19_gpg60"]
 
 [node name="Level1" type="Node3D"]
 script = ExtResource("1_k8tq5")
@@ -2133,15 +2133,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 29, -854)
 
 [node name="SpecialTreats" type="Node3D" parent="."]
 
-[node name="PlaceHolderItem3" parent="SpecialTreats" instance=ExtResource("16_2tebo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, -750)
-
 [node name="Cheese" parent="SpecialTreats" instance=ExtResource("17_gvuf6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.5, -368.5)
 
 [node name="Cookie" parent="SpecialTreats" instance=ExtResource("18_y1ujj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -5, -496)
 TreatType = 3
+
+[node name="Meat" parent="SpecialTreats" instance=ExtResource("19_gpg60")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 1, -750)
+TreatType = 2
 
 [node name="Tutorials" type="Node3D" parent="."]
 

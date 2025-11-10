@@ -102,6 +102,6 @@ public partial class SpecialTreat : Area3D
 
     public void CollectedMeat()
     {
-        //Hud.ShowCookie();
+        Hud.ShowMeat();
     }
 }

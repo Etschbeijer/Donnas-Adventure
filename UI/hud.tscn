@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c031qh1bonppp"]
+[gd_scene load_steps=17 format=3 uid="uid://c031qh1bonppp"]
 
 [ext_resource type="Script" uid="uid://bbvvs4j7svuef" path="res://UI/Hud.cs" id="1_2o5uh"]
 [ext_resource type="Texture2D" uid="uid://c242cvnacega3" path="res://Images/Icons/Treat.png" id="1_ne75i"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cm7spmyvwogn4" path="res://Images/Icons/Cookie.png" id="5_pf7ph"]
 [ext_resource type="Texture2D" uid="uid://c01vcvy1pbifw" path="res://Images/Progressbars/ProgressBarLayout.png" id="5_rnl6m"]
 [ext_resource type="Texture2D" uid="uid://dgwduonwek3gi" path="res://Images/Progressbars/ProgressBarFill.png" id="6_1ui3w"]
+[ext_resource type="Texture2D" uid="uid://7n6ijhn2bvds" path="res://Images/Icons/Meat.png" id="6_vs5gg"]
 [ext_resource type="Texture2D" uid="uid://cp4p2nrmpggrf" path="res://Images/Icons/Donna_Face.png" id="7_0j753"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtv4n"]
@@ -108,10 +109,19 @@ expand_mode = 1
 [node name="TextureCookie" type="TextureRect" parent="PanelSpecialTreats"]
 show_behind_parent = true
 layout_mode = 0
-offset_left = 64.0
-offset_right = 128.0
+offset_left = 56.0
+offset_right = 120.0
 offset_bottom = 56.0
 texture = ExtResource("5_pf7ph")
+expand_mode = 1
+
+[node name="TextureMeat" type="TextureRect" parent="PanelSpecialTreats"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 112.0
+offset_right = 200.0
+offset_bottom = 56.0
+texture = ExtResource("6_vs5gg")
 expand_mode = 1
 
 [node name="PanelSpeed" type="Panel" parent="."]
