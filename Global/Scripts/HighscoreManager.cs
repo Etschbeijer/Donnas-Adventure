@@ -2,7 +2,7 @@ using System;
 
 public static class HighscoreManager
 {
-    public static int CalculateScore(float actualTime, int collectedTreats, int collectedSpecialTreats, float expectedTime = 180f, int exptectedTreats = 200)
+    public static int CalculateScore(float actualTime, int collectedTreats, int collectedSpecialTreats, float expectedTime = 180f, int exptectedTreats = 150)
     {
         float timeScore = MathF.Max(0, (expectedTime / actualTime) * 5000f);
         float treatScore = MathF.Max(0, (exptectedTreats / collectedTreats) * 5000f);

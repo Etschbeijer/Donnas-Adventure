@@ -23,7 +23,7 @@ public partial class AirRiseMovement : PlayerState
         {
             AnimationPlayer.Play("Jump_Start", 0.1, 2);
 
-            Player.PlayerVelocity.Y = Player.JumpVelocity * 0.5f;
+            Player.PlayerVelocity.Y = Player.JumpVelocity * 0.4f;
 
             startJumping = true;
         }

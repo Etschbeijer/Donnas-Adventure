@@ -377,7 +377,19 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void CalculateMovementSpeed(double delta)
     {
-        if (IsOnFloor() && Input.IsActionPressed("Accelerate") && !WallDetector.IsColliding())
+        if (IsOnFloor())
+        {
+            calculateGroundMovementSpeed(delta);
+        }
+        else
+        {
+            calculateJumpMovementSpeed(delta);
+        }
+    }
+
+    private void calculateGroundMovementSpeed(double delta)
+    {
+        if (Input.IsActionPressed("Accelerate") && !WallDetector.IsColliding())
         {
             if (TopSpeedTimer > TopSpeedThresholdTime)
             {
@@ -388,13 +400,25 @@ public partial class PlayerCharacter : CharacterBody3D
                 MovementSpeed = Mathf.MoveToward(MovementSpeed, HighSpeed, TopAcellerationRate * (float)delta);
             }
         }
-        else if (MovementSpeed >= HighSpeed && TimeSinceLeftFloor <= JumpTimeThreshold)
-        {
-            MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, ToRunDecelerationRate * (float)delta);
-        }
         else
         {
             MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, RunAcellerationRate * (float)delta);
+        }
+    }
+
+    private void calculateJumpMovementSpeed(double delta)
+    {
+        if (Input.IsActionPressed("Accelerate") && !WallDetector.IsColliding() && TimeSinceLeftFloor <= JumpTimeThreshold && MovementSpeed >= HighSpeed && TimeSinceLeftFloor > CoyoteTime)
+        {
+            if (MovementSpeed > HighSpeed)
+            {
+                MovementSpeed = Mathf.MoveToward(MovementSpeed, HighSpeed, ToRunDecelerationRate * (float)delta);
+            }
+        }
+        else
+        {
+            var timeFactor = Mathf.Clamp((TimeSinceLeftFloor / 0.8f), 0.5f, 1.5f);
+            MovementSpeed = Mathf.MoveToward(MovementSpeed, RunSpeed, ToRunDecelerationRate * timeFactor * (float)delta);
         }
     }
 
@@ -473,7 +497,7 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         GpuParticles3D trail = side == "l" ? grassTrailL : grassTrailR;
 
-        trail.Emitting = false;
+        trail.Restart();
         trail.Amount = (int)MovementSpeed * 2;
         trail.Emitting = true;
     }
