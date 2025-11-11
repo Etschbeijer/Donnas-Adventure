@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://bincglc530w64"]
 
 [ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/hud.tscn" id="1_308c0"]
-[ext_resource type="Script" uid="uid://byvwficb4xf6c" path="res://Levels/Scripts/LevelTest.cs" id="1_k8tq5"]
+[ext_resource type="Script" uid="uid://b6bjisges4dgg" path="res://Levels/Scripts/BaseLevel.cs" id="1_y1ujj"]
 [ext_resource type="PackedScene" uid="uid://b0fweypvn3pw0" path="res://Global/Nodes/world_environment.tscn" id="2_ohoa6"]
 [ext_resource type="PackedScene" uid="uid://big15srtmkr7a" path="res://Global/Nodes/fall_zone.tscn" id="3_a34cx"]
 [ext_resource type="PackedScene" uid="uid://s56vqbwuarxx" path="res://Global/Nodes/start_zone.tscn" id="4_lpr52"]
@@ -21,7 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://d1yjf68ini5d4" path="res://Items/Nodes/meat.tscn" id="19_gpg60"]
 
 [node name="Level1" type="Node3D"]
-script = ExtResource("1_k8tq5")
+script = ExtResource("1_y1ujj")
+LevelId = "1-1"
 
 [node name="HUD" parent="." instance=ExtResource("1_308c0")]
 

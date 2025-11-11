@@ -1,13 +1,16 @@
 using Godot;
 using System;
 
-public partial class LevelTest : Node3D
+public partial class BaseLevel : Node3D
 {
-    Global global;
-
-    public Node3D numberOfTreats;
-
+    [Export]
+    public string LevelId;
+    
     public Hud hud;
+
+    public Node3D NumberOfTreats;
+
+    Global global;
 
     SoundManager soundManager;
 
@@ -16,16 +19,17 @@ public partial class LevelTest : Node3D
 	{
         //Get nodes
         global = GetNode<Global>("/root/Global");
-        numberOfTreats = GetNode<Node3D>("Treats");
+        NumberOfTreats = GetNode<Node3D>("Treats");
         hud = GetNode<Hud>("HUD");
         var labelTreats = hud.LabelTreats;
         soundManager = GetNode<SoundManager>("/root/SoundManager");
 
         //Set initial values
-        int treatCount = numberOfTreats.GetChildCount();
+        int treatCount = NumberOfTreats.GetChildCount();
         global.SetCurrentTreats(0);
         global.SetNumberOfTreats(treatCount);
         labelTreats.Text = global.CollectedTreats.ToString();
+        global.SetLevelId(LevelId);
 
         //Call important methods
         soundManager.StopMusicProject2Marioish2D();

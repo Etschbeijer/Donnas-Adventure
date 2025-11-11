@@ -5,19 +5,17 @@ using System.Collections.Generic;
 public partial class SaveData : Resource
 {
     [Export]
-    public double[] highscores = new double[0];
-    [Export]
-    public string[] topPlayers = new string[0];
+    public Godot.Collections.Array<PlayerScore> PlayerScores = new();
 
-    const string SavePath = "user://highscores.tres";
+    const string savePathHighScores = "user://highscores.tres";
 
     public static SaveData LoadOrCreate()
     {
         SaveData res;
 
-        if (FileAccess.FileExists(SavePath))
+        if (FileAccess.FileExists(savePathHighScores))
         {
-            res = (SaveData)ResourceLoader.Load(SavePath).Duplicate() as SaveData;
+            res = (SaveData)ResourceLoader.Load(savePathHighScores).Duplicate() as SaveData;
         }
         else
         {
@@ -27,12 +25,31 @@ public partial class SaveData : Resource
         return res;
     }
 
+    public void ResetHighScores()
+    {
+        PlayerScores = new ();
+        Save();
+        LoadOrCreate();
+    }
+
+    public void Reset()
+    {
+        SaveData res;
+
+        if (FileAccess.FileExists(savePathHighScores))
+        {
+            res = new SaveData();
+            Save();
+            LoadOrCreate();
+        }
+    }
+
     public void Save()
     {
-        var dir = SavePath.GetBaseDir();
+        var dir = savePathHighScores.GetBaseDir();
         DirAccess.MakeDirRecursiveAbsolute(dir);
         
-        var err = ResourceSaver.Save(this, SavePath);
+        var err = ResourceSaver.Save(this, savePathHighScores);
         if (err == Error.Ok)
         {
             GD.Print($"Highscores have been saved successful: {err}");

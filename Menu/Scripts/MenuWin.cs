@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Formats.Asn1.AsnWriter;
 
 public partial class MenuWin : Control
 {
@@ -13,8 +14,16 @@ public partial class MenuWin : Control
 
     AcceptDialog nameDialog;
 
-    double currentScore;
-    List<(double, string)> highscoresAndPlayers = new List<(double, string)>();
+    double currentTime;
+
+    int score;
+    int collectedTreats;
+
+    string[] specialStreats;
+
+    List<PlayerScore> highscoresAndPlayers = new();
+
+    PlayerScore currentPlayer;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -37,18 +46,24 @@ public partial class MenuWin : Control
 
     public async void OnButtonPlayAgainPressed()
     {
+        global.ResetSpecialTreats();
+        global.ResetLevelId();
         await soundManager.PlaySoundPlay();
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
     public void OnButtonMenuPressed()
     {
+        global.ResetSpecialTreats();
+        global.ResetLevelId();
         soundManager.PlaySoundClick();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void OnButtonExitPressed()
     {
+        global.ResetSpecialTreats();
+        global.ResetLevelId();
         await soundManager.PlaySoundExit();
         GetTree().Quit();
     }
@@ -57,19 +72,20 @@ public partial class MenuWin : Control
     {
         timescore.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
 
-        var highscores = global.SaveData.highscores?.ToList() ?? new List<double>();
+        var playerScores = global.SaveData.PlayerScores?.ToList() ?? new();
 
-        currentScore = (new TimeSpan(0, global.Minutes, global.Seconds)).TotalSeconds;
+        collectedTreats = global.CollectedTreats;
+        specialStreats = global.SpecialTreats.ToArray();
+        currentTime = (new TimeSpan(0, global.Minutes, global.Seconds)).TotalSeconds;
+        score = HighscoreManager.CalculateScore((float)currentTime, collectedTreats, specialStreats.Length);
 
-        bool addNewTime = highscores.Any(highscore => highscore > currentScore) || highscores.Count < 10;
+        bool addNewTime = playerScores.Any(highscore => score > highscore.Score) || playerScores.Count < 10;
 
         if (addNewTime)
         {
-            var temp = global.SaveData.topPlayers?.ToList() ?? new List<string>();
-
-            for(int i = 0; i < temp.Count; i++)
+            for(int i = 0; i < playerScores.Count; i++)
             {
-                highscoresAndPlayers.Add((highscores[i], temp[i]));
+                highscoresAndPlayers.Add(playerScores[i]);
             }
             nameDialog.Show();
         }
@@ -78,23 +94,37 @@ public partial class MenuWin : Control
     public void OnNameDialogConfirmed()
     {
         string playerName = nameDialog.GetNode<LineEdit>("LineEdit").Text.Trim();
-        highscoresAndPlayers.Add((currentScore, playerName));
-        highscoresAndPlayers.Sort ((rankA, rankB) => rankA.CompareTo(rankB));
+
+        currentPlayer = new PlayerScore
+        {
+            Name = playerName,
+            Level = global.LevelId,
+            Score = score,
+            Time = currentTime,
+            CollectedTreats = collectedTreats,
+            SpecialTreats = specialStreats
+        };
+
+        currentPlayer.Name = playerName;
+        highscoresAndPlayers.Add(currentPlayer);
+        highscoresAndPlayers.Sort ((rankA, rankB) => rankA.Score.CompareTo(rankB.Score));
 
         var top10ScoresAndPlayer = highscoresAndPlayers.Take(10).ToList();
 
-        var topHighscores = new List<double>();
-        var notIndexedTopPlayers = new List<string>();
+        var topPlayers = new List<PlayerScore>();
 
         for (int i = 0; i < top10ScoresAndPlayer.Count; i++)
         {
-            topHighscores.Add(highscoresAndPlayers[i].Item1);
-            notIndexedTopPlayers.Add(highscoresAndPlayers[i].Item2);
+            topPlayers.Add(highscoresAndPlayers[i]);
         }
 
-        global.SaveData.highscores = topHighscores.ToArray();
-        global.SaveData.topPlayers = notIndexedTopPlayers.ToArray();
+        topPlayers = topPlayers.OrderByDescending(playerScore => playerScore.Score).ToList();
+
+        global.SaveData.PlayerScores = new(topPlayers);
 
         global.SaveData.Save();
+
+        global.ResetSpecialTreats();
+        global.ResetLevelId();
     }
 }

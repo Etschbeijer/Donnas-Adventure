@@ -4,10 +4,7 @@ using System;
 public partial class SpecialTreat : Area3D
 {
     [Export]
-    public int Value = 15;
-    [Export]
     public TreatTypes TreatType;
-
 
     public Hud Hud;
 
@@ -46,7 +43,6 @@ public partial class SpecialTreat : Area3D
 
         if (player != null)
         {
-            global.IncreaseTreats(Value);
             SetCollisionLayerValue(3, false);
             SetCollisionMaskValue(1, false);
 
@@ -59,7 +55,7 @@ public partial class SpecialTreat : Area3D
 
             if (TreatType == TreatTypes.Cheese)
             {
-                CollectedChees();
+                CollectedCheese();
             }
 
             if (TreatType == TreatTypes.Cookie)
@@ -90,18 +86,21 @@ public partial class SpecialTreat : Area3D
         QueueFree();
     }
 
-    public void CollectedChees()
+    public void CollectedCheese()
     {
         Hud.ShowCheese();
+        global.AddSpecialTreat(TreatTypes.Cheese.ToString());
     }
 
     public void CollectedCookie()
     {
         Hud.ShowCookie();
+        global.AddSpecialTreat(TreatTypes.Cookie.ToString());
     }
 
     public void CollectedMeat()
     {
         Hud.ShowMeat();
+        global.AddSpecialTreat(TreatTypes.Meat.ToString());
     }
 }

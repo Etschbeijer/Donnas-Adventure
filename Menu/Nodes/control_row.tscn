@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c638efe0ce7mv"]
+[gd_scene load_steps=7 format=3 uid="uid://c638efe0ce7mv"]
 
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_pq02n"]
+[ext_resource type="Texture2D" uid="uid://5xyl7qsh1mwe" path="res://Images/Icons/Cheese.png" id="2_sf8tv"]
+[ext_resource type="Texture2D" uid="uid://cm7spmyvwogn4" path="res://Images/Icons/Cookie.png" id="3_6t86j"]
+[ext_resource type="Texture2D" uid="uid://7n6ijhn2bvds" path="res://Images/Icons/Meat.png" id="4_oplac"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7sg6"]
 bg_color = Color(0.384314, 0.113725, 0.537255, 1)
@@ -14,28 +17,33 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf8tv"]
+bg_color = Color(0, 0, 0, 0.498039)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
 [node name="ControlRow" type="Control"]
 custom_minimum_size = Vector2(432, 70)
 layout_mode = 3
-anchor_top = -0.025
-anchor_right = 0.319
-anchor_bottom = 0.123
-offset_top = 16.2
-offset_right = 64.512
-offset_bottom = -9.704
+anchors_preset = 0
+offset_right = 432.0
+offset_bottom = 70.0
 
 [node name="PanelRank" type="Panel" parent="."]
 layout_mode = 1
-offset_right = 432.0
-offset_bottom = 64.0
+offset_top = 11.0
+offset_right = 768.0
+offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7sg6")
 
 [node name="LabelRank" type="Label" parent="."]
 layout_mode = 1
 offset_left = 8.0
-offset_top = 4.0
+offset_top = 14.8
 offset_right = 224.0
-offset_bottom = 163.0
+offset_bottom = 119.8
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -44,15 +52,33 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("1_pq02n")
 theme_override_font_sizes/font_size = 35
-text = "1st
+text = "10th
+"
+
+[node name="LabelScore" type="Label" parent="."]
+layout_mode = 1
+offset_left = 96.0
+offset_top = 14.8
+offset_right = 316.0
+offset_bottom = 173.8
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "15000
+
 "
 
 [node name="LabelName" type="Label" parent="."]
 layout_mode = 1
-offset_left = 96.0
-offset_top = 4.0
-offset_right = 264.0
-offset_bottom = 163.0
+offset_left = 536.0
+offset_top = 14.8
+offset_right = 756.0
+offset_bottom = 173.8
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -61,16 +87,16 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("1_pq02n")
 theme_override_font_sizes/font_size = 35
-text = "123456789012
+text = "Alfred Testman
 
 "
 
 [node name="LabelTime" type="Label" parent="."]
 layout_mode = 1
-offset_left = 328.0
-offset_top = 4.0
-offset_right = 456.0
-offset_bottom = 163.0
+offset_left = 208.0
+offset_top = 14.8
+offset_right = 336.0
+offset_bottom = 173.8
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -82,3 +108,38 @@ theme_override_font_sizes/font_size = 35
 text = "05:00
 
 "
+
+[node name="PanelSpecialTreats" type="Panel" parent="."]
+offset_left = 312.0
+offset_top = 15.0
+offset_right = 512.0
+offset_bottom = 71.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sf8tv")
+
+[node name="TextureCheese" type="TextureRect" parent="PanelSpecialTreats"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = -32.0
+offset_top = 4.0
+offset_right = 88.0
+offset_bottom = 54.0
+texture = ExtResource("2_sf8tv")
+expand_mode = 1
+
+[node name="TextureCookie" type="TextureRect" parent="PanelSpecialTreats"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 56.0
+offset_right = 120.0
+offset_bottom = 56.0
+texture = ExtResource("3_6t86j")
+expand_mode = 1
+
+[node name="TextureMeat" type="TextureRect" parent="PanelSpecialTreats"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 112.0
+offset_right = 200.0
+offset_bottom = 56.0
+texture = ExtResource("4_oplac")
+expand_mode = 1

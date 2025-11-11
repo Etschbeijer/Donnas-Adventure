@@ -1,13 +1,19 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public partial class Global : Node
 {
+    public string LevelId;
+    
     public int CollectedTreats = 0;
     public int NumberOfTreats = 0;
+
     public int Minutes = 0;
     public int Seconds = 0;
+
+    public List<string> SpecialTreats = new List<string>();
 
     public bool CheckTime = false;
     public bool PauseTime = false;
@@ -131,5 +137,25 @@ public partial class Global : Node
     public void SetDeathType(Deathypes deathype)
     {
         Deathypes = deathype;
+    }
+
+    public void AddSpecialTreat(string specialTreat)
+    {
+        SpecialTreats.Add(specialTreat);
+    }
+
+    public void ResetSpecialTreats()
+    {
+        SpecialTreats.Clear();
+    }
+
+    public void SetLevelId(string levelId)
+    {
+        LevelId = levelId;
+    }
+
+    public void ResetLevelId()
+    {
+        LevelId = "";
     }
 }

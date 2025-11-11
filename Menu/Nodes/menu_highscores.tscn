@@ -114,6 +114,22 @@ offset_bottom = -54.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="ButtonReset" type="Button" parent="Buttons"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_yepu1")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Reset"
+
 [node name="ButtonMenu" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
@@ -130,4 +146,5 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Main Menu"
 
+[connection signal="pressed" from="Buttons/ButtonReset" to="." method="OnButtonResetHighScoresPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]

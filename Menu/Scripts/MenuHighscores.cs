@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class MenuHighscores : Control
 {
@@ -11,6 +12,9 @@ public partial class MenuHighscores : Control
     SoundManager soundManager;
 
     VBoxContainer container;
+    VBoxContainer buttons;
+
+    Button resetHighScore;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -19,6 +23,9 @@ public partial class MenuHighscores : Control
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         container = GetNode<VBoxContainer>("VBoxContainer");
+        buttons = GetNode<VBoxContainer>("Buttons");
+        resetHighScore = buttons.GetNode<Button>("ButtonReset");
+
 
         //Call important methods
         ClearHighScores();
@@ -43,15 +50,18 @@ public partial class MenuHighscores : Control
 
     public void ShowHighScores()
     {
-        var highScores = global.SaveData.highscores;
-        
-        for (int i = 0; i < highScores.Length; i++)
+        var highScores = global.SaveData.PlayerScores;
+
+        var orderedHighscores = highScores.OrderByDescending(playerScore => playerScore.Score).ToArray();
+
+        for (int i = 0; i < orderedHighscores.Length; i++)
         {
             var row = PanelRowScene.Instantiate() as Control;
             row.GetNode<Label>("LabelRank").Text = $"{i + 1}";
-            row.GetNode<Label>("LabelName").Text = global.SaveData.topPlayers[i];
-            row.GetNode<Label>("LabelTime").Text = $"{formatTime(highScores[i])}";
-
+            row.GetNode<Label>("LabelName").Text = orderedHighscores[i].Name;
+            row.GetNode<Label>("LabelScore").Text = orderedHighscores[i].Score.ToString();
+            row.GetNode<Label>("LabelTime").Text = $"{formatTime(orderedHighscores[i].Time)}";
+            displaySpecialTreats(row, orderedHighscores[i].SpecialTreats);
             container.AddChild(row);
         }
     }
@@ -60,5 +70,39 @@ public partial class MenuHighscores : Control
     {
         soundManager.PlaySoundMainMenu();
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
+    }
+
+    public void OnButtonResetHighScoresPressed()
+    {
+        soundManager.PlaySoundClick();
+        global.SaveData.ResetHighScores();
+        ClearHighScores();
+        ShowHighScores();
+        resetHighScore.ButtonPressed = false;
+        resetHighScore.FocusMode = FocusModeEnum.None;
+    }
+
+    private void displaySpecialTreats(Control row, string[] specialTreats)
+    {
+        Panel panelSpecialTreats = row.GetNode<Panel>("PanelSpecialTreats");
+
+        TextureRect textureMeat = panelSpecialTreats.GetNode<TextureRect>("TextureMeat");
+        TextureRect textureCheese = panelSpecialTreats.GetNode<TextureRect>("TextureCheese");
+        TextureRect textureCookie = panelSpecialTreats.GetNode<TextureRect>("TextureCookie");
+
+        if (specialTreats.Contains(TreatTypes.Meat.ToString()))
+        {
+            textureMeat.ShowBehindParent = false;
+        }
+
+        if (specialTreats.Contains(TreatTypes.Cheese.ToString()))
+        {
+            textureCheese.ShowBehindParent = false;
+        }
+
+        if (specialTreats.Contains(TreatTypes.Cookie.ToString()))
+        {
+            textureCookie.ShowBehindParent = false;
+        }
     }
 }
