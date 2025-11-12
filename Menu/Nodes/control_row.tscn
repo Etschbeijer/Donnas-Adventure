@@ -28,22 +28,22 @@ corner_radius_bottom_left = 15
 custom_minimum_size = Vector2(432, 70)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 432.0
-offset_bottom = 70.0
+offset_right = 840.0
+offset_bottom = 88.0
 
 [node name="PanelRank" type="Panel" parent="."]
 layout_mode = 1
 offset_top = 11.0
-offset_right = 768.0
+offset_right = 840.0
 offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7sg6")
 
 [node name="LabelRank" type="Label" parent="."]
 layout_mode = 1
 offset_left = 8.0
-offset_top = 14.8
+offset_top = 15.0
 offset_right = 224.0
-offset_bottom = 119.8
+offset_bottom = 120.0
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -73,24 +73,6 @@ text = "15000
 
 "
 
-[node name="LabelName" type="Label" parent="."]
-layout_mode = 1
-offset_left = 536.0
-offset_top = 14.8
-offset_right = 756.0
-offset_bottom = 173.8
-theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 4
-theme_override_constants/shadow_offset_y = 4
-theme_override_constants/outline_size = 4
-theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("1_pq02n")
-theme_override_font_sizes/font_size = 35
-text = "Alfred Testman
-
-"
-
 [node name="LabelTime" type="Label" parent="."]
 layout_mode = 1
 offset_left = 208.0
@@ -109,11 +91,47 @@ text = "05:00
 
 "
 
-[node name="PanelSpecialTreats" type="Panel" parent="."]
-layout_mode = 0
+[node name="LabelCollectedTreats" type="Label" parent="."]
+layout_mode = 1
 offset_left = 312.0
 offset_top = 15.0
-offset_right = 512.0
+offset_right = 440.0
+offset_bottom = 174.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "100
+
+"
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 1
+offset_left = 600.0
+offset_top = 15.0
+offset_right = 820.0
+offset_bottom = 174.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = "Alfred Testman
+
+"
+
+[node name="PanelSpecialTreats" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 15.0
+offset_right = 584.0
 offset_bottom = 71.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_sf8tv")
 

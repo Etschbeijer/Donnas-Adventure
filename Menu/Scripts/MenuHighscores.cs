@@ -48,6 +48,23 @@ public partial class MenuHighscores : Control
         return $"{minutes:D2}:{seconds:D2}";
     }
 
+    private string toOrdinal(int number)
+    {
+        int rem100 = number % 100;
+        if (rem100 >= 11 && rem100 <= 13)
+        {
+            return $"{rem100}th";
+        }
+
+        switch (number % 10)
+        {
+            case 1: return $"{number}st";
+            case 2: return $"{number}nd";
+            case 3: return $"{number}rd";
+            default: return $"{number}th";
+        }
+    }
+
     public void ShowHighScores()
     {
         var highScores = global.SaveData.PlayerScores;
@@ -57,10 +74,12 @@ public partial class MenuHighscores : Control
         for (int i = 0; i < orderedHighscores.Length; i++)
         {
             var row = PanelRowScene.Instantiate() as Control;
-            row.GetNode<Label>("LabelRank").Text = $"{i + 1}";
+            row.GetNode<Label>("LabelRank").Text = toOrdinal(i + 1);
             row.GetNode<Label>("LabelName").Text = orderedHighscores[i].Name;
             row.GetNode<Label>("LabelScore").Text = orderedHighscores[i].Score.ToString();
             row.GetNode<Label>("LabelTime").Text = $"{formatTime(orderedHighscores[i].Time)}";
+            row.GetNode<Label>("LabelCollectedTreats").Text = orderedHighscores[i].CollectedTreats.ToString();
+
             displaySpecialTreats(row, orderedHighscores[i].SpecialTreats);
             container.AddChild(row);
         }
