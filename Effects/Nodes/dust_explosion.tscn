@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://21hr3inhjaa6"]
+[gd_scene load_steps=9 format=3 uid="uid://21hr3inhjaa6"]
+
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="1_u2dol"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62q1l"]
+next_pass = ExtResource("1_u2dol")
 transparency = 1
 cull_mode = 1
 albedo_color = Color(0.737255, 0.494118, 0.188235, 0.784314)

@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bkp2he4xhk8kh"]
+[gd_scene load_steps=12 format=3 uid="uid://bkp2he4xhk8kh"]
+
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="1_ecl58"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orbje"]
+next_pass = ExtResource("1_ecl58")
 albedo_color = Color(0.737255, 0.494118, 0.188235, 0.784314)
 
 [sub_resource type="Curve" id="Curve_eqer1"]
@@ -41,6 +44,7 @@ radial_segments = 8
 rings = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62q1l"]
+next_pass = ExtResource("1_ecl58")
 transparency = 1
 cull_mode = 1
 albedo_color = Color(0.203922, 0.494118, 0.188235, 1)

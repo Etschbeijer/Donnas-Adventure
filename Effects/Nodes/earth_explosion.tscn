@@ -1,6 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjof50losyfd7"]
+[gd_scene load_steps=9 format=3 uid="uid://bjof50losyfd7"]
+
+[ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="1_h8r08"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_62q1l"]
+next_pass = ExtResource("1_h8r08")
 albedo_color = Color(0.467682, 0.304514, 0.0960682, 1)
 
 [sub_resource type="Curve" id="Curve_eqer1"]
