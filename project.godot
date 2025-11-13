@@ -13,7 +13,7 @@ config_version=5
 config/name="Donnas Adventure"
 run/main_scene="uid://cm7g7p0qaiv1"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="uid://o4avmj4x5tjt"
+config/icon="uid://ovymi6b6oa3d"
 config/macos_native_icon="res://Images/Icons/DonnasAdventure.icns"
 config/windows_native_icon="res://Images/Icons/DonnasAdventure.ico"
 
