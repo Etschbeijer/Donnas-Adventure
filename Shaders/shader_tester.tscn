@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvc1fg83eh60v"]
+
+[ext_resource type="Shader" uid="uid://duiuvpi7njjnu" path="res://Shaders/DissolveShader.tres" id="1_2tjbf"]
+
+[sub_resource type="Gradient" id="Gradient_5iwge"]
+colors = PackedColorArray(0, 0.471123, 0.555796, 1, 0.752079, 0.623132, 1.92523e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2tjbf"]
+gradient = SubResource("Gradient_5iwge")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5iwge"]
+render_priority = 0
+shader = ExtResource("1_2tjbf")
+shader_parameter/Albedo = SubResource("GradientTexture2D_2tjbf")
+shader_parameter/Strength = 5.0
+shader_parameter/LightColour = Color(0.869204, 0, 0, 1)
+shader_parameter/Speed = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5iwge"]
+
+[node name="ShaderTester" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_5iwge")
+mesh = SubResource("BoxMesh_5iwge")
