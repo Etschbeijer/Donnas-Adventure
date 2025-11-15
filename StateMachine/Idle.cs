@@ -38,7 +38,6 @@ public partial class Idle : PlayerState
         if (!Player.IsOnFloor())
 		{
 			StateMachine.TransitionTo(nameof(AirDropMovement));
-			return;
 		}
 
         var velocityY = Player.Velocity.Y;
@@ -68,13 +67,9 @@ public partial class Idle : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.ShallRespawn())
+        if (Player.ShallRespawn() || Player.HasLost())
         {
-            Player.Respawn();
-        }
-        else if (Player.HasLost())
-        {
-            StateMachine.TransitionTo(nameof(Lose));
+            StateMachine.TransitionTo(nameof(Despawn));
         }
 
         if (Player.HasWon)

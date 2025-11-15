@@ -1,14 +1,16 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dro04y0w4yfik"]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dro04y0w4yfik"]
 
 [ext_resource type="Shader" uid="uid://duiuvpi7njjnu" path="res://Shaders/DissolveShader.tres" id="1_8tvup"]
+[ext_resource type="Material" uid="uid://brvqkddrr6yvw" path="res://Shaders/DonnaOutlineDissolveShader.tres" id="1_lm8wt"]
 [ext_resource type="Texture2D" uid="uid://bnqcfjcgnwfs1" path="res://Characters/Models/Donna/Donna_ColourMap.png" id="2_lm8wt"]
 
 [resource]
 render_priority = 0
+next_pass = ExtResource("1_lm8wt")
 shader = ExtResource("1_8tvup")
 shader_parameter/Albedo = ExtResource("2_lm8wt")
-shader_parameter/Strength = 5.0
+shader_parameter/Strength = 8.0
 shader_parameter/LightColour = Color(1, 0.235294, 0.996078, 1)
 shader_parameter/Dissolve = -1.0
 shader_parameter/Speed = 1.0
-shader_parameter/EdgeSize = 0.01
+shader_parameter/EdgeSize = 0.015

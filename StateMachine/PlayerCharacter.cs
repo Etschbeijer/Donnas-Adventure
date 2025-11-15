@@ -37,6 +37,8 @@ public partial class PlayerCharacter : CharacterBody3D
     public float CoyoteTime = 0.1f;
     [Export]
     public float JumpTimeThreshold = 1.5f;
+    [Export]
+    public float DissolveTime = 0.8f;
 
     [Export]
     public double InvulnerabilityTimer = 1;
@@ -52,6 +54,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
     [Export]
     public Hud Hud;
+    [Export]
+    public TransitionScreen TransitionScreen;
 
     public Vector3 SpawnPoint;
     public Vector3 SpawnRoration;
@@ -85,6 +89,8 @@ public partial class PlayerCharacter : CharacterBody3D
     const float minYaw = -75f;
     const float maxYaw = 75f;
 
+    public float DissolveValue;
+
     public float StopRate;
     public float RunAcellerationRate;
     public float TopAcellerationRate;
@@ -94,15 +100,13 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public AnimationTree AnimationTree { get; set; }
 
-    public AnimationPlayer AnimationPlayer { get; set; }
-
     public AnimationNodeStateMachinePlayback AnimationNodeState { get; set; }
+
+    public Global Global;
 
     public SoundManager SoundManager;
 
     public RayCast3D WallDetector;
-
-    public Global Global;
 
     [Signal]
     public delegate void PlayerHitEventHandler();
@@ -117,7 +121,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     RayCast3D groundDetector;
 
-    MeshInstance3D meshInstance;
+    MeshInstance3D meshDonnaHead;
 
     Color originColour;
     Color damageColour;
@@ -136,6 +140,8 @@ public partial class PlayerCharacter : CharacterBody3D
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
 
+    MeshInstance3D[] donnaMeshs;
+
     GpuParticles3D grassTrailL;
     GpuParticles3D grassTrailR;
 
@@ -146,6 +152,7 @@ public partial class PlayerCharacter : CharacterBody3D
     AudioStreamPlayer3D soundSkate;
     AudioStreamPlayer3D soundGetHit;
     AudioStreamPlayer3D soundTopSpeed;
+    AudioStreamPlayer3D soundDissolve;
     AudioStreamPlayer3D soundDoubleJump;
     AudioStreamPlayer3D soundLandOnGrass;
     AudioStreamPlayer3D soundWalkOnGrass;
@@ -156,20 +163,20 @@ public partial class PlayerCharacter : CharacterBody3D
         Global = GetNode<Global>("/root/Global");
         SoundManager = GetNode<SoundManager>("/root/SoundManager");
 
-        AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         CameraController = GetNode<Node3D>("Camera_Controller");
         WallDetector = GetNode<RayCast3D>("WallDetector");
 
         cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
         groundDetector = GetNode<RayCast3D>("GroundDetector");
         rigDonna = GetNode<Node3D>("rig_Donna");
-        meshInstance = rigDonna.GetNode<Skeleton3D>("Skeleton3D").GetNode<MeshInstance3D>("Donna_Head");
+        meshDonnaHead = rigDonna.GetNode<Skeleton3D>("Skeleton3D").GetNode<MeshInstance3D>("Donna_Head");
 
         sounds = GetNode<Node3D>("Sounds");
         soundDrop = sounds.GetNode<AudioStreamPlayer3D>("Drop");
         soundJump = sounds.GetNode<AudioStreamPlayer3D>("Jump");
         soundSkate = sounds.GetNode<AudioStreamPlayer3D>("Skate");
         soundGetHit = sounds.GetNode<AudioStreamPlayer3D>("GetHit");
+        soundDissolve = sounds.GetNode<AudioStreamPlayer3D>("Dissolve");
         soundTopSpeed = sounds.GetNode<AudioStreamPlayer3D>("TopSpeed");
         soundDoubleJump = sounds.GetNode<AudioStreamPlayer3D>("DoubleJump");
         soundLandOnGrass = sounds.GetNode<AudioStreamPlayer3D>("LandOnGrass");
@@ -183,13 +190,14 @@ public partial class PlayerCharacter : CharacterBody3D
         hitboxes = GetTree().GetNodesInGroup("HitBoxesPlayer").Cast<Area3D>().ToArray();
         hurtboxes = GetTree().GetNodesInGroup("HurtBoxesPlayer").Cast<Area3D>().ToArray();
         footLightTrails = GetTree().GetNodesInGroup("FootLightTrails").Cast<Node3D>().ToArray();
+        donnaMeshs = GetTree().GetNodesInGroup("DonnaMesh").Cast<MeshInstance3D>().ToArray();
 
         //AnimationTree = GetNode<AnimationTree>("AnimationTree");
         //AnimationNodeState = (AnimationNodeStateMachinePlayback) AnimationTree.Get("parameters/playback");
 
         //Set initial values
         blinkInterval = 0.15f;
-        originColour = (Color)meshInstance.GetActiveMaterial(0).NextPass.Get("albedo_color");
+        originColour = (Color)meshDonnaHead.GetActiveMaterial(0).NextPass.Get("albedo_color");
         damageColour = new Color(1f, 0f, 0f);
 
         Hud.UpdateHealthbar(CurrentHealth);
@@ -290,15 +298,15 @@ public partial class PlayerCharacter : CharacterBody3D
 
         while (IsInvulnerable)
         {
-            meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", blinkColor);
+            meshDonnaHead.GetActiveMaterial(0).NextPass.Set("albedo_color", blinkColor);
             await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
 
-            meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
+            meshDonnaHead.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
             await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
         }
 
         isBlinking = false;
-        meshInstance.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
+        meshDonnaHead.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
     }
 
     public void AlignCamera(Vector3 cameraPosition, Vector3 characterPosition, double delta)
@@ -677,19 +685,19 @@ public partial class PlayerCharacter : CharacterBody3D
     private void handleFallZone()
     {
         Global.StopTimer();
-        isDead = false;
         soundDrop.Play();
         ReduceLife();
         Hud.UpdateLifes(Lifes);
 
         if (Lifes > 0)
         {
-            Respawn();
+            CurrentHealth = 0;
+            Hud.UpdateHealthbar(CurrentHealth);
         }
 
         Global.SetDeathType(Deathypes.Drop);
     }
-
+    
     public void PlaySoundDoubleJump()
     {
         soundDoubleJump.PitchScale = 1.5f * rng.RandfRange(0.9f, 1.1f);
@@ -740,6 +748,12 @@ public partial class PlayerCharacter : CharacterBody3D
         soundWalkOnGrass.Play();
     }
 
+    public void PlaySoundDissolve()
+    {
+        soundDissolve.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        soundDissolve.Play();
+    }
+
     public void PlaySoundTopSpeed()
     {
         soundTopSpeed.PitchScale = rng.RandfRange(0.9f, 1.1f);
@@ -783,10 +797,12 @@ public partial class PlayerCharacter : CharacterBody3D
         ResetCamera();
         ResetInvulnerability();
         Hud.UpdateHealthbar(MaxHealth);
+        isDead = false;
     }
 
     public void ResetCamera()
     {
+        CameraController.Position = Position;
         CameraController.Rotation = Rotation;
     }
 
@@ -884,5 +900,98 @@ public partial class PlayerCharacter : CharacterBody3D
     public void UpdateSpeedGauge()
     {
         Hud.UpdateSpeedGauge(TopSpeedTimer);
+    }
+
+    public void ReplaceWithDissolveShader()
+    {
+        var dissolveShaderDonna = GD.Load<ShaderMaterial>("res://Shaders/DonnaDissolveShader.tres");
+        var dissolveShaderDonnaEyeLeft = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeLeftDissolveShader.tres");
+        var dissolveShaderDonnaEyeRight = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeRightDissolveShader.tres");
+
+        foreach (MeshInstance3D mesh in donnaMeshs)
+        {
+            var count = mesh.GetSurfaceOverrideMaterialCount();
+            for (int i=0; i<count; i++)
+            {
+                if (mesh.Name == "Donna_Eyes")
+                {
+                    if(i == 0)
+                    {
+                        mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonnaEyeRight);
+                    }
+                    else
+                    {
+                        mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonnaEyeLeft);
+                    }
+                }
+                else
+                {
+                    mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonna);
+                }
+            }
+        }
+    }
+
+    public void Dissolve(float time, float from, float to)
+    {
+        DissolveValue += time;
+
+        float progress = Mathf.Lerp(from, to, DissolveValue / DissolveTime);
+        progress = Mathf.Clamp(progress, -1f, 1f);
+
+        var dissolveShaderDonna = GD.Load<ShaderMaterial>("res://Shaders/DonnaDissolveShader.tres");
+        var dissolveShaderDonnaOutline = GD.Load<ShaderMaterial>("res://Shaders/DonnaOutlineDissolveShader.tres");
+
+        var dissolveShaderDonnaEyeLeft = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeLeftDissolveShader.tres");
+        var dissolveShaderDonnaEyeRight = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeRightDissolveShader.tres");
+
+        if (DissolveValue > 1f)
+        {
+            DissolveValue = 1f;
+            progress = 1f;
+        }
+        
+        if (DissolveValue < -1f)
+        {
+            DissolveValue = -1f;
+            progress = -1f;
+        }
+
+        dissolveShaderDonna.SetShaderParameter("Dissolve", progress);
+        dissolveShaderDonnaOutline.SetShaderParameter("Dissolve", progress);
+
+        dissolveShaderDonnaEyeLeft.SetShaderParameter("Dissolve", progress);
+        dissolveShaderDonnaEyeRight.SetShaderParameter("Dissolve", progress);
+    }
+
+    public void ReplaceWithStandardMaterial()
+    {
+        var standardMaterial = GD.Load<Material>("res://Materials/donna.tres");
+        var standardMaterialLeftEye = GD.Load<Material>("res://Materials/donna_left_eye.tres");
+        var standardMaterialRightEye = GD.Load<Material>("res://Materials/donna_right_eye.tres");
+
+        foreach (MeshInstance3D mesh in donnaMeshs)
+        {
+            var count = mesh.GetSurfaceOverrideMaterialCount();
+            for (int i = 0; i < count; i++)
+            {
+                
+                if (mesh.Name == "Donna_Eyes")
+                {
+                    if (i == 0)
+                    {
+                        mesh.SetSurfaceOverrideMaterial(i, standardMaterialRightEye);
+                    }
+                    else
+                    {
+                        mesh.SetSurfaceOverrideMaterial(i, standardMaterialLeftEye);
+                    }
+                }
+                else
+                {
+                    mesh.SetSurfaceOverrideMaterial(i, standardMaterial);
+                }
+            }
+        }
     }
 }

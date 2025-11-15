@@ -9,27 +9,32 @@ public partial class GetHit : PlayerState
 
     public override void Enter(Dictionary msg = null)
     {
-        AnimationPlayer.Play("Hit_Front", 0.1);
-
         Player.ControlHurtBoxes(false);
 
         Player.ReduceHealth();
 
         Player.PlaySoundOnHit();
-    }
 
-    public override void PhysicsUpdate(double delta)
-    {
-        if (!AnimationPlayer.IsPlaying() && Player.CurrentHealth <= 0)
+        if (Player.CurrentHealth <= 0)
         {
+            AnimationPlayer.Play("Defeat", 0.1);
+            Player.PlayerVelocity = Vector3.Zero;
+            Player.CanInput = false;
             Player.ReduceLife();
             Player.IsHurt = false;
             Player.Hud.UpdateLifes(Player.Lifes);
         }
+        else
+        {
+            AnimationPlayer.Play("Hit_Front", 0.1);
+        }
+    }
 
-        //if (!AnimationPlayer.IsPlaying())
-        //{
-        if (Player.IsOnFloor())
+    public override void PhysicsUpdate(double delta)
+    {
+        if (!AnimationPlayer.IsPlaying() || (Math.Abs(Player.GetInputDirection().Length()) != 0))
+        {
+            if (Player.IsOnFloor())
             {
                 if (Math.Abs(Player.GetInputDirection().Length()) == 0)
                 {
@@ -50,18 +55,14 @@ public partial class GetHit : PlayerState
                 Player.IsHurt = false;
                 StateMachine.TransitionTo(nameof(AirDropMovement));
             }
-        //}
+        }
     }
 
     public override void Update(double delta)
     {
-        if (Player.ShallRespawn() && !AnimationPlayer.IsPlaying())
+        if ((Player.ShallRespawn() || Player.HasLost()) && !AnimationPlayer.IsPlaying() )
         {
-            Player.Respawn();
-        }
-        else if (Player.HasLost())
-        {
-            StateMachine.TransitionTo(nameof(Lose));
+            StateMachine.TransitionTo(nameof(Despawn));
         }
 
         if (Player.HasWon && !AnimationPlayer.IsPlaying())

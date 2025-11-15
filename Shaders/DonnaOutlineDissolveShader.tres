@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brvqkddrr6yvw"]
+
+[ext_resource type="Shader" uid="uid://y14wqj34g425" path="res://Shaders/OutlineDissolveShader.tres" id="1_jic28"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_jic28")
+shader_parameter/Thickness = 0.01
+shader_parameter/Albedo = Color(0, 0, 0, 1)
+shader_parameter/LightColour = Color(0, 0, 0, 1)
+shader_parameter/Dissolve = -1.0
+shader_parameter/Speed = 1.0
+shader_parameter/EdgeSize = 0.1

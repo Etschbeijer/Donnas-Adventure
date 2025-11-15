@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://6exg1xcll47q"]
+[gd_scene load_steps=17 format=3 uid="uid://6exg1xcll47q"]
 
 [ext_resource type="Script" uid="uid://b6bjisges4dgg" path="res://Levels/Scripts/BaseLevel.cs" id="1_llywo"]
-[ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/hud.tscn" id="2_yr5j8"]
+[ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/Nodes/hud.tscn" id="2_yr5j8"]
+[ext_resource type="PackedScene" uid="uid://bqa24f41tomh" path="res://UI/Nodes/transition_screen.tscn" id="3_bxty8"]
 [ext_resource type="PackedScene" uid="uid://b0fweypvn3pw0" path="res://Global/Nodes/world_environment.tscn" id="3_yr5j8"]
 [ext_resource type="PackedScene" uid="uid://kdhgdir770ai" path="res://Items/Nodes/treat.tscn" id="4_3mr6q"]
 [ext_resource type="PackedScene" uid="uid://crsot43wrtpnv" path="res://Characters/Nodes/slime.tscn" id="5_vcbbq"]
@@ -21,6 +22,8 @@ script = ExtResource("1_llywo")
 LevelId = "0-1"
 
 [node name="HUD" parent="." instance=ExtResource("2_yr5j8")]
+
+[node name="TransitionScreen" parent="." instance=ExtResource("3_bxty8")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -0.609699, 6.36539, 7.56635)
@@ -317,9 +320,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud") instance=ExtResource("9_b5cc4")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud", "TransitionScreen") instance=ExtResource("9_b5cc4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 8.46746, 2)
 Hud = NodePath("../HUD")
+TransitionScreen = NodePath("../TransitionScreen")
 
 [node name="MenuPause" parent="PlayerCharacter" instance=ExtResource("10_1ms43")]
 

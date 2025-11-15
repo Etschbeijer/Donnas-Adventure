@@ -46,20 +46,17 @@ public partial class Stomp : PlayerState
         {
             Player.HasDoubleJump = true;
             Player.FireExplosion(0.3f);
+            Player.PlayerVelocity.Y = 0f;
+            Player.Velocity = Player.PlayerVelocity;
+            Player.ControlFeetCollision(true, false);
+            Player.ControlSaltoCollision(false);
+
             if (Player.InputDir == Vector2.Zero)
             {
-                Player.PlayerVelocity.Y = 0f;
-                Player.Velocity = Player.PlayerVelocity;
-                Player.ControlFeetCollision(true, false);
-                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(Idle));
             }
             else
             {
-                Player.PlayerVelocity.Y = 0f;
-                Player.Velocity = Player.PlayerVelocity;
-                Player.ControlFeetCollision(true, false);
-                Player.ControlSaltoCollision(false);
                 StateMachine.TransitionTo(nameof(GroundMovement));
             }
         }
@@ -72,13 +69,9 @@ public partial class Stomp : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.ShallRespawn())
+        if (Player.ShallRespawn() || Player.HasLost())
         {
-            Player.Respawn();
-        }
-        else if (Player.HasLost())
-        {
-            StateMachine.TransitionTo(nameof(Lose));
+            StateMachine.TransitionTo(nameof(Despawn));
         }
 
         if (Player.HasWon)

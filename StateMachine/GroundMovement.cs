@@ -53,13 +53,9 @@ public partial class GroundMovement : PlayerState
 
     public override void Update(double delta)
     {
-        if (Player.ShallRespawn())
+        if (Player.ShallRespawn() || Player.HasLost())
         {
-            Player.Respawn();
-        }
-        else if (Player.HasLost())
-        {
-            StateMachine.TransitionTo(nameof(Lose));
+            StateMachine.TransitionTo(nameof(Despawn));
         }
 
         if (Player.HasWon)
@@ -87,19 +83,19 @@ public partial class GroundMovement : PlayerState
 
         if (Player.MovementSpeed > 8)
         {
-            Player.AnimationPlayer.Play("Skate_HandsBack", 0.1, 1.2f);
+            AnimationPlayer.Play("Skate_HandsBack", 0.1, 1.2f);
         }
         else if (Player.InputDir.X < 0)
         {
-            Player.AnimationPlayer.Play("Skate_LeftHand", 0.1);
+            AnimationPlayer.Play("Skate_LeftHand", 0.1);
         }
         else if (Player.InputDir.X > 0)
         {
-            Player.AnimationPlayer.Play("Skate_RightHand", 0.1);
+            AnimationPlayer.Play("Skate_RightHand", 0.1);
         }
         else
         {
-            Player.AnimationPlayer.Play("Skate", 0.1);
+            AnimationPlayer.Play("Skate", 0.1);
         }
     }
 
@@ -120,15 +116,15 @@ public partial class GroundMovement : PlayerState
     {
         if(Player.InputDir.X < 0)
         {
-            Player.AnimationPlayer.Play("Strafe_Left", 0.1);
+            AnimationPlayer.Play("Strafe_Left", 0.1);
         }
         else if (Player.InputDir.X > 0)
         {
-            Player.AnimationPlayer.Play("Strafe_Right", 0.1);
+            AnimationPlayer.Play("Strafe_Right", 0.1);
         }
         else
         {
-            Player.AnimationPlayer.Play("Walk_Forward", 0.1);
+            AnimationPlayer.Play("Walk_Forward", 0.1);
         }
     }
 
@@ -136,15 +132,15 @@ public partial class GroundMovement : PlayerState
     {
         if (Player.InputDir.X < 0)
         {
-            Player.AnimationPlayer.Play("Strafe_Left", 0.1, 1.2f);
+            AnimationPlayer.Play("Strafe_Left", 0.1, 1.2f);
         }
         else if (Player.InputDir.X > 0)
         {
-            Player.AnimationPlayer.Play("Strafe_Right", 0.1, 1.2f);
+            AnimationPlayer.Play("Strafe_Right", 0.1, 1.2f);
         }
         else
         {
-            Player.AnimationPlayer.Play("Run", 0.1);
+            AnimationPlayer.Play("Run", 0.1);
         }
     }
 }
