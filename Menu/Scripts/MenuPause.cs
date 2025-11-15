@@ -8,14 +8,17 @@ public partial class MenuPause : Control
 
     SoundManager soundManager;
 
+    TransitionScreen transitionScreen;
+
     bool isPaused = false;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Get nodes
-        soundManager = GetNode<SoundManager>("/root/SoundManager");
         global = GetNode<Global>("/root/Global");
+        soundManager = GetNode<SoundManager>("/root/SoundManager");
+        transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,7 +28,6 @@ public partial class MenuPause : Control
         {
             CallDeferred(nameof(SetPause));
         }
-
     }
 
     public void SetPause()
@@ -52,17 +54,28 @@ public partial class MenuPause : Control
         CallDeferred(nameof(SetPause));
     }
 
-    public void OnButtonMenuPressed()
+    public async void OnButtonMenuPressed()
     {
         GetTree().Paused = false;
         soundManager.PlaySoundClick();
+
+        transitionScreen.FadeToBlack();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void OnButtonExitPressed()
     {
         GetTree().Paused = false;
+
+        transitionScreen.FadeToBlack();
+
         await soundManager.PlaySoundExit();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
         GetTree().Quit();
     }
 }

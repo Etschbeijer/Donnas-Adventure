@@ -14,6 +14,8 @@ public partial class MenuWin : Control
 
     AcceptDialog nameDialog;
 
+    TransitionScreen transitionScreen;
+
     double currentTime;
 
     int score;
@@ -29,10 +31,12 @@ public partial class MenuWin : Control
     public override void _Ready()
     {
         //Get nodes
-        soundManager = GetNode<SoundManager>("/root/SoundManager");
         global = GetNode<Global>("/root/Global");
+        soundManager = GetNode<SoundManager>("/root/SoundManager");
+
         timescore = GetNode<Label>("LabelTimeScore");
         nameDialog = GetNode<AcceptDialog>("NameDialog");
+        transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -42,6 +46,7 @@ public partial class MenuWin : Control
         soundManager.PlayMusicProject2Marioish2D();
         nameDialog.Hide();
         SetHighscore();
+        transitionScreen.FadeToNormal();
     }
 
     public async void OnButtonPlayAgainPressed()
@@ -49,14 +54,19 @@ public partial class MenuWin : Control
         global.ResetSpecialTreats();
         global.ResetLevelId();
         await soundManager.PlaySoundPlay();
+        transitionScreen.FadeToBlack();
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void OnButtonMenuPressed()
+    public async void OnButtonMenuPressed()
     {
         global.ResetSpecialTreats();
         global.ResetLevelId();
         soundManager.PlaySoundClick();
+        transitionScreen.FadeToBlack();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
@@ -64,7 +74,13 @@ public partial class MenuWin : Control
     {
         global.ResetSpecialTreats();
         global.ResetLevelId();
+
+        transitionScreen.FadeToBlack();
+
         await soundManager.PlaySoundExit();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
         GetTree().Quit();
     }
 

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 public partial class MenuSettingsSound : Control
 {
+    TransitionScreen transitionScreen;
+
     SoundManager soundManager;
 
     HSlider sliderMaster;
@@ -15,6 +17,8 @@ public partial class MenuSettingsSound : Control
     {
         //Get nodes
         soundManager = GetNode<SoundManager>("/root/SoundManager");
+        transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
         sliderMaster = GetNode<HSlider>("VolumeSliders/LabelMaster/SliderMaster");
         sliderMusic = GetNode<HSlider>("VolumeSliders/LabelMusic/SliderMusic");
         sliderSFX = GetNode<HSlider>("VolumeSliders/LabelSFX/SliderSFX");
@@ -26,6 +30,8 @@ public partial class MenuSettingsSound : Control
         sliderMusic.Value = musicLinearValue;
         var sfxLinearValue = soundManager.GetLinearValue("SFX");
         sliderSFX.Value = sfxLinearValue;
+
+        transitionScreen.FadeToNormal();
     }
 
     public void OnButtonResetPressed()
@@ -56,11 +62,16 @@ public partial class MenuSettingsSound : Control
     public void OnButtonMenuPressed()
     {
         soundManager.PlaySoundMainMenu();
+
+        transitionScreen.FadeToBlack();
+
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void OnButtonExitPressed()
     {
+        transitionScreen.FadeToBlack();
+
         await soundManager.PlaySoundExit();
 
         GetTree().Quit();

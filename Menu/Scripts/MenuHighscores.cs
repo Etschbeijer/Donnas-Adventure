@@ -11,6 +11,8 @@ public partial class MenuHighscores : Control
 
     SoundManager soundManager;
 
+    TransitionScreen transitionScreen;
+
     VBoxContainer container;
     VBoxContainer buttons;
 
@@ -22,14 +24,17 @@ public partial class MenuHighscores : Control
         //Get nodes
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
+        transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
         container = GetNode<VBoxContainer>("VBoxContainer");
         buttons = GetNode<VBoxContainer>("Buttons");
         resetHighScore = buttons.GetNode<Button>("ButtonReset");
 
-
         //Call important methods
         ClearHighScores();
         ShowHighScores();
+
+        transitionScreen.FadeToNormal();
     }
 
     public void ClearHighScores()
@@ -88,6 +93,9 @@ public partial class MenuHighscores : Control
     public void OnButtonMenuPressed()
     {
         soundManager.PlaySoundMainMenu();
+
+        transitionScreen.FadeToBlack();
+
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 

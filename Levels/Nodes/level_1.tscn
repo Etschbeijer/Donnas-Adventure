@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bincglc530w64"]
+[gd_scene load_steps=20 format=3 uid="uid://bincglc530w64"]
 
 [ext_resource type="PackedScene" uid="uid://c031qh1bonppp" path="res://UI/Nodes/hud.tscn" id="1_308c0"]
 [ext_resource type="Script" uid="uid://b6bjisges4dgg" path="res://Levels/Scripts/BaseLevel.cs" id="1_y1ujj"]
-[ext_resource type="PackedScene" uid="uid://bqa24f41tomh" path="res://UI/Nodes/transition_screen.tscn" id="2_gpg60"]
 [ext_resource type="PackedScene" uid="uid://b0fweypvn3pw0" path="res://Global/Nodes/world_environment.tscn" id="2_ohoa6"]
 [ext_resource type="PackedScene" uid="uid://big15srtmkr7a" path="res://Global/Nodes/fall_zone.tscn" id="3_a34cx"]
 [ext_resource type="PackedScene" uid="uid://s56vqbwuarxx" path="res://Global/Nodes/start_zone.tscn" id="4_lpr52"]
@@ -27,8 +26,6 @@ LevelId = "1-1"
 
 [node name="HUD" parent="." instance=ExtResource("1_308c0")]
 
-[node name="TransitionScreen" parent="." instance=ExtResource("2_gpg60")]
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.609699, 6.36539, 7.56635)
 layers = 31
@@ -49,10 +46,9 @@ metadata/_editor_floor_ = Vector3(0, 8, 0)
 [node name="BoneTreat" parent="." instance=ExtResource("15_fep27")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -29, 3, -891)
 
-[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud", "TransitionScreen") instance=ExtResource("6_lpr52")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("Hud") instance=ExtResource("6_lpr52")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4, 22)
 Hud = NodePath("../HUD")
-TransitionScreen = NodePath("../TransitionScreen")
 
 [node name="MenuPause" parent="PlayerCharacter" instance=ExtResource("8_i2lpa")]
 

@@ -9,12 +9,16 @@ public partial class MenuDefeat : Control
     TextureRect deathBySlimes;
     TextureRect deathByDrop;
 
+    TransitionScreen transitionScreen;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Get nodes
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
+        transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
         deathByDrop = GetNode<TextureRect>("DeathByDrop");
         deathBySlimes = GetNode<TextureRect>("DeathBySlimes");
 
@@ -40,25 +44,37 @@ public partial class MenuDefeat : Control
         {
             ShowDeathByDrop();
         }
+
+        transitionScreen.FadeToNormal();
     }
 
     public async void OnButtonPlayAgainPressed()
     {
+        transitionScreen.FadeToBlack();
+
         await soundManager.PlaySoundPlay();
 
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void OnButtonMenuPressed()
+    public async void OnButtonMenuPressed()
     {
         soundManager.PlaySoundMainMenu();
+
+        transitionScreen.FadeToBlack();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
 
     public async void OnButtonExitPressed()
     {
+        transitionScreen.FadeToBlack();
+
         await soundManager.PlaySoundExit();
+
+        await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 
         GetTree().Quit();
     }

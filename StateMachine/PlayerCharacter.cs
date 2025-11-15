@@ -54,7 +54,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
     [Export]
     public Hud Hud;
-    [Export]
+
+
     public TransitionScreen TransitionScreen;
 
     public Vector3 SpawnPoint;
@@ -162,6 +163,7 @@ public partial class PlayerCharacter : CharacterBody3D
         //Get nodes
         Global = GetNode<Global>("/root/Global");
         SoundManager = GetNode<SoundManager>("/root/SoundManager");
+        TransitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
         CameraController = GetNode<Node3D>("Camera_Controller");
         WallDetector = GetNode<RayCast3D>("WallDetector");

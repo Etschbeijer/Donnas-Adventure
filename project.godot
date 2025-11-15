@@ -21,6 +21,7 @@ config/windows_native_icon="res://Images/Icons/DonnasAdventure.ico"
 
 Global="*res://Global/Scripts/Global.cs"
 SoundManager="*res://Global/Nodes/sound_manager.tscn"
+TransitionScreen="*res://UI/Nodes/transition_screen.tscn"
 
 [display]
 
