@@ -3,7 +3,7 @@ using System;
 
 public partial class StartZone : Area3D
 {
-    public AudioStreamPlayer3D audioPlayer;
+    AudioStreamPlayer3D audioPlayer;
 
     Global global;
 
@@ -29,7 +29,7 @@ public partial class StartZone : Area3D
 
         if (player != null)
         {
-            if (!global.CheckTime)
+            if (!global.CheckTime && audioPlayer.IsInsideTree())
             {
                 audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
                 audioPlayer.Play();

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c638efe0ce7mv"]
+[gd_scene load_steps=8 format=3 uid="uid://c638efe0ce7mv"]
 
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_pq02n"]
+[ext_resource type="Texture2D" uid="uid://c242cvnacega3" path="res://Images/Icons/Treat.png" id="2_6t86j"]
 [ext_resource type="Texture2D" uid="uid://5xyl7qsh1mwe" path="res://Images/Icons/Cheese.png" id="2_sf8tv"]
 [ext_resource type="Texture2D" uid="uid://cm7spmyvwogn4" path="res://Images/Icons/Cookie.png" id="3_6t86j"]
 [ext_resource type="Texture2D" uid="uid://7n6ijhn2bvds" path="res://Images/Icons/Meat.png" id="4_oplac"]
@@ -34,7 +35,7 @@ offset_bottom = 88.0
 [node name="PanelRank" type="Panel" parent="."]
 layout_mode = 1
 offset_top = 11.0
-offset_right = 840.0
+offset_right = 912.0
 offset_bottom = 75.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7sg6")
 
@@ -91,11 +92,38 @@ text = "05:00
 
 "
 
+[node name="TextureTreat" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 16.0
+offset_right = 376.0
+offset_bottom = 72.0
+texture = ExtResource("2_6t86j")
+expand_mode = 3
+
+[node name="LabelCollectedTreats_" type="Label" parent="."]
+layout_mode = 1
+offset_left = 376.0
+offset_top = 11.0
+offset_right = 432.0
+offset_bottom = 170.0
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("1_pq02n")
+theme_override_font_sizes/font_size = 35
+text = ":
+
+"
+
 [node name="LabelCollectedTreats" type="Label" parent="."]
 layout_mode = 1
-offset_left = 312.0
+offset_left = 392.0
 offset_top = 15.0
-offset_right = 440.0
+offset_right = 448.0
 offset_bottom = 174.0
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -111,9 +139,9 @@ text = "100
 
 [node name="LabelName" type="Label" parent="."]
 layout_mode = 1
-offset_left = 600.0
+offset_left = 680.0
 offset_top = 15.0
-offset_right = 820.0
+offset_right = 900.0
 offset_bottom = 174.0
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -129,10 +157,10 @@ text = "Alfred Testman
 
 [node name="PanelSpecialTreats" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 15.0
-offset_right = 584.0
-offset_bottom = 71.0
+offset_left = 464.0
+offset_top = 16.0
+offset_right = 664.0
+offset_bottom = 72.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_sf8tv")
 
 [node name="TextureCheese" type="TextureRect" parent="PanelSpecialTreats"]
