@@ -44,8 +44,8 @@ jobs:
     - name: Patch Windows icon with rcedit
       run: |
         wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe
-        wine ./rcedit-x64.exe "${{ steps.export.outputs.archive_directory }}/DonnasAdventure.exe" --set-icon "./Images/Icons/DonnasAdventure.ico"
-
+        wineconsole --backend=curses ./rcedit-x64.exe "${{ steps.export.outputs.archive_directory }}/DonnasAdventure.exe" --set-icon "./Images/Icons/DonnasAdventure.ico"
+        
       # This release action has worked well for me. However, you can most likely use any release action of your choosing.
       # https://github.com/ncipollo/release-action
     - name: create release
