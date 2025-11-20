@@ -20,14 +20,6 @@ jobs:
     - name: checkout
       uses: actions/checkout@v5
   
-    - name: install wine
-      id: wine_install
-      run: |
-        sudo dpkg --add-architecture i386
-        sudo apt update
-        sudo apt install -y wine64 wine32
-        echo "WINE_PATH=$(which wine)" >> $GITHUB_OUTPUT
-
     - name: export game
       id: export
       # Use latest version (see releases for all versions)
@@ -39,13 +31,7 @@ jobs:
         relative_project_path: ./
         archive_output: true
         cache: true
-        wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
 
-    - name: Patch Windows icon with rcedit
-      run: |
-        wget https://github.com/electron/rcedit/releases/download/v2.0.0/rcedit-x64.exe
-        wineconsole --backend=curses ./rcedit-x64.exe "${{ steps.export.outputs.archive_directory }}/DonnasAdventure.exe" --set-icon "./Images/Icons/DonnasAdventure.ico"
-        
       # This release action has worked well for me. However, you can most likely use any release action of your choosing.
       # https://github.com/ncipollo/release-action
     - name: create release
