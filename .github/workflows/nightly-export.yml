@@ -20,6 +20,14 @@ jobs:
     - name: checkout
       uses: actions/checkout@v5
   
+    - name: install wine
+        id: wine_install
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt install -y wine64 wine32
+          echo "WINE_PATH=$(which wine)" >> $GITHUB_OUTPUT
+
     - name: export game
       id: export
       # Use latest version (see releases for all versions)
@@ -31,6 +39,7 @@ jobs:
         relative_project_path: ./
         archive_output: true
         cache: true
+        wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
 
       # This release action has worked well for me. However, you can most likely use any release action of your choosing.
       # https://github.com/ncipollo/release-action
