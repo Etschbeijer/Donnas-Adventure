@@ -69,16 +69,30 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.335211, 0.754964, 0.287311, 1)
 
-[node name="LabelTitle" type="Label" parent="."]
+[node name="VScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -128.0
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 179.0
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -476.0
+offset_right = 960.0
+offset_bottom = 356.0
 grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Credits" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -86,16 +100,24 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_xos3g")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 100
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="LabelAudioCredits" type="Label" parent="."]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 192.0
-offset_right = 723.0
-offset_bottom = 351.0
+[node name="Empty" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Donnas Adventure" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
@@ -103,18 +125,52 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_xos3g")
-theme_override_font_sizes/font_size = 35
-text = "Audio Credits
+theme_override_font_sizes/font_size = 40
+text = "Donnas Adventure"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-"
+[node name="Game by" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "A game by Etschbeijer
+Etschlord Dungeons"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Empty2" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelPlaytester" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 40
+text = "Playtester"
 horizontal_alignment = 1
 
-[node name="LabelAudioAutors" type="Label" parent="."]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 256.0
-offset_right = 552.0
-offset_bottom = 529.0
+[node name="LabelPlaytesters" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
@@ -122,19 +178,17 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_xos3g")
 theme_override_font_sizes/font_size = 30
-text = "Sound effects from OpenGameArt.org (Public Domain / CC0)
-- KobatoGames
-- Spring Spring
-- cynicmusic
-- SwissArcadeGameEntertainment"
-autowrap_mode = 3
+text = "Freymaurer
+Rooka
+Christel
+Vrayx
+Kreanga94
+Felix"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LabelArtAutors" type="Label" parent="."]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 576.0
-offset_right = 552.0
-offset_bottom = 849.0
+[node name="Empty3" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
@@ -142,17 +196,24 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_xos3g")
 theme_override_font_sizes/font_size = 30
-text = "Art from OpenGameArt.org (Public Domain / CC0)
-- bart
-Art from Wikimedia.org (Public Domain / CC0)"
-autowrap_mode = 3
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="LabelAudioAutors2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 552.0
-offset_top = 256.0
-offset_right = 1040.0
-offset_bottom = 713.0
+[node name="LabelAudioCredits" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 40
+text = "Audio Credits"
+horizontal_alignment = 1
+
+[node name="LabelAudioSourceOpenGameArt" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 4
@@ -160,10 +221,90 @@ theme_override_constants/outline_size = 4
 theme_override_constants/shadow_outline_size = 6
 theme_override_fonts/font = ExtResource("2_xos3g")
 theme_override_font_sizes/font_size = 30
-text = "Sound effects from kenney.nl  (Public Domain / CC0)
-- Interface Sounds
-- Impact Sounds"
-autowrap_mode = 3
+text = "Sound effects from OpenGameArt.org (Public Domain / CC0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAudioAutors" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "KobatoGames
+Spring Spring
+cynicmusic
+SwissArcadeGameEntertainment"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAudioSourceKenney" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Sound effects from kenney.nl  (Public Domain / CC0)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelAudioTypes" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Interface Sounds
+Impact Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Empty4" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelArt" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 40
+text = "Audio Art"
+horizontal_alignment = 1
+
+[node name="LabelArtSource" type="Label" parent="VScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.492249, 0.254548, 0.820425, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("2_xos3g")
+theme_override_font_sizes/font_size = 30
+text = "Blender"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -173,9 +314,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -118.0
-offset_top = -130.0
+offset_top = -120.0
 offset_right = 118.0
-offset_bottom = -54.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 0
 
