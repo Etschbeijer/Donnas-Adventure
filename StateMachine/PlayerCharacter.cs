@@ -51,6 +51,8 @@ public partial class PlayerCharacter : CharacterBody3D
     public int CurrentHealth { get; set; } = 3;
     [Export]
     public int Lifes { get; set; } = 3;
+    [Export]
+    public int JoystickSensitivity { get; set; } = 5;
 
     [Export]
     public Hud Hud;
@@ -117,6 +119,7 @@ public partial class PlayerCharacter : CharacterBody3D
     float blinkInterval;
 
     bool isDead = false;
+    bool isControllerInput;
     bool isBlinking = false;
     bool hasTopSpeed = false;
 
@@ -225,11 +228,13 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         //Control camera position manually
         Vector3 characterPosition = Position;
+        Vector3 characterRotation = Rotation;
 
         //Get camera controller position
         Vector3 cameraPosition = CameraController.Position;
+        Vector3 cameraRotation = CameraController.Rotation;
 
-        if(IsInvulnerable)
+        if (IsInvulnerable)
         {
             currentInvulnerabilityTime += delta;
 
@@ -266,13 +271,22 @@ public partial class PlayerCharacter : CharacterBody3D
 
         Velocity = PlayerVelocity;
 
+        controlGamepadCamera(delta);
+
         AlignCamera(cameraPosition, characterPosition, delta);
 
         MoveAndSlide();
     }
 
+    //public override void _Process(double delta)
+    //{
+    //    controlGamepadCamera(delta);
+    //}
+
     public override void _Input(InputEvent @event)
     {
+        isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
         if (@event is InputEventMouseMotion motion)
         {
             CameraController.RotateY(-motion.Relative.X * MouseSensitivity);
@@ -289,6 +303,21 @@ public partial class PlayerCharacter : CharacterBody3D
             //Control min and max vertical rotation
             float pitch = cameraTarget.RotationDegrees.X;
             pitch -= motion.Relative.Y * MouseSensitivity * Mathf.RadToDeg(1f);
+            pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
+            cameraTarget.RotationDegrees = new Vector3(pitch, cameraTarget.RotationDegrees.Y, cameraTarget.RotationDegrees.Z);
+        }
+    }
+
+    private void controlGamepadCamera(double delta)
+    {
+        Vector2 joyStickInput = Input.GetVector("look_left", "look_right", "look_down", "look_up");
+
+        if (joyStickInput.Length() > 0.1f)
+        {
+            CameraController.RotateY(-joyStickInput.X * JoystickSensitivity * (float)delta);
+
+            float pitch = cameraTarget.RotationDegrees.X;
+            pitch -= joyStickInput.Y * JoystickSensitivity * Mathf.RadToDeg(1f) * (float)delta;
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
             cameraTarget.RotationDegrees = new Vector3(pitch, cameraTarget.RotationDegrees.Y, cameraTarget.RotationDegrees.Z);
         }
@@ -347,9 +376,8 @@ public partial class PlayerCharacter : CharacterBody3D
         //    }
         //}
 
-        CameraController.Position = cameraPosition.Lerp(characterPosition, 5f * (float)delta);
+        CameraController.Position = cameraPosition.Lerp(characterPosition, 3f * (float)delta);
     }
-
 
     //Align character to floor
     private void alignWithFloor(Vector3 floorNormal)
@@ -452,6 +480,7 @@ public partial class PlayerCharacter : CharacterBody3D
                 PlayerVelocity.X = direction.X * MovementSpeed;
                 PlayerVelocity.Z = direction.Z * MovementSpeed;
 
+                //Control with keyboard
                 if (inputDir.Y < 0)
                 {
                     //Rotate player to camera angle

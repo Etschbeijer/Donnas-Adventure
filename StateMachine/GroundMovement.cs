@@ -114,11 +114,11 @@ public partial class GroundMovement : PlayerState
 
     public void DetermineWalkAnimation()
     {
-        if(Player.InputDir.X < 0)
+        if(Player.InputDir.X < -0.5)
         {
             AnimationPlayer.Play("Strafe_Left", 0.1);
         }
-        else if (Player.InputDir.X > 0)
+        else if (Player.InputDir.X > 0.5)
         {
             AnimationPlayer.Play("Strafe_Right", 0.1);
         }
@@ -130,11 +130,11 @@ public partial class GroundMovement : PlayerState
 
     public void DetermineRunAnimation()
     {
-        if (Player.InputDir.X < 0)
+        if (Player.InputDir.X < -0.5)
         {
             AnimationPlayer.Play("Strafe_Left", 0.1, 1.2f);
         }
-        else if (Player.InputDir.X > 0)
+        else if (Player.InputDir.X > 0.5)
         {
             AnimationPlayer.Play("Strafe_Right", 0.1, 1.2f);
         }
