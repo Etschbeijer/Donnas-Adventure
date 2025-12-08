@@ -8,9 +8,11 @@ public partial class MenuSettingsSound : Control
     SoundManager soundManager;
     TransitionScreen transitionScreen;
 
-    HSlider sliderMaster;
-    HSlider sliderMusic;
     HSlider sliderSFX;
+    HSlider sliderMusic;
+    HSlider sliderMaster;
+
+    Button menuButton;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -20,9 +22,11 @@ public partial class MenuSettingsSound : Control
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
-        sliderMaster = GetNode<HSlider>("VolumeSliders/LabelMaster/SliderMaster");
-        sliderMusic = GetNode<HSlider>("VolumeSliders/LabelMusic/SliderMusic");
         sliderSFX = GetNode<HSlider>("VolumeSliders/LabelSFX/SliderSFX");
+        sliderMusic = GetNode<HSlider>("VolumeSliders/LabelMusic/SliderMusic");
+        sliderMaster = GetNode<HSlider>("VolumeSliders/LabelMaster/SliderMaster");
+
+        menuButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonMenu");
 
         //Call important methods
         var masterLinearValue = soundManager.GetLinearValue("Master");
@@ -39,6 +43,22 @@ public partial class MenuSettingsSound : Control
     public override void _Process(double delta)
     {
         UiAdapter.SetMouseUi(global.IsControllerInput);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if (!input && input != global.IsControllerInput)
+        {
+            GetViewport().GuiReleaseFocus();
+        }
+
+        if (input && input != global.IsControllerInput)
+        {
+            menuButton.GrabFocus();
+        }
+        global.IsControllerInput = input;
     }
 
     public void OnButtonResetPressed()
@@ -73,14 +93,5 @@ public partial class MenuSettingsSound : Control
         transitionScreen.FadeToBlack();
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
-    }
-
-    public async void OnButtonExitPressed()
-    {
-        transitionScreen.FadeToBlack();
-
-        await soundManager.PlaySoundExit();
-
-        GetTree().Quit();
     }
 }

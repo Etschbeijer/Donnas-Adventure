@@ -7,9 +7,10 @@ public partial class MenuDefeat : Control
     SoundManager soundManager;
     TransitionScreen transitionScreen;
 
-    TextureRect deathBySlimes;
     TextureRect deathByDrop;
+    TextureRect deathBySlimes;
 
+    Button playAgainButton;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -21,6 +22,7 @@ public partial class MenuDefeat : Control
 
         deathByDrop = GetNode<TextureRect>("DeathByDrop");
         deathBySlimes = GetNode<TextureRect>("DeathBySlimes");
+        playAgainButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonPlayAgain");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -51,6 +53,22 @@ public partial class MenuDefeat : Control
     public override void _Process(double delta)
     {
         UiAdapter.SetMouseUi(global.IsControllerInput);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if (!input && input != global.IsControllerInput)
+        {
+            GetViewport().GuiReleaseFocus();
+        }
+
+        if (input && input != global.IsControllerInput)
+        {
+            playAgainButton.GrabFocus();
+        }
+        global.IsControllerInput = input;
     }
 
     public async void OnButtonPlayAgainPressed()

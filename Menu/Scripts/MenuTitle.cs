@@ -8,6 +8,8 @@ public partial class MenuTitle : Control
     SoundManager soundManager;
     TransitionScreen transitionScreen;
 
+    Button playButton;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -15,6 +17,8 @@ public partial class MenuTitle : Control
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
+        playButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonPlay");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -35,17 +39,23 @@ public partial class MenuTitle : Control
 
     public override void _Process(double delta)
     {
-        //if (!global.IsControllerInput)
-        //{
-        //    GetViewport().GuiReleaseFocus();
-        //}
-
         UiAdapter.SetMouseUi(global.IsControllerInput);
     }
 
     public override void _Input(InputEvent @event)
     {
-        global.IsControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if (!input && input != global.IsControllerInput)
+        {
+            GetViewport().GuiReleaseFocus();
+        }
+
+        if (input && input != global.IsControllerInput)
+        {
+            playButton.GrabFocus();
+        }
+        global.IsControllerInput = input;
     }
 
     public async void OnButtonPlayPressed()

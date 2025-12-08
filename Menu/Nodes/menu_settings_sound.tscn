@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://y3ba0to0tv4c"]
+[gd_scene load_steps=9 format=3 uid="uid://y3ba0to0tv4c"]
 
 [ext_resource type="Script" uid="uid://coo5u5m3mwehp" path="res://Menu/Scripts/MenuSettingsSound.cs" id="1_jrtae"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_2v02v"]
@@ -42,54 +42,6 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iovgq"]
-bg_color = Color(0.138366, 0.327553, 0.116957, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.494118, 0.254902, 0.819608, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
-bg_color = Color(0.26146, 0.562342, 0.212165, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weaej"]
-bg_color = Color(0.262745, 0.560784, 0.211765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4cr3"]
-bg_color = Color(0.262745, 0.560784, 0.211765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
 bg_color = Color(0.138366, 0.327553, 0.116957, 1)
 border_width_left = 2
 border_width_top = 2
@@ -288,10 +240,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -424.0
-offset_right = 116.0
-offset_bottom = -184.0
+offset_left = -118.0
+offset_top = -276.0
+offset_right = 118.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -328,22 +280,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_iovgq")
 text = "Main Menu"
 script = ExtResource("4_2v02v")
 
-[node name="ButtonExit" type="Button" parent="Buttons"]
-layout_mode = 2
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
-theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
-theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("2_2v02v")
-theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
-theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
-text = "Exit"
-
 [connection signal="value_changed" from="VolumeSliders/LabelMaster/SliderMaster" to="." method="OnMasterValueChanged"]
 [connection signal="value_changed" from="VolumeSliders/LabelMaster/SliderMaster" to="VolumeSliders" method="OnMasterValueChanged"]
 [connection signal="value_changed" from="VolumeSliders/LabelMusic/SliderMusic" to="." method="OnMusicValueChanged"]
@@ -352,4 +288,3 @@ text = "Exit"
 [connection signal="value_changed" from="VolumeSliders/LabelSFX/SliderSFX" to="VolumeSliders" method="OnSFXValueChanged"]
 [connection signal="pressed" from="Buttons/ButtonMenuReset" to="." method="OnButtonResetPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]
-[connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]

@@ -97,7 +97,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uepin")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Buttons" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 1
 anchors_preset = 8
@@ -112,7 +112,7 @@ offset_bottom = 118.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ButtonResume" type="Button" parent="VBoxContainer"]
+[node name="ButtonResume" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
@@ -129,7 +129,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
 text = "Resume"
 script = ExtResource("3_iglgv")
 
-[node name="ButtonMainMenu" type="Button" parent="VBoxContainer"]
+[node name="ButtonMainMenu" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
@@ -145,7 +145,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
 text = "Main Menu"
 
-[node name="ButtonExit" type="Button" parent="VBoxContainer"]
+[node name="ButtonExit" type="Button" parent="Buttons"]
 layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
@@ -161,6 +161,6 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
 text = "Exit"
 
-[connection signal="button_down" from="VBoxContainer/ButtonResume" to="." method="OnButtonResumePressed"]
-[connection signal="button_down" from="VBoxContainer/ButtonMainMenu" to="." method="OnButtonMenuPressed"]
-[connection signal="button_down" from="VBoxContainer/ButtonExit" to="." method="OnButtonExitPressed"]
+[connection signal="button_down" from="Buttons/ButtonResume" to="." method="OnButtonResumePressed"]
+[connection signal="button_down" from="Buttons/ButtonMainMenu" to="." method="OnButtonMenuPressed"]
+[connection signal="button_down" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]

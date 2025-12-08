@@ -11,10 +11,11 @@ public partial class MenuHighscores : Control
     SoundManager soundManager;
     TransitionScreen transitionScreen;
 
-    VBoxContainer container;
     VBoxContainer buttons;
+    VBoxContainer container;
 
-    Button resetHighScore;
+    Button menuButton;
+    Button resetHighScoreButton;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,7 +27,8 @@ public partial class MenuHighscores : Control
 
         container = GetNode<VBoxContainer>("VBoxContainer");
         buttons = GetNode<VBoxContainer>("Buttons");
-        resetHighScore = buttons.GetNode<Button>("ButtonReset");
+        resetHighScoreButton = buttons.GetNode<Button>("ButtonReset");
+        menuButton = buttons.GetNode<Button>("ButtonMenu");
 
         //Call important methods
         ClearHighScores();
@@ -38,6 +40,22 @@ public partial class MenuHighscores : Control
     public override void _Process(double delta)
     {
         UiAdapter.SetMouseUi(global.IsControllerInput);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if (!input && input != global.IsControllerInput)
+        {
+            GetViewport().GuiReleaseFocus();
+        }
+
+        if (input && input != global.IsControllerInput)
+        {
+            menuButton.GrabFocus();
+        }
+        global.IsControllerInput = input;
     }
 
     public void ClearHighScores()
@@ -108,8 +126,8 @@ public partial class MenuHighscores : Control
         global.SaveData.ResetHighScores();
         ClearHighScores();
         ShowHighScores();
-        resetHighScore.ButtonPressed = false;
-        resetHighScore.FocusMode = FocusModeEnum.None;
+        resetHighScoreButton.ButtonPressed = false;
+        resetHighScoreButton.FocusMode = FocusModeEnum.None;
     }
 
     private void displaySpecialTreats(Control row, string[] specialTreats)

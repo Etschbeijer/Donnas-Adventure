@@ -20,6 +20,8 @@ public partial class MenuWin : Control
 
     PlayerScore currentPlayer;
 
+    Button playAgainButton;
+
     List<PlayerScore> highscoresAndPlayers = new();
 
     double currentTime;
@@ -42,6 +44,8 @@ public partial class MenuWin : Control
         buttonAccept = panelScore.GetNode<Button>("ButtonAccept");
         textEditName = panelScore.GetNode<TextEdit>("TextEditName");
 
+        playAgainButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonPlayAgain");
+
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
@@ -56,6 +60,22 @@ public partial class MenuWin : Control
     public override void _Process(double delta)
     {
         UiAdapter.SetMouseUi(global.IsControllerInput);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if (!input && input != global.IsControllerInput)
+        {
+            GetViewport().GuiReleaseFocus();
+        }
+
+        if (input && input != global.IsControllerInput)
+        {
+            playAgainButton.GrabFocus();
+        }
+        global.IsControllerInput = input;
     }
 
     public async void OnButtonPlayAgainPressed()

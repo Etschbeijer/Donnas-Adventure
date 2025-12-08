@@ -20,7 +20,7 @@ public partial class MenuPause : Control
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
-        resumeButton = GetNode<VBoxContainer>("VBoxContainer").GetNode<Button>("ButtonResume");
+        resumeButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonResume");
 
         //Call important methods
         GetViewport().GuiReleaseFocus();
