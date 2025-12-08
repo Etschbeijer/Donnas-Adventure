@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://y3ba0to0tv4c"]
+[gd_scene load_steps=13 format=3 uid="uid://y3ba0to0tv4c"]
 
 [ext_resource type="Script" uid="uid://coo5u5m3mwehp" path="res://Menu/Scripts/MenuSettingsSound.cs" id="1_jrtae"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_2v02v"]
 [ext_resource type="Script" uid="uid://d1y8hiwsiyko" path="res://Menu/Scripts/VolumeSliders.cs" id="3_783fd"]
+[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="4_2v02v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jrtae"]
 bg_color = Color(0.26146, 0.562342, 0.212165, 1)
@@ -325,6 +326,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_783fd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_2v02v")
 theme_override_styles/normal = SubResource("StyleBoxFlat_iovgq")
 text = "Main Menu"
+script = ExtResource("4_2v02v")
 
 [node name="ButtonExit" type="Button" parent="Buttons"]
 layout_mode = 2

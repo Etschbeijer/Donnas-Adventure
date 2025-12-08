@@ -17,6 +17,7 @@ public partial class Global : Node
 
     public bool CheckTime = false;
     public bool PauseTime = false;
+    public bool IsControllerInput = false;
 
     public ulong StartTime = 0;
     public ulong PausedTime = 0;
@@ -54,6 +55,11 @@ public partial class Global : Node
             Minutes = (int)(elapsed / 60);
             Seconds = (int)(elapsed % 60);
         }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        IsControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
     }
 
     public void IncreaseTreats(int value)

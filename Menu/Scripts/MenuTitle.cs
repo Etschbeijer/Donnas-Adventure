@@ -4,14 +4,15 @@ using System.Threading.Tasks;
 
 public partial class MenuTitle : Control
 {
+    Global global;
     SoundManager soundManager;
-
     TransitionScreen transitionScreen;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Get nodes
+        global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
@@ -30,6 +31,21 @@ public partial class MenuTitle : Control
         }
 
         transitionScreen.FadeToNormal();
+    }
+
+    public override void _Process(double delta)
+    {
+        //if (!global.IsControllerInput)
+        //{
+        //    GetViewport().GuiReleaseFocus();
+        //}
+
+        UiAdapter.SetMouseUi(global.IsControllerInput);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        global.IsControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
     }
 
     public async void OnButtonPlayPressed()

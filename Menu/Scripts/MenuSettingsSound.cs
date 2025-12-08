@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 public partial class MenuSettingsSound : Control
 {
-    TransitionScreen transitionScreen;
-
+    Global global;
     SoundManager soundManager;
+    TransitionScreen transitionScreen;
 
     HSlider sliderMaster;
     HSlider sliderMusic;
@@ -16,6 +16,7 @@ public partial class MenuSettingsSound : Control
     public override void _Ready()
     {
         //Get nodes
+        global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
@@ -31,7 +32,13 @@ public partial class MenuSettingsSound : Control
         var sfxLinearValue = soundManager.GetLinearValue("SFX");
         sliderSFX.Value = sfxLinearValue;
 
+        //Call important methods
         transitionScreen.FadeToNormal();
+    }
+
+    public override void _Process(double delta)
+    {
+        UiAdapter.SetMouseUi(global.IsControllerInput);
     }
 
     public void OnButtonResetPressed()

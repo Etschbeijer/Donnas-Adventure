@@ -8,9 +8,7 @@ public partial class MenuHighscores : Control
     PackedScene PanelRowScene;
     
     Global global;
-
     SoundManager soundManager;
-
     TransitionScreen transitionScreen;
 
     VBoxContainer container;
@@ -35,6 +33,11 @@ public partial class MenuHighscores : Control
         ShowHighScores();
 
         transitionScreen.FadeToNormal();
+    }
+
+    public override void _Process(double delta)
+    {
+        UiAdapter.SetMouseUi(global.IsControllerInput);
     }
 
     public void ClearHighScores()

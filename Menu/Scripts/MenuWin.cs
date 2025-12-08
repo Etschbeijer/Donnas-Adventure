@@ -7,14 +7,20 @@ using static System.Formats.Asn1.AsnWriter;
 public partial class MenuWin : Control
 {
     Global global;
-
     SoundManager soundManager;
+    TransitionScreen transitionScreen;
 
     Label timescore;
 
-    AcceptDialog nameDialog;
+    Panel panelScore;
 
-    TransitionScreen transitionScreen;
+    Button buttonAccept;
+
+    TextEdit textEditName;
+
+    PlayerScore currentPlayer;
+
+    List<PlayerScore> highscoresAndPlayers = new();
 
     double currentTime;
 
@@ -23,20 +29,18 @@ public partial class MenuWin : Control
 
     string[] specialStreats;
 
-    List<PlayerScore> highscoresAndPlayers = new();
-
-    PlayerScore currentPlayer;
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         //Get nodes
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
-
-        timescore = GetNode<Label>("LabelTimeScore");
-        nameDialog = GetNode<AcceptDialog>("NameDialog");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
+        panelScore = GetNode<Panel>("PanelScore");
+        timescore = panelScore.GetNode<Label>("LabelTimeScore");
+        buttonAccept = panelScore.GetNode<Button>("ButtonAccept");
+        textEditName = panelScore.GetNode<TextEdit>("TextEditName");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
@@ -44,9 +48,14 @@ public partial class MenuWin : Control
         //Call important methods
         soundManager.StopMusicPuppyPlayingInTheGarden2D();
         soundManager.PlayMusicProject2Marioish2D();
-        nameDialog.Hide();
+        panelScore.Hide();
         SetHighscore();
         transitionScreen.FadeToNormal();
+    }
+
+    public override void _Process(double delta)
+    {
+        UiAdapter.SetMouseUi(global.IsControllerInput);
     }
 
     public async void OnButtonPlayAgainPressed()
@@ -103,13 +112,13 @@ public partial class MenuWin : Control
             {
                 highscoresAndPlayers.Add(playerScores[i]);
             }
-            nameDialog.Show();
+            panelScore.Show();
         }
     }
 
-    public void OnNameDialogConfirmed()
+    public void OnButtonAcceptPressed()
     {
-        string playerName = nameDialog.GetNode<LineEdit>("LineEdit").Text.Trim();
+        string playerName = textEditName.Text.Trim();
 
         currentPlayer = new PlayerScore
         {
@@ -142,5 +151,7 @@ public partial class MenuWin : Control
 
         global.ResetSpecialTreats();
         global.ResetLevelId();
+
+        panelScore.Hide();
     }
 }

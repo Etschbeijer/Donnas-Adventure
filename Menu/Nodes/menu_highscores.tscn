@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://kgv3xulofh6x"]
+[gd_scene load_steps=9 format=3 uid="uid://kgv3xulofh6x"]
 
 [ext_resource type="Script" uid="uid://d4dc4gf1apfny" path="res://Menu/Scripts/MenuHighscores.cs" id="1_j7sg6"]
 [ext_resource type="PackedScene" uid="uid://c638efe0ce7mv" path="res://Menu/Nodes/control_row.tscn" id="2_eygsm"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_yepu1"]
+[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="4_eygsm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
 bg_color = Color(0.26146, 0.562342, 0.212165, 1)
@@ -145,6 +146,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Main Menu"
+script = ExtResource("4_eygsm")
 
 [connection signal="pressed" from="Buttons/ButtonReset" to="." method="OnButtonResetHighScoresPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]

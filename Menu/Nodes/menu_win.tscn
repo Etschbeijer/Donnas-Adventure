@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dse1fhfje01i8"]
+[gd_scene load_steps=11 format=3 uid="uid://dse1fhfje01i8"]
 
 [ext_resource type="Script" uid="uid://cq8c866l8i0d" path="res://Menu/Scripts/MenuWin.cs" id="2_jdqle"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
 [ext_resource type="Texture2D" uid="uid://cpdf4k3umk8lm" path="res://Images/Donnas/Donna_Win.png" id="3_vlnal"]
+[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="4_llr70"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr70"]
 bg_color = Color(0.384314, 0.113725, 0.537255, 1)
@@ -15,6 +16,18 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdqle"]
+bg_color = Color(0.192, 0.953, 0.42, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.192157, 0.952941, 0.419608, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otwlu"]
 bg_color = Color(0.69124, 0.493593, 0.897696, 1)
@@ -54,18 +67,6 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjukq"]
 bg_color = Color(0.38455, 0.112288, 0.5389, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.333333, 0.756863, 0.286275, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlnal"]
-bg_color = Color(0.384314, 0.113725, 0.537255, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -124,22 +125,46 @@ offset_bottom = 612.0
 grow_vertical = 2
 texture = ExtResource("3_vlnal")
 
-[node name="PanelTime" type="Panel" parent="."]
+[node name="PanelScore" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -136.0
-offset_top = 76.0
-offset_right = 136.0
-offset_bottom = 132.0
+offset_left = -184.0
+offset_top = -108.0
+offset_right = 184.0
+offset_bottom = 252.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_llr70")
 
-[node name="LabelTime" type="Label" parent="."]
+[node name="Congratulations" type="Label" parent="PanelScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -188.0
+offset_right = 174.0
+offset_bottom = -116.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+text = "Congratulations!"
+horizontal_alignment = 1
+
+[node name="TextEditName" type="TextEdit" parent="PanelScore"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,9 +172,39 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -152.0
-offset_top = 68.0
-offset_right = 8.0
-offset_bottom = 140.0
+offset_top = -116.0
+offset_right = 152.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/current_line_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_outline_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_placeholder_color = Color(0.192, 0.953, 0.42, 0.4)
+theme_override_colors/font_readonly_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/selection_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_selected_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_jdqle")
+placeholder_text = "Name"
+drag_and_drop_selection_enabled = false
+wrap_mode = 1
+scroll_fit_content_height = true
+caret_move_on_right_click = false
+caret_multiple = false
+
+[node name="LabelTime" type="Label" parent="PanelScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
@@ -163,17 +218,16 @@ theme_override_font_sizes/font_size = 50
 text = "Time:"
 horizontal_alignment = 1
 
-[node name="LabelTimeScore" type="Label" parent="."]
+[node name="LabelTimeScore" type="Label" parent="PanelScore"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = 68.0
-offset_right = 144.0
-offset_bottom = 140.0
+offset_top = -36.0
+offset_right = 152.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
@@ -186,6 +240,81 @@ theme_override_fonts/font = ExtResource("2_llr70")
 theme_override_font_sizes/font_size = 50
 text = "00:00"
 horizontal_alignment = 1
+
+[node name="LabelScore" type="Label" parent="PanelScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 20.0
+offset_right = 10.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+text = "Score:"
+horizontal_alignment = 1
+
+[node name="LabelScoreScore" type="Label" parent="PanelScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 20.0
+offset_right = 152.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+
+[node name="ButtonAccept" type="Button" parent="PanelScore"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = 92.0
+offset_right = 71.5
+offset_bottom = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.192814, 0.953087, 0.420198, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_llr70")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+text = "Accept"
+script = ExtResource("4_llr70")
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -216,6 +345,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
 text = "Play Again!"
+script = ExtResource("4_llr70")
 
 [node name="ButtonMenu" type="Button" parent="Buttons"]
 layout_mode = 2
@@ -249,34 +379,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
 text = "Exit"
 
-[node name="NameDialog" type="AcceptDialog" parent="."]
-title = "Congratulations!"
-initial_position = 1
-size = Vector2i(200, 108)
-visible = true
-theme_override_styles/panel = SubResource("StyleBoxFlat_vlnal")
-ok_button_text = "Accept"
-dialog_close_on_escape = false
-
-[node name="LineEdit" type="LineEdit" parent="NameDialog"]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 198.0
-offset_bottom = 65.0
-theme_override_colors/selection_color = Color(0.192157, 0.952941, 0.419608, 1)
-theme_override_colors/font_placeholder_color = Color(0.192157, 0.952941, 0.419608, 0.392157)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/font_selected_color = Color(0.192157, 0.952941, 0.419608, 1)
-theme_override_colors/font_color = Color(0.192157, 0.952941, 0.419608, 1)
-theme_override_constants/outline_size = 2
-theme_override_fonts/font = ExtResource("2_llr70")
-theme_override_font_sizes/font_size = 30
-placeholder_text = "Playername"
-alignment = 1
-max_length = 12
-flat = true
-
+[connection signal="pressed" from="PanelScore/ButtonAccept" to="." method="OnButtonAcceptPressed"]
 [connection signal="pressed" from="Buttons/ButtonPlayAgain" to="." method="OnButtonPlayAgainPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]
 [connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]
-[connection signal="confirmed" from="NameDialog" to="." method="OnNameDialogConfirmed"]

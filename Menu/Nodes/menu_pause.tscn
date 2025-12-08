@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bevo4djud04el"]
+[gd_scene load_steps=9 format=3 uid="uid://bevo4djud04el"]
 
 [ext_resource type="Script" uid="uid://tqgvx7aqmho1" path="res://Menu/Scripts/MenuPause.cs" id="1_ft0x8"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_uepin"]
+[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="3_iglgv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uepin"]
 bg_color = Color(0.494118, 0.254902, 0.819608, 0.392157)
@@ -126,6 +127,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
 text = "Resume"
+script = ExtResource("3_iglgv")
 
 [node name="ButtonMainMenu" type="Button" parent="VBoxContainer"]
 layout_mode = 2

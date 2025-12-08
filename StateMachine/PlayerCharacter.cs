@@ -57,7 +57,6 @@ public partial class PlayerCharacter : CharacterBody3D
     [Export]
     public Hud Hud;
 
-
     public TransitionScreen TransitionScreen;
 
     public Vector3 SpawnPoint;
@@ -119,7 +118,6 @@ public partial class PlayerCharacter : CharacterBody3D
     float blinkInterval;
 
     bool isDead = false;
-    bool isControllerInput;
     bool isBlinking = false;
     bool hasTopSpeed = false;
 
@@ -285,8 +283,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public override void _Input(InputEvent @event)
     {
-        isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
-
         if (@event is InputEventMouseMotion motion)
         {
             CameraController.RotateY(-motion.Relative.X * MouseSensitivity);
@@ -317,7 +313,7 @@ public partial class PlayerCharacter : CharacterBody3D
             CameraController.RotateY(-joyStickInput.X * JoystickSensitivity * (float)delta);
 
             float pitch = cameraTarget.RotationDegrees.X;
-            pitch -= joyStickInput.Y * JoystickSensitivity * Mathf.RadToDeg(1f) * (float)delta;
+            pitch -= joyStickInput.Y * (JoystickSensitivity / 2) * Mathf.RadToDeg(1f) * (float)delta;
             pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
             cameraTarget.RotationDegrees = new Vector3(pitch, cameraTarget.RotationDegrees.Y, cameraTarget.RotationDegrees.Z);
         }

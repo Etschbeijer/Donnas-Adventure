@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public partial class MenuPause : Control
 {
     Global global;
-
     SoundManager soundManager;
-
     TransitionScreen transitionScreen;
+
+    Button resumeButton;
 
     bool isPaused = false;
 
@@ -19,6 +19,11 @@ public partial class MenuPause : Control
         global = GetNode<Global>("/root/Global");
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+
+        resumeButton = GetNode<VBoxContainer>("VBoxContainer").GetNode<Button>("ButtonResume");
+
+        //Call important methods
+        GetViewport().GuiReleaseFocus();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,10 +33,16 @@ public partial class MenuPause : Control
         {
             CallDeferred(nameof(SetPause));
         }
+
+        if (isPaused)
+        {
+            UiAdapter.SetMouseUi(global.IsControllerInput);
+        }
     }
 
     public void SetPause()
     {
+        GetViewport().GuiReleaseFocus();
         if (isPaused)
         {
             Hide();
@@ -42,9 +53,15 @@ public partial class MenuPause : Control
         {
             Show();
             GetTree().Paused = true;
-            Input.MouseMode = Input.MouseModeEnum.Visible;
+            UiAdapter.SetMouseUi(global.IsControllerInput);
+            resumeButton.GrabFocus();
         }
         isPaused = !isPaused;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        global.IsControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
     }
 
     public void OnButtonResumePressed()
