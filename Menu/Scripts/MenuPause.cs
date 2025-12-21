@@ -96,7 +96,9 @@ public partial class MenuPause : Control
 
     public async void OnButtonExitPressed()
     {
-        GetTree().Paused = false;
+        ProcessMode = Node.ProcessModeEnum.Always;
+        transitionScreen.ProcessMode = Node.ProcessModeEnum.Always;
+        soundManager.ProcessMode = Node.ProcessModeEnum.Always;
 
         transitionScreen.FadeToBlack();
 
