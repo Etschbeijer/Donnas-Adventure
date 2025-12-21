@@ -738,6 +738,705 @@ theme_override_styles/pressed = ExtResource("3_fcvkw")
 theme_override_styles/normal = ExtResource("4_8eiwa")
 text = "?"
 
+[node name="GridContainer2" type="GridContainer" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -86.0
+offset_right = 113.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 10
+
+[node name="1" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "1"
+
+[node name="2" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "2"
+
+[node name="3" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "3"
+
+[node name="4" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "4"
+
+[node name="5" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "5"
+
+[node name="6" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "6"
+
+[node name="7" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "7"
+
+[node name="8" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "8"
+
+[node name="9" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "9"
+
+[node name="0" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "0"
+
+[node name="!" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "!"
+
+[node name="doubleQuotes" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "\""
+
+[node name="§" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "§"
+
+[node name="$" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "$"
+
+[node name="percentage" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "%"
+
+[node name="&" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "&"
+
+[node name="forwardSlash" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "/"
+
+[node name="backwarSlash" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "\\"
+
+[node name="(" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "("
+
+[node name=")" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = ")"
+
+[node name="=" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "="
+
+[node name="at" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "@"
+
+[node name="{" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "{"
+
+[node name="}" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "}"
+
+[node name="ß" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "ß"
+
+[node name="+" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "+"
+
+[node name="~" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "~"
+
+[node name="*" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "*"
+
+[node name="#" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "#"
+
+[node name="\'" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "'"
+
+[node name="|" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "|"
+
+[node name=";" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = ";"
+
+[node name="doubeDots" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = ":"
+
+[node name="_" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "_"
+
+[node name="^" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "^"
+
+[node name="°" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "°"
+
+[node name="´" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "´"
+
+[node name="`" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "`"
+
+[node name="dot" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "."
+
+[node name="?" type="Button" parent="Panel/GridContainer2" groups=["KeyButtons"]]
+custom_minimum_size = Vector2(19, 31)
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(0.607843, 0.996078, 0.666667, 1)
+theme_override_colors/font_hover_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_color = Color(0.333333, 0.756863, 0.286275, 1)
+theme_override_colors/font_focus_color = Color(0.192157, 0.952941, 0.419608, 1)
+theme_override_colors/font_pressed_color = Color(0.608218, 0.997651, 0.666589, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_j7vao")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("3_fcvkw")
+theme_override_styles/hover = ExtResource("3_fcvkw")
+theme_override_styles/pressed = ExtResource("3_fcvkw")
+theme_override_styles/normal = ExtResource("4_8eiwa")
+text = "?"
+
 [node name="Backspace" type="Button" parent="Panel"]
 custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
@@ -858,4 +1557,7 @@ theme_override_styles/normal = ExtResource("4_8eiwa")
 text = ">"
 
 [connection signal="pressed" from="Panel/Backspace" to="." method="OnBackspacePressed"]
+[connection signal="pressed" from="Panel/Symbols" to="." method="OnSymbolsPressed"]
 [connection signal="pressed" from="Panel/Shift" to="." method="OnShiftPressed"]
+[connection signal="pressed" from="Panel/<" to="." method="OnSmallThanPressed"]
+[connection signal="pressed" from="Panel/>" to="." method="OnBiggerThanPressed"]
