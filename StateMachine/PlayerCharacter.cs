@@ -59,6 +59,8 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public TransitionScreen TransitionScreen;
 
+    public Node3D TopSpeedTrail;
+
     public Vector3 SpawnPoint;
     public Vector3 SpawnRoration;
     public Vector3 PlayerVelocity;
@@ -166,11 +168,13 @@ public partial class PlayerCharacter : CharacterBody3D
         SoundManager = GetNode<SoundManager>("/root/SoundManager");
         TransitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
-        CameraController = GetNode<Node3D>("Camera_Controller");
+        TopSpeedTrail = GetNode<Node3D>("TopSpeedTrail");
         WallDetector = GetNode<RayCast3D>("WallDetector");
-
-        cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
         groundDetector = GetNode<RayCast3D>("GroundDetector");
+
+        CameraController = GetNode<Node3D>("Camera_Controller");
+        cameraTarget = CameraController.GetNode<Node3D>("Camera_Target");
+        
         rigDonna = GetNode<Node3D>("rig_Donna");
         meshDonnaHead = rigDonna.GetNode<Skeleton3D>("Skeleton3D").GetNode<MeshInstance3D>("Donna_Head");
 
@@ -252,13 +256,22 @@ public partial class PlayerCharacter : CharacterBody3D
 
         HitWall();
 
-        if (MovementSpeed > RunSpeed)
+        if (MovementSpeed >= RunSpeed)
         {
             ControlLightTrail(false);
         }
         else
         {
             ControlLightTrail(true);
+        }
+
+        if (TopSpeedTimer > TopSpeedThresholdTime)
+        {
+            TopSpeedTrail.Show();
+        }
+        else
+        {
+            TopSpeedTrail.Hide();
         }
 
         alignWithFloor(groundDetector.GetCollisionNormal());
@@ -899,7 +912,7 @@ public partial class PlayerCharacter : CharacterBody3D
             TopSpeedTimer = 5.5f;
         }
 
-        if(IsHurt || (IsOnWall() && WallDetector.IsColliding()) || InputDir.Y >= 0)
+        if(IsHurt || (IsOnWall() && WallDetector.IsColliding()))
         {
             hasTopSpeed = false;
             TopSpeedTimer = 0;
