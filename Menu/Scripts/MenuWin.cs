@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static System.Formats.Asn1.AsnWriter;
 
 public partial class MenuWin : Control
 {
@@ -21,6 +20,8 @@ public partial class MenuWin : Control
     PlayerScore currentPlayer;
 
     Button playAgainButton;
+
+    VirtualKeyboard virtualKeyboard;
 
     List<PlayerScore> highscoresAndPlayers = new();
 
@@ -43,7 +44,7 @@ public partial class MenuWin : Control
         timescore = panelScore.GetNode<Label>("LabelTimeScore");
         buttonAccept = panelScore.GetNode<Button>("ButtonAccept");
         textEditName = panelScore.GetNode<TextEdit>("TextEditName");
-
+        virtualKeyboard = panelScore.GetNode<VirtualKeyboard>("VirtualKeyboard");
         playAgainButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonPlayAgain");
 
         //Set initial values
@@ -55,27 +56,50 @@ public partial class MenuWin : Control
         panelScore.Hide();
         SetHighscore();
         transitionScreen.FadeToNormal();
-    }
-
-    public override void _Process(double delta)
-    {
-        UiAdapter.SetMouseUi(global.IsControllerInput);
+        virtualKeyboard.KeyButtonPressed += OnKeyButtonPressed;
     }
 
     public override void _Input(InputEvent @event)
     {
-        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+        var isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
 
-        if (!input && input != global.IsControllerInput)
+        if (!isControllerInput && isControllerInput != global.IsControllerInput)
         {
-            GetViewport().GuiReleaseFocus();
+            virtualKeyboard.Hide();
         }
 
-        if (input && input != global.IsControllerInput)
+        UiAdapter.SetMouseUi(this, global, isControllerInput, playAgainButton);
+    }
+
+    void ResetGuiHover(Node parent)
+    {
+        foreach (var child in parent.GetChildren())
         {
-            playAgainButton.GrabFocus();
+            if (child is Control c)
+            {
+                c.MouseFilter = MouseFilterEnum.Ignore;
+                c.MouseFilter = MouseFilterEnum.Stop;
+
+                ResetGuiHover(c);
+            }
         }
-        global.IsControllerInput = input;
+    }
+
+    public void OnKeyButtonPressed(string key)
+    {
+        GD.Print(key);
+        textEditName.Text += key;
+    }
+
+    public void OnTextEditNameFocusEntered()
+    {
+        if (virtualKeyboard != null)
+        {
+            if (global.IsControllerInput)
+            {
+                virtualKeyboard.Show();
+            }
+        }
     }
 
     public async void OnButtonPlayAgainPressed()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dse1fhfje01i8"]
+[gd_scene load_steps=10 format=3 uid="uid://dse1fhfje01i8"]
 
 [ext_resource type="Script" uid="uid://cq8c866l8i0d" path="res://Menu/Scripts/MenuWin.cs" id="2_jdqle"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
 [ext_resource type="Texture2D" uid="uid://cpdf4k3umk8lm" path="res://Images/Donnas/Donna_Win.png" id="3_vlnal"]
 [ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="4_llr70"]
+[ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="4_mg454"]
+[ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="5_3nbnt"]
+[ext_resource type="PackedScene" uid="uid://tejuk67iiin4" path="res://Menu/Nodes/virtual_keyboard.tscn" id="5_jdqle"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_llr70"]
 bg_color = Color(0.384314, 0.113725, 0.537255, 1)
@@ -28,54 +31,6 @@ corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otwlu"]
-bg_color = Color(0.69124, 0.493593, 0.897696, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpant"]
-bg_color = Color(0.690196, 0.494118, 0.898039, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skq7x"]
-bg_color = Color(0.690196, 0.494118, 0.898039, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qjukq"]
-bg_color = Color(0.38455, 0.112288, 0.5389, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.333333, 0.756863, 0.286275, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [node name="Menu_Win" type="Control"]
 layout_mode = 3
@@ -133,9 +88,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -184.0
-offset_top = -108.0
+offset_top = -284.0
 offset_right = 184.0
-offset_bottom = 252.0
+offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_llr70")
@@ -309,12 +264,24 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_llr70")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+theme_override_styles/focus = ExtResource("4_mg454")
+theme_override_styles/hover = ExtResource("4_mg454")
+theme_override_styles/pressed = ExtResource("4_mg454")
+theme_override_styles/normal = ExtResource("5_3nbnt")
 text = "Accept"
 script = ExtResource("4_llr70")
+
+[node name="VirtualKeyboard" parent="PanelScore" instance=ExtResource("5_jdqle")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 340.0
+offset_bottom = 340.0
+scale = Vector2(2, 2)
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -324,9 +291,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 512.0
-offset_top = 100.0
+offset_top = 228.0
 offset_right = 768.0
-offset_bottom = 356.0
+offset_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -340,10 +307,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_llr70")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+theme_override_styles/focus = ExtResource("4_mg454")
+theme_override_styles/hover = ExtResource("4_mg454")
+theme_override_styles/pressed = ExtResource("4_mg454")
+theme_override_styles/normal = ExtResource("5_3nbnt")
 text = "Play Again!"
 script = ExtResource("4_llr70")
 
@@ -357,10 +324,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_llr70")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+theme_override_styles/focus = ExtResource("4_mg454")
+theme_override_styles/hover = ExtResource("4_mg454")
+theme_override_styles/pressed = ExtResource("4_mg454")
+theme_override_styles/normal = ExtResource("5_3nbnt")
 text = "Main Menu"
 
 [node name="ButtonExit" type="Button" parent="Buttons"]
@@ -373,12 +340,13 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_llr70")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_otwlu")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
-theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
+theme_override_styles/focus = ExtResource("4_mg454")
+theme_override_styles/hover = ExtResource("4_mg454")
+theme_override_styles/pressed = ExtResource("4_mg454")
+theme_override_styles/normal = ExtResource("5_3nbnt")
 text = "Exit"
 
+[connection signal="focus_entered" from="PanelScore/TextEditName" to="." method="OnTextEditNameFocusEntered"]
 [connection signal="pressed" from="PanelScore/ButtonAccept" to="." method="OnButtonAcceptPressed"]
 [connection signal="pressed" from="Buttons/ButtonPlayAgain" to="." method="OnButtonPlayAgainPressed"]
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]

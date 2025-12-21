@@ -1,58 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://be1ra3cvgnjsw"]
+[gd_scene load_steps=8 format=3 uid="uid://be1ra3cvgnjsw"]
 
 [ext_resource type="Script" uid="uid://b5xoysbln1vkj" path="res://Menu/Scripts/MenuCredits.cs" id="1_1ftru"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_xos3g"]
 [ext_resource type="Texture2D" uid="uid://ce1sauhb1e4sd" path="res://Images/Icons/Logo_Blender.png" id="3_wslgr"]
 [ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="4_xos3g"]
+[ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="5_8ikh4"]
 [ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="5_gdaxx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
-bg_color = Color(0.26146, 0.562342, 0.212165, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weaej"]
-bg_color = Color(0.262745, 0.560784, 0.211765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4cr3"]
-bg_color = Color(0.262745, 0.560784, 0.211765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
-bg_color = Color(0.138366, 0.327553, 0.116957, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.494118, 0.254902, 0.819608, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="6_fahva"]
 
 [node name="MenuCredits" type="Control"]
 layout_mode = 3
@@ -358,10 +312,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_xos3g")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
-theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
-theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+theme_override_styles/focus = ExtResource("5_8ikh4")
+theme_override_styles/hover = ExtResource("5_8ikh4")
+theme_override_styles/pressed = ExtResource("5_8ikh4")
+theme_override_styles/normal = ExtResource("6_fahva")
 text = "Main Menu"
 script = ExtResource("5_gdaxx")
 

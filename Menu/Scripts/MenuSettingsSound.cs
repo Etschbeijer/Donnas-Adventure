@@ -40,25 +40,11 @@ public partial class MenuSettingsSound : Control
         transitionScreen.FadeToNormal();
     }
 
-    public override void _Process(double delta)
-    {
-        UiAdapter.SetMouseUi(global.IsControllerInput);
-    }
-
     public override void _Input(InputEvent @event)
     {
-        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+        var isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
 
-        if (!input && input != global.IsControllerInput)
-        {
-            GetViewport().GuiReleaseFocus();
-        }
-
-        if (input && input != global.IsControllerInput)
-        {
-            menuButton.GrabFocus();
-        }
-        global.IsControllerInput = input;
+        UiAdapter.SetMouseUi(this, global, isControllerInput, menuButton);
     }
 
     public void OnButtonResetPressed()

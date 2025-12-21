@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
 public partial class MenuTitle : Control
 {
@@ -37,25 +35,11 @@ public partial class MenuTitle : Control
         transitionScreen.FadeToNormal();
     }
 
-    public override void _Process(double delta)
-    {
-        UiAdapter.SetMouseUi(global.IsControllerInput);
-    }
-
     public override void _Input(InputEvent @event)
     {
-        var input = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+        var isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
 
-        if (!input && input != global.IsControllerInput)
-        {
-            GetViewport().GuiReleaseFocus();
-        }
-
-        if (input && input != global.IsControllerInput)
-        {
-            playButton.GrabFocus();
-        }
-        global.IsControllerInput = input;
+        UiAdapter.SetMouseUi(this, global, isControllerInput, playButton);
     }
 
     public async void OnButtonPlayPressed()

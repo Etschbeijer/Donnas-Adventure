@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public partial class MenuPause : Control
 {
@@ -22,6 +20,8 @@ public partial class MenuPause : Control
 
         resumeButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonResume");
 
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+
         //Call important methods
         GetViewport().GuiReleaseFocus();
     }
@@ -32,11 +32,6 @@ public partial class MenuPause : Control
         if (Input.IsActionJustPressed("Pause"))
         {
             CallDeferred(nameof(SetPause));
-        }
-
-        if (isPaused)
-        {
-            UiAdapter.SetMouseUi(global.IsControllerInput);
         }
     }
 
@@ -52,16 +47,32 @@ public partial class MenuPause : Control
         else
         {
             Show();
+            if (global.IsControllerInput)
+            {
+                UiAdapter.ResetGuiHover(this);
+                resumeButton.GrabFocus();
+            }
+            else
+            {
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+            }
             GetTree().Paused = true;
-            UiAdapter.SetMouseUi(global.IsControllerInput);
-            resumeButton.GrabFocus();
         }
         isPaused = !isPaused;
     }
 
     public override void _Input(InputEvent @event)
     {
-        global.IsControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+        var isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
+
+        if(isPaused)
+        {
+            if (isControllerInput && isControllerInput != global.IsControllerInput)
+            {
+                UiAdapter.ResetGuiHover(this);
+            }
+            UiAdapter.SetMouseUi(this, global, isControllerInput, resumeButton);
+        }
     }
 
     public void OnButtonResumePressed()

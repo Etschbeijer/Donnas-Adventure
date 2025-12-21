@@ -17,6 +17,18 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
+bg_color = Color(0.138366, 0.327553, 0.116957, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.494118, 0.254902, 0.819608, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weaej"]
 bg_color = Color(0.262745, 0.560784, 0.211765, 1)
 border_width_left = 2
@@ -36,18 +48,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3opb"]
-bg_color = Color(0.138366, 0.327553, 0.116957, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.494118, 0.254902, 0.819608, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -126,8 +126,8 @@ theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_yepu1")
 theme_override_font_sizes/font_size = 50
 theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
-theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5cs7u")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Reset"
 

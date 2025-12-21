@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bevo4djud04el"]
+[gd_scene load_steps=7 format=3 uid="uid://bevo4djud04el"]
 
 [ext_resource type="Script" uid="uid://tqgvx7aqmho1" path="res://Menu/Scripts/MenuPause.cs" id="1_ft0x8"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_uepin"]
 [ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="3_iglgv"]
+[ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="3_ydb6o"]
+[ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="4_q8bwd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uepin"]
 bg_color = Color(0.494118, 0.254902, 0.819608, 0.392157)
@@ -11,54 +13,6 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.196078, 0.0705882, 0.352941, 0.784314)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iglgv"]
-bg_color = Color(0.69124, 0.493593, 0.897696, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxfd1"]
-bg_color = Color(0.690196, 0.494118, 0.898039, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydb6o"]
-bg_color = Color(0.690196, 0.494118, 0.898039, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q8bwd"]
-bg_color = Color(0.38455, 0.112288, 0.5389, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.333333, 0.756863, 0.286275, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [node name="MenuPause" type="Control"]
 process_mode = 3
@@ -122,10 +76,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_uepin")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
-theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+theme_override_styles/focus = ExtResource("3_ydb6o")
+theme_override_styles/hover = ExtResource("3_ydb6o")
+theme_override_styles/pressed = ExtResource("3_ydb6o")
+theme_override_styles/normal = ExtResource("4_q8bwd")
 text = "Resume"
 script = ExtResource("3_iglgv")
 
@@ -139,10 +93,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_uepin")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
-theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+theme_override_styles/focus = ExtResource("3_ydb6o")
+theme_override_styles/hover = ExtResource("3_ydb6o")
+theme_override_styles/pressed = ExtResource("3_ydb6o")
+theme_override_styles/normal = ExtResource("4_q8bwd")
 text = "Main Menu"
 
 [node name="ButtonExit" type="Button" parent="Buttons"]
@@ -155,10 +109,10 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_uepin")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = SubResource("StyleBoxFlat_iglgv")
-theme_override_styles/hover = SubResource("StyleBoxFlat_qxfd1")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ydb6o")
-theme_override_styles/normal = SubResource("StyleBoxFlat_q8bwd")
+theme_override_styles/focus = ExtResource("3_ydb6o")
+theme_override_styles/hover = ExtResource("3_ydb6o")
+theme_override_styles/pressed = ExtResource("3_ydb6o")
+theme_override_styles/normal = ExtResource("4_q8bwd")
 text = "Exit"
 
 [connection signal="button_down" from="Buttons/ButtonResume" to="." method="OnButtonResumePressed"]
