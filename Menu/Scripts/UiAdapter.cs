@@ -30,7 +30,6 @@ public static class UiAdapter
         {
             if (child is Control c)
             {
-                GD.Print($"c: {c.Name}");
                 c.MouseFilter = MouseFilterEnum.Ignore;
                 c.MouseFilter = MouseFilterEnum.Stop;
 

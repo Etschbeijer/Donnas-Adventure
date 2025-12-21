@@ -57,6 +57,7 @@ public partial class MenuWin : Control
         SetHighscore();
         transitionScreen.FadeToNormal();
         virtualKeyboard.KeyButtonPressed += OnKeyButtonPressed;
+        virtualKeyboard.DeleteButtonPressed += OnDeleteButtonPressed;
     }
 
     public override void _Input(InputEvent @event)
@@ -87,8 +88,15 @@ public partial class MenuWin : Control
 
     public void OnKeyButtonPressed(string key)
     {
-        GD.Print(key);
         textEditName.Text += key;
+    }
+
+    public void OnDeleteButtonPressed()
+    {
+        if (textEditName.Text.Length > 0)
+        {
+            textEditName.Text = textEditName.Text.Substring(0, textEditName.Text.Length - 1);
+        }
     }
 
     public void OnTextEditNameFocusEntered()

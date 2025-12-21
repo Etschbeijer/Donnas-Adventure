@@ -274,13 +274,13 @@ script = ExtResource("4_llr70")
 [node name="VirtualKeyboard" parent="PanelScore" instance=ExtResource("5_jdqle")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = 340.0
-offset_bottom = 340.0
+offset_top = 200.0
+offset_bottom = 200.0
+grow_vertical = 0
 scale = Vector2(2, 2)
 
 [node name="Buttons" type="VBoxContainer" parent="."]
