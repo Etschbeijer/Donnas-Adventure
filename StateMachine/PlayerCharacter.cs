@@ -729,6 +729,8 @@ public partial class PlayerCharacter : CharacterBody3D
         ReduceLife();
         Hud.UpdateLifes(Lifes);
 
+        PlayerVelocity.Y = 0;
+
         if (Lifes > 0)
         {
             CurrentHealth = 0;
