@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ch3k83xv32swx"]
+[gd_scene load_steps=9 format=3 uid="uid://ch3k83xv32swx"]
 
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_7pqhn"]
 [ext_resource type="Script" uid="uid://briie8tlbg1lm" path="res://Menu/Scripts/MenuDefeat.cs" id="1_elvsx"]
 [ext_resource type="Texture2D" uid="uid://b3cuu8btn8opm" path="res://Images/Donnas/Donna_Death_Slimes.png" id="3_elvsx"]
 [ext_resource type="Texture2D" uid="uid://6t04y23qx75" path="res://Images/Donnas/Donna_Death_Dropping.png" id="4_otwlu"]
-[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="5_rpant"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otwlu"]
 bg_color = Color(0.772549, 0.2, 0.380392, 1)
@@ -149,7 +148,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_rpant")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_skq7x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qjukq")
 text = "Play Again!"
-script = ExtResource("5_rpant")
 
 [node name="ButtonMenu" type="Button" parent="Buttons"]
 layout_mode = 2

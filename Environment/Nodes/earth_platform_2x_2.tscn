@@ -10,7 +10,8 @@
 resource_name = "AnimeMaterial"
 next_pass = ExtResource("3_t3ryc")
 cull_mode = 2
-shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
 albedo_texture = ExtResource("2_t3ryc")
 texture_filter = 2
 

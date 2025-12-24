@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://be1ra3cvgnjsw"]
+[gd_scene load_steps=7 format=3 uid="uid://be1ra3cvgnjsw"]
 
 [ext_resource type="Script" uid="uid://b5xoysbln1vkj" path="res://Menu/Scripts/MenuCredits.cs" id="1_1ftru"]
 [ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_xos3g"]
 [ext_resource type="Texture2D" uid="uid://ce1sauhb1e4sd" path="res://Images/Icons/Logo_Blender.png" id="3_wslgr"]
 [ext_resource type="Texture2D" uid="uid://bsgcisiu8v1fd" path="res://Images/Icons/godot_default.svg" id="4_xos3g"]
 [ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="5_8ikh4"]
-[ext_resource type="Script" uid="uid://4b8ep8xuabsa" path="res://Menu/Scripts/ButtonMenu.cs" id="5_gdaxx"]
 [ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="6_fahva"]
 
 [node name="MenuCredits" type="Control"]
@@ -317,6 +316,5 @@ theme_override_styles/hover = ExtResource("5_8ikh4")
 theme_override_styles/pressed = ExtResource("5_8ikh4")
 theme_override_styles/normal = ExtResource("6_fahva")
 text = "Main Menu"
-script = ExtResource("5_gdaxx")
 
 [connection signal="pressed" from="Buttons/ButtonMenu" to="." method="OnButtonMenuPressed"]

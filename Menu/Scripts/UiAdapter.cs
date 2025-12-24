@@ -7,6 +7,7 @@ public static class UiAdapter
     {
         if (!isControllerInput && isControllerInput != global.IsControllerInput)
         {
+            GD.Print("Mouse is used");
             Input.MouseMode = Input.MouseModeEnum.Visible;
 
             owner.GetViewport().GuiReleaseFocus();
@@ -14,6 +15,7 @@ public static class UiAdapter
 
         if (isControllerInput && isControllerInput != global.IsControllerInput)
         {
+            GD.Print("Controller is used");
             Input.MouseMode = Input.MouseModeEnum.Captured;
 
             owner.GetViewport().GuiReleaseFocus();

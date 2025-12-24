@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://ck3bevx6mvjhg"]
+
+[ext_resource type="Shader" uid="uid://b1samoapuh5lc" path="res://stylizedSky.gdshader" id="1_fgmn4"]
+[ext_resource type="Texture2D" uid="uid://b25pf1thvvi28" path="res://Images/Progressbars/ProgressBar.png" id="2_cb84g"]
+
+[sub_resource type="Curve" id="Curve_fgmn4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.747278), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cb84g"]
+curve = SubResource("Curve_fgmn4")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fgmn4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cb84g"]
+seamless = true
+noise = SubResource("FastNoiseLite_fgmn4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cb84g"]
+shader = ExtResource("1_fgmn4")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_cb84g")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_cb84g")
+shader_parameter/cloud_curves = SubResource("CurveTexture_cb84g")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.4
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.03
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 1.0
+shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_cb84g")
+shader_parameter/high_clouds_density = 0.2
+shader_parameter/top_color = Color(0.34902, 0.588235, 1, 1)
+shader_parameter/bottom_color = Color(0, 0.329412, 0.968627, 1)
+shader_parameter/sun_scatter = Color(0.298039, 0.298039, 0.298039, 1)
+shader_parameter/astro_tint = Color(0.905882, 0.792157, 0.564706, 1)
+shader_parameter/astro_sampler = ExtResource("2_cb84g")
+shader_parameter/astro_scale = 3.0
+shader_parameter/astro_intensity = 3.0
+shader_parameter/stars_intensity = 0.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_q0n1q"]
+sky_material = SubResource("ShaderMaterial_cb84g")
+
+[sub_resource type="Environment" id="Environment_rkfe3"]
+background_mode = 2
+sky = SubResource("Sky_q0n1q")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="StylizedSky" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rkfe3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shadow_enabled = true
