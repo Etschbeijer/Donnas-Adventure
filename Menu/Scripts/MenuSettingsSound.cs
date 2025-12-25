@@ -38,6 +38,11 @@ public partial class MenuSettingsSound : Control
 
         //Call important methods
         transitionScreen.FadeToNormal();
+
+        if (global.IsControllerInput)
+        {
+            menuButton.GrabFocus();
+        }
     }
 
     public override void _Input(InputEvent @event)

@@ -35,6 +35,11 @@ public partial class MenuHighscores : Control
         ShowHighScores();
 
         transitionScreen.FadeToNormal();
+
+        if (global.IsControllerInput)
+        {
+            menuButton.GrabFocus();
+        }
     }
 
     public override void _Input(InputEvent @event)

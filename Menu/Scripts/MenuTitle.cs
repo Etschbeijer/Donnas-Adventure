@@ -33,6 +33,11 @@ public partial class MenuTitle : Control
         }
 
         transitionScreen.FadeToNormal();
+
+        if (global.IsControllerInput)
+        {
+            playButton.GrabFocus();
+        }
     }
 
     public override void _Input(InputEvent @event)

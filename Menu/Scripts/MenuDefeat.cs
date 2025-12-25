@@ -48,6 +48,11 @@ public partial class MenuDefeat : Control
         }
 
         transitionScreen.FadeToNormal();
+
+        if (global.IsControllerInput)
+        {
+            playAgainButton.GrabFocus();
+        }
     }
 
     public override void _Input(InputEvent @event)

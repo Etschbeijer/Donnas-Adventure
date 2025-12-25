@@ -60,6 +60,11 @@ public partial class MenuWin : Control
         transitionScreen.FadeToNormal();
         virtualKeyboard.KeyButtonPressed += OnKeyButtonPressed;
         virtualKeyboard.DeleteButtonPressed += OnDeleteButtonPressed;
+
+        if (global.IsControllerInput)
+        {
+            playAgainButton.GrabFocus();
+        }
     }
 
     public override void _Input(InputEvent @event)

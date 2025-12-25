@@ -84,12 +84,17 @@ public partial class MenuPause : Control
 
     public async void OnButtonMenuPressed()
     {
-        GetTree().Paused = false;
-        soundManager.PlaySoundClick();
+        ProcessMode = Node.ProcessModeEnum.Always;
+        transitionScreen.ProcessMode = Node.ProcessModeEnum.Always;
+        soundManager.ProcessMode = Node.ProcessModeEnum.Always;
 
         transitionScreen.FadeToBlack();
 
+        soundManager.PlaySoundClick();
+
         await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
+
+        GetTree().Paused = false;
 
         GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_title.tscn");
     }
