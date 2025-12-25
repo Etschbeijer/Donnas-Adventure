@@ -10,6 +10,7 @@ public partial class MenuWin : Control
     TransitionScreen transitionScreen;
 
     Label timescore;
+    Label playerscore;
 
     Panel panelScore;
 
@@ -42,6 +43,7 @@ public partial class MenuWin : Control
 
         panelScore = GetNode<Panel>("PanelScore");
         timescore = panelScore.GetNode<Label>("LabelTimeScore");
+        playerscore = panelScore.GetNode<Label>("LabelScoreValue");
         buttonAccept = panelScore.GetNode<Button>("ButtonAccept");
         textEditName = panelScore.GetNode<TextEdit>("TextEditName");
         virtualKeyboard = panelScore.GetNode<VirtualKeyboard>("VirtualKeyboard");
@@ -155,6 +157,8 @@ public partial class MenuWin : Control
         specialStreats = global.SpecialTreats.ToArray();
         currentTime = (new TimeSpan(0, global.Minutes, global.Seconds)).TotalSeconds;
         score = HighscoreManager.CalculateScore((float)currentTime, collectedTreats, specialStreats.Length);
+
+        playerscore.Text = score.ToString();
 
         bool addNewTime = playerScores.Any(highscore => score > highscore.Score) || playerScores.Count < 10;
 
