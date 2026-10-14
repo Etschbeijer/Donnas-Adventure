@@ -60,6 +60,33 @@ jobs:
         cache: true
         wine_path: ${{ steps.wine.outputs.path }}
 
+    - name: Normalize release archive names
+      shell: bash
+      env:
+        ARCHIVE_DIRECTORY: ${{ steps.export.outputs.archive_directory }}
+      run: |
+        set -euo pipefail
+        # Match GitHub's stored asset names so replacement finds existing uploads.
+        shopt -s nullglob
+        archives=("$ARCHIVE_DIRECTORY"/*.zip)
+        if (( ${#archives[@]} == 0 )); then
+          echo "No release archives found in $ARCHIVE_DIRECTORY" >&2
+          exit 1
+        fi
+        for archive in "${archives[@]}"; do
+          filename="${archive##*/}"
+          normalized="${filename// /.}"
+          if [[ "$filename" == "$normalized" ]]; then
+            continue
+          fi
+          destination="$ARCHIVE_DIRECTORY/$normalized"
+          if [[ -e "$destination" ]]; then
+            echo "Archive name collision: $normalized" >&2
+            exit 1
+          fi
+          mv -- "$archive" "$destination"
+        done
+
     - name: create release
       uses: ncipollo/release-action@v1.18.0
       with:
@@ -67,7 +94,7 @@ jobs:
         generateReleaseNotes: true
         tag: ${{ github.event.release.tag_name || inputs.release_tag || 'nightly' }}
         commit: ${{ github.sha }}
-        artifacts: ${{ steps.export.outputs.archive_directory }}/*
+        artifacts: ${{ steps.export.outputs.archive_directory }}/*.zip
         allowUpdates: true
         omitBodyDuringUpdate: true
         omitNameDuringUpdate: true
