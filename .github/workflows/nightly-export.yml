@@ -1,8 +1,22 @@
-# Whenever a tag push matching pattern "v*" then run the job
+name: Export Game
+
+# Keep nightly builds on main and attach builds to published releases.
 on: 
   push:
     branches: 
-      - master
+      - main
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing release tag to build (leave blank for nightly)
+        required: false
+        type: string
+
+concurrency:
+  group: export-${{ github.event.release.tag_name || inputs.release_tag || 'nightly' }}
+  cancel-in-progress: false
 
 jobs:
   export_game:
@@ -13,12 +27,27 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v5
+      with:
+        ref: ${{ github.event.release.tag_name || inputs.release_tag || github.sha }}
 
-    - name: Install rcedit
+    - name: Verify existing release for manual build
+      if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_TAG: ${{ inputs.release_tag }}
+      run: gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" > /dev/null
+
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install Wine
+      id: wine
       run: |
         sudo apt-get update
         sudo apt-get install -y wine
-        wget https://github.com/electron/rcedit/releases/download/v1.1.1/rcedit-x64.exe -O rcedit.exe
+        echo "path=$(command -v wine)" >> "$GITHUB_OUTPUT"
 
     - name: export game
       id: export
@@ -29,15 +58,21 @@ jobs:
         relative_project_path: ./
         archive_output: true
         cache: true
-        rcedit_path: "./rcedit.exe"
+        wine_path: ${{ steps.wine.outputs.path }}
 
     - name: create release
       uses: ncipollo/release-action@v1.18.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         generateReleaseNotes: true
-        tag: "nightly"
+        tag: ${{ github.event.release.tag_name || inputs.release_tag || 'nightly' }}
+        commit: ${{ github.sha }}
         artifacts: ${{ steps.export.outputs.archive_directory }}/*
         allowUpdates: true
-        removeArtifacts: true
-        replaceArtifacts: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
+        omitDraftDuringUpdate: true
+        omitPrereleaseDuringUpdate: true
+        artifactErrorsFailBuild: true
+        removeArtifacts: false
+        replacesArtifacts: true
