@@ -17,11 +17,6 @@ public partial class StartZone : Area3D
         audioPlayer = GetNode<AudioStreamPlayer3D>("SoundStart");
     }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public void OnStartZoneExited(CharacterBody3D body)
     {

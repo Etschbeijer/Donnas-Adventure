@@ -79,20 +79,6 @@ public partial class MenuWin : Control
         UiAdapter.SetMouseUi(this, global, isControllerInput, playAgainButton);
     }
 
-    void ResetGuiHover(Node parent)
-    {
-        foreach (var child in parent.GetChildren())
-        {
-            if (child is Control c)
-            {
-                c.MouseFilter = MouseFilterEnum.Ignore;
-                c.MouseFilter = MouseFilterEnum.Stop;
-
-                ResetGuiHover(c);
-            }
-        }
-    }
-
     public void OnKeyButtonPressed(string key)
     {
         textEditName.Text += key;
@@ -108,12 +94,9 @@ public partial class MenuWin : Control
 
     public void OnTextEditNameFocusEntered()
     {
-        if (virtualKeyboard != null)
+        if (virtualKeyboard != null && global.IsControllerInput)
         {
-            if (global.IsControllerInput)
-            {
-                virtualKeyboard.Show();
-            }
+            virtualKeyboard.Show();
         }
     }
 
@@ -191,7 +174,6 @@ public partial class MenuWin : Control
             SpecialTreats = specialStreats
         };
 
-        currentPlayer.Name = playerName;
         highscoresAndPlayers.Add(currentPlayer);
         highscoresAndPlayers.Sort ((rankA, rankB) => rankA.Score.CompareTo(rankB.Score));
 

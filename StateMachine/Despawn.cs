@@ -11,7 +11,7 @@ public partial class Despawn : PlayerState
 
     public SoundManager SoundManager;
 
-    public override async void Enter(Dictionary msg = null)
+    public override void Enter(Dictionary msg = null)
     {
         //Get nodes
         Global = GetNode<Global>("/root/Global");

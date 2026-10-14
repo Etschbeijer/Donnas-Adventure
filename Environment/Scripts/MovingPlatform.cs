@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
 public partial class MovingPlatform : AnimatableBody3D
 {
@@ -18,16 +16,15 @@ public partial class MovingPlatform : AnimatableBody3D
     public Vector3 Velocity;
     Vector3 previousPosition;
 
-    SceneTree tree;
+    Tween movementTween;
 
     // Called when the node enters the scene tree for the first time.
-    public override async void _Ready()
+    public override void _Ready()
 	{
-        //Get nodes
-        tree = GetTree();
+        previousPosition = GlobalPosition;
 
         //Call important methods
-        await Movement();
+        Movement();
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,25 +33,32 @@ public partial class MovingPlatform : AnimatableBody3D
         calculateVelocity((float)delta);
     }
 
-    public async Task Movement()
+    public void Movement()
     {
-        if (tree != null)
-        {
-            var travelTimer = GetTree().CreateTimer(2 * (travelTime + pauseTime));
+        StopMovement();
 
-            var moveTween = CreateTween();
+        // An infinite tween needs a nonzero duration or delay.
+        if (travelTime <= 0f && pauseTime <= 0f)
+            return;
 
-            moveTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
-            moveTween.TweenProperty(this, "position", startPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
-            await ToSignal(travelTimer, Timer.SignalName.Timeout);
-            await Movement();
-        }
+        movementTween = CreateTween().SetLoops();
+        movementTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
+        movementTween.TweenProperty(this, "position", startPosition, travelTime).SetTrans(Tween.TransitionType.Sine).SetDelay(pauseTime);
+    }
+
+    public override void _ExitTree() => StopMovement();
+
+    void StopMovement()
+    {
+        movementTween?.Kill();
+        movementTween?.Dispose();
+        movementTween = null;
     }
 
     private void calculateVelocity(float delta)
     {
         Vector3 currentPosition = GlobalPosition;
-        Velocity = (currentPosition - previousPosition) / delta;
+        Velocity = delta > 0f ? (currentPosition - previousPosition) / delta : Vector3.Zero;
         previousPosition = currentPosition;
     }
 }

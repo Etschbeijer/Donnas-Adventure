@@ -22,15 +22,7 @@ public partial class MenuTitle : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        if (soundManager.IsMusicPuppyPlayingInTheGarden2DPlaying())
-        {
-            soundManager.StopMusicPuppyPlayingInTheGarden2D();
-        }
-
-        if (!soundManager.IsMusicProject2Marioish2DPlaying())
-        {
-            soundManager.PlayMusicProject2Marioish2D();
-        }
+        soundManager.EnsureMenuMusic();
 
         transitionScreen.FadeToNormal();
 
@@ -58,31 +50,19 @@ public partial class MenuTitle : Control
         GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
     }
 
-    public void OnButtonScoresPressed()
+    public void OnButtonScoresPressed() => OpenMenu("res://Menu/Nodes/menu_highscores.tscn");
+
+    public void OnButtonSettingsPressed() => OpenMenu("res://Menu/Nodes/menu_settings_sound.tscn");
+
+    public void OnButtonCreditsPressed() => OpenMenu("res://Menu/Nodes/menu_credits.tscn");
+
+    void OpenMenu(string scenePath)
     {
         soundManager.PlaySoundClick();
 
         transitionScreen.FadeToBlack();
 
-        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_highscores.tscn");
-    }
-
-    public void OnButtonSettingsPressed()
-    {
-        soundManager.PlaySoundClick();
-
-        transitionScreen.FadeToBlack();
-
-        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_settings_sound.tscn");
-    }
-
-    public void OnButtonCreditsPressed()
-    {
-        soundManager.PlaySoundClick();
-
-        transitionScreen.FadeToBlack();
-
-        GetTree().ChangeSceneToFile("res://Menu/Nodes/menu_credits.tscn");
+        GetTree().ChangeSceneToFile(scenePath);
     }
 
     public async void OnButtonExitPressed()

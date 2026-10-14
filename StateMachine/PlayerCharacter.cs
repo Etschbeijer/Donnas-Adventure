@@ -1,9 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
-using System.Xml.Xsl;
 using System.Threading.Tasks;
-using System.Runtime.Intrinsics.Arm;
 
 public partial class PlayerCharacter : CharacterBody3D
 {
@@ -138,13 +136,26 @@ public partial class PlayerCharacter : CharacterBody3D
     Node3D rigDonna;
     Node3D cameraTarget;
 
-    Node3D[] thrusters;
+    GpuParticles3D[] thrusters;
     Node3D[] footLightTrails;
 
     Area3D[] hitboxes;
     Area3D[] hurtboxes;
+    Area3D[] feetHitboxes;
+    Area3D[] feetHurtboxes;
+    Area3D[] saltoHitboxes;
 
     MeshInstance3D[] donnaMeshs;
+
+    ShaderMaterial dissolveShaderDonna;
+    ShaderMaterial dissolveShaderDonnaOutline;
+    ShaderMaterial dissolveShaderDonnaEyeLeft;
+    ShaderMaterial dissolveShaderDonnaEyeRight;
+    Material standardMaterial;
+    Material standardMaterialLeftEye;
+    Material standardMaterialRightEye;
+
+    static readonly StringName dissolveParameter = "Dissolve";
 
     GpuParticles3D grassTrailL;
     GpuParticles3D grassTrailR;
@@ -193,11 +204,23 @@ public partial class PlayerCharacter : CharacterBody3D
         grassTrailL = trails.GetNode<Node3D>("GrassTrailL").GetNode<GpuParticles3D>("GrassExplosion");
         grassTrailR = trails.GetNode<Node3D>("GrassTrailR").GetNode<GpuParticles3D>("GrassExplosion");
 
-        thrusters = GetTree().GetNodesInGroup("Thrusters").Cast<Node3D>().ToArray();
+        thrusters = GetTree().GetNodesInGroup("Thrusters").Cast<Node3D>()
+            .Select(thruster => thruster.GetNode<GpuParticles3D>("Fire")).ToArray();
         hitboxes = GetTree().GetNodesInGroup("HitBoxesPlayer").Cast<Area3D>().ToArray();
         hurtboxes = GetTree().GetNodesInGroup("HurtBoxesPlayer").Cast<Area3D>().ToArray();
+        feetHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().Contains("foot", StringComparison.OrdinalIgnoreCase)).ToArray();
+        feetHurtboxes = hurtboxes.Where(hurtbox => hurtbox.Name.ToString().Contains("foot", StringComparison.OrdinalIgnoreCase)).ToArray();
+        saltoHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().Contains("salto", StringComparison.OrdinalIgnoreCase)).ToArray();
         footLightTrails = GetTree().GetNodesInGroup("FootLightTrails").Cast<Node3D>().ToArray();
         donnaMeshs = GetTree().GetNodesInGroup("DonnaMesh").Cast<MeshInstance3D>().ToArray();
+
+        dissolveShaderDonna = GD.Load<ShaderMaterial>("res://Shaders/DonnaDissolveShader.tres");
+        dissolveShaderDonnaOutline = GD.Load<ShaderMaterial>("res://Shaders/DonnaOutlineDissolveShader.tres");
+        dissolveShaderDonnaEyeLeft = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeLeftDissolveShader.tres");
+        dissolveShaderDonnaEyeRight = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeRightDissolveShader.tres");
+        standardMaterial = GD.Load<Material>("res://Materials/donna.tres");
+        standardMaterialLeftEye = GD.Load<Material>("res://Materials/donna_left_eye.tres");
+        standardMaterialRightEye = GD.Load<Material>("res://Materials/donna_right_eye.tres");
 
         //AnimationTree = GetNode<AnimationTree>("AnimationTree");
         //AnimationNodeState = (AnimationNodeStateMachinePlayback) AnimationTree.Get("parameters/playback");
@@ -341,8 +364,14 @@ public partial class PlayerCharacter : CharacterBody3D
             meshDonnaHead.GetActiveMaterial(0).NextPass.Set("albedo_color", blinkColor);
             await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
 
+            if (!IsInstanceValid(this) || !IsInsideTree())
+                return;
+
             meshDonnaHead.GetActiveMaterial(0).NextPass.Set("albedo_color", originColour);
             await ToSignal(GetTree().CreateTimer(blinkInterval), SceneTreeTimer.SignalName.Timeout);
+
+            if (!IsInstanceValid(this) || !IsInsideTree())
+                return;
         }
 
         isBlinking = false;
@@ -552,13 +581,9 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void ControlTrusters(bool onOff)
     {
-        for (int i = 0; i < thrusters.Length; i++)
+        foreach (GpuParticles3D thruster in thrusters)
         {
-            var thruster = thrusters[i].GetNode<GpuParticles3D>("Fire");
-            if (thruster != null)
-            {
-                thruster.Emitting = onOff;
-            }
+            thruster.Emitting = onOff;
         }
     }
 
@@ -603,9 +628,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void ControlFeetCollision(bool onOffHurt, bool onOffHit)
     {
-        var feetHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().ToLower().Contains("foot"));
-        var feetHurtboxes = hurtboxes.Where(hurtBox => hurtBox.Name.ToString().ToLower().Contains("foot"));
-
         foreach (Area3D footHurtbox in feetHurtboxes)
         {
             ControlHurtbox(footHurtbox, onOffHurt);
@@ -619,8 +641,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void ControlSaltoCollision(bool onOffSalto)
     {
-        var saltoHitboxes = hitboxes.Where(hitbox => hitbox.Name.ToString().ToLower().Contains("salto"));
-
         foreach (Area3D saltoHitbox in saltoHitboxes)
         {
             ControlHitbox(saltoHitbox, onOffSalto);
@@ -944,32 +964,22 @@ public partial class PlayerCharacter : CharacterBody3D
         Hud.UpdateSpeedGauge(TopSpeedTimer);
     }
 
-    public void ReplaceWithDissolveShader()
-    {
-        var dissolveShaderDonna = GD.Load<ShaderMaterial>("res://Shaders/DonnaDissolveShader.tres");
-        var dissolveShaderDonnaEyeLeft = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeLeftDissolveShader.tres");
-        var dissolveShaderDonnaEyeRight = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeRightDissolveShader.tres");
+    public void ReplaceWithDissolveShader() =>
+        ApplyMaterials(dissolveShaderDonna, dissolveShaderDonnaEyeLeft, dissolveShaderDonnaEyeRight);
 
+    public void ReplaceWithStandardMaterial() =>
+        ApplyMaterials(standardMaterial, standardMaterialLeftEye, standardMaterialRightEye);
+
+    void ApplyMaterials(Material body, Material leftEye, Material rightEye)
+    {
         foreach (MeshInstance3D mesh in donnaMeshs)
         {
+            bool isEyes = mesh.Name == "Donna_Eyes";
             var count = mesh.GetSurfaceOverrideMaterialCount();
-            for (int i=0; i<count; i++)
+            for (int i = 0; i < count; i++)
             {
-                if (mesh.Name == "Donna_Eyes")
-                {
-                    if(i == 0)
-                    {
-                        mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonnaEyeRight);
-                    }
-                    else
-                    {
-                        mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonnaEyeLeft);
-                    }
-                }
-                else
-                {
-                    mesh.SetSurfaceOverrideMaterial(i, dissolveShaderDonna);
-                }
+                Material material = isEyes ? (i == 0 ? rightEye : leftEye) : body;
+                mesh.SetSurfaceOverrideMaterial(i, material);
             }
         }
     }
@@ -980,12 +990,6 @@ public partial class PlayerCharacter : CharacterBody3D
 
         float progress = Mathf.Lerp(from, to, DissolveValue / DissolveTime);
         progress = Mathf.Clamp(progress, -1f, 1f);
-
-        var dissolveShaderDonna = GD.Load<ShaderMaterial>("res://Shaders/DonnaDissolveShader.tres");
-        var dissolveShaderDonnaOutline = GD.Load<ShaderMaterial>("res://Shaders/DonnaOutlineDissolveShader.tres");
-
-        var dissolveShaderDonnaEyeLeft = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeLeftDissolveShader.tres");
-        var dissolveShaderDonnaEyeRight = GD.Load<ShaderMaterial>("res://Shaders/DonnaEyeRightDissolveShader.tres");
 
         if (DissolveValue > 1f)
         {
@@ -999,41 +1003,10 @@ public partial class PlayerCharacter : CharacterBody3D
             progress = -1f;
         }
 
-        dissolveShaderDonna.SetShaderParameter("Dissolve", progress);
-        dissolveShaderDonnaOutline.SetShaderParameter("Dissolve", progress);
+        dissolveShaderDonna.SetShaderParameter(dissolveParameter, progress);
+        dissolveShaderDonnaOutline.SetShaderParameter(dissolveParameter, progress);
 
-        dissolveShaderDonnaEyeLeft.SetShaderParameter("Dissolve", progress);
-        dissolveShaderDonnaEyeRight.SetShaderParameter("Dissolve", progress);
-    }
-
-    public void ReplaceWithStandardMaterial()
-    {
-        var standardMaterial = GD.Load<Material>("res://Materials/donna.tres");
-        var standardMaterialLeftEye = GD.Load<Material>("res://Materials/donna_left_eye.tres");
-        var standardMaterialRightEye = GD.Load<Material>("res://Materials/donna_right_eye.tres");
-
-        foreach (MeshInstance3D mesh in donnaMeshs)
-        {
-            var count = mesh.GetSurfaceOverrideMaterialCount();
-            for (int i = 0; i < count; i++)
-            {
-                
-                if (mesh.Name == "Donna_Eyes")
-                {
-                    if (i == 0)
-                    {
-                        mesh.SetSurfaceOverrideMaterial(i, standardMaterialRightEye);
-                    }
-                    else
-                    {
-                        mesh.SetSurfaceOverrideMaterial(i, standardMaterialLeftEye);
-                    }
-                }
-                else
-                {
-                    mesh.SetSurfaceOverrideMaterial(i, standardMaterial);
-                }
-            }
-        }
+        dissolveShaderDonnaEyeLeft.SetShaderParameter(dissolveParameter, progress);
+        dissolveShaderDonnaEyeRight.SetShaderParameter(dissolveParameter, progress);
     }
 }

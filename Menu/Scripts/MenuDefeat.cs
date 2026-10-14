@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class MenuDefeat : Control
 {
@@ -28,15 +27,7 @@ public partial class MenuDefeat : Control
         Input.MouseMode = Input.MouseModeEnum.Visible;
 
         //Call important methods
-        if (soundManager.IsMusicPuppyPlayingInTheGarden2DPlaying())
-        {
-            soundManager.StopMusicPuppyPlayingInTheGarden2D();
-        }
-
-        if (!soundManager.IsMusicProject2Marioish2DPlaying())
-        {
-            soundManager.PlayMusicProject2Marioish2D();
-        }
+        soundManager.EnsureMenuMusic();
 
         if (global.Deathypes == Deathypes.Slimes)
         {

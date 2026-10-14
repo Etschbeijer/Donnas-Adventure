@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class SpecialTreat : Area3D
 {
@@ -37,40 +36,21 @@ public partial class SpecialTreat : Area3D
         RotateY(Mathf.DegToRad(RotSpeed * (float)delta));
     }
 
-    public async void OnBodyEntered(CharacterBody3D body)
+    public void OnBodyEntered(CharacterBody3D body)
     {
-        var player = body as PlayerCharacter;
+        if (body is not PlayerCharacter || isCollected)
+            return;
 
-        if (player != null)
-        {
-            SetCollisionLayerValue(3, false);
-            SetCollisionMaskValue(1, false);
+        isCollected = true;
+        SetCollisionLayerValue(3, false);
+        SetCollisionMaskValue(1, false);
 
-            animationPlayer.Play("bounce");
-
-            Hud.UpdateLabelTreats();
-
-            audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
-            audioPlayer.Play();
-
-            if (TreatType == TreatTypes.Cheese)
-            {
-                CollectedCheese();
-            }
-
-            if (TreatType == TreatTypes.Cookie)
-            {
-                CollectedCookie();
-            }
-
-            if (TreatType == TreatTypes.Meat)
-            {
-                CollectedMeat();
-            }
-
-            await ToSignal(audioPlayer, AudioStreamPlayer3D.SignalName.Finished);
-            await ToSignal(animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-        }
+        animationPlayer.Play("bounce");
+        Hud.UpdateLabelTreats();
+        audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        audioPlayer.Play();
+        CollectSpecialTreat(TreatType);
+        // The scene's animation_finished connection already handles cleanup.
     }
 
     public void OnAnimationPlayerAnimationFinished(string animation)
@@ -86,21 +66,22 @@ public partial class SpecialTreat : Area3D
         QueueFree();
     }
 
-    public void CollectedCheese()
-    {
-        Hud.ShowCheese();
-        global.AddSpecialTreat(TreatTypes.Cheese.ToString());
-    }
+    public void CollectedCheese() => CollectSpecialTreat(TreatTypes.Cheese);
 
-    public void CollectedCookie()
-    {
-        Hud.ShowCookie();
-        global.AddSpecialTreat(TreatTypes.Cookie.ToString());
-    }
+    public void CollectedCookie() => CollectSpecialTreat(TreatTypes.Cookie);
 
-    public void CollectedMeat()
+    public void CollectedMeat() => CollectSpecialTreat(TreatTypes.Meat);
+
+    void CollectSpecialTreat(TreatTypes type)
     {
-        Hud.ShowMeat();
-        global.AddSpecialTreat(TreatTypes.Meat.ToString());
+        switch (type)
+        {
+            case TreatTypes.Cheese: Hud.ShowCheese(); break;
+            case TreatTypes.Cookie: Hud.ShowCookie(); break;
+            case TreatTypes.Meat: Hud.ShowMeat(); break;
+            default: return;
+        }
+
+        global.AddSpecialTreat(type.ToString());
     }
 }

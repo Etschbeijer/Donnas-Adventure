@@ -1,9 +1,6 @@
 using Godot;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using static System.Net.Mime.MediaTypeNames;
 
 public partial class Hud : CanvasLayer
 {
@@ -17,6 +14,9 @@ public partial class Hud : CanvasLayer
     public TextureProgressBar SpeedGauge;
 
     bool isDisplayingTutorial = false;
+    bool isExiting = false;
+    int displayedMinutes = -1;
+    int displayedSeconds = -1;
 
     Queue<(string text, float time)> tutorialQueue = new Queue<(string, float)>();
 
@@ -52,7 +52,7 @@ public partial class Hud : CanvasLayer
         
         LabelTime = panelTime.GetNode<Label>("LabelTime");
         LabelLifes = panelLife.GetNode<Label>("LabelLifes");
-        LabelHealth = panelLife.GetNode<Label>("LabelHealth");;
+        LabelHealth = panelLife.GetNode<Label>("LabelHealth");
         LabelTreats = panelTreats.GetNode<Label>("LabelTreats");
         LabelTutorial = panelTutorial.GetNode<Label>("LabelTutorial");
 
@@ -62,13 +62,13 @@ public partial class Hud : CanvasLayer
 
         //Set initial values
         LabelTreats.Text = global.CollectedTreats.ToString();
-        LabelTime.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
+        UpdateLabelTime();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-	{
-        
+    public override void _ExitTree()
+    {
+        isExiting = true;
+        tutorialQueue.Clear();
     }
 
     public void UpdateLabelTreats()
@@ -78,7 +78,12 @@ public partial class Hud : CanvasLayer
 
     public void UpdateLabelTime()
     {
-        LabelTime.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
+        if (displayedMinutes == global.Minutes && displayedSeconds == global.Seconds)
+            return;
+
+        displayedMinutes = global.Minutes;
+        displayedSeconds = global.Seconds;
+        LabelTime.Text = $"{displayedMinutes:D2}:{displayedSeconds:D2}";
     }
 
     public void UpdateHealthbar(float healthValue)
@@ -99,11 +104,14 @@ public partial class Hud : CanvasLayer
 
     public void UpdateTutorial(string text, float time = 3f)
     {
+        if (isExiting)
+            return;
+
         tutorialQueue.Enqueue((text, time));
 
         if (!isDisplayingTutorial)
         {
-            displayTutorialAsync();
+            _ = displayTutorialAsync();
         }
     }
 
@@ -120,6 +128,9 @@ public partial class Hud : CanvasLayer
 
             var timer = GetTree().CreateTimer(time);
             await ToSignal(timer, Timer.SignalName.Timeout);
+
+            if (!IsInstanceValid(this) || isExiting || !IsInsideTree())
+                return;
 
             panelTutorial.Hide();
             LabelTutorial.Text = "";

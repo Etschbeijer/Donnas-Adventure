@@ -84,68 +84,50 @@ public partial class SoundManager : Control
         }
     }
 
-    public void PlaySoundClick()
+    void PlaySound(AudioStreamPlayer2D player)
     {
-        SoundClick.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        SoundClick.Play();
+        player.PitchScale = rng.RandfRange(0.9f, 1.1f);
+        player.Play();
     }
 
-    public async Task PlaySoundExit()
+    async Task PlaySoundAndWait(AudioStreamPlayer2D player)
     {
-        SoundExit.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        SoundExit.Play();
-
-        await ToSignal(SoundExit, AudioStreamPlayer2D.SignalName.Finished);
+        PlaySound(player);
+        await ToSignal(player, AudioStreamPlayer2D.SignalName.Finished);
     }
 
-    public void PlaySoundMainMenu()
+    public void PlaySoundClick() => PlaySound(SoundClick);
+
+    public void PlaySoundMainMenu() => PlaySound(SoundMainMenu);
+
+    public Task PlaySoundExit() => PlaySoundAndWait(SoundExit);
+
+    public Task PlaySoundPlay() => PlaySoundAndWait(SoundStartGame);
+
+    public void EnsureMenuMusic()
     {
-        SoundMainMenu.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        SoundMainMenu.Play();
+        if (IsMusicPuppyPlayingInTheGarden2DPlaying())
+            StopMusicPuppyPlayingInTheGarden2D();
+
+        if (!IsMusicProject2Marioish2DPlaying())
+            PlayMusicProject2Marioish2D();
     }
 
-    public void PlayMusicProject2Marioish2D()
-    {
-        MusicProject2Marioish2D.Play();
-    }
+    public void PlayMusicProject2Marioish2D() => MusicProject2Marioish2D.Play();
 
-    public bool IsMusicProject2Marioish2DPlaying()
-    {
-        return MusicProject2Marioish2D.Playing;
-    }
+    public bool IsMusicProject2Marioish2DPlaying() => MusicProject2Marioish2D.Playing;
 
-    public void StopMusicProject2Marioish2D()
-    {
-        MusicProject2Marioish2D.Stop();
-    }
+    public void StopMusicProject2Marioish2D() => MusicProject2Marioish2D.Stop();
 
-    public void PlayMusicPuppyPlayingInTheGarden2D()
-    {
-        MusicPuppyPlayingInTheGarden2D.Play();
-    }
+    public void PlayMusicPuppyPlayingInTheGarden2D() => MusicPuppyPlayingInTheGarden2D.Play();
 
-    public bool IsMusicPuppyPlayingInTheGarden2DPlaying()
-    {
-        return MusicPuppyPlayingInTheGarden2D.Playing;
-    }
+    public bool IsMusicPuppyPlayingInTheGarden2DPlaying() => MusicPuppyPlayingInTheGarden2D.Playing;
 
-    public void StopMusicPuppyPlayingInTheGarden2D()
-    {
-        MusicPuppyPlayingInTheGarden2D.Stop();
-    }
-
-    public async Task PlaySoundPlay()
-    {
-        SoundStartGame.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        SoundStartGame.Play();
-
-        await ToSignal(SoundStartGame, AudioStreamPlayer2D.SignalName.Finished);
-    }
+    public void StopMusicPuppyPlayingInTheGarden2D() => MusicPuppyPlayingInTheGarden2D.Stop();
 
     public void PlaySoundLose()
     {
-        SoundLose.PitchScale = rng.RandfRange(0.9f, 1.1f);
-        SoundLose.Play();
+        PlaySound(SoundLose);
 
         StopMusicPuppyPlayingInTheGarden2D();
     }

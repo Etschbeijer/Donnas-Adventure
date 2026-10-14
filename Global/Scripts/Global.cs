@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 public partial class Global : Node
 {
@@ -130,13 +129,12 @@ public partial class Global : Node
     {
         if (grassExplosion != null)
         {
-            var instance = (Node3D) grassExplosion.Instantiate();
+            var instance = grassExplosion.Instantiate<ParticleBurst>();
             GetTree().CurrentScene.AddChild(instance);
 
             instance.Scale = new Vector3(scaling, scaling, scaling);
-            instance.GlobalPosition = new Vector3(position.X, position.Y - 0.25f, position.Z); ;
-            var explosions = instance.GetChildren().OfType<GpuParticles3D>().Where(explosion => explosion.Name.ToString().Contains("Explosion")).ToArray();
-            FireExplosions(explosions);
+            instance.GlobalPosition = new Vector3(position.X, position.Y - 0.25f, position.Z);
+            instance.Emit();
         }
     }
 

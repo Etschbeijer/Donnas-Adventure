@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkp2he4xhk8kh"]
+[gd_scene load_steps=13 format=3 uid="uid://bkp2he4xhk8kh"]
 
 [ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="1_ecl58"]
+[ext_resource type="Script" path="res://Effects/Scripts/ParticleBurst.cs" id="2_burst"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orbje"]
 next_pass = ExtResource("1_ecl58")
@@ -62,6 +63,7 @@ rings = 4
 [sub_resource type="PrismMesh" id="PrismMesh_orbje"]
 
 [node name="GrassExplosion" type="Node3D"]
+script = ExtResource("2_burst")
 metadata/_edit_group_ = true
 
 [node name="DustExplosion" type="GPUParticles3D" parent="."]
