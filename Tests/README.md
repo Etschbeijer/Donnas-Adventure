@@ -18,3 +18,5 @@ Headless Godot does not simulate GPU particles, so the suite drives their native
 completion signals to test cleanup and separately checks the timeout fallback.
 Rendered particle timing and how it feels to ride moving platforms still need
 an interactive playthrough.
+
+See [GRAPHICS.md](GRAPHICS.md) for the rendered GPU benchmark and graphics changes.

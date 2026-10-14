@@ -90,12 +90,11 @@ mat3 direction_to_matrix(vec3 direction) {
 				vec3(x_axis.z, y_axis.z, direction.z));
 }
 
-float cloud_density(vec3 p, float progress){
+float cloud_density(vec3 p, float height_curve){
 	float t_o = TIME * 0.001;
 	float t_o_small = TIME * -0.005;
 	float noise = texture(cloud_noise_sampler, p.xy * 4.0 + t_o_small).x * 0.1 + 0.9;
 	float clouds_shape = texture(cloud_shape_sampler, (p.xy + t_o) * clouds_scale).x;
-	float height_curve = texture(cloud_curves, vec2(progress, 0.0)).x;
 	float base_density = 1.0 - clouds_density;
 	float density = 
 	smoothstep(base_density - clouds_smoothness,
@@ -118,14 +117,16 @@ vec2 cloud_ray_march(vec3 direction, vec3 sun_direction){
 	for(int i = loop_offset; i < clouds_samples + loop_offset; i++) {
 		float progress = float(i) / float(clouds_samples);
 		sample_point = direction * height * progress;
-		float point_density = cloud_density(sample_point, progress);
+		float height_curve = texture(cloud_curves, vec2(progress, 0.0)).x;
+		float point_density = cloud_density(sample_point, height_curve);
 		density += point_density;
 		
-		float point_light = 0.0;
-		for(int f = 0; f < shadow_sample; f++){
+		// The first shadow sample has zero offset and matches point_density.
+		float point_light = point_density;
+		for(int f = 1; f < shadow_sample; f++){
 			float shadow_progress = float(f) / float(shadow_sample);
 			vec3 shadow_offset = sun_direction * height * shadow_progress;
-			point_light += cloud_density(sample_point + shadow_offset, progress);
+			point_light += cloud_density(sample_point + shadow_offset, height_curve);
 		}
 		light += point_light;
 	}

@@ -47,7 +47,7 @@ public partial class VirtualKeyboard : Control
         EmitSignal(SignalName.KeyButtonPressed, button.Text);
     }
 
-    public void OnBackspacePressed()
+    public void OnSpaceBarPressed()
     {
         EmitSignal(SignalName.KeyButtonPressed, " ");
     }

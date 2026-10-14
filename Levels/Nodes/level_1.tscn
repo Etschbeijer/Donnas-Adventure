@@ -2160,7 +2160,7 @@ TextGamepad = "Press LT to move faster."
 [node name="TutorialTrigger3" parent="Tutorials" node_paths=PackedStringArray("Hud") instance=ExtResource("17_2maft")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -16)
 Hud = NodePath("../../HUD")
-TextKeyboard = "Press backspace to jump."
+TextKeyboard = "Press the Space bar to jump."
 TextGamepad = "Press A to jump."
 
 [node name="TutorialTrigger4" parent="Tutorials" node_paths=PackedStringArray("Hud") instance=ExtResource("17_2maft")]

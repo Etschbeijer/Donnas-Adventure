@@ -10,6 +10,7 @@ uniform float roughness : hint_range(0.0, 1.0) = 0.02;
 uniform sampler2D wave;
 uniform sampler2D texture_normal;
 uniform sampler2D texture_normal2;
+uniform bool use_second_normal_layer = true;
 uniform vec2 wave_direction = vec2(2.0,0.0); // Direction of wave 1
 uniform vec2 wave_direction2 = vec2(0.0,1.0); // Direction of wave 2
 uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.025; // Rate of movement multiplied by TIME
@@ -27,7 +28,6 @@ uniform float far = 100.0;
 uniform vec3 edge_color : source_color;
 
 // Varying variables
-varying float height;
 varying vec3 world_pos;
 
 float fresnel(float amount, vec3 normal, vec3 view)
@@ -41,13 +41,14 @@ float edge(float depth){
 
 void vertex() {
 	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	height = texture(wave, world_pos.xz / noise_scale + TIME * time_scale).r;
+	float height = texture(wave, world_pos.xz / noise_scale + TIME * time_scale).r;
 	VERTEX.y += height * height_scale;
 }
 
 void fragment() {
 	// Depth variables and calc
-	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).r * 2.0 - 1.0;
+	float depth_sample = texture(DEPTH_TEXTURE, SCREEN_UV).r;
+	float depth_texture = depth_sample * 2.0 - 1.0;
 	float depth = PROJECTION_MATRIX[3][2] / (depth_texture + PROJECTION_MATRIX[2][2]);
 	float depth_blend = exp((depth+VERTEX.z + depth_offset) * -beers_law);
 	depth_blend = clamp(1.0 - depth_blend, 0.0, 1.0);	
@@ -59,16 +60,17 @@ void fragment() {
 	vec3 color = mix(screen_color * depth_color, depth_color * 0.25, depth_blend_power * 0.5);
 	
 	// Getting edge depth calc
-	float z_depth = edge(texture(DEPTH_TEXTURE, SCREEN_UV).x);
+	float z_depth = edge(depth_sample);
 	float z_pos = edge(FRAGCOORD.z);
 	float z_dif = z_depth - z_pos;
 	
 	// Time calculations for wave (normal map) movement
 	vec2 time = (TIME * wave_direction) * time_scale; // Movement rate of first wave
-	vec2 time2 = (TIME * wave_direction2) * time_scale; // Movement rate of second wave
-	
-	// Blend normal maps into one
-	vec3 normal_blend = mix(texture(texture_normal,world_pos.xz + time).rgb, texture(texture_normal2,world_pos.xz + time2).rgb, 0.5);
+	vec3 normal_blend = texture(texture_normal, world_pos.xz + time).rgb;
+	if (use_second_normal_layer) {
+		vec2 time2 = (TIME * wave_direction2) * time_scale;
+		normal_blend = mix(normal_blend, texture(texture_normal2, world_pos.xz + time2).rgb, 0.5);
+	}
 	
 	// Calculate Fresnel
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
