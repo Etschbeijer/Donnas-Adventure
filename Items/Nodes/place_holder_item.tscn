@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b58yae6j8i5gc" path="res://Items/Scripts/SpecialTreat.cs" id="1_30vvh"]
 [ext_resource type="Material" uid="uid://5c7v78hxwamj" path="res://Materials/donna_flame.tres" id="1_vp8bu"]
-[ext_resource type="AudioStream" uid="uid://c28202yckrxo4" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_30vvh"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_30vvh"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_teqtv"]
 

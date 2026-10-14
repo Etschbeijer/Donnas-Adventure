@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://deybfghkltjy7"]
 
-[ext_resource type="Texture2D" uid="uid://cbasa5siywy6w" path="res://Characters/Models/Donna/Donna_RightEyeColourMap.png" id="1_u1x54"]
+[ext_resource type="Texture2D" path="res://Characters/Models/Donna/Donna_RightEyeColourMap.png" id="1_u1x54"]
 [ext_resource type="Material" uid="uid://bqmu15d4l2d3s" path="res://Materials/donna_outline.tres" id="2_5hh1i"]
 
 [resource]

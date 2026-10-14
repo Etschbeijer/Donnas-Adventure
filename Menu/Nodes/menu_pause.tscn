@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bevo4djud04el"]
 
 [ext_resource type="Script" uid="uid://tqgvx7aqmho1" path="res://Menu/Scripts/MenuPause.cs" id="1_ft0x8"]
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_uepin"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_uepin"]
 [ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="3_ydb6o"]
 [ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="4_q8bwd"]
 

@@ -1,0 +1,17 @@
+<Project Sdk="Godot.NET.Sdk/4.4.1">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>DonnasAdventure</RootNamespace>
+	<RuntimeIdentifiers>win-x64;linux-x64;osx-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Items\Nodes\Scripts\**" />
+    <EmbeddedResource Remove="Items\Nodes\Scripts\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Items\Nodes\" />
+    <Folder Include="Levels\Nodes\" />
+    <Folder Include="Menu\Nodes\" />
+  </ItemGroup>
+</Project>

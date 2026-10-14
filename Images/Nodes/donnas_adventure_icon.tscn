@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddken4mvxd6nq"]
 
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_dgvcm"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_dgvcm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dgvcm"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

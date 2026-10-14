@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://dse1fhfje01i8"]
 
 [ext_resource type="Script" uid="uid://cq8c866l8i0d" path="res://Menu/Scripts/MenuWin.cs" id="2_jdqle"]
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
-[ext_resource type="Texture2D" uid="uid://cpdf4k3umk8lm" path="res://Images/Donnas/Donna_Win.png" id="3_vlnal"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="2_llr70"]
+[ext_resource type="Texture2D" path="res://Images/Donnas/Donna_Win.png" id="3_vlnal"]
 [ext_resource type="StyleBox" uid="uid://c6lq5ro0511m1" path="res://Menu/Styles/focusButton.tres" id="4_mg454"]
 [ext_resource type="StyleBox" uid="uid://ban76hq5dqcbj" path="res://Menu/Styles/standardButton.tres" id="5_3nbnt"]
 [ext_resource type="PackedScene" uid="uid://tejuk67iiin4" path="res://Menu/Nodes/virtual_keyboard.tscn" id="5_jdqle"]

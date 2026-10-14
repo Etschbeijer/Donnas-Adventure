@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://fxchiasmiyoh"]
 
 [ext_resource type="Script" uid="uid://dlvxwpm4ra8y6" path="res://Items/Scripts/BoneTreat.cs" id="1_el4n8"]
-[ext_resource type="Texture2D" uid="uid://f4dbvystr4ex" path="res://Items/Models/BoneTreat_Albedo.png" id="2_a8h0j"]
-[ext_resource type="AudioStream" uid="uid://c28202yckrxo4" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_el4n8"]
+[ext_resource type="Texture2D" path="res://Items/Models/BoneTreat_Albedo.png" id="2_a8h0j"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_el4n8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wha00"]
 cull_mode = 1

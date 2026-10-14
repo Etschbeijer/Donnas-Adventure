@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ck3bevx6mvjhg"]
 
 [ext_resource type="Shader" uid="uid://b1samoapuh5lc" path="res://stylizedSky.gdshader" id="1_fgmn4"]
-[ext_resource type="Texture2D" uid="uid://b25pf1thvvi28" path="res://Images/Progressbars/ProgressBar.png" id="2_cb84g"]
+[ext_resource type="Texture2D" path="res://Images/Progressbars/ProgressBar.png" id="2_cb84g"]
 
 [sub_resource type="Curve" id="Curve_fgmn4"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.747278), 0.0, 0.0, 0, 0]

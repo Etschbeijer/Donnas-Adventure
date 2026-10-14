@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dov1r381x573l" path="res://Items/Scripts/Checkpoint.cs" id="1_f1kax"]
 [ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="2_f2met"]
-[ext_resource type="AudioStream" uid="uid://c28202yckrxo4" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_ikfxa"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up1.wav" id="3_ikfxa"]
 
 [sub_resource type="Animation" id="Animation_6ca7x"]
 length = 0.001

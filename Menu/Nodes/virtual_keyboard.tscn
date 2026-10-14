@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://tejuk67iiin4"]
 
 [ext_resource type="Script" uid="uid://cw2gbjp4romr7" path="res://Menu/Scripts/VirtualKeyboard.cs" id="1_50xn0"]
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_j7vao"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_j7vao"]
 [ext_resource type="StyleBox" uid="uid://criw1580g0csk" path="res://Menu/Styles/focusKeyButton.tres" id="3_fcvkw"]
 [ext_resource type="StyleBox" uid="uid://c4vule6522mow" path="res://Menu/Styles/standardKeyButton.tres" id="4_8eiwa"]
 

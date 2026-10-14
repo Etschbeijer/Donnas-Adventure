@@ -1,6 +1,6 @@
 [gd_resource type="MeshLibrary" load_steps=44 format=4 uid="uid://pndhd55hl46v"]
 
-[ext_resource type="Texture2D" uid="uid://blet42785t5jv" path="res://Environment/Models/Blocks_ColourMap.png" id="1_k3iv3"]
+[ext_resource type="Texture2D" path="res://Environment/Models/Blocks_ColourMap.png" id="1_k3iv3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ntdj"]
 cull_mode = 1

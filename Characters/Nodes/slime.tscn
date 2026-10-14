@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cyqd33qeca140" path="res://Characters/Scripts/Slime.cs" id="1_fr6l1"]
 [ext_resource type="Material" uid="uid://b1yb07mj1esrj" path="res://Materials/slime.tres" id="2_ncda4"]
-[ext_resource type="AudioStream" uid="uid://drme7lu1q5wkg" path="res://AudioTracks/Soundeffect/OpenGameArt/slime_jump.wav" id="2_xkuhn"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/slime_jump.wav" id="2_xkuhn"]
 [ext_resource type="PackedScene" uid="uid://c51l5r4hdips2" path="res://Effects/Nodes/slime_burst.tscn" id="4_7v1d6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdh2u"]

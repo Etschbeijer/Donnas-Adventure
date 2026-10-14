@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://b58yae6j8i5gc" path="res://Items/Scripts/SpecialTreat.cs" id="1_ak37n"]
 [ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="3_iwkaw"]
-[ext_resource type="AudioStream" uid="uid://30vhyd0x3n13" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up.wav" id="4_ahdav"]
-[ext_resource type="Texture2D" uid="uid://l7t6ndt3b5sw" path="res://Items/Models/Cookie_Albedo.png" id="5_s4717"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up.wav" id="4_ahdav"]
+[ext_resource type="Texture2D" path="res://Items/Models/Cookie_Albedo.png" id="5_s4717"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ak37n"]
 resource_name = "AnimeMaterial"

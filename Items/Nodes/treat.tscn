@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=4 uid="uid://kdhgdir770ai"]
 
 [ext_resource type="Script" uid="uid://xul2mr6me2xd" path="res://Items/Scripts/Treat.cs" id="1_gof5t"]
-[ext_resource type="Texture2D" uid="uid://dhtfskbomxnum" path="res://Items/Models/Treat_ColourMap.png" id="2_2cn0a"]
-[ext_resource type="AudioStream" uid="uid://crveqwfiaffy" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_2cn0a"]
+[ext_resource type="Texture2D" path="res://Items/Models/Treat_ColourMap.png" id="2_2cn0a"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Coins/Coin3.wav" id="3_2cn0a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wha00"]
 cull_mode = 1

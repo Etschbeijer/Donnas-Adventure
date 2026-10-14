@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://s56vqbwuarxx"]
 
 [ext_resource type="Script" uid="uid://8yjijtucm5t1" path="res://Global/Scripts/StartZone.cs" id="1_d3ovh"]
-[ext_resource type="AudioStream" uid="uid://met3r8c70njc" path="res://AudioTracks/Soundeffect/kenney_impact-sounds/Audio/bell/impactBell_heavy_000.ogg" id="2_krv0v"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/kenney_impact-sounds/Audio/bell/impactBell_heavy_000.ogg" id="2_krv0v"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_krv0v"]
 radius = 2.0

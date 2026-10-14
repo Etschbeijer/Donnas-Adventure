@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=4 uid="uid://b6l6l5hojitxj"]
 
 [ext_resource type="Script" uid="uid://bkx6mr2wimd3c" path="res://Environment/Scripts/FallingPlatform.cs" id="1_t3ryc"]
-[ext_resource type="Texture2D" uid="uid://blet42785t5jv" path="res://Environment/Models/Blocks_ColourMap.png" id="2_t3ryc"]
+[ext_resource type="Texture2D" path="res://Environment/Models/Blocks_ColourMap.png" id="2_t3ryc"]
 [ext_resource type="Material" uid="uid://d0776l1l86t2q" path="res://Materials/material_black_outline.tres" id="3_t3ryc"]
-[ext_resource type="AudioStream" uid="uid://b2s8gj6bkd1k4" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Hit/Hit3.wav" id="4_ko7nl"]
+[ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Hit/Hit3.wav" id="4_ko7nl"]
 [ext_resource type="PackedScene" uid="uid://bjof50losyfd7" path="res://Effects/Nodes/earth_explosion.tscn" id="5_siwle"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx2mv"]

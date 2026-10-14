@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://c638efe0ce7mv"]
 
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_pq02n"]
-[ext_resource type="Texture2D" uid="uid://c242cvnacega3" path="res://Images/Icons/Treat.png" id="2_6t86j"]
-[ext_resource type="Texture2D" uid="uid://cu3e0lsc2b650" path="res://Images/Icons/Bonetreat.png" id="2_20jhl"]
-[ext_resource type="Texture2D" uid="uid://caf8yffhxtoqi" path="res://Images/Icons/Stopwatch.png" id="2_oplac"]
-[ext_resource type="Texture2D" uid="uid://5xyl7qsh1mwe" path="res://Images/Icons/Cheese.png" id="2_sf8tv"]
-[ext_resource type="Texture2D" uid="uid://cm7spmyvwogn4" path="res://Images/Icons/Cookie.png" id="3_6t86j"]
-[ext_resource type="Texture2D" uid="uid://7n6ijhn2bvds" path="res://Images/Icons/Meat.png" id="4_oplac"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_pq02n"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Treat.png" id="2_6t86j"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Bonetreat.png" id="2_20jhl"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Stopwatch.png" id="2_oplac"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Cheese.png" id="2_sf8tv"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Cookie.png" id="3_6t86j"]
+[ext_resource type="Texture2D" path="res://Images/Icons/Meat.png" id="4_oplac"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7sg6"]
 bg_color = Color(0.384314, 0.113725, 0.537255, 1)

@@ -187,6 +187,10 @@ func _process(delta):
 	
 	await RenderingServer.frame_pre_draw
 	
+	# Scene changes can remove the trail while it is waiting for the draw frame.
+	if not is_inside_tree():
+		return
+
 	if(billboard):
 		var delta_position = global_position - _old_pos
 		

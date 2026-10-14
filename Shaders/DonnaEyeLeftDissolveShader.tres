@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://brvqkddrr6yvw" path="res://Shaders/DonnaOutlineDissolveShader.tres" id="1_yqvn6"]
 [ext_resource type="Shader" uid="uid://duiuvpi7njjnu" path="res://Shaders/DissolveShader.tres" id="2_t3rgg"]
-[ext_resource type="Texture2D" uid="uid://ntt5k7e1rbkf" path="res://Characters/Models/Donna/Donna_LeftEyeColourMap.png" id="3_yqvn6"]
+[ext_resource type="Texture2D" path="res://Characters/Models/Donna/Donna_LeftEyeColourMap.png" id="3_yqvn6"]
 
 [resource]
 render_priority = 0

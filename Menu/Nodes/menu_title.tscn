@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cm7g7p0qaiv1"]
 
 [ext_resource type="Script" uid="uid://cienfqxbojf6o" path="res://Menu/Scripts/MenuTitle.cs" id="1_8mqsw"]
-[ext_resource type="FontFile" uid="uid://cli6mqpsx13b1" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_ef4cy"]
-[ext_resource type="Texture2D" uid="uid://xda737f0wx7e" path="res://Images/Donnas/Donna_Run.png" id="3_8mqsw"]
+[ext_resource type="FontFile" path="res://Fonts/FrancoisOne-Regular.ttf" id="1_ef4cy"]
+[ext_resource type="Texture2D" path="res://Images/Donnas/Donna_Run.png" id="3_8mqsw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cs7u"]
 bg_color = Color(0.26146, 0.562342, 0.212165, 1)
