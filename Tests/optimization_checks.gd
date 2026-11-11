@@ -505,6 +505,52 @@ func _check_scene_teardown(player: Node):
 	await create_timer(0.2).timeout
 	_check(not is_instance_valid(old_level), "Scene teardown frees the level during tutorial and blink callbacks")
 
+func _check_highscore_boards(global_node: Node):
+	var score_script = load("res://Global/Scripts/PlayerScore.cs")
+	var save_data = global_node.get("SaveData")
+	var seeded := []
+	for i in range(1, 11):
+		var entry = score_script.new()
+		entry.set("Level", "1-1")
+		entry.set("Score", i * 100)
+		seeded.append(entry)
+	for value in [50, 60, 70]:
+		var entry = score_script.new()
+		entry.set("Level", "1-2")
+		entry.set("Score", value)
+		seeded.append(entry)
+	save_data.set("PlayerScores", seeded)
+	global_node.set("LevelId", "1-1")
+	global_node.set("Minutes", 1)
+	global_node.set("Seconds", 0)
+	change_scene_to_file("res://Menu/Nodes/menu_win.tscn")
+	await process_frame
+	await process_frame
+	current_scene.get_node("PanelScore/TextEditName").text = "Board test"
+	current_scene.call("OnButtonAcceptPressed")
+	var board_1 := _highscore_board(save_data, "1-1")
+	var board_1_scores := board_1.map(func(s): return s.get("Score"))
+	var board_1_names := board_1.map(func(s): return s.get("Name"))
+	_check(board_1.size() == 10 and "Board test" in board_1_names and not 100 in board_1_scores and 1000 in board_1_scores and _highscore_board(save_data, "1-2").size() == 3, "A new highscore replaces the lowest score on its own level board only")
+	change_scene_to_file("res://Menu/Nodes/menu_highscores.tscn")
+	await process_frame
+	await process_frame
+	var rows := current_scene.get_node("VBoxContainer")
+	var rows_before := rows.get_child_count()
+	current_scene.get_node("LevelTabs/ButtonLevel2").emit_signal("pressed")
+	await process_frame
+	var level_2_rows_ok: bool = rows.get_child_count() == 3
+	for row in rows.get_children():
+		level_2_rows_ok = level_2_rows_ok and row.get_node("LabelScore").text in ["50", "60", "70"]
+	_check(rows_before == 10 and level_2_rows_ok, "The highscore screen shows one level board at a time")
+	current_scene.call("OnButtonResetHighScoresPressed")
+	await process_frame
+	_check(_highscore_board(save_data, "1-2").is_empty() and _highscore_board(save_data, "1-1").size() == 10 and rows.get_child_count() == 0, "Reset clears only the board on screen")
+	save_data.call("ResetHighScores")
+
+func _highscore_board(save_data: Object, level_id: String) -> Array:
+	return save_data.get("PlayerScores").filter(func(s): return s.get("Level") == level_id)
+
 func _check_menu_and_sound(global_node: Node):
 	var sound := root.get_node("SoundManager")
 	sound.call("PlayMusicPuppyPlayingInTheGarden2D")
@@ -526,6 +572,7 @@ func _check_menu_and_sound(global_node: Node):
 	var scores = global_node.get("SaveData").get("PlayerScores")
 	var treats = scores[0].get("SpecialTreats")
 	_check(treats.size() == 3 and "Cheese" in treats and "Cookie" in treats and "Meat" in treats, "Special-treat rewards save exactly once for each type")
+	await _check_highscore_boards(global_node)
 	for destination in [
 		["OnButtonScoresPressed", "res://Menu/Nodes/menu_highscores.tscn"],
 		["OnButtonSettingsPressed", "res://Menu/Nodes/menu_settings_sound.tscn"],

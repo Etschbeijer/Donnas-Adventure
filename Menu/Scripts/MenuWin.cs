@@ -24,7 +24,7 @@ public partial class MenuWin : Control
 
     VirtualKeyboard virtualKeyboard;
 
-    List<PlayerScore> highscoresAndPlayers = new();
+    string boardId;
 
     double currentTime;
 
@@ -139,7 +139,8 @@ public partial class MenuWin : Control
     {
         timescore.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
 
-        var playerScores = global.SaveData.PlayerScores?.ToList() ?? new();
+        boardId = string.IsNullOrEmpty(global.LevelId) ? LevelCatalog.Level1Id : global.LevelId;
+        var board = global.SaveData.GetBoard(boardId);
 
         collectedTreats = global.CollectedTreats;
         specialStreats = global.SpecialTreats.ToArray();
@@ -148,14 +149,8 @@ public partial class MenuWin : Control
 
         playerscore.Text = score.ToString();
 
-        bool addNewTime = playerScores.Any(highscore => score > highscore.Score) || playerScores.Count < 10;
-
-        if (addNewTime)
+        if (board.Count < SaveData.ScoresPerBoard || score > board[board.Count - 1].Score)
         {
-            for(int i = 0; i < playerScores.Count; i++)
-            {
-                highscoresAndPlayers.Add(playerScores[i]);
-            }
             panelScore.Show();
         }
     }
@@ -167,28 +162,16 @@ public partial class MenuWin : Control
         currentPlayer = new PlayerScore
         {
             Name = playerName,
-            Level = global.LevelId,
+            Level = boardId,
             Score = score,
             Time = currentTime,
             CollectedTreats = collectedTreats,
             SpecialTreats = specialStreats
         };
 
-        highscoresAndPlayers.Add(currentPlayer);
-        highscoresAndPlayers.Sort ((rankA, rankB) => rankA.Score.CompareTo(rankB.Score));
-
-        var top10ScoresAndPlayer = highscoresAndPlayers.Take(10).ToList();
-
-        var topPlayers = new List<PlayerScore>();
-
-        for (int i = 0; i < top10ScoresAndPlayer.Count; i++)
-        {
-            topPlayers.Add(highscoresAndPlayers[i]);
-        }
-
-        topPlayers = topPlayers.OrderByDescending(playerScore => playerScore.Score).ToList();
-
-        global.SaveData.PlayerScores = new(topPlayers);
+        var newBoard = global.SaveData.GetBoard(boardId);
+        newBoard.Add(currentPlayer);
+        global.SaveData.SetBoard(boardId, newBoard);
 
         global.SaveData.Save();
 

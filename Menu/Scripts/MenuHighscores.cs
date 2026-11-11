@@ -17,6 +17,8 @@ public partial class MenuHighscores : Control
     Button menuButton;
     Button resetHighScoreButton;
 
+    string shownBoardId = LevelCatalog.Level1Id;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -29,6 +31,13 @@ public partial class MenuHighscores : Control
         buttons = GetNode<VBoxContainer>("Buttons");
         resetHighScoreButton = buttons.GetNode<Button>("ButtonReset");
         menuButton = buttons.GetNode<Button>("ButtonMenu");
+
+        var levelTabs = GetNode<HBoxContainer>("LevelTabs");
+        for (int i = 0; i < LevelCatalog.HighscoreBoards.Length; i++)
+        {
+            var boardId = LevelCatalog.HighscoreBoards[i].Id;
+            levelTabs.GetChild<Button>(i).Pressed += () => OnButtonLevelPressed(boardId);
+        }
 
         //Call important methods
         ClearHighScores();
@@ -53,8 +62,17 @@ public partial class MenuHighscores : Control
     {
         foreach (Node child in container.GetChildren())
         {
+            container.RemoveChild(child);
             child.QueueFree();
         }
+    }
+
+    public void OnButtonLevelPressed(string boardId)
+    {
+        shownBoardId = boardId;
+        soundManager.PlaySoundClick();
+        ClearHighScores();
+        ShowHighScores();
     }
 
     private string formatTime(double time)
@@ -84,9 +102,7 @@ public partial class MenuHighscores : Control
 
     public void ShowHighScores()
     {
-        var highScores = global.SaveData.PlayerScores;
-
-        var orderedHighscores = highScores.OrderByDescending(playerScore => playerScore.Score).ToArray();
+        var orderedHighscores = global.SaveData.GetBoard(shownBoardId).ToArray();
 
         for (int i = 0; i < orderedHighscores.Length; i++)
         {
@@ -114,7 +130,7 @@ public partial class MenuHighscores : Control
     public void OnButtonResetHighScoresPressed()
     {
         soundManager.PlaySoundClick();
-        global.SaveData.ResetHighScores();
+        global.SaveData.ResetHighScores(shownBoardId);
         ClearHighScores();
         ShowHighScores();
         resetHighScoreButton.ButtonPressed = false;

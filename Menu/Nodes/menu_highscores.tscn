@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://kgv3xulofh6x"]
+[gd_scene load_steps=9 format=3 uid="uid://kgv3xulofh6x"]
 
 [ext_resource type="Script" uid="uid://d4dc4gf1apfny" path="res://Menu/Scripts/MenuHighscores.cs" id="1_j7sg6"]
 [ext_resource type="PackedScene" uid="uid://c638efe0ce7mv" path="res://Menu/Nodes/control_row.tscn" id="2_eygsm"]
@@ -52,6 +52,8 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_levels"]
+
 [node name="MenuHighscores" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -93,12 +95,62 @@ theme_override_font_sizes/font_size = 80
 text = "Highscores"
 horizontal_alignment = 1
 
+[node name="LevelTabs" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_top = 192.0
+offset_right = 210.0
+offset_bottom = 248.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="ButtonLevel1" type="Button" parent="LevelTabs"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_yepu1")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_levels")
+text = "Level 1"
+
+[node name="ButtonLevel2" type="Button" parent="LevelTabs"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_yepu1")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+toggle_mode = true
+button_group = SubResource("ButtonGroup_levels")
+text = "Level 2"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 64.0
-offset_top = 192.0
+offset_top = 264.0
 offset_right = 64.0
-offset_bottom = 192.0
+offset_bottom = 264.0
 
 [node name="Buttons" type="VBoxContainer" parent="."]
 layout_mode = 1
