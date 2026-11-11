@@ -35,21 +35,22 @@ public partial class SaveData : Resource
 
     public const int ScoresPerBoard = 10;
 
-    // Scores saved before level 2 existed have no level and belong to level 1.
+    // Scores with no level or with a level that has no board (saved before level 2 existed, or from the test level)
+    // show on the level 1 board, so its Reset button can clear them.
     public static string BoardIdOf(PlayerScore score)
     {
-        return string.IsNullOrEmpty(score.Level) ? LevelCatalog.Level1Id : score.Level;
+        return LevelCatalog.HasBoard(score.Level) ? score.Level : LevelCatalog.Level1Id;
     }
 
     public List<PlayerScore> GetBoard(string levelId)
     {
-        return PlayerScores.Where(score => BoardIdOf(score) == levelId).OrderByDescending(score => score.Score).ToList();
+        return (PlayerScores ?? new()).Where(score => score != null && BoardIdOf(score) == levelId).OrderByDescending(score => score.Score).Take(ScoresPerBoard).ToList();
     }
 
     public void SetBoard(string levelId, IEnumerable<PlayerScore> scores)
     {
-        var board = scores.OrderByDescending(score => score.Score).Take(ScoresPerBoard);
-        var others = PlayerScores.Where(score => BoardIdOf(score) != levelId);
+        var board = scores.Where(score => score != null).OrderByDescending(score => score.Score).Take(ScoresPerBoard);
+        var others = (PlayerScores ?? new()).Where(score => score != null && BoardIdOf(score) != levelId);
         PlayerScores = new(others.Concat(board));
     }
 

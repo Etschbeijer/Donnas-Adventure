@@ -546,6 +546,33 @@ func _check_highscore_boards(global_node: Node):
 	current_scene.call("OnButtonResetHighScoresPressed")
 	await process_frame
 	_check(_highscore_board(save_data, "1-2").is_empty() and _highscore_board(save_data, "1-1").size() == 10 and rows.get_child_count() == 0, "Reset clears only the board on screen")
+	var seed_scores := func(entries: Array) -> void:
+		var list := []
+		for e in entries:
+			var entry = score_script.new()
+			entry.set("Level", e[0])
+			entry.set("Score", e[1])
+			list.append(entry)
+		save_data.set("PlayerScores", list)
+	var high := []
+	for i in range(10):
+		high.append(["1-1", 1000000 + i])
+	seed_scores.call(high + [["1-2", 50], ["1-2", 60], ["1-2", 70]])
+	var panel_states := []
+	for level_id in ["1-1", "1-2", "0-1"]:
+		global_node.set("LevelId", level_id)
+		change_scene_to_file("res://Menu/Nodes/menu_win.tscn")
+		await process_frame
+		await process_frame
+		panel_states.append(current_scene.get_node("PanelScore").visible)
+	var count_before: int = save_data.get("PlayerScores").size()
+	current_scene.call("OnButtonAcceptPressed")
+	_check(panel_states == [false, true, false] and save_data.get("PlayerScores").size() == count_before, "The win screen offers a highscore only when it beats its own level board")
+	seed_scores.call([["", 100], ["0-1", 200]])
+	change_scene_to_file("res://Menu/Nodes/menu_highscores.tscn")
+	await process_frame
+	await process_frame
+	_check(current_scene.get_node("VBoxContainer").get_child_count() == 2, "Scores without a known level show on the level 1 board")
 	save_data.call("ResetHighScores")
 
 func _highscore_board(save_data: Object, level_id: String) -> Array:
@@ -564,6 +591,7 @@ func _check_menu_and_sound(global_node: Node):
 	global_node.get("SaveData").call("ResetHighScores")
 	global_node.set("Minutes", 1)
 	global_node.set("Seconds", 0)
+	global_node.set("LevelId", "1-1")
 	change_scene_to_file("res://Menu/Nodes/menu_win.tscn")
 	await process_frame
 	await process_frame

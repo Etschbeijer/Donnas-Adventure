@@ -33,10 +33,12 @@ public partial class MenuHighscores : Control
         menuButton = buttons.GetNode<Button>("ButtonMenu");
 
         var levelTabs = GetNode<HBoxContainer>("LevelTabs");
-        for (int i = 0; i < LevelCatalog.HighscoreBoards.Length; i++)
+        for (int i = 0; i < Math.Min(LevelCatalog.HighscoreBoards.Length, levelTabs.GetChildCount()); i++)
         {
             var boardId = LevelCatalog.HighscoreBoards[i].Id;
-            levelTabs.GetChild<Button>(i).Pressed += () => OnButtonLevelPressed(boardId);
+            var tab = levelTabs.GetChild<Button>(i);
+            tab.Text = LevelCatalog.HighscoreBoards[i].Name;
+            tab.Pressed += () => OnButtonLevelPressed(boardId);
         }
 
         //Call important methods
@@ -134,7 +136,15 @@ public partial class MenuHighscores : Control
         ClearHighScores();
         ShowHighScores();
         resetHighScoreButton.ButtonPressed = false;
-        resetHighScoreButton.FocusMode = FocusModeEnum.None;
+
+        if (global.IsControllerInput)
+        {
+            resetHighScoreButton.GrabFocus();
+        }
+        else
+        {
+            resetHighScoreButton.ReleaseFocus();
+        }
     }
 
     private void displaySpecialTreats(Control row, string[] specialTreats)

@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public partial class MenuWin : Control
@@ -25,6 +24,7 @@ public partial class MenuWin : Control
     VirtualKeyboard virtualKeyboard;
 
     string boardId;
+    bool canSaveScore;
 
     double currentTime;
 
@@ -140,6 +140,7 @@ public partial class MenuWin : Control
         timescore.Text = $"{global.Minutes:D2}:{global.Seconds:D2}";
 
         boardId = string.IsNullOrEmpty(global.LevelId) ? LevelCatalog.Level1Id : global.LevelId;
+        canSaveScore = LevelCatalog.HasBoard(boardId);
         var board = global.SaveData.GetBoard(boardId);
 
         collectedTreats = global.CollectedTreats;
@@ -149,7 +150,7 @@ public partial class MenuWin : Control
 
         playerscore.Text = score.ToString();
 
-        if (board.Count < SaveData.ScoresPerBoard || score > board[board.Count - 1].Score)
+        if (canSaveScore && (board.Count < SaveData.ScoresPerBoard || score > board[board.Count - 1].Score))
         {
             panelScore.Show();
         }
@@ -157,6 +158,11 @@ public partial class MenuWin : Control
 
     public void OnButtonAcceptPressed()
     {
+        if (!canSaveScore)
+        {
+            return;
+        }
+
         string playerName = textEditName.Text.Trim();
 
         currentPlayer = new PlayerScore

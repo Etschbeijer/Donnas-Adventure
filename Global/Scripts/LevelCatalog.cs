@@ -6,4 +6,9 @@ public static class LevelCatalog
     public const string Level2Id = "1-2";
 
     public static readonly (string Id, string Name)[] HighscoreBoards = { (Level1Id, "Level 1"), (Level2Id, "Level 2") };
+
+    public static bool HasBoard(string levelId)
+    {
+        return System.Array.Exists(HighscoreBoards, board => board.Id == levelId);
+    }
 }
