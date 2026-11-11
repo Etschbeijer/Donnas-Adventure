@@ -24,3 +24,5 @@ Thumbs.db
 # Build folders
 bin/
 obj/
+
+.fake
