@@ -10,7 +10,6 @@ public partial class MenuTitle : Control
 
     Button playButton;
     Button level1Button;
-    Button level2Button;
 
     VBoxContainer buttons;
     VBoxContainer levelSelect;
@@ -27,13 +26,9 @@ public partial class MenuTitle : Control
         levelSelect = GetNode<VBoxContainer>("LevelSelect");
         playButton = buttons.GetNode<Button>("ButtonPlay");
         level1Button = levelSelect.GetNode<Button>("ButtonLevel1");
-        level2Button = levelSelect.GetNode<Button>("ButtonLevel2");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
-
-        //The second level scene may not exist yet
-        level2Button.Disabled = !ResourceLoader.Exists(LevelCatalog.Level2);
 
         //Call important methods
         soundManager.EnsureMenuMusic();

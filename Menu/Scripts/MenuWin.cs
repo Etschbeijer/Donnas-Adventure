@@ -144,7 +144,7 @@ public partial class MenuWin : Control
         collectedTreats = global.CollectedTreats;
         specialStreats = global.SpecialTreats.ToArray();
         currentTime = (new TimeSpan(0, global.Minutes, global.Seconds)).TotalSeconds;
-        score = HighscoreManager.CalculateScore((float)currentTime, collectedTreats, specialStreats.Length);
+        score = HighscoreManager.CalculateScore((float)currentTime, collectedTreats, specialStreats.Length, global.ExpectedTime, global.ExpectedTreats);
 
         playerscore.Text = score.ToString();
 

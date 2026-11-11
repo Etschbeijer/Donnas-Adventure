@@ -26,6 +26,18 @@ public partial class FallingPlatform : AnimatableBody3D
 
     RandomNumberGenerator rng = new RandomNumberGenerator();
 
+    Vector3 spawnPosition;
+    uint bodyLayer;
+    uint bodyMask;
+    uint areaLayer;
+    uint areaMask;
+
+    // Bumped on every respawn so a drop that is still awaiting a timer stops itself.
+    int cycle;
+    bool isTriggered;
+
+    Tween dropTween;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
@@ -44,7 +56,13 @@ public partial class FallingPlatform : AnimatableBody3D
         
 
         //Set initial values
-        targetPosition = new Vector3(Position.X, Position.Y - dropHeight, Position.Z);
+        AddToGroup("ResetOnRespawn");
+        spawnPosition = Position;
+        bodyLayer = CollisionLayer;
+        bodyMask = CollisionMask;
+        areaLayer = area.CollisionLayer;
+        areaMask = area.CollisionMask;
+        targetPosition = new Vector3(spawnPosition.X, spawnPosition.Y - dropHeight, spawnPosition.Z);
     }
 
     public async Task Movement()
@@ -53,34 +71,62 @@ public partial class FallingPlatform : AnimatableBody3D
         {
             var travelTimer = GetTree().CreateTimer(travelTime);
 
-            var moveTween = tree.CreateTween();
+            dropTween = tree.CreateTween();
 
-            moveTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine);
+            dropTween.TweenProperty(this, "position", targetPosition, travelTime).SetTrans(Tween.TransitionType.Sine);
             await ToSignal(travelTimer, Timer.SignalName.Timeout);
         }
     }
 
     public async void OnPlatformEntered(CharacterBody3D body)
     {
-        var collider = body as PlayerCharacter;
-        if (collider != null)
+        if (body is not PlayerCharacter || isTriggered)
         {
-            PlayFallingSound();
-            ControllExplosions(true);
-
-            var timer = tree.CreateTimer(stayTime);
-            await ToSignal(timer, Timer.SignalName.Timeout);
-            await Movement();
-
-            SetCollisionLayerValue(2, false);
-            SetCollisionMaskValue(1, false);
-            area.SetCollisionLayerValue(2, false);
-            area.SetCollisionMaskValue(1, false);
-
-            ControllExplosions(false);
-
-            CallDeferred(nameof(Unload));
+            return;
         }
+
+        isTriggered = true;
+        int myCycle = cycle;
+
+        PlayFallingSound();
+        ControllExplosions(true);
+
+        var timer = tree.CreateTimer(stayTime);
+        await ToSignal(timer, Timer.SignalName.Timeout);
+        if (cycle != myCycle || !IsInstanceValid(this))
+        {
+            return;
+        }
+
+        await Movement();
+        if (cycle != myCycle || !IsInstanceValid(this))
+        {
+            return;
+        }
+
+        SetCollisionLayerValue(2, false);
+        SetCollisionMaskValue(1, false);
+        area.SetCollisionLayerValue(2, false);
+        area.SetCollisionMaskValue(1, false);
+
+        ControllExplosions(false);
+
+        Hide();
+    }
+
+    public void ResetOnRespawn()
+    {
+        cycle++;
+        dropTween?.Kill();
+        dropTween = null;
+        Position = spawnPosition;
+        CollisionLayer = bodyLayer;
+        CollisionMask = bodyMask;
+        area.CollisionLayer = areaLayer;
+        area.CollisionMask = areaMask;
+        ControllExplosions(false);
+        Show();
+        isTriggered = false;
     }
 
     public void ControllExplosions(bool onOff)
@@ -95,10 +141,5 @@ public partial class FallingPlatform : AnimatableBody3D
     {
         audioPlayer.PitchScale = rng.RandfRange(0.9f, 1.1f);
         audioPlayer.Play();
-    }
-
-    public void Unload()
-    {
-        QueueFree();
     }
 }

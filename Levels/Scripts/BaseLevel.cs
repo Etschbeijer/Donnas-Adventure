@@ -5,6 +5,12 @@ public partial class BaseLevel : Node3D
 {
     [Export]
     public string LevelId;
+
+    [Export]
+    public float ExpectedTime = 180f;
+
+    [Export]
+    public int ExpectedTreats = 150;
     
     public Hud hud;
 
@@ -30,6 +36,7 @@ public partial class BaseLevel : Node3D
         global.SetNumberOfTreats(treatCount);
         labelTreats.Text = global.CollectedTreats.ToString();
         global.SetLevelId(LevelId);
+        global.SetScoreTargets(ExpectedTime, ExpectedTreats);
         global.SetCurrentLevelScenePath(SceneFilePath);
 
         //Call important methods

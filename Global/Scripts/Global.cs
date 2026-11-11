@@ -10,6 +10,9 @@ public partial class Global : Node
     public int CollectedTreats = 0;
     public int NumberOfTreats = 0;
 
+    public float ExpectedTime = 180f;
+    public int ExpectedTreats = 150;
+
     public int Minutes = 0;
     public int Seconds = 0;
 
@@ -157,6 +160,12 @@ public partial class Global : Node
     public void SetLevelId(string levelId)
     {
         LevelId = levelId;
+    }
+
+    public void SetScoreTargets(float expectedTime, int expectedTreats)
+    {
+        ExpectedTime = expectedTime;
+        ExpectedTreats = expectedTreats;
     }
 
     public void SetCurrentLevelScenePath(string path)

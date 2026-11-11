@@ -34,6 +34,7 @@ func _run():
 	_check_player_controls(player)
 	await _check_special_treats(player, global_node)
 	await _check_gameplay_effects(player)
+	await _check_falling_platform(player)
 	await _check_scene_teardown(player)
 	await _check_menu_and_sound(global_node)
 	current_scene.queue_free()
@@ -230,7 +231,7 @@ func _check_gameplay_effects(player: Node):
 	var player_transform: Transform3D = player.global_transform
 	_check(not bool(player.get("IsOnRail")) and (end_state == "GroundMovement" or end_state == "AirDropMovement") and player_transform.basis.y.y > 0.99, "Finishing the rail releases the player upright into a movement state")
 
-	# Speed pad, bounce pad and boost
+	# Pads and the speed boost
 	var speed_pad: Node = load("res://Environment/Nodes/speed_pad.tscn").instantiate()
 	var bounce_pad: Node = load("res://Environment/Nodes/bounce_pad.tscn").instantiate()
 	_check(is_equal_approx(float(speed_pad.get("BoostSpeed")), 13.0) and is_equal_approx(float(speed_pad.get("BoostDuration")), 1.5), "Speed pad scene keeps its script exports")
@@ -251,7 +252,7 @@ func _check_gameplay_effects(player: Node):
 	bounce_pad.free()
 	player.set("ShallBounce", false)
 
-	# Queued bounce, boost redirect and rail edge cases
+	# Queued bounce, boost redirect, rail abort and rail release
 	var idle_state = states.get_node("Idle")
 	var ground_state = states.get_node("GroundMovement")
 	states.call("TransitionTo", "Idle", null)
@@ -347,6 +348,27 @@ func _check_gameplay_effects(player: Node):
 	rail.free()
 	player.global_transform = start_transform
 
+func _check_falling_platform(player: Node):
+	var start_transform: Transform3D = player.global_transform
+	var platform = load("res://Environment/Nodes/earth_platform_1x_1.tscn").instantiate()
+	platform.set("stayTime", 0.05)
+	platform.position = Vector3(300, 0, 300)
+	current_scene.add_child(platform)
+	var spawn: Vector3 = platform.position
+	var original_layer: int = platform.collision_layer
+	platform.call("OnPlatformEntered", player)
+	var started := Time.get_ticks_msec()
+	while platform.visible and Time.get_ticks_msec() - started < 3000:
+		await process_frame
+	_check(not platform.visible and (platform.collision_layer & 2) == 0, "Falling platform hides after dropping")
+	player.call("Respawn")
+	# The platform syncs its transform to physics, so the new position lands a step later.
+	await physics_frame
+	await physics_frame
+	_check(platform.visible and platform.position.is_equal_approx(spawn) and platform.collision_layer == original_layer, "Respawn restores fallen platforms")
+	platform.free()
+	player.global_transform = start_transform
+
 func _check_scene_teardown(player: Node):
 	var hud := current_scene.get_node("HUD")
 	hud.call("UpdateTutorial", "Scene teardown test", 0.05)
@@ -416,3 +438,34 @@ func _check_menu_and_sound(global_node: Node):
 	await process_frame
 	await process_frame
 	_check(current_scene.scene_file_path == "res://Levels/Nodes/level_1.tscn", "Shared sound helper resumes Play Again when playback finishes")
+	await _check_level_2_from_title(global_node)
+
+func _check_level_2_from_title(global_node: Node):
+	change_scene_to_file("res://Menu/Nodes/menu_title.tscn")
+	await process_frame
+	await process_frame
+	var title_menu := current_scene
+	title_menu.call("OnButtonLevel2Pressed")
+	var started := Time.get_ticks_msec()
+	while current_scene == title_menu and Time.get_ticks_msec() - started < 5000:
+		await process_frame
+	await process_frame
+	await process_frame
+	await process_frame
+	var level_2_path := "res://Levels/Nodes/level_2.tscn"
+	_check(current_scene != null and current_scene.scene_file_path == level_2_path, "Title-menu Level 2 button changes to level_2")
+	if current_scene == null or current_scene.scene_file_path != level_2_path:
+		return
+	_check(current_scene.get("LevelId") == "1-2" and global_node.get("CurrentLevelScenePath") == level_2_path, "Level 2 reports its level id and stores its scene path in Global")
+	var treat_count: int = current_scene.get_node("Treats").get_child_count()
+	var specials := current_scene.get_node("SpecialTreats")
+	var special_types := {}
+	for special in specials.get_children():
+		special_types[str(special.name)] = special.get("TreatType")
+	_check(treat_count >= 60 and specials.get_child_count() == 3 and special_types.get("Cheese") == 1 and special_types.get("Cookie") == 3 and special_types.get("Meat") == 2 and current_scene.find_child("BoneTreat", true, false) != null, "Level 2 has its treats, three special treats and the bone treat")
+	var rail_count := 0
+	for loop in current_scene.get_node("Loopings").get_children():
+		var script = loop.get_script()
+		if script != null and str(script.resource_path).ends_with("LoopRail.cs"):
+			rail_count += 1
+	_check(rail_count == 2, "Level 2 has exactly two loop rails")

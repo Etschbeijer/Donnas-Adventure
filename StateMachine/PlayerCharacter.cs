@@ -1123,6 +1123,7 @@ public partial class PlayerCharacter : CharacterBody3D
         ResetInvulnerability();
         Hud.UpdateHealthbar(MaxHealth);
         isDead = false;
+        GetTree().CallGroup("ResetOnRespawn", "ResetOnRespawn");
     }
 
     public void ResetCamera()
