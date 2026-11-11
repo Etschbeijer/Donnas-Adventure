@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://co3ewb3dlmi3x"]
 
 [ext_resource type="Script" path="res://Environment/Scripts/LoopRail.cs" uid="uid://bendjh3n16x85" id="1_looprail"]
 

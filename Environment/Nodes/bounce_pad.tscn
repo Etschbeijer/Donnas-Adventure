@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://carjntu34275v"]
 
 [ext_resource type="Script" path="res://Environment/Scripts/BouncePad.cs" uid="uid://dk3rp3j3mshf3" id="1_bouncepad"]
 [ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Jump/Jump.wav" uid="uid://dwkok5bonkoa0" id="2_jump"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://3u10sh8m381k"]
 
 [ext_resource type="Script" path="res://Environment/Scripts/SpeedPad.cs" uid="uid://bm3bnbnt8vi5j" id="1_speedpad"]
 
