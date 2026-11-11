@@ -573,6 +573,11 @@ func _check_highscore_boards(global_node: Node):
 	await process_frame
 	await process_frame
 	_check(current_scene.get_node("VBoxContainer").get_child_count() == 2, "Scores without a known level show on the level 1 board")
+	seed_scores.call([["1-1", 100], ["1-2", 200]])
+	save_data.call("Save")
+	save_data.call("Reset")
+	var reloaded = ResourceLoader.load("user://highscores.tres", "", ResourceLoader.CACHE_MODE_IGNORE)
+	_check(save_data.get("PlayerScores").is_empty() and reloaded != null and reloaded.get("PlayerScores").size() == 0, "Reset clears the saved highscores in memory and on disk")
 	save_data.call("ResetHighScores")
 
 func _highscore_board(save_data: Object, level_id: String) -> Array:

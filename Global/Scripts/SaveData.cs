@@ -30,7 +30,6 @@ public partial class SaveData : Resource
     {
         PlayerScores = new ();
         Save();
-        LoadOrCreate();
     }
 
     public const int ScoresPerBoard = 10;
@@ -60,16 +59,11 @@ public partial class SaveData : Resource
         Save();
     }
 
+    // Clears every saved field, so a field added to SaveData later should be reset here too.
     public void Reset()
     {
-        SaveData res;
-
-        if (FileAccess.FileExists(savePathHighScores))
-        {
-            res = new SaveData();
-            Save();
-            LoadOrCreate();
-        }
+        PlayerScores = new();
+        Save();
     }
 
     public void Save()
