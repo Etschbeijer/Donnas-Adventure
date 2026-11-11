@@ -470,3 +470,24 @@ func _check_level_2_from_title(global_node: Node):
 		if script != null and str(script.resource_path).ends_with("LoopRail.cs"):
 			rail_count += 1
 	_check(rail_count == 2, "Level 2 has exactly two loop rails")
+	_check(not current_scene.get_node("HUD/PanelTutorial").visible, "The tutorial box stays hidden until a tutorial trigger fires")
+	var tutorial_triggers := current_scene.get_node("Tutorials").get_children()
+	var speed_z: float = current_scene.get_node("Pads/SpeedPad1").position.z
+	var looping_z: float = current_scene.get_node("Loopings/Looping1").position.z
+	var bounce_z: float = current_scene.get_node("Pads/BouncePad1").position.z
+	var tutorials_ok := tutorial_triggers.size() == 3
+	var found_speed := false
+	var found_looping := false
+	var found_bounce := false
+	for trigger in tutorial_triggers:
+		var keyboard_text := str(trigger.get("TextKeyboard"))
+		if keyboard_text.is_empty() or str(trigger.get("TextGamepad")).is_empty():
+			tutorials_ok = false
+		var trigger_z: float = trigger.position.z
+		if keyboard_text.contains("arrow pads") and trigger_z > speed_z:
+			found_speed = true
+		elif keyboard_text.contains("looping") and trigger_z > looping_z:
+			found_looping = true
+		elif keyboard_text.contains("bounce") and trigger_z > bounce_z and trigger_z < -150.0:
+			found_bounce = true
+	_check(tutorials_ok and found_speed and found_looping and found_bounce, "Level 2 tutorials explain the speed pads, the looping and the bounce pad")

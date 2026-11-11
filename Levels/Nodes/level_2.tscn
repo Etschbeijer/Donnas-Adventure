@@ -480,6 +480,12 @@ Hud = NodePath("../../HUD")
 TextKeyboard = "Keep running through the looping!"
 TextGamepad = "Keep running through the looping!"
 
+[node name="TutorialTrigger3" type="Area3D" parent="Tutorials" unique_id=731904265 node_paths=PackedStringArray("Hud") instance=ExtResource("31_e77ts")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -166)
+Hud = NodePath("../../HUD")
+TextKeyboard = "Run onto the green pad to bounce up to the high ledge!"
+TextGamepad = "Run onto the green pad to bounce up to the high ledge!"
+
 [node name="Pads" type="Node3D" parent="." unique_id=1442682261]
 
 [node name="SpeedPad1" type="Area3D" parent="Pads" unique_id=504788059 instance=ExtResource("33_xvxvh")]
