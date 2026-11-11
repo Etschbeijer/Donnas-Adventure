@@ -44,7 +44,8 @@ func _run():
 	for audio_player in root.get_node("SoundManager").get_children():
 		if audio_player is AudioStreamPlayer2D:
 			audio_player.stop()
-	await create_timer(0.1).timeout
+	# The audio mixer thread frees stopped playbacks asynchronously, so quitting sooner leaks them at exit.
+	await create_timer(0.5).timeout
 	print("Optimization checks finished; failures: ", failures)
 	quit(failures)
 
@@ -315,18 +316,23 @@ func _check_gameplay_effects(player: Node):
 	rail_flipped.free()
 
 	var floor_rail: Node3D = load("res://Environment/Nodes/looping.tscn").instantiate()
-	# Origin height 0.67 puts the exit 0.02 above the resting player height on the floor (y = 2.45)
+	# Origin height 0.45 puts the rail exit at the resting player height on the floor (y = 2.45 with the rail at y = 2)
 	floor_rail.position = Vector3(0, 2, 18)
 	current_scene.add_child(floor_rail)
 	player.set("HasDoubleJump", false)
 	player.global_transform = start_transform
+	player.set("CanInput", false)
+	player.call("ControlFeetCollision", false, true)
+	player.call("ControlSaltoCollision", true)
 	player.call("TryStartRail", floor_rail)
 	_run_rail(player)
 	var landed_state := str(states.get("CurrentStateName"))
 	var landed_boost: bool = player.get("IsSpeedBoostActive")
 	var landed_input: bool = player.get("CanInput")
 	var landed_jump: bool = player.get("HasDoubleJump")
+	var foot_hurtbox: Area3D = player.find_child("HurtBoxFootL", true, false)
 	_check(landed_state == "GroundMovement" and landed_boost and landed_input and landed_jump, "Releasing the rail onto the floor grounds the player with a boost, input and the double jump")
+	_check(foot_hurtbox.monitorable, "Releasing the rail turns the feet hurtbox back on")
 	floor_rail.free()
 	player.call("CancelSpeedBoost")
 	states.call("TransitionTo", "Idle", null)
