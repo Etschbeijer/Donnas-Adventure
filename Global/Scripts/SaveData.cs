@@ -62,8 +62,7 @@ public partial class SaveData : Resource
     // Clears every saved field, so a field added to SaveData later should be reset here too.
     public void Reset()
     {
-        PlayerScores = new();
-        Save();
+        ResetHighScores();
     }
 
     public void Save()
