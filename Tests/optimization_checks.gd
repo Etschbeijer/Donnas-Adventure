@@ -62,17 +62,25 @@ func _collect_slimes(node: Node, found: Array[Node]):
 func _check_slime_facing():
 	var misfacing: Array[String] = []
 	var every_level_has_slimes := true
-	for path in ["res://Levels/Nodes/level_1.tscn", "res://Levels/Nodes/level_2.tscn", "res://Levels/Nodes/level_test.tscn"]:
+	# Scan the folder so a new level is checked without editing this list.
+	var levels_with_slimes := ["level_1.tscn", "level_2.tscn", "level_test.tscn"]
+	for file in DirAccess.get_files_at("res://Levels/Nodes/"):
+		if not file.ends_with(".tscn"):
+			continue
+		var path := "res://Levels/Nodes/" + file
 		var level: Node = load(path).instantiate()
 		var slimes: Array[Node] = []
 		_collect_slimes(level, slimes)
-		every_level_has_slimes = every_level_has_slimes and not slimes.is_empty()
+		if file in levels_with_slimes and slimes.is_empty():
+			every_level_has_slimes = false
 		for slime in slimes:
 			var relative := Transform3D.IDENTITY
 			var current: Node = slime
-			while current != level:
-				if current is Node3D:
-					relative = current.transform * relative
+			# Godot stops transform inheritance at a non-Node3D parent and above a top_level node.
+			while current != level and current is Node3D:
+				relative = current.transform * relative
+				if current.top_level:
+					break
 				current = current.get_parent()
 			var facing: Vector3 = relative.basis.z
 			var walking: Vector3 = slime.get("direction")
