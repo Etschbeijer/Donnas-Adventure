@@ -15,6 +15,7 @@ func _check(condition: bool, description: String):
 		push_error("FAIL: " + description)
 
 func _run():
+	_check_slime_facing()
 	if change_scene_to_file("res://Levels/Nodes/level_1.tscn") != OK:
 		push_error("Could not load the test level")
 		quit(1)
@@ -49,6 +50,40 @@ func _run():
 	await create_timer(0.5).timeout
 	print("Optimization checks finished; failures: ", failures)
 	quit(failures)
+
+func _collect_slimes(node: Node, found: Array[Node]):
+	var script: Script = node.get_script()
+	if script != null and script.resource_path.ends_with("Slime.cs"):
+		found.append(node)
+	for child in node.get_children():
+		_collect_slimes(child, found)
+
+# Slime.cs moves along the direction field. The model and its floor-edge ray face local +Z, so the rotation has to match.
+func _check_slime_facing():
+	var misfacing: Array[String] = []
+	var every_level_has_slimes := true
+	for path in ["res://Levels/Nodes/level_1.tscn", "res://Levels/Nodes/level_2.tscn", "res://Levels/Nodes/level_test.tscn"]:
+		var level: Node = load(path).instantiate()
+		var slimes: Array[Node] = []
+		_collect_slimes(level, slimes)
+		every_level_has_slimes = every_level_has_slimes and not slimes.is_empty()
+		for slime in slimes:
+			var relative := Transform3D.IDENTITY
+			var current: Node = slime
+			while current != level:
+				if current is Node3D:
+					relative = current.transform * relative
+				current = current.get_parent()
+			var facing: Vector3 = relative.basis.z
+			var walking: Vector3 = slime.get("direction")
+			facing.y = 0.0
+			walking.y = 0.0
+			if facing.normalized().dot(walking.normalized()) < 0.99:
+				misfacing.append(path.get_file() + ":" + str(level.get_path_to(slime)))
+		level.free()
+	if not misfacing.is_empty():
+		print("Slimes not facing their direction: ", misfacing)
+	_check(every_level_has_slimes and misfacing.is_empty(), "Every slime faces the direction it walks")
 
 func _check_bursts(global_node: Node):
 	var bursts: Array[Node] = []

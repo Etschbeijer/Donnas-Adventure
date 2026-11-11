@@ -199,31 +199,31 @@ travelTime = 2.5
 [node name="Slimes" type="Node3D" parent="." unique_id=1173089118]
 
 [node name="Slime1" type="CharacterBody3D" parent="Slimes" unique_id=94804595 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3, -76)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -2, 3, -76)
 direction = Vector3(1, 0, 0)
 
 [node name="Slime2" type="CharacterBody3D" parent="Slimes" unique_id=607016412 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3, -82)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 2, 3, -82)
 direction = Vector3(-1, 0, 0)
 
 [node name="Slime3" type="CharacterBody3D" parent="Slimes" unique_id=499983028 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -122)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3, -122)
 direction = Vector3(1, 0, 0)
 
 [node name="Slime4" type="CharacterBody3D" parent="Slimes" unique_id=44974446 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -250)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3, -250)
 direction = Vector3(1, 0, 0)
 
 [node name="Slime5" type="CharacterBody3D" parent="Slimes" unique_id=904122234 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -256)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 3, -256)
 direction = Vector3(-1, 0, 0)
 
 [node name="Slime6" type="CharacterBody3D" parent="Slimes" unique_id=1337909348 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -262)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3, -262)
 direction = Vector3(1, 0, 0)
 
 [node name="Slime7" type="CharacterBody3D" parent="Slimes" unique_id=818232945 instance=ExtResource("23_v6mpg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -320)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 3, -320)
 direction = Vector3(1, 0, 0)
 
 [node name="Treats" type="Node3D" parent="." unique_id=314226756]
