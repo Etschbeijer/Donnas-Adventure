@@ -475,19 +475,30 @@ func _check_level_2_from_title(global_node: Node):
 	var speed_z: float = current_scene.get_node("Pads/SpeedPad1").position.z
 	var looping_z: float = current_scene.get_node("Loopings/Looping1").position.z
 	var bounce_z: float = current_scene.get_node("Pads/BouncePad1").position.z
+	var spawn_z: float = current_scene.get_node("PlayerCharacter").position.z
 	var tutorials_ok := tutorial_triggers.size() == 3
 	var found_speed := false
 	var found_looping := false
 	var found_bounce := false
 	for trigger in tutorial_triggers:
 		var keyboard_text := str(trigger.get("TextKeyboard"))
-		if keyboard_text.is_empty() or str(trigger.get("TextGamepad")).is_empty():
+		if keyboard_text.is_empty() or str(trigger.get("TextGamepad")).is_empty() or trigger.get("Hud") == null:
 			tutorials_ok = false
 		var trigger_z: float = trigger.position.z
+		if trigger_z > spawn_z:
+			tutorials_ok = false
 		if keyboard_text.contains("arrow pads") and trigger_z > speed_z:
 			found_speed = true
 		elif keyboard_text.contains("looping") and trigger_z > looping_z:
 			found_looping = true
+		# The falling bridge ends at z -150, so the bounce tip has to come after it, on the moving platform.
 		elif keyboard_text.contains("bounce") and trigger_z > bounce_z and trigger_z < -150.0:
 			found_bounce = true
 	_check(tutorials_ok and found_speed and found_looping and found_bounce, "Level 2 tutorials explain the speed pads, the looping and the bounce pad")
+	var hud := current_scene.get_node("HUD")
+	var panel_tutorial: Panel = hud.get_node("PanelTutorial")
+	var label_tutorial: Label = panel_tutorial.get_node("LabelTutorial")
+	hud.call("UpdateTutorial", "Tutorial visibility test", 0.05)
+	var shown := panel_tutorial.visible and label_tutorial.text == "Tutorial visibility test"
+	await create_timer(0.2).timeout
+	_check(shown and not panel_tutorial.visible and label_tutorial.text.is_empty(), "The tutorial box shows a message and hides again when it runs out")
