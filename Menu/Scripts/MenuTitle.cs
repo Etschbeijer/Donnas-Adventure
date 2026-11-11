@@ -6,6 +6,8 @@ public partial class MenuTitle : Control
     SoundManager soundManager;
     TransitionScreen transitionScreen;
 
+    bool isStarting;
+
     Button playButton;
     Button level1Button;
     Button level2Button;
@@ -50,7 +52,7 @@ public partial class MenuTitle : Control
 
         UiAdapter.SetMouseUi(this, global, isControllerInput, levelSelect.Visible ? level1Button : playButton);
 
-        if (levelSelect.Visible && @event.IsActionPressed("ui_cancel"))
+        if (levelSelect.Visible && !isStarting && @event.IsActionPressed("ui_cancel"))
         {
             GetViewport().SetInputAsHandled();
             OnButtonBackPressed();
@@ -63,16 +65,27 @@ public partial class MenuTitle : Control
 
         buttons.Hide();
         levelSelect.Show();
-        level1Button.GrabFocus();
+        if (global.IsControllerInput)
+        {
+            level1Button.GrabFocus();
+        }
     }
 
     public void OnButtonBackPressed()
     {
+        if (isStarting)
+        {
+            return;
+        }
+
         soundManager.PlaySoundClick();
 
         levelSelect.Hide();
         buttons.Show();
-        playButton.GrabFocus();
+        if (global.IsControllerInput)
+        {
+            playButton.GrabFocus();
+        }
     }
 
     public void OnButtonLevel1Pressed() => StartLevel(LevelCatalog.Level1);
@@ -81,6 +94,12 @@ public partial class MenuTitle : Control
 
     async void StartLevel(string scenePath)
     {
+        if (isStarting)
+        {
+            return;
+        }
+        isStarting = true;
+
         transitionScreen.FadeToBlack();
 
         await soundManager.PlaySoundPlay();

@@ -17,7 +17,7 @@ public partial class LoopRail : Node3D
     float leadIn = 6f;
     float leadOut = 12f;
     float lateralOffset = 2f;
-    float playerOriginHeight = 0.67f;
+    float playerOriginHeight = 0.45f;
 
     [Export]
     public float Radius { get => radius; set { radius = value; markDirty(); } }
@@ -70,6 +70,7 @@ public partial class LoopRail : Node3D
             return;
         }
 
+        float r = Mathf.Max(radius, 0.1f);
         float lead = Mathf.Max(leadIn, 0.1f);
         float lout = Mathf.Max(leadOut, 0.1f);
         int count = (LeadSamples + 1) + RingSamples + LeadSamples;
@@ -91,8 +92,8 @@ public partial class LoopRail : Node3D
         {
             float theta = Mathf.Tau * i / RingSamples;
             float x = -lateralOffset / 2f + lateralOffset * (theta - Mathf.Sin(theta)) / Mathf.Tau;
-            float y = radius * (1f - Mathf.Cos(theta));
-            float z = -lead - radius * Mathf.Sin(theta);
+            float y = r * (1f - Mathf.Cos(theta));
+            float z = -lead - r * Mathf.Sin(theta);
 
             points[index] = new Vector3(x, y, z);
             ups[index] = new Vector3(0f, Mathf.Cos(theta), Mathf.Sin(theta));
@@ -195,8 +196,15 @@ public partial class LoopRail : Node3D
             visuals.QueueFree();
         }
 
+        var stale = GetNodeOrNull(VisualsName);
+        if (stale != null)
+        {
+            RemoveChild(stale);
+            stale.QueueFree();
+        }
+
         visuals = new Node3D { Name = VisualsName };
-        AddChild(visuals);
+        AddChild(visuals, false, InternalMode.Front);
 
         var library = GD.Load<MeshLibrary>("res://MeshLibraries/Blocks.tres");
         var mesh = library?.GetItemMesh(0);

@@ -15,6 +15,10 @@ public partial class Looping : PlayerState
     public override void PhysicsUpdate(double delta)
     {
         //PlayerCharacter moves the player along the rail.
+        if (!Player.IsOnRail)
+        {
+            StateMachine.TransitionTo(nameof(AirDropMovement));
+        }
     }
 
     public override void Update(double delta)

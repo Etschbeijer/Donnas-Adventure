@@ -250,6 +250,88 @@ func _check_gameplay_effects(player: Node):
 	bounce_pad.free()
 	player.set("ShallBounce", false)
 
+	# Queued bounce, boost redirect and rail edge cases
+	var idle_state = states.get_node("Idle")
+	var ground_state = states.get_node("GroundMovement")
+	states.call("TransitionTo", "Idle", null)
+	player.call("TryBounce", 13.0)
+	idle_state.call("PhysicsUpdate", 1.0 / 60.0)
+	_check(str(states.get("CurrentStateName")) == "Bounce" and is_equal_approx(float((player.get("PlayerVelocity") as Vector3).y), 13.0), "Idle turns a queued bounce into the Bounce state with the launch velocity")
+	states.call("TransitionTo", "GroundMovement", null)
+	player.call("TryBounce", 13.0)
+	ground_state.call("PhysicsUpdate", 1.0 / 60.0)
+	_check(str(states.get("CurrentStateName")) == "Bounce", "GroundMovement turns a queued bounce into the Bounce state")
+	player.call("ClearBounceRequest")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+	player.call("TryStartSpeedBoost", 13.0, 1.5, Vector3(0, 0, -1))
+	idle_state.call("PhysicsUpdate", 1.0 / 60.0)
+	_check(str(states.get("CurrentStateName")) == "GroundMovement", "Idle hands an active speed boost to GroundMovement")
+	ground_state.call("PhysicsUpdate", 1.0 / 60.0)
+	var boost_velocity: Vector3 = player.get("PlayerVelocity")
+	_check(Vector2(boost_velocity.x, boost_velocity.z).length() >= 13.0 and boost_velocity.z < 0.0 and absf(boost_velocity.x) < 0.01, "Speed boost keeps its heading along -Z without input")
+	player.call("CancelSpeedBoost")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+
+	player.call("TryStartRail", rail)
+	var hit_area := Area3D.new()
+	hit_area.name = "SlimeHitbox"
+	current_scene.add_child(hit_area)
+	player.call("OnHurtboxEntered", hit_area)
+	_check(bool(player.get("IsOnRail")) and not bool(player.get("IsHurt")), "Hurtbox contact is ignored while riding the rail")
+	hit_area.free()
+	player.call("Respawn")
+	_check(not bool(player.get("IsOnRail")), "Respawn ends an active rail ride")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+
+	player.call("TryStartRail", rail)
+	player.call("AbortRail")
+	states.get_node("Looping").call("PhysicsUpdate", 1.0 / 60.0)
+	_check(str(states.get("CurrentStateName")) == "AirDropMovement", "Looping leaves for AirDropMovement when the rail is gone")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+
+	var rail_flipped: Node3D = load("res://Environment/Nodes/looping.tscn").instantiate()
+	rail_flipped.position = Vector3(200, 0, 200)
+	rail_flipped.rotation.y = PI
+	current_scene.add_child(rail_flipped)
+	player.call("TryStartRail", rail_flipped)
+	var flipped_top: Transform3D = rail_flipped.call("SampleTransform", 0.0)
+	var flipped_distance := 0.0
+	while flipped_distance <= float(rail_flipped.get("Length")):
+		var flipped_sample: Transform3D = rail_flipped.call("SampleTransform", flipped_distance)
+		if flipped_sample.origin.y > flipped_top.origin.y:
+			flipped_top = flipped_sample
+		flipped_distance += 0.05
+	player.global_transform = flipped_top
+	player.call("AbortRail")
+	var facing: Vector3 = player.global_transform.basis.z
+	facing.y = 0.0
+	var travel: Vector3 = -rail_flipped.global_transform.basis.z
+	_check(facing.normalized().dot(travel) > 0.99, "Aborting at the top of the ring faces along the rail travel direction")
+	states.call("TransitionTo", "Idle", null)
+	rail_flipped.free()
+
+	var floor_rail: Node3D = load("res://Environment/Nodes/looping.tscn").instantiate()
+	# Origin height 0.67 puts the exit 0.02 above the resting player height on the floor (y = 2.45)
+	floor_rail.position = Vector3(0, 2, 18)
+	current_scene.add_child(floor_rail)
+	player.set("HasDoubleJump", false)
+	player.global_transform = start_transform
+	player.call("TryStartRail", floor_rail)
+	_run_rail(player)
+	var landed_state := str(states.get("CurrentStateName"))
+	var landed_boost: bool = player.get("IsSpeedBoostActive")
+	var landed_input: bool = player.get("CanInput")
+	var landed_jump: bool = player.get("HasDoubleJump")
+	_check(landed_state == "GroundMovement" and landed_boost and landed_input and landed_jump, "Releasing the rail onto the floor grounds the player with a boost, input and the double jump")
+	floor_rail.free()
+	player.call("CancelSpeedBoost")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+
 	# Finishing clears rail and boost, and blocks new effects
 	player.call("TryStartRail", rail)
 	player.call("TryStartSpeedBoost", 13.0, 1.5, Vector3(0, 0, -1))

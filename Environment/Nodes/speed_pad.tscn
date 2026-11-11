@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://Environment/Scripts/SpeedPad.cs" id="1_speedpad"]
+[ext_resource type="Script" path="res://Environment/Scripts/SpeedPad.cs" uid="uid://bm3bnbnt8vi5j" id="1_speedpad"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pad"]
 size = Vector3(4, 1, 2)

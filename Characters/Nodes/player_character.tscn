@@ -28,7 +28,7 @@
 [ext_resource type="Script" uid="uid://d3f2jn4mkixos" path="res://StateMachine/WallHanging.cs" id="22_3wrq7"]
 [ext_resource type="Script" uid="uid://cgqn7jwntobeb" path="res://StateMachine/Bounce.cs" id="22_dr6y8"]
 [ext_resource type="Script" uid="uid://8vf2d2sdg46s" path="res://StateMachine/Stomp.cs" id="22_ffnnu"]
-[ext_resource type="Script" path="res://StateMachine/Looping.cs" id="99_looping"]
+[ext_resource type="Script" path="res://StateMachine/Looping.cs" uid="uid://pisbi7kdv31c" id="99_looping"]
 [ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/1up/1up2.wav" id="27_o6d1x"]
 [ext_resource type="PackedScene" uid="uid://dicyrwmggvrp3" path="res://Effects/Nodes/grass_Trail.tscn" id="28_o6d1x"]
 [ext_resource type="AudioStream" path="res://AudioTracks/Soundeffect/OpenGameArt/Sound effects Mini Pack1.5/Power-up/Powerup.wav" id="30_chg8p"]

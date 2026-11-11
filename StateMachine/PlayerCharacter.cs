@@ -143,6 +143,7 @@ public partial class PlayerCharacter : CharacterBody3D
     Vector3 speedBoostDirection;
 
     float pendingBounceVelocity;
+    float railYaw;
 
     bool isFinishing;
 
@@ -389,6 +390,14 @@ public partial class PlayerCharacter : CharacterBody3D
         float speed = railSpeed;
 
         activeRail = null;
+        ControlFeetCollision(true, false);
+        ControlSaltoCollision(false);
+        HasDoubleJump = true;
+        if (!isFinishing)
+        {
+            CanInput = true;
+        }
+        ClearBounceRequest();
         GlobalTransform = exit;
         Rotation = new Vector3(0f, Mathf.Atan2(dir.X, dir.Z), 0f);
 
@@ -428,7 +437,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public bool TryStartRail(LoopRail rail)
     {
-        if (rail == null || IsOnRail || !CanStartGameplayEffect() || !stateMachine.HasNode("Looping"))
+        if (rail == null || IsOnRail || !CanStartGameplayEffect() || !stateMachine.HasNode(nameof(Looping)))
         {
             return false;
         }
@@ -440,12 +449,16 @@ public partial class PlayerCharacter : CharacterBody3D
         railEntryTransform = GlobalTransform;
         activeRail = rail;
         CancelSpeedBoost();
-        pendingBounceVelocity = 0f;
-        ShallBounce = false;
+        ClearBounceRequest();
+        InputDir = Vector2.Zero;
+        var travel = -rail.GlobalTransform.Basis.Z;
+        travel.Y = 0f;
+        travel = travel.Normalized();
+        railYaw = Mathf.Atan2(travel.X, travel.Z);
         PlatformVelocity = Vector3.Zero;
         PlayerVelocity = Vector3.Zero;
         Velocity = Vector3.Zero;
-        stateMachine.TransitionTo("Looping");
+        stateMachine.TransitionTo(nameof(Looping));
         return true;
     }
 
@@ -457,7 +470,7 @@ public partial class PlayerCharacter : CharacterBody3D
         }
 
         activeRail = null;
-        Rotation = new Vector3(0f, Rotation.Y, 0f);
+        Rotation = new Vector3(0f, railYaw, 0f);
         PlayerVelocity = Vector3.Zero;
     }
 
@@ -503,6 +516,12 @@ public partial class PlayerCharacter : CharacterBody3D
         return true;
     }
 
+    public void ClearBounceRequest()
+    {
+        ShallBounce = false;
+        pendingBounceVelocity = 0f;
+    }
+
     public float ConsumeBounceVelocity()
     {
         float v = pendingBounceVelocity > 0f ? pendingBounceVelocity : JumpVelocity * 0.7f;
@@ -515,8 +534,7 @@ public partial class PlayerCharacter : CharacterBody3D
         isFinishing = true;
         AbortRail();
         CancelSpeedBoost();
-        pendingBounceVelocity = 0f;
-        ShallBounce = false;
+        ClearBounceRequest();
         PlayerVelocity = Vector3.Zero;
         Velocity = Vector3.Zero;
     }
@@ -724,6 +742,11 @@ public partial class PlayerCharacter : CharacterBody3D
             if (hasInput)
             {
                 CalculateMovementSpeed(delta);
+            }
+
+            if (hasInput && direction != Vector3.Zero)
+            {
+                speedBoostDirection = new Vector3(direction.X, 0f, direction.Z).Normalized();
             }
 
             MovementSpeed = Mathf.Max(MovementSpeed, speedBoostSpeed);
@@ -1090,8 +1113,7 @@ public partial class PlayerCharacter : CharacterBody3D
     {
         AbortRail();
         CancelSpeedBoost();
-        pendingBounceVelocity = 0f;
-        ShallBounce = false;
+        ClearBounceRequest();
         PlayerVelocity = Vector3.Zero;
         InputDir = Vector2.Zero;
         CurrentHealth = MaxHealth;

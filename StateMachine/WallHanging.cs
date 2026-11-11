@@ -14,7 +14,7 @@ public partial class WallHanging : PlayerState
     {
         Player.TimeOnWall = 0f;
 
-        Player.ShallBounce = false;
+        Player.ClearBounceRequest();
         Player.HasDoubleJump = true;
 
         Player.PlayerVelocity = Vector3.Zero;
