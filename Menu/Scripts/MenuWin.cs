@@ -106,7 +106,7 @@ public partial class MenuWin : Control
         global.ResetLevelId();
         await soundManager.PlaySoundPlay();
         transitionScreen.FadeToBlack();
-        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
+        GetTree().ChangeSceneToFile(global.GetReplayScenePath());
     }
 
     public async void OnButtonMenuPressed()

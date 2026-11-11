@@ -22,6 +22,7 @@ func _run():
 	await process_frame
 	await process_frame
 	var global_node := root.get_node("Global")
+	_check(global_node.get("CurrentLevelScenePath") == "res://Levels/Nodes/level_1.tscn", "Loading level_1 stores its scene path in Global")
 	var player = current_scene.get_node("PlayerCharacter")
 	player.set_physics_process(false)
 	var states = player.get_node("StateMachine")
@@ -225,6 +226,22 @@ func _check_menu_and_sound(global_node: Node):
 		await process_frame
 		await process_frame
 		_check(current_scene.scene_file_path == destination[1], "Title-menu handler opens " + destination[1].get_file())
+	change_scene_to_file("res://Menu/Nodes/menu_title.tscn")
+	await process_frame
+	await process_frame
+	var title := current_scene
+	title.call("OnButtonPlayPressed")
+	_check(title.get_node("LevelSelect").visible and not title.get_node("Buttons").visible, "Title-menu Play shows the level select and hides the main buttons")
+	title.call("OnButtonBackPressed")
+	_check(not title.get_node("LevelSelect").visible and title.get_node("Buttons").visible, "Title-menu Back restores the main buttons")
+	var stored_path = global_node.get("CurrentLevelScenePath")
+	global_node.set("CurrentLevelScenePath", "res://Menu/Nodes/menu_title.tscn")
+	_check(global_node.call("GetReplayScenePath") == "res://Menu/Nodes/menu_title.tscn", "Replay path returns the stored scene when it exists")
+	global_node.set("CurrentLevelScenePath", "")
+	_check(global_node.call("GetReplayScenePath") == "res://Levels/Nodes/level_1.tscn", "Replay path falls back to level_1 when empty")
+	global_node.set("CurrentLevelScenePath", "res://Levels/Nodes/missing.tscn")
+	_check(global_node.call("GetReplayScenePath") == "res://Levels/Nodes/level_1.tscn", "Replay path falls back to level_1 when the scene is missing")
+	global_node.set("CurrentLevelScenePath", stored_path)
 	change_scene_to_file("res://Menu/Nodes/menu_defeat.tscn")
 	await process_frame
 	await process_frame

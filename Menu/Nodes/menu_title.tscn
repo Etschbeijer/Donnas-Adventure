@@ -198,8 +198,74 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
 text = "Exit"
 
+[node name="LevelSelect" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -108.0
+offset_right = -192.0
+offset_bottom = 292.0
+grow_horizontal = 0
+grow_vertical = 2
+visible = false
+
+[node name="ButtonLevel1" type="Button" parent="LevelSelect"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_ef4cy")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Level 1"
+
+[node name="ButtonLevel2" type="Button" parent="LevelSelect"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_ef4cy")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Level 2"
+
+[node name="ButtonBack" type="Button" parent="LevelSelect"]
+layout_mode = 2
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_color = Color(0.648235, 0.477472, 0.949636, 1)
+theme_override_colors/font_focus_color = Color(0.878431, 0.576471, 0.988235, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_ef4cy")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/focus = SubResource("StyleBoxFlat_5cs7u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_weaej")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_k4cr3")
+theme_override_styles/normal = SubResource("StyleBoxFlat_n3opb")
+text = "Back"
+
 [connection signal="pressed" from="Buttons/ButtonPlay" to="." method="OnButtonPlayPressed"]
 [connection signal="pressed" from="Buttons/ButtonSettings" to="." method="OnButtonSettingsPressed"]
 [connection signal="pressed" from="Buttons/ButtonScores" to="." method="OnButtonScoresPressed"]
 [connection signal="pressed" from="Buttons/ButtonCredits" to="." method="OnButtonCreditsPressed"]
 [connection signal="pressed" from="Buttons/ButtonExit" to="." method="OnButtonExitPressed"]
+[connection signal="pressed" from="LevelSelect/ButtonLevel1" to="." method="OnButtonLevel1Pressed"]
+[connection signal="pressed" from="LevelSelect/ButtonLevel2" to="." method="OnButtonLevel2Pressed"]
+[connection signal="pressed" from="LevelSelect/ButtonBack" to="." method="OnButtonBackPressed"]

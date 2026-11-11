@@ -7,6 +7,11 @@ public partial class MenuTitle : Control
     TransitionScreen transitionScreen;
 
     Button playButton;
+    Button level1Button;
+    Button level2Button;
+
+    VBoxContainer buttons;
+    VBoxContainer levelSelect;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -16,10 +21,17 @@ public partial class MenuTitle : Control
         soundManager = GetNode<SoundManager>("/root/SoundManager");
         transitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
 
-        playButton = GetNode<VBoxContainer>("Buttons").GetNode<Button>("ButtonPlay");
+        buttons = GetNode<VBoxContainer>("Buttons");
+        levelSelect = GetNode<VBoxContainer>("LevelSelect");
+        playButton = buttons.GetNode<Button>("ButtonPlay");
+        level1Button = levelSelect.GetNode<Button>("ButtonLevel1");
+        level2Button = levelSelect.GetNode<Button>("ButtonLevel2");
 
         //Set initial values
         Input.MouseMode = Input.MouseModeEnum.Visible;
+
+        //The second level scene may not exist yet
+        level2Button.Disabled = !ResourceLoader.Exists(LevelCatalog.Level2);
 
         //Call important methods
         soundManager.EnsureMenuMusic();
@@ -36,18 +48,46 @@ public partial class MenuTitle : Control
     {
         var isControllerInput = @event is InputEventJoypadButton || @event is InputEventJoypadMotion;
 
-        UiAdapter.SetMouseUi(this, global, isControllerInput, playButton);
+        UiAdapter.SetMouseUi(this, global, isControllerInput, levelSelect.Visible ? level1Button : playButton);
+
+        if (levelSelect.Visible && @event.IsActionPressed("ui_cancel"))
+        {
+            GetViewport().SetInputAsHandled();
+            OnButtonBackPressed();
+        }
     }
 
-    public async void OnButtonPlayPressed()
-	{
+    public void OnButtonPlayPressed()
+    {
+        soundManager.PlaySoundClick();
+
+        buttons.Hide();
+        levelSelect.Show();
+        level1Button.GrabFocus();
+    }
+
+    public void OnButtonBackPressed()
+    {
+        soundManager.PlaySoundClick();
+
+        levelSelect.Hide();
+        buttons.Show();
+        playButton.GrabFocus();
+    }
+
+    public void OnButtonLevel1Pressed() => StartLevel(LevelCatalog.Level1);
+
+    public void OnButtonLevel2Pressed() => StartLevel(LevelCatalog.Level2);
+
+    async void StartLevel(string scenePath)
+    {
         transitionScreen.FadeToBlack();
 
         await soundManager.PlaySoundPlay();
 
         await ToSignal(transitionScreen.AnimationPlayer, AnimationPlayer.SignalName.AnimationFinished);
 
-        GetTree().ChangeSceneToFile("res://Levels/Nodes/level_1.tscn");
+        GetTree().ChangeSceneToFile(scenePath);
     }
 
     public void OnButtonScoresPressed() => OpenMenu("res://Menu/Nodes/menu_highscores.tscn");

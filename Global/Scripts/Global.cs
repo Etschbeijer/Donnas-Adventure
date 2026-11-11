@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public partial class Global : Node
 {
     public string LevelId;
+    public string CurrentLevelScenePath = "";
     
     public int CollectedTreats = 0;
     public int NumberOfTreats = 0;
@@ -156,6 +157,21 @@ public partial class Global : Node
     public void SetLevelId(string levelId)
     {
         LevelId = levelId;
+    }
+
+    public void SetCurrentLevelScenePath(string path)
+    {
+        CurrentLevelScenePath = path;
+    }
+
+    public string GetReplayScenePath()
+    {
+        if (!string.IsNullOrEmpty(CurrentLevelScenePath) && ResourceLoader.Exists(CurrentLevelScenePath))
+        {
+            return CurrentLevelScenePath;
+        }
+
+        return LevelCatalog.Level1;
     }
 
     public void ResetLevelId()

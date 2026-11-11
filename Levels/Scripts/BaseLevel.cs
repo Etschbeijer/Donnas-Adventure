@@ -30,6 +30,7 @@ public partial class BaseLevel : Node3D
         global.SetNumberOfTreats(treatCount);
         labelTreats.Text = global.CollectedTreats.ToString();
         global.SetLevelId(LevelId);
+        global.SetCurrentLevelScenePath(SceneFilePath);
 
         //Call important methods
         soundManager.StopMusicProject2Marioish2D();
