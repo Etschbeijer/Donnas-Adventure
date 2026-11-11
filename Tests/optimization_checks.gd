@@ -62,9 +62,13 @@ func _collect_slimes(node: Node, found: Array[Node]):
 func _check_slime_facing():
 	var misfacing: Array[String] = []
 	var every_level_has_slimes := true
-	# Scan the folder so a new level is checked without editing this list.
+	# The folder scan covers new levels automatically. levels_with_slimes only names the levels that must contain at least one slime.
 	var levels_with_slimes := ["level_1.tscn", "level_2.tscn", "level_test.tscn"]
-	for file in DirAccess.get_files_at("res://Levels/Nodes/"):
+	var level_files := DirAccess.get_files_at("res://Levels/Nodes/")
+	for required in levels_with_slimes:
+		if not required in level_files:
+			every_level_has_slimes = false
+	for file in level_files:
 		if not file.ends_with(".tscn"):
 			continue
 		var path := "res://Levels/Nodes/" + file
