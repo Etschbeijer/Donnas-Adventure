@@ -104,6 +104,7 @@ func _check_slime_turns_once():
 	var scene: PackedScene = load("res://Characters/Nodes/slime.tscn")
 	var created: Array[Node] = []
 
+	# In play, slimes bump through IsOnWall. This part checks that path, which does not go through the new guard.
 	var floor_body := StaticBody3D.new()
 	floor_body.collision_layer = 2
 	var shape := CollisionShape3D.new()
