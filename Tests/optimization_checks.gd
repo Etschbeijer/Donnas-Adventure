@@ -457,6 +457,7 @@ func _check_level_2_from_title(global_node: Node):
 	if current_scene == null or current_scene.scene_file_path != level_2_path:
 		return
 	_check(current_scene.get("LevelId") == "1-2" and global_node.get("CurrentLevelScenePath") == level_2_path, "Level 2 reports its level id and stores its scene path in Global")
+	_check(is_equal_approx(float(global_node.get("ExpectedTime")), 75.0) and int(global_node.get("ExpectedTreats")) == 60, "Level 2 passes its score targets to Global")
 	var treat_count: int = current_scene.get_node("Treats").get_child_count()
 	var specials := current_scene.get_node("SpecialTreats")
 	var special_types := {}
