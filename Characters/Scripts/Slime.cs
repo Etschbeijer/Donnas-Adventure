@@ -76,6 +76,8 @@ public partial class Slime : CharacterBody3D
 
 	public async Task TurnAround()
 	{
+        if (isTurning) return;
+
         isTurning = true;
 
         var dir = direction;

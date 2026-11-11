@@ -16,6 +16,7 @@ func _check(condition: bool, description: String):
 
 func _run():
 	_check_slime_facing()
+	await _check_slime_turns_once()
 	if change_scene_to_file("res://Levels/Nodes/level_1.tscn") != OK:
 		push_error("Could not load the test level")
 		quit(1)
@@ -96,6 +97,83 @@ func _check_slime_facing():
 	if not misfacing.is_empty():
 		print("Slimes not facing their direction: ", misfacing)
 	_check(every_level_has_slimes and misfacing.is_empty(), "Every slime faces the direction it walks")
+
+# A turn request that arrives while a slime is already turning must not add a second half turn.
+func _check_slime_turns_once():
+	var origin := Vector3(2000, 1000, 2000)
+	var scene: PackedScene = load("res://Characters/Nodes/slime.tscn")
+	var created: Array[Node] = []
+
+	var floor_body := StaticBody3D.new()
+	floor_body.collision_layer = 2
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(40, 1, 40)
+	shape.shape = box
+	floor_body.add_child(shape)
+	floor_body.position = origin + Vector3(0, -0.5, 0)
+	root.add_child(floor_body)
+	created.append(floor_body)
+
+	var walker_a: Node3D = scene.instantiate()
+	var walker_b: Node3D = scene.instantiate()
+	walker_a.position = origin + Vector3(0, 0.45, -1)
+	walker_b.position = origin + Vector3(0, 0.45, 1)
+	walker_b.rotation_degrees = Vector3(0, 180, 0)
+	walker_a.set("direction", Vector3(0, 0, 1))
+	walker_b.set("direction", Vector3(0, 0, -1))
+	root.add_child(walker_a)
+	root.add_child(walker_b)
+	created.append(walker_a)
+	created.append(walker_b)
+	var walkers: Array[Node3D] = [walker_a, walker_b]
+	var starts: Array[Vector3] = [Vector3(0, 0, 1), Vector3(0, 0, -1)]
+	var previous: Array[Vector3] = starts.duplicate()
+	var turns: Array[int] = [0, 0]
+	var settled_frames := 0
+	for frame in 240:
+		await physics_frame
+		for index in 2:
+			var current: Vector3 = walkers[index].get("direction")
+			if current == Vector3.ZERO and previous[index] != Vector3.ZERO:
+				turns[index] += 1
+			previous[index] = current
+		if turns[0] >= 1 and turns[1] >= 1 and previous[0] != Vector3.ZERO and previous[1] != Vector3.ZERO:
+			settled_frames += 1
+			if settled_frames >= 30:
+				break
+	var bumped_ok := true
+	for index in 2:
+		var facing: Vector3 = walkers[index].global_basis.z
+		facing.y = 0.0
+		var walking: Vector3 = walkers[index].get("direction")
+		if turns[index] != 1 or not walking.is_equal_approx(-starts[index]) or facing.normalized().dot(walking) < 0.99:
+			bumped_ok = false
+	_check(bumped_ok, "Two slimes that walk into each other each turn once")
+
+	# These slimes have no floor, so only the hurtbox calls below can make them turn.
+	var airborne: Array[Node3D] = []
+	for index in 3:
+		var slime: Node3D = scene.instantiate()
+		slime.position = origin + Vector3(10 * index, 50, 20)
+		slime.rotation_degrees = Vector3(0, 90, 0)
+		slime.set("direction", Vector3(1, 0, 0))
+		root.add_child(slime)
+		created.append(slime)
+		airborne.append(slime)
+	airborne[0].call("OnHurtboxEntered", airborne[1].get_node("Hitbox"))
+	await physics_frame
+	airborne[2].call("OnHurtboxEntered", airborne[1].get_node("Hitbox"))
+	var turn_time: float = airborne[0].get("TurnTime")
+	await create_timer(turn_time + 0.3).timeout
+	var repeated_ok := true
+	for slime in airborne:
+		var walking: Vector3 = slime.get("direction")
+		if not walking.is_equal_approx(Vector3(-1, 0, 0)) or slime.global_basis.z.dot(Vector3(-1, 0, 0)) < 0.99:
+			repeated_ok = false
+	_check(repeated_ok, "A slime asked to turn again mid-turn still turns only once")
+	for node in created:
+		node.free()
 
 func _check_bursts(global_node: Node):
 	var bursts: Array[Node] = []
