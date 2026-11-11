@@ -20,7 +20,9 @@ public partial class Bounce : PlayerState
 
         AnimationPlayer.Play("Jump_Start", 0.1, 2);
 
-        Player.PlayerVelocity.Y = Player.JumpVelocity * 0.7f;
+        Player.ControlFeetCollision(false, true);
+
+        Player.PlayerVelocity.Y = Player.ConsumeBounceVelocity();
 
         Player.TopSpeedTimer += 1f;
         Player.UpdateSpeedGauge();

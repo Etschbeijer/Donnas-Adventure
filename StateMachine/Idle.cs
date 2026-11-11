@@ -28,6 +28,18 @@ public partial class Idle : PlayerState
 
     public override void PhysicsUpdate(double delta)
 	{
+        if (Player.ShallBounce)
+        {
+            StateMachine.TransitionTo(nameof(Bounce));
+            return;
+        }
+
+        if (Player.IsSpeedBoostActive)
+        {
+            StateMachine.TransitionTo(nameof(GroundMovement));
+            return;
+        }
+
         CalculateVelocity(Player.InputDir, delta);
 
         if (!AnimationPlayer.IsPlaying())

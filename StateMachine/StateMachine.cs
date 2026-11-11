@@ -21,6 +21,8 @@ public partial class StateMachine : Node
     //The current active state. At the start of the game, we get the `initial_state`.
     private State currentState { get; set; }
 
+    public string CurrentStateName => currentState?.Name.ToString() ?? "";
+
 	public override void _Ready()
 	{
         currentState = (State) GetNode(InitialState);

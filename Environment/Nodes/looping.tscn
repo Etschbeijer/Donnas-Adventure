@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Environment/Scripts/LoopRail.cs" id="1_looprail"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_entry"]
+size = Vector3(8, 3, 2)
+
+[node name="Looping" type="Node3D"]
+script = ExtResource("1_looprail")
+
+[node name="Entry" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -1)
+shape = SubResource("BoxShape3D_entry")
+
+[connection signal="body_entered" from="Entry" to="." method="OnEntryBodyEntered"]

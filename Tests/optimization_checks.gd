@@ -33,6 +33,7 @@ func _run():
 	_check_hud(global_node)
 	_check_player_controls(player)
 	await _check_special_treats(player, global_node)
+	await _check_gameplay_effects(player)
 	await _check_scene_teardown(player)
 	await _check_menu_and_sound(global_node)
 	current_scene.queue_free()
@@ -182,6 +183,81 @@ func _check_special_treats(player: Node, global_node: Node):
 	for treat in collected:
 		all_freed = all_freed and not is_instance_valid(treat)
 	_check(all_freed, "Collected special treats still free through their animation signal")
+
+func _run_rail(player: Node):
+	var steps := 0
+	while bool(player.get("IsOnRail")) and steps < 600:
+		player.call("_physics_process", 1.0 / 60.0)
+		steps += 1
+
+func _check_gameplay_effects(player: Node):
+	var states = player.get_node("StateMachine")
+	var start_transform: Transform3D = player.global_transform
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+
+	# Loop rail geometry
+	var rail: Node3D = load("res://Environment/Nodes/looping.tscn").instantiate()
+	rail.position = Vector3(200, 0, 200)
+	current_scene.add_child(rail)
+	var radius: float = rail.get("Radius")
+	var lead_in: float = rail.get("LeadIn")
+	var lead_out: float = rail.get("LeadOut")
+	var lateral: float = rail.get("LateralOffset")
+	var height: float = rail.get("PlayerOriginHeight")
+	var base := rail.position
+	var length: float = rail.get("Length")
+	_check(length > TAU * radius, "Loop rail length exceeds the ring circumference")
+	var first: Transform3D = rail.call("SampleTransform", 0.0)
+	_check(first.origin.is_equal_approx(base + Vector3(-lateral / 2.0, height, 0.0)), "Loop rail starts at the lead-in with the player origin above the feet")
+	var top: Transform3D = first
+	var distance := 0.0
+	while distance <= length:
+		var sample: Transform3D = rail.call("SampleTransform", distance)
+		if sample.origin.y > top.origin.y or distance == 0.0:
+			top = sample
+		distance += 0.05
+	_check(absf(top.origin.y - (base.y + 2.0 * radius - height)) < 0.01 and top.basis.y.dot(Vector3.DOWN) > 0.99, "Loop rail top is upside down at twice the radius")
+	var exit_transform: Transform3D = rail.call("ExitTransform")
+	_check(exit_transform.origin.is_equal_approx(base + Vector3(lateral / 2.0, height, -lead_in - lead_out)) and exit_transform.basis.y.is_equal_approx(Vector3.UP), "Loop rail exit is upright at the end of the lead-out")
+
+	# Riding the rail
+	var started: bool = player.call("TryStartRail", rail)
+	_check(started and bool(player.get("IsOnRail")) and str(states.get("CurrentStateName")) == "Looping", "Starting the rail puts the player in the Looping state")
+	_run_rail(player)
+	var end_state := str(states.get("CurrentStateName"))
+	var player_transform: Transform3D = player.global_transform
+	_check(not bool(player.get("IsOnRail")) and (end_state == "GroundMovement" or end_state == "AirDropMovement") and player_transform.basis.y.y > 0.99, "Finishing the rail releases the player upright into a movement state")
+
+	# Speed pad, bounce pad and boost
+	var speed_pad: Node = load("res://Environment/Nodes/speed_pad.tscn").instantiate()
+	var bounce_pad: Node = load("res://Environment/Nodes/bounce_pad.tscn").instantiate()
+	_check(is_equal_approx(float(speed_pad.get("BoostSpeed")), 13.0) and is_equal_approx(float(speed_pad.get("BoostDuration")), 1.5), "Speed pad scene keeps its script exports")
+	_check(is_equal_approx(float(bounce_pad.get("LaunchVelocity")), 13.0), "Bounce pad scene keeps its script export")
+	speed_pad.free()
+	player.call("CancelSpeedBoost")
+	states.call("TransitionTo", "Idle", null)
+	player.set("MovementSpeed", 0.0)
+	var boosted: bool = player.call("TryStartSpeedBoost", 13.0, 1.5, Vector3(0, 0, -1))
+	_check(boosted and bool(player.get("IsSpeedBoostActive")) and float(player.get("MovementSpeed")) >= 13.0, "Speed boost starts and raises the movement speed")
+	player.call("CancelSpeedBoost")
+	player.set("MovementSpeed", 0.0)
+	var queued: bool = player.call("TryBounce", float(bounce_pad.get("LaunchVelocity")))
+	_check(queued and bool(player.get("ShallBounce")), "Bounce queues a launch")
+	var launch: float = player.call("ConsumeBounceVelocity")
+	var fallback: float = player.call("ConsumeBounceVelocity")
+	_check(is_equal_approx(launch, 13.0) and is_equal_approx(fallback, float(player.get("JumpVelocity")) * 0.7), "Bounce velocity is consumed once, then falls back to the slime bounce")
+	bounce_pad.free()
+	player.set("ShallBounce", false)
+
+	# Finishing clears rail and boost, and blocks new effects
+	player.call("TryStartRail", rail)
+	player.call("TryStartSpeedBoost", 13.0, 1.5, Vector3(0, 0, -1))
+	player.call("BeginFinishSequence")
+	_check(not bool(player.get("IsOnRail")) and not bool(player.get("IsSpeedBoostActive")), "Finish sequence clears the active rail and boost")
+	_check(not bool(player.call("TryStartSpeedBoost", 13.0, 1.5, Vector3(0, 0, -1))), "Speed boost is refused after the finish sequence began")
+	rail.free()
+	player.global_transform = start_transform
 
 func _check_scene_teardown(player: Node):
 	var hud := current_scene.get_node("HUD")

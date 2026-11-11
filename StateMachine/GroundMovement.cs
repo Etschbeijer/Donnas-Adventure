@@ -18,6 +18,12 @@ public partial class GroundMovement : PlayerState
 
     public override void PhysicsUpdate(double delta)
     {
+        if (Player.ShallBounce)
+        {
+            StateMachine.TransitionTo(nameof(Bounce));
+            return;
+        }
+
         Player.CalculateVelocity(Player.InputDir, Player.Direction, delta);
 
         PlayMovementAnimation();
@@ -45,7 +51,7 @@ public partial class GroundMovement : PlayerState
         //{
         //    StateMachine.TransitionTo("Attack1");
         //}
-        else if (Player.InputDir == Vector2.Zero && Player.IsOnFloor())
+        else if (Player.InputDir == Vector2.Zero && Player.IsOnFloor() && !Player.IsSpeedBoostActive)
         {
             StateMachine.TransitionTo(nameof(Idle));
         }

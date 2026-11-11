@@ -34,6 +34,8 @@ public partial class BoneTreat : Area3D
 
         if (player != null)
         {
+            player.BeginFinishSequence();
+
             player.CanInput = false;
             player.PlayerVelocity = Vector3.Zero;
             player.IsInvulnerable = true;

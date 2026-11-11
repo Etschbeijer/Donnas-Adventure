@@ -130,6 +130,25 @@ public partial class PlayerCharacter : CharacterBody3D
 
     Transform3D xTransform;
 
+    StateMachine stateMachine;
+
+    LoopRail activeRail;
+    float railDistance;
+    float railSpeed;
+    float railTime;
+    Transform3D railEntryTransform;
+
+    float speedBoostTimeLeft;
+    float speedBoostSpeed;
+    Vector3 speedBoostDirection;
+
+    float pendingBounceVelocity;
+
+    bool isFinishing;
+
+    public bool IsOnRail => activeRail != null;
+    public bool IsSpeedBoostActive => speedBoostTimeLeft > 0f;
+
     Node trails;
 
     Node3D sounds;
@@ -178,6 +197,7 @@ public partial class PlayerCharacter : CharacterBody3D
         Global = GetNode<Global>("/root/Global");
         SoundManager = GetNode<SoundManager>("/root/SoundManager");
         TransitionScreen = GetNode<TransitionScreen>("/root/TransitionScreen");
+        stateMachine = GetNode<StateMachine>("StateMachine");
 
         TopSpeedTrail = GetNode<Node3D>("TopSpeedTrail");
         WallDetector = GetNode<RayCast3D>("WallDetector");
@@ -274,6 +294,31 @@ public partial class PlayerCharacter : CharacterBody3D
             }
         }
 
+        if (activeRail != null)
+        {
+            if (!IsInstanceValid(activeRail))
+            {
+                AbortRail();
+            }
+            else
+            {
+                physicsProcessRail(delta, cameraPosition);
+                return;
+            }
+        }
+
+        if (IsSpeedBoostActive)
+        {
+            if (IsHurt || isDead)
+            {
+                CancelSpeedBoost();
+            }
+            else
+            {
+                speedBoostTimeLeft -= (float)delta;
+            }
+        }
+
         var factor = CalculateSpeedBoost();
         DetermineTopSpeedConditions(factor, (float) delta);
 
@@ -288,7 +333,7 @@ public partial class PlayerCharacter : CharacterBody3D
             ControlLightTrail(true);
         }
 
-        if (TopSpeedTimer > TopSpeedThresholdTime)
+        if (TopSpeedTimer > TopSpeedThresholdTime || IsSpeedBoostActive)
         {
             TopSpeedTrail.Show();
         }
@@ -310,6 +355,170 @@ public partial class PlayerCharacter : CharacterBody3D
         AlignCamera(cameraPosition, characterPosition, delta);
 
         MoveAndSlide();
+    }
+
+    private void physicsProcessRail(double delta, Vector3 cameraPosition)
+    {
+        railTime += (float)delta;
+        railDistance += railSpeed * (float)delta;
+
+        if (railDistance >= activeRail.Length)
+        {
+            releaseRail();
+            controlGamepadCamera(delta);
+            AlignCamera(cameraPosition, Position, delta);
+            return;
+        }
+
+        var target = activeRail.SampleTransform(railDistance);
+        float t = Mathf.Clamp(railTime / 0.25f, 0f, 1f);
+        GlobalTransform = t < 1f ? railEntryTransform.InterpolateWith(target, t) : target;
+
+        TopSpeedTrail.Show();
+
+        controlGamepadCamera(delta);
+        AlignCamera(cameraPosition, Position, delta);
+    }
+
+    private void releaseRail()
+    {
+        var exit = activeRail.ExitTransform();
+        var dir = exit.Basis.Z;
+        dir.Y = 0f;
+        dir = dir.Normalized();
+        float speed = railSpeed;
+
+        activeRail = null;
+        GlobalTransform = exit;
+        Rotation = new Vector3(0f, Mathf.Atan2(dir.X, dir.Z), 0f);
+
+        PlayerVelocity = dir * speed + Vector3.Down * 2f;
+        Velocity = PlayerVelocity;
+        MoveAndSlide();
+        PlayerVelocity = IsOnFloor() ? new Vector3(Velocity.X, 0f, Velocity.Z) : Velocity;
+
+        MovementSpeed = speed;
+        PlatformVelocity = Vector3.Zero;
+        TimeOnWall = 0f;
+        TimeSinceLeftFloor = IsOnFloor() ? 0f : CoyoteTime + 0.01f;
+
+        stateMachine.TransitionTo(IsOnFloor() ? nameof(GroundMovement) : nameof(AirDropMovement));
+        TryStartSpeedBoost(speed, 0.75f, dir);
+    }
+
+    private bool CanStartGameplayEffect()
+    {
+        if (isDead || isFinishing || HasWon || IsHurt || CurrentHealth <= 0)
+        {
+            return false;
+        }
+
+        switch (stateMachine.CurrentStateName)
+        {
+            case nameof(Despawn):
+            case nameof(Spawn):
+            case nameof(Win):
+            case nameof(Lose):
+            case nameof(GetHit):
+                return false;
+            default:
+                return true;
+        }
+    }
+
+    public bool TryStartRail(LoopRail rail)
+    {
+        if (rail == null || IsOnRail || !CanStartGameplayEffect() || !stateMachine.HasNode("Looping"))
+        {
+            return false;
+        }
+
+        float h = new Vector2(PlayerVelocity.X, PlayerVelocity.Z).Length();
+        railSpeed = Mathf.Max(Mathf.Max(h, MovementSpeed), rail.MinSpeed);
+        railDistance = 0f;
+        railTime = 0f;
+        railEntryTransform = GlobalTransform;
+        activeRail = rail;
+        CancelSpeedBoost();
+        pendingBounceVelocity = 0f;
+        ShallBounce = false;
+        PlatformVelocity = Vector3.Zero;
+        PlayerVelocity = Vector3.Zero;
+        Velocity = Vector3.Zero;
+        stateMachine.TransitionTo("Looping");
+        return true;
+    }
+
+    public void AbortRail()
+    {
+        if (!IsOnRail)
+        {
+            return;
+        }
+
+        activeRail = null;
+        Rotation = new Vector3(0f, Rotation.Y, 0f);
+        PlayerVelocity = Vector3.Zero;
+    }
+
+    public bool TryStartSpeedBoost(float speed, float duration, Vector3 worldDirection)
+    {
+        if (!CanStartGameplayEffect() || IsOnRail || speed <= 0f || duration <= 0f)
+        {
+            return false;
+        }
+
+        var dir = new Vector3(worldDirection.X, 0f, worldDirection.Z);
+        if (dir.Length() < 0.001f)
+        {
+            return false;
+        }
+        dir = dir.Normalized();
+
+        speedBoostSpeed = speed;
+        speedBoostTimeLeft = duration;
+        speedBoostDirection = dir;
+        MovementSpeed = Mathf.Max(MovementSpeed, speed);
+        PlayerVelocity.X = dir.X * MovementSpeed;
+        PlayerVelocity.Z = dir.Z * MovementSpeed;
+        Rotation = new Vector3(Rotation.X, Mathf.Atan2(dir.X, dir.Z), Rotation.Z);
+        PlaySoundTopSpeed();
+        return true;
+    }
+
+    public void CancelSpeedBoost()
+    {
+        speedBoostTimeLeft = 0f;
+    }
+
+    public bool TryBounce(float upwardVelocity)
+    {
+        if (!CanStartGameplayEffect() || IsOnRail || upwardVelocity <= 0f)
+        {
+            return false;
+        }
+
+        pendingBounceVelocity = upwardVelocity;
+        ShallBounce = true;
+        return true;
+    }
+
+    public float ConsumeBounceVelocity()
+    {
+        float v = pendingBounceVelocity > 0f ? pendingBounceVelocity : JumpVelocity * 0.7f;
+        pendingBounceVelocity = 0f;
+        return v;
+    }
+
+    public void BeginFinishSequence()
+    {
+        isFinishing = true;
+        AbortRail();
+        CancelSpeedBoost();
+        pendingBounceVelocity = 0f;
+        ShallBounce = false;
+        PlayerVelocity = Vector3.Zero;
+        Velocity = Vector3.Zero;
     }
 
     //public override void _Process(double delta)
@@ -509,6 +718,27 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void CalculateVelocity(Vector2 inputDir, Vector3 direction, double delta)
     {
+        if (IsSpeedBoostActive)
+        {
+            bool hasInput = inputDir != Vector2.Zero;
+            if (hasInput)
+            {
+                CalculateMovementSpeed(delta);
+            }
+
+            MovementSpeed = Mathf.Max(MovementSpeed, speedBoostSpeed);
+            var moveDir = (hasInput && direction != Vector3.Zero) ? direction : speedBoostDirection;
+            PlayerVelocity.X = moveDir.X * MovementSpeed;
+            PlayerVelocity.Z = moveDir.Z * MovementSpeed;
+
+            if (hasInput && direction != Vector3.Zero)
+            {
+                applyKeyboardControl(inputDir, direction, delta);
+            }
+
+            return;
+        }
+
         if (inputDir != Vector2.Zero)
         {
             CalculateMovementSpeed(delta);
@@ -518,25 +748,7 @@ public partial class PlayerCharacter : CharacterBody3D
                 PlayerVelocity.X = direction.X * MovementSpeed;
                 PlayerVelocity.Z = direction.Z * MovementSpeed;
 
-                //Control with keyboard
-                if (inputDir.Y < 0)
-                {
-                    //Rotate player to camera angle
-                    float targetYaw = Mathf.Atan2(direction.X, direction.Z);
-                    float currentYaw = Rotation.Y;
-                    float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, 10f * (float)delta);
-                    Rotation = new Vector3(Rotation.X, newYaw, Rotation.Z);
-                }
-
-                //Align camera slowly with palyer movement
-                if (inputDir.Y > 0)
-                {
-                    float targetYaw = RotationDegrees.Y;
-                    float currentYaw = CameraController.RotationDegrees.Y;
-                    float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, 5f * (float)delta);
-
-                    CameraController.RotationDegrees = new Vector3(CameraController.RotationDegrees.X, newYaw, CameraController.RotationDegrees.Z);
-                }
+                applyKeyboardControl(inputDir, direction, delta);
             }
         }
         else
@@ -551,6 +763,29 @@ public partial class PlayerCharacter : CharacterBody3D
 
             PlayerVelocity.X = Mathf.MoveToward(Velocity.X, 0, stopRate * (float)delta);
             PlayerVelocity.Z = Mathf.MoveToward(Velocity.Z, 0, stopRate * (float)delta);
+        }
+    }
+
+    private void applyKeyboardControl(Vector2 inputDir, Vector3 direction, double delta)
+    {
+        //Control with keyboard
+        if (inputDir.Y < 0)
+        {
+            //Rotate player to camera angle
+            float targetYaw = Mathf.Atan2(direction.X, direction.Z);
+            float currentYaw = Rotation.Y;
+            float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, 10f * (float)delta);
+            Rotation = new Vector3(Rotation.X, newYaw, Rotation.Z);
+        }
+
+        //Align camera slowly with palyer movement
+        if (inputDir.Y > 0)
+        {
+            float targetYaw = RotationDegrees.Y;
+            float currentYaw = CameraController.RotationDegrees.Y;
+            float newYaw = Mathf.LerpAngle(currentYaw, targetYaw, 5f * (float)delta);
+
+            CameraController.RotationDegrees = new Vector3(CameraController.RotationDegrees.X, newYaw, CameraController.RotationDegrees.Z);
         }
     }
 
@@ -677,7 +912,7 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public Vector2 GetInputDirection()
     {
-        if (!CanInput)
+        if (!CanInput || IsOnRail)
         {
             return new Vector2();
         }
@@ -732,9 +967,11 @@ public partial class PlayerCharacter : CharacterBody3D
         if (hitbox.Name == "FallZone")
         {
             isDead = true;
+            AbortRail();
+            CancelSpeedBoost();
             CallDeferred(nameof(handleFallZone));
         }
-        else if(!IsInvulnerable)
+        else if(!IsInvulnerable && !IsOnRail)
         {
             Global.SetDeathType(Deathypes.Slimes);
             IsHurt = true;
@@ -851,6 +1088,10 @@ public partial class PlayerCharacter : CharacterBody3D
 
     public void Respawn()
     {
+        AbortRail();
+        CancelSpeedBoost();
+        pendingBounceVelocity = 0f;
+        ShallBounce = false;
         PlayerVelocity = Vector3.Zero;
         InputDir = Vector2.Zero;
         CurrentHealth = MaxHealth;
@@ -888,6 +1129,13 @@ public partial class PlayerCharacter : CharacterBody3D
             PlaySoundOnHit();
             MovementSpeed = 0f;
             Velocity = new Vector3(0f, Velocity.Y, 0f);
+
+            if (IsSpeedBoostActive)
+            {
+                CancelSpeedBoost();
+                PlayerVelocity.X = 0f;
+                PlayerVelocity.Z = 0f;
+            }
         }
     }
 
